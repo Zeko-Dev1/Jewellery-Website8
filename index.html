@@ -1,0 +1,1646 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AURÈLE — Fine Jewellery</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,300;1,400;1,700;1,900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <style>
+    /* ===================================================
+       VARIABLES
+       =================================================== */
+    :root {
+      --c-night:  #1C2B1E;
+      --c-sage:   #3D5C42;
+      --c-mid:    #7A9E7E;
+      --c-pale:   #B5C9B7;
+      --c-linen:  #F0EBE0;
+      --c-gold:   #C8A96E;
+      --c-pgold:  #E8D5A3;
+      --c-bronze: #8C6D3F;
+      --c-text:   #1C2B1E;
+      --c-muted:  #5C7A60;
+    }
+
+    /* ===================================================
+       GLOBAL
+       =================================================== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--c-linen);
+      color: var(--c-text);
+      overflow-x: hidden;
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+    }
+
+    .gold-rule {
+      display: block;
+      width: 60px;
+      height: 1px;
+      background: var(--c-gold);
+      border: none;
+    }
+
+    .eyebrow {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      font-size: 11px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--c-mid);
+    }
+
+    .lux-container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 48px;
+    }
+
+    .section-pad { padding: 120px 0; }
+
+    /* Reveal */
+    .reveal {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.in { opacity: 1; transform: none; }
+
+    /* ===================================================
+       BUTTONS
+       =================================================== */
+    .btn-ol {
+      display: inline-block;
+      border: 1px solid var(--c-gold);
+      color: var(--c-sage);
+      background: transparent;
+      padding: 14px 44px;
+      letter-spacing: 0.18em;
+      font-size: 11px;
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 500;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: 0;
+      cursor: pointer;
+      transition: background 0.4s, color 0.4s;
+    }
+    .btn-ol:hover { background: var(--c-gold); color: var(--c-night); }
+    .btn-ol.dark { color: var(--c-pgold); }
+    .btn-ol.dark:hover { background: var(--c-gold); color: var(--c-night); }
+
+    .btn-solid {
+      display: inline-block;
+      background: var(--c-sage);
+      color: var(--c-pgold);
+      padding: 14px 44px;
+      letter-spacing: 0.18em;
+      font-size: 11px;
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 500;
+      text-transform: uppercase;
+      text-decoration: none;
+      border: none;
+      border-radius: 0;
+      cursor: pointer;
+      transition: background 0.4s;
+    }
+    .btn-solid:hover { background: var(--c-night); color: var(--c-pgold); }
+
+    /* ===================================================
+       NAV
+       =================================================== */
+    #nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      height: 80px;
+      display: flex;
+      align-items: center;
+      transition: background 0.4s, border-color 0.4s;
+    }
+    #nav.scrolled {
+      background: rgba(240,235,224,0.95);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--c-pale);
+    }
+    .nav-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 48px;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-weight: 400;
+      font-style: italic;
+      font-size: 24px;
+      color: var(--c-sage);
+      text-decoration: none;
+    }
+    .nav-logo .dot { color: var(--c-gold); }
+    .nav-links {
+      display: flex;
+      gap: 40px;
+      list-style: none;
+    }
+    .nav-links a {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 400;
+      font-size: 12px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--c-muted);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+    .nav-links a:hover { color: var(--c-gold); }
+    .nav-right { display: flex; align-items: center; gap: 20px; }
+    .nav-ig { display: flex; align-items: center; text-decoration: none; }
+    .nav-ig svg { width: 20px; height: 20px; stroke: var(--c-gold); }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+    }
+    .hamburger span {
+      display: block;
+      width: 24px;
+      height: 1px;
+      background: var(--c-sage);
+      transition: transform 0.3s, opacity 0.3s;
+    }
+    .hamburger.open span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+
+    .mob-overlay {
+      position: fixed;
+      inset: 0;
+      background: var(--c-night);
+      z-index: 999;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      transform: translateX(100%);
+      transition: transform 0.4s cubic-bezier(0.76,0,0.24,1);
+    }
+    .mob-overlay.open { transform: translateX(0); }
+    .mob-overlay-nav {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 32px;
+    }
+    .mob-overlay-nav a {
+      font-family: 'Playfair Display', serif;
+      font-weight: 300;
+      font-style: italic;
+      font-size: 48px;
+      color: var(--c-pgold);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+    .mob-overlay-nav a:hover { color: var(--c-gold); }
+    .mob-close {
+      position: absolute;
+      top: 28px; right: 36px;
+      background: none;
+      border: none;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 13px;
+      letter-spacing: 0.1em;
+      color: var(--c-pale);
+      cursor: pointer;
+    }
+
+    /* ===================================================
+       HERO
+       =================================================== */
+    #hero {
+      height: 100vh;
+      background: var(--c-night);
+      display: flex;
+      align-items: stretch;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-wrap {
+      display: flex;
+      width: 100%;
+      align-items: stretch;
+    }
+    .hero-left {
+      flex: 0 0 55%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 120px 64px 80px 48px;
+      max-width: calc(55% );
+    }
+    .hero-eyebrow {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      font-size: 11px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--c-mid);
+    }
+    .hero-rule {
+      display: block;
+      width: 60px;
+      height: 1px;
+      background: var(--c-gold);
+      margin: 24px 0;
+    }
+    .h1a {
+      font-family: 'Playfair Display', serif;
+      font-weight: 300;
+      font-style: italic;
+      font-size: 96px;
+      color: var(--c-pgold);
+      line-height: 0.9;
+      display: block;
+    }
+    .h1b {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      font-style: italic;
+      font-size: 96px;
+      color: var(--c-gold);
+      line-height: 1;
+      display: block;
+    }
+    .hero-sub {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      font-size: 15px;
+      color: var(--c-pale);
+      line-height: 1.9;
+      max-width: 420px;
+      margin-top: 20px;
+    }
+    .hero-cta { margin-top: 40px; }
+    .hero-hint {
+      display: block;
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      font-size: 12px;
+      color: var(--c-mid);
+      margin-top: 20px;
+    }
+
+    .hero-right {
+      flex: 0 0 45%;
+      background: var(--c-sage);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-art {
+      position: relative;
+      width: 380px;
+      height: 380px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .h-circle-lg {
+      position: absolute;
+      width: 380px;
+      height: 380px;
+      border: 1px solid var(--c-gold);
+      border-radius: 50%;
+    }
+    .h-circle-sm {
+      position: absolute;
+      width: 200px;
+      height: 200px;
+      border: 1px solid rgba(200,169,110,0.3);
+      border-radius: 50%;
+    }
+    .h-line-v {
+      position: absolute;
+      width: 1px;
+      height: 180px;
+      background: rgba(200,169,110,0.4);
+    }
+    .h-line-h {
+      position: absolute;
+      width: 180px;
+      height: 1px;
+      background: rgba(200,169,110,0.4);
+    }
+    .h-dot {
+      position: absolute;
+      width: 6px;
+      height: 6px;
+      background: var(--c-gold);
+      border-radius: 50%;
+    }
+    .hero-caption {
+      position: absolute;
+      bottom: 32px;
+      left: 0; right: 0;
+      text-align: center;
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      color: var(--c-mid);
+    }
+
+    .scroll-ind {
+      position: absolute;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      opacity: 0.6;
+      animation: bounce 2s ease-in-out infinite;
+      pointer-events: none;
+    }
+    .scroll-ind .sl { width: 1px; height: 40px; background: var(--c-gold); }
+    .scroll-ind .sa {
+      width: 0; height: 0;
+      border-left: 4px solid transparent;
+      border-right: 4px solid transparent;
+      border-top: 6px solid var(--c-gold);
+    }
+    @keyframes bounce {
+      0%,100% { transform: translateX(-50%) translateY(0); }
+      50%      { transform: translateX(-50%) translateY(8px); }
+    }
+
+    /* ===================================================
+       MARQUEE
+       =================================================== */
+    .marquee-strip {
+      background: var(--c-gold);
+      height: 48px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+    }
+    .marquee-track {
+      display: flex;
+      white-space: nowrap;
+      animation: marquee 40s linear infinite;
+    }
+    .marquee-track span {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      font-size: 12px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--c-night);
+      padding: 0 20px;
+    }
+    @keyframes marquee {
+      0%   { transform: translateX(0); }
+      100% { transform: translateX(-33.3333%); }
+    }
+
+    /* ===================================================
+       STATS
+       =================================================== */
+    #stats {
+      background: var(--c-linen);
+      padding: 64px 0;
+    }
+    .stats-grid {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 48px;
+      display: grid;
+      grid-template-columns: repeat(4,1fr);
+    }
+    .stat-item {
+      text-align: center;
+      padding: 32px 16px;
+      border-right: 1px solid var(--c-pale);
+    }
+    .stat-item:last-child { border-right: none; }
+    .stat-num {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      font-size: 56px;
+      color: var(--c-sage);
+      display: block;
+      line-height: 1;
+    }
+    .stat-lbl {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      font-size: 12px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--c-muted);
+      display: block;
+      margin-top: 12px;
+    }
+
+    /* ===================================================
+       EDITORIAL SPLIT
+       =================================================== */
+    .editorial-split {
+      display: grid;
+      grid-template-columns: 60fr 40fr;
+      min-height: 540px;
+    }
+    .ed-col {
+      padding: 80px;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      min-height: 540px;
+    }
+    .ed-col.sage { background: var(--c-sage); }
+    .ed-col.pale { background: var(--c-pale); }
+    .ed-wm {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      font-style: italic;
+      font-size: 140px;
+      color: rgba(240,235,224,0.07);
+      position: absolute;
+      top: 0; right: -16px;
+      line-height: 1;
+      pointer-events: none;
+      user-select: none;
+    }
+    .ed-eyebrow {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      font-size: 11px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+    .ed-h {
+      font-family: 'Playfair Display', serif;
+      font-weight: 400;
+      font-size: 48px;
+      line-height: 1.1;
+      margin-bottom: 20px;
+    }
+    .ed-body {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      font-size: 15px;
+      line-height: 1.9;
+      margin-bottom: 24px;
+    }
+    .ed-link {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 500;
+      font-size: 12px;
+      letter-spacing: 0.1em;
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.3s;
+      display: inline-block;
+    }
+    .ed-link:hover { border-color: currentColor; }
+
+    /* ===================================================
+       PRODUCT GRID
+       =================================================== */
+    #collection { background: var(--c-linen); }
+
+    .sec-eyebrow {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      font-size: 11px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--c-mid);
+      margin-bottom: 16px;
+      display: block;
+    }
+    .sec-heading {
+      font-family: 'Playfair Display', serif;
+      font-weight: 400;
+      font-size: 64px;
+      color: var(--c-sage);
+      line-height: 1.05;
+    }
+    .sec-sub {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      font-size: 15px;
+      color: var(--c-muted);
+      line-height: 1.9;
+      max-width: 480px;
+      margin-top: 16px;
+    }
+
+    .filter-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      justify-content: center;
+      margin: 48px 0 60px;
+    }
+    .f-pill {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 400;
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      background: transparent;
+      border: 1px solid var(--c-pale);
+      color: var(--c-muted);
+      padding: 8px 24px;
+      border-radius: 0;
+      cursor: pointer;
+      transition: border-color 0.3s, color 0.3s, background 0.3s;
+    }
+    .f-pill:hover { border-color: var(--c-gold); color: var(--c-gold); }
+    .f-pill.on { background: var(--c-sage); color: var(--c-pgold); border-color: var(--c-sage); }
+
+    .prod-grid {
+      display: grid;
+      grid-template-columns: repeat(4,1fr);
+      gap: 2px;
+    }
+    .prod-card {
+      background: var(--c-linen);
+      overflow: hidden;
+      transition: opacity 0.25s ease, transform 0.25s ease;
+    }
+    .prod-card.hide { opacity: 0; pointer-events: none; transform: scale(0.97); }
+
+    .prod-img {
+      height: 300px;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .prod-img svg { transition: transform 0.5s ease; display: block; }
+    .prod-card:hover .prod-img svg { transform: scale(1.04); }
+    .prod-img::after {
+      content: 'Order via Instagram';
+      position: absolute;
+      inset: 0;
+      background: rgba(28,43,30,0.7);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 500;
+      font-size: 12px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--c-pgold);
+      opacity: 0;
+      transition: opacity 0.35s;
+    }
+    .prod-card:hover .prod-img::after { opacity: 1; }
+
+    .img-a { background: var(--c-sage); }
+    .img-b { background: var(--c-pale); }
+    .img-c { background: var(--c-night); }
+    .img-d { background: var(--c-pgold); }
+
+    .prod-body { padding: 20px 16px; }
+    .prod-meta { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 6px; }
+    .prod-name {
+      font-family: 'Playfair Display', serif;
+      font-weight: 400;
+      font-size: 18px;
+      color: var(--c-sage);
+    }
+    .prod-price {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 500;
+      font-size: 15px;
+      color: var(--c-gold);
+    }
+    .prod-cat {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--c-muted);
+      margin-bottom: 14px;
+      display: block;
+    }
+    .prod-btn {
+      display: block;
+      width: 100%;
+      background: var(--c-sage);
+      color: var(--c-pgold);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 500;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      padding: 12px;
+      text-align: center;
+      text-decoration: none;
+      border: none;
+      border-radius: 0;
+      transition: background 0.3s;
+    }
+    .prod-btn:hover { background: var(--c-night); color: var(--c-pgold); }
+
+    /* ===================================================
+       QUOTE
+       =================================================== */
+    #quote {
+      background: var(--c-night);
+      min-height: 60vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 80px 48px;
+    }
+    .quote-wrap {
+      text-align: center;
+      max-width: 700px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .q-rule { display: block; width: 60px; height: 1px; background: var(--c-gold); }
+    .q-text {
+      font-family: 'Playfair Display', serif;
+      font-weight: 300;
+      font-style: italic;
+      font-size: 38px;
+      color: var(--c-pgold);
+      line-height: 1.4;
+      margin: 32px 0 28px;
+    }
+    .q-attr {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      font-size: 12px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--c-mid);
+      margin-bottom: 28px;
+    }
+
+    /* ===================================================
+       HOW TO ORDER
+       =================================================== */
+    #order { background: var(--c-sage); }
+    .order-h {
+      font-family: 'Playfair Display', serif;
+      font-weight: 400;
+      font-size: 64px;
+      color: var(--c-pgold);
+      line-height: 1.05;
+      margin-bottom: 24px;
+    }
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(3,1fr);
+      gap: 48px;
+      margin-top: 64px;
+    }
+    .step {
+      position: relative;
+      padding-top: 56px;
+    }
+    .step-n {
+      font-family: 'Playfair Display', serif;
+      font-weight: 900;
+      font-style: italic;
+      font-size: 100px;
+      color: var(--c-gold);
+      opacity: 0.15;
+      position: absolute;
+      top: -24px;
+      left: -8px;
+      line-height: 1;
+      pointer-events: none;
+      user-select: none;
+    }
+    .step-h {
+      font-family: 'Playfair Display', serif;
+      font-weight: 400;
+      font-size: 26px;
+      color: var(--c-pgold);
+      margin-bottom: 14px;
+      position: relative;
+    }
+    .step-t {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      font-size: 14px;
+      color: var(--c-pale);
+      line-height: 1.9;
+      position: relative;
+    }
+    .order-cta { text-align: center; margin-top: 60px; }
+
+    /* ===================================================
+       SHIPPING
+       =================================================== */
+    #shipping { background: var(--c-linen); }
+    .ship-h {
+      font-family: 'Playfair Display', serif;
+      font-weight: 400;
+      font-size: 48px;
+      color: var(--c-sage);
+      margin-bottom: 16px;
+    }
+    .ship-sub {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      font-size: 15px;
+      color: var(--c-muted);
+      margin-bottom: 64px;
+    }
+    .country-grid {
+      display: grid;
+      grid-template-columns: repeat(3,1fr);
+    }
+    .c-card {
+      background: var(--c-pale);
+      padding: 48px 36px;
+      text-align: center;
+      border-right: 1px solid rgba(181,201,183,0.4);
+    }
+    .c-card:last-child { border-right: none; }
+    .c-flag { font-size: 40px; line-height: 1; display: block; }
+    .c-name {
+      font-family: 'Playfair Display', serif;
+      font-weight: 400;
+      font-size: 28px;
+      color: var(--c-sage);
+      margin-top: 16px;
+      display: block;
+    }
+    .c-detail {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      font-size: 13px;
+      color: var(--c-muted);
+      margin-top: 8px;
+      display: block;
+    }
+    .c-free {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      font-size: 12px;
+      color: var(--c-gold);
+      margin-top: 8px;
+      display: block;
+    }
+
+    /* ===================================================
+       STORY
+       =================================================== */
+    #story { background: var(--c-linen); }
+    .story-split {
+      display: grid;
+      grid-template-columns: 40fr 60fr;
+      min-height: 600px;
+    }
+    .story-left {
+      background: var(--c-pale);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      min-height: 500px;
+    }
+    .story-wm {
+      font-family: 'Playfair Display', serif;
+      font-weight: 900;
+      font-style: italic;
+      font-size: 260px;
+      color: rgba(61,92,66,0.07);
+      position: absolute;
+      line-height: 1;
+      user-select: none;
+    }
+    .story-art {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .story-right {
+      background: var(--c-linen);
+      padding: 80px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .story-eyebrow {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      font-size: 11px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--c-mid);
+      margin-bottom: 16px;
+    }
+    .story-h {
+      font-family: 'Playfair Display', serif;
+      font-weight: 400;
+      font-style: italic;
+      font-size: 48px;
+      color: var(--c-sage);
+      line-height: 1.1;
+      margin-bottom: 24px;
+    }
+    .story-p {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      font-size: 15px;
+      color: var(--c-text);
+      line-height: 1.9;
+      margin-bottom: 20px;
+    }
+    .story-bq {
+      border-left: 2px solid var(--c-gold);
+      padding-left: 24px;
+      margin: 32px 0;
+    }
+    .story-bq p {
+      font-family: 'Playfair Display', serif;
+      font-weight: 300;
+      font-style: italic;
+      font-size: 22px;
+      color: var(--c-sage);
+      line-height: 1.5;
+    }
+
+    /* ===================================================
+       INSTAGRAM WALL
+       =================================================== */
+    #instagram { background: var(--c-night); }
+    .ig-eyebrow {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      font-size: 11px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--c-mid);
+      margin-bottom: 16px;
+      display: block;
+    }
+    .ig-h {
+      font-family: 'Playfair Display', serif;
+      font-weight: 400;
+      font-style: italic;
+      font-size: 56px;
+      color: var(--c-pgold);
+      line-height: 1.05;
+      margin-bottom: 16px;
+    }
+    .ig-handle {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      font-size: 14px;
+      color: var(--c-mid);
+      text-decoration: none;
+      transition: color 0.3s;
+      display: block;
+    }
+    .ig-handle:hover { color: var(--c-gold); }
+    .ig-grid {
+      display: grid;
+      grid-template-columns: repeat(3,1fr);
+      gap: 2px;
+      margin-top: 48px;
+    }
+    .ig-cell {
+      aspect-ratio: 1;
+      position: relative;
+      overflow: hidden;
+      display: block;
+      text-decoration: none;
+    }
+    .ig-inner {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.4s ease;
+    }
+    .ig-cell:hover .ig-inner { transform: scale(1.05); }
+    .ig-cell::after {
+      content: 'View on Instagram';
+      position: absolute;
+      inset: 0;
+      background: rgba(28,43,30,0.85);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 500;
+      font-size: 12px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--c-pgold);
+      opacity: 0;
+      transition: opacity 0.4s;
+    }
+    .ig-cell:hover::after { opacity: 1; }
+    .ig-c1 .ig-inner { background: var(--c-sage); }
+    .ig-c2 .ig-inner { background: var(--c-night); border: 1px solid rgba(200,169,110,0.08); }
+    .ig-c3 .ig-inner { background: var(--c-pale); }
+    .ig-c4 .ig-inner { background: var(--c-bronze); }
+    .ig-c5 .ig-inner { background: var(--c-mid); }
+    .ig-c6 .ig-inner { background: var(--c-sage); }
+    .ig-cta { text-align: center; margin-top: 48px; }
+
+    /* ===================================================
+       FOOTER
+       =================================================== */
+    #footer { background: var(--c-night); }
+    .footer-top {
+      padding: 80px 0;
+      display: grid;
+      grid-template-columns: repeat(3,1fr);
+      gap: 48px;
+    }
+    .f-brand {
+      font-family: 'Playfair Display', serif;
+      font-weight: 400;
+      font-style: italic;
+      font-size: 28px;
+      color: var(--c-pgold);
+      display: block;
+      margin-bottom: 12px;
+    }
+    .f-tag {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      font-size: 13px;
+      color: var(--c-mid);
+    }
+    .f-col-head {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 500;
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--c-gold);
+      margin-bottom: 20px;
+      display: block;
+    }
+    .f-links { display: flex; flex-direction: column; gap: 10px; list-style: none; }
+    .f-links a {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      font-size: 13px;
+      color: var(--c-pale);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+    .f-links a:hover { color: var(--c-gold); }
+    .f-links span {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      font-size: 13px;
+      color: var(--c-pale);
+    }
+    .f-div { height: 1px; background: rgba(181,201,183,0.15); }
+    .footer-bottom {
+      padding: 24px 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .f-copy {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      font-size: 12px;
+      color: var(--c-mid);
+    }
+    .f-policy a {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      font-size: 12px;
+      color: var(--c-mid);
+      text-decoration: none;
+      margin-left: 16px;
+      transition: color 0.3s;
+    }
+    .f-policy a:hover { color: var(--c-gold); }
+
+    /* ===================================================
+       BACK TO TOP
+       =================================================== */
+    #btt {
+      position: fixed;
+      bottom: 32px; right: 32px;
+      width: 44px; height: 44px;
+      background: var(--c-sage);
+      color: var(--c-pgold);
+      border: none;
+      border-radius: 0;
+      cursor: pointer;
+      font-size: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s, background 0.3s;
+      z-index: 900;
+      font-family: 'DM Sans', sans-serif;
+    }
+    #btt.show { opacity: 1; pointer-events: auto; }
+    #btt:hover { background: var(--c-night); }
+
+    /* ===================================================
+       RESPONSIVE
+       =================================================== */
+    @media (max-width: 991px) {
+      .nav-links, .nav-ig { display: none; }
+      .hamburger { display: flex; }
+      #nav { height: 64px; }
+      .nav-inner { padding: 0 24px; }
+
+      #hero { height: auto; min-height: 100svh; }
+      .hero-wrap { flex-direction: column; }
+      .hero-right { flex: none; width: 100%; height: 280px; order: -1; }
+      .hero-left { flex: none; width: 100%; max-width: 100%; padding: 64px 24px 80px; }
+      .h1a, .h1b { font-size: 52px; }
+      .hero-art { width: 200px; height: 200px; }
+      .h-circle-lg { width: 200px; height: 200px; }
+      .h-circle-sm { width: 110px; height: 110px; }
+      .h-line-v { height: 100px; }
+      .h-line-h { width: 100px; }
+
+      .stats-grid { grid-template-columns: repeat(2,1fr); padding: 0 24px; }
+      .stat-item:nth-child(2) { border-right: none; }
+      .stat-item { border-bottom: 1px solid var(--c-pale); }
+      .stat-item:nth-child(3), .stat-item:nth-child(4) { border-bottom: none; }
+
+      .editorial-split { grid-template-columns: 1fr; }
+      .ed-col { min-height: 380px; padding: 48px; }
+
+      .prod-grid { grid-template-columns: repeat(2,1fr); }
+      .sec-heading { font-size: 38px; }
+
+      .steps { grid-template-columns: 1fr; gap: 40px; }
+      .order-h { font-size: 38px; }
+
+      .country-grid { grid-template-columns: 1fr; }
+      .c-card { border-right: none; border-bottom: 1px solid rgba(181,201,183,0.4); }
+      .c-card:last-child { border-bottom: none; }
+
+      .story-split { grid-template-columns: 1fr; }
+      .story-left { min-height: 300px; }
+      .story-right { padding: 48px 24px; }
+      .story-h { font-size: 36px; }
+
+      .ig-h { font-size: 38px; }
+
+      .footer-top { grid-template-columns: 1fr; gap: 40px; }
+      .footer-bottom { flex-direction: column; gap: 12px; text-align: center; }
+      .f-policy a { margin: 0 8px; }
+
+      .lux-container { padding: 0 24px; }
+      .section-pad { padding: 64px 0; }
+      #quote { padding: 60px 24px; }
+      .q-text { font-size: 22px; }
+    }
+
+    @media (max-width: 575px) {
+      .prod-grid { grid-template-columns: 1fr; }
+      .ig-grid { grid-template-columns: repeat(2,1fr); }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">AU<span class="dot">·</span>RÈLE</a>
+    <ul class="nav-links">
+      <li><a href="#collection">Collections</a></li>
+      <li><a href="#story">Story</a></li>
+      <li><a href="#order">Order</a></li>
+      <li><a href="#footer">Contact</a></li>
+    </ul>
+    <div class="nav-right">
+      <a href="https://instagram.com/yourbrand" target="_blank" rel="noopener noreferrer" class="nav-ig" aria-label="Instagram">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="2" y="2" width="20" height="20" rx="5"/>
+          <circle cx="12" cy="12" r="4"/>
+          <circle cx="17.5" cy="6.5" r="1" fill="#C8A96E" stroke="none"/>
+        </svg>
+      </a>
+      <button class="hamburger" id="ham" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- Mobile overlay -->
+<div class="mob-overlay" id="mob">
+  <button class="mob-close" id="mobClose">Close ✕</button>
+  <nav class="mob-overlay-nav">
+    <a href="#collection" class="mob-lnk">Collections</a>
+    <a href="#story"      class="mob-lnk">Story</a>
+    <a href="#order"      class="mob-lnk">Order</a>
+    <a href="#footer"     class="mob-lnk">Contact</a>
+  </nav>
+</div>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-wrap">
+    <div class="hero-left">
+      <p class="hero-eyebrow">Fine Jewellery · Handcrafted · Balkans</p>
+      <span class="hero-rule"></span>
+      <span class="h1a">Worn close</span>
+      <span class="h1b">to the heart.</span>
+      <p class="hero-sub">Each piece is a quiet ceremony. Handcrafted in small batches, shipped with intention across Albania, Kosovo, and North Macedonia.</p>
+      <div class="hero-cta">
+        <a href="#collection" class="btn-ol dark">Explore the Collection</a>
+        <span class="hero-hint">or ↓ scroll to discover</span>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="hero-art">
+        <div class="h-circle-lg"></div>
+        <div class="h-circle-sm"></div>
+        <div class="h-line-v"></div>
+        <div class="h-line-h"></div>
+        <div class="h-dot"></div>
+      </div>
+      <p class="hero-caption">Est. 2024 · Balkans</p>
+    </div>
+  </div>
+  <div class="scroll-ind" aria-hidden="true">
+    <div class="sl"></div>
+    <div class="sa"></div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-strip" aria-hidden="true">
+  <div class="marquee-track">
+    <span>Albania · Kosovo · North Macedonia · Handcrafted with care · Order via Instagram · Small-batch jewellery · Free shipping above €80 ·</span>
+    <span>Albania · Kosovo · North Macedonia · Handcrafted with care · Order via Instagram · Small-batch jewellery · Free shipping above €80 ·</span>
+    <span>Albania · Kosovo · North Macedonia · Handcrafted with care · Order via Instagram · Small-batch jewellery · Free shipping above €80 ·</span>
+  </div>
+</div>
+
+<!-- STATS -->
+<section id="stats">
+  <div class="stats-grid">
+    <div class="stat-item reveal"><span class="stat-num">16+</span><span class="stat-lbl">Unique Pieces</span></div>
+    <div class="stat-item reveal"><span class="stat-num">3</span><span class="stat-lbl">Countries</span></div>
+    <div class="stat-item reveal"><span class="stat-num">100%</span><span class="stat-lbl">Handcrafted</span></div>
+    <div class="stat-item reveal"><span class="stat-num">∞</span><span class="stat-lbl">With Love</span></div>
+  </div>
+</section>
+
+<!-- EDITORIAL SPLIT -->
+<section id="collections-intro">
+  <div class="editorial-split">
+    <div class="ed-col sage reveal">
+      <span class="ed-wm">Rings</span>
+      <p class="ed-eyebrow" style="color:var(--c-mid)">Collection 01</p>
+      <h2 class="ed-h" style="color:var(--c-pgold)">The Ring Edit</h2>
+      <p class="ed-body" style="color:var(--c-pale)">Each ring is cast once and cast with purpose. Minimal forms that carry maximal meaning.</p>
+      <a href="#collection" class="ed-link" style="color:var(--c-gold)">Explore Rings →</a>
+    </div>
+    <div class="ed-col pale reveal">
+      <p class="ed-eyebrow" style="color:var(--c-bronze)">Collection 02</p>
+      <h2 class="ed-h" style="color:var(--c-sage)">Neck &amp; Wrist</h2>
+      <p class="ed-body" style="color:var(--c-muted)">Chokers, chains, and cuffs. Designed to be layered, stacked, worn endlessly.</p>
+      <a href="#collection" class="ed-link" style="color:var(--c-bronze)">Explore →</a>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCT GRID -->
+<section id="collection" class="section-pad">
+  <div class="lux-container">
+    <span class="sec-eyebrow reveal">The Collection</span>
+    <h2 class="sec-heading reveal">All Pieces</h2>
+    <p class="sec-sub reveal">16 handcrafted works. Order any piece via Instagram.</p>
+    <span class="gold-rule" style="margin:32px 0 0"></span>
+
+    <div class="filter-bar">
+      <button class="f-pill on" data-f="all">All</button>
+      <button class="f-pill" data-f="rings">Rings</button>
+      <button class="f-pill" data-f="necklaces">Necklaces</button>
+      <button class="f-pill" data-f="bracelets">Bracelets</button>
+      <button class="f-pill" data-f="earrings">Earrings</button>
+    </div>
+
+    <div class="prod-grid">
+
+      <div class="prod-card reveal" data-cat="rings">
+        <div class="prod-img img-a">
+          <svg width="90" height="90" viewBox="0 0 90 90" fill="none"><circle cx="45" cy="45" r="40" stroke="#C8A96E" stroke-width="1"/><path d="M45 30 L57 45 L45 60 L33 45 Z" stroke="#C8A96E" stroke-width="1" fill="none" opacity=".55"/></svg>
+        </div>
+        <div class="prod-body">
+          <div class="prod-meta"><span class="prod-name">Selène Ring</span><span class="prod-price">€42</span></div>
+          <span class="prod-cat">Rings</span>
+          <a href="https://instagram.com/yourbrand" target="_blank" rel="noopener noreferrer" class="prod-btn">Order on Instagram</a>
+        </div>
+      </div>
+
+      <div class="prod-card reveal" data-cat="necklaces">
+        <div class="prod-img img-b">
+          <svg width="90" height="70" viewBox="0 0 90 70" fill="none"><line x1="10" y1="25" x2="80" y2="25" stroke="#8C6D3F" stroke-width="1"/><line x1="10" y1="35" x2="80" y2="35" stroke="#8C6D3F" stroke-width="1"/><line x1="10" y1="45" x2="80" y2="45" stroke="#8C6D3F" stroke-width="1"/></svg>
+        </div>
+        <div class="prod-body">
+          <div class="prod-meta"><span class="prod-name">Aurel Choker</span><span class="prod-price">€58</span></div>
+          <span class="prod-cat">Necklaces</span>
+          <a href="https://instagram.com/yourbrand" target="_blank" rel="noopener noreferrer" class="prod-btn">Order on Instagram</a>
+        </div>
+      </div>
+
+      <div class="prod-card reveal" data-cat="bracelets">
+        <div class="prod-img img-c">
+          <svg width="100" height="100" viewBox="0 0 100 100" fill="none"><circle cx="50" cy="50" r="44" stroke="#E8D5A3" stroke-width="1.5"/><circle cx="50" cy="50" r="24" stroke="#E8D5A3" stroke-width=".6" stroke-dasharray="3 5"/></svg>
+        </div>
+        <div class="prod-body">
+          <div class="prod-meta"><span class="prod-name">Arc De Bangle</span><span class="prod-price">€49</span></div>
+          <span class="prod-cat">Bracelets</span>
+          <a href="https://instagram.com/yourbrand" target="_blank" rel="noopener noreferrer" class="prod-btn">Order on Instagram</a>
+        </div>
+      </div>
+
+      <div class="prod-card reveal" data-cat="earrings">
+        <div class="prod-img img-d">
+          <svg width="60" height="100" viewBox="0 0 60 100" fill="none"><path d="M30 8 C50 8 56 30 56 48 C56 70 44 92 30 92 C16 92 4 70 4 48 C4 30 10 8 30 8 Z" stroke="#3D5C42" stroke-width="1" fill="none"/><circle cx="30" cy="14" r="4" stroke="#3D5C42" stroke-width="1"/></svg>
+        </div>
+        <div class="prod-body">
+          <div class="prod-meta"><span class="prod-name">Mira Drop Earrings</span><span class="prod-price">€31</span></div>
+          <span class="prod-cat">Earrings</span>
+          <a href="https://instagram.com/yourbrand" target="_blank" rel="noopener noreferrer" class="prod-btn">Order on Instagram</a>
+        </div>
+      </div>
+
+      <div class="prod-card reveal" data-cat="rings">
+        <div class="prod-img img-a">
+          <svg width="90" height="90" viewBox="0 0 90 90" fill="none"><circle cx="45" cy="45" r="40" stroke="#C8A96E" stroke-width="1"/><circle cx="45" cy="45" r="22" stroke="#C8A96E" stroke-width=".6" opacity=".5"/></svg>
+        </div>
+        <div class="prod-body">
+          <div class="prod-meta"><span class="prod-name">Lune Stacking Ring</span><span class="prod-price">€38</span></div>
+          <span class="prod-cat">Rings</span>
+          <a href="https://instagram.com/yourbrand" target="_blank" rel="noopener noreferrer" class="prod-btn">Order on Instagram</a>
+        </div>
+      </div>
+
+      <div class="prod-card reveal" data-cat="necklaces">
+        <div class="prod-img img-b">
+          <svg width="80" height="80" viewBox="0 0 80 80" fill="none"><path d="M40 10 Q70 10 70 40 Q70 70 40 70 Q10 70 10 40 Q10 10 40 10 Z" stroke="#8C6D3F" stroke-width="1" fill="none"/><line x1="40" y1="20" x2="40" y2="60" stroke="#8C6D3F" stroke-width=".6" opacity=".5"/></svg>
+        </div>
+        <div class="prod-body">
+          <div class="prod-meta"><span class="prod-name">Forêt Pendant</span><span class="prod-price">€67</span></div>
+          <span class="prod-cat">Necklaces</span>
+          <a href="https://instagram.com/yourbrand" target="_blank" rel="noopener noreferrer" class="prod-btn">Order on Instagram</a>
+        </div>
+      </div>
+
+      <div class="prod-card reveal" data-cat="bracelets">
+        <div class="prod-img img-c">
+          <svg width="100" height="100" viewBox="0 0 100 100" fill="none"><circle cx="50" cy="50" r="44" stroke="#E8D5A3" stroke-width="1.5"/><path d="M30 50 L50 30 L70 50 L50 70 Z" stroke="#E8D5A3" stroke-width=".6" fill="none" opacity=".4"/></svg>
+        </div>
+        <div class="prod-body">
+          <div class="prod-meta"><span class="prod-name">Olive Cuff</span><span class="prod-price">€54</span></div>
+          <span class="prod-cat">Bracelets</span>
+          <a href="https://instagram.com/yourbrand" target="_blank" rel="noopener noreferrer" class="prod-btn">Order on Instagram</a>
+        </div>
+      </div>
+
+      <div class="prod-card reveal" data-cat="earrings">
+        <div class="prod-img img-d">
+          <svg width="80" height="80" viewBox="0 0 80 80" fill="none"><polygon points="40,6 74,40 40,74 6,40" stroke="#3D5C42" stroke-width="1" fill="none"/><polygon points="40,20 60,40 40,60 20,40" stroke="#3D5C42" stroke-width=".6" fill="none" opacity=".5"/></svg>
+        </div>
+        <div class="prod-body">
+          <div class="prod-meta"><span class="prod-name">Étoile Studs</span><span class="prod-price">€28</span></div>
+          <span class="prod-cat">Earrings</span>
+          <a href="https://instagram.com/yourbrand" target="_blank" rel="noopener noreferrer" class="prod-btn">Order on Instagram</a>
+        </div>
+      </div>
+
+      <div class="prod-card reveal" data-cat="rings">
+        <div class="prod-img img-a">
+          <svg width="90" height="90" viewBox="0 0 90 90" fill="none"><circle cx="45" cy="45" r="40" stroke="#C8A96E" stroke-width="1"/><line x1="45" y1="10" x2="45" y2="80" stroke="#C8A96E" stroke-width=".5" opacity=".4"/><line x1="10" y1="45" x2="80" y2="45" stroke="#C8A96E" stroke-width=".5" opacity=".4"/></svg>
+        </div>
+        <div class="prod-body">
+          <div class="prod-meta"><span class="prod-name">Seren Ring</span><span class="prod-price">€45</span></div>
+          <span class="prod-cat">Rings</span>
+          <a href="https://instagram.com/yourbrand" target="_blank" rel="noopener noreferrer" class="prod-btn">Order on Instagram</a>
+        </div>
+      </div>
+
+      <div class="prod-card reveal" data-cat="necklaces">
+        <div class="prod-img img-b">
+          <svg width="90" height="70" viewBox="0 0 90 70" fill="none"><line x1="10" y1="20" x2="80" y2="20" stroke="#8C6D3F" stroke-width="1"/><line x1="10" y1="30" x2="80" y2="30" stroke="#8C6D3F" stroke-width="1"/><line x1="10" y1="40" x2="80" y2="40" stroke="#8C6D3F" stroke-width="1"/><line x1="10" y1="50" x2="80" y2="50" stroke="#8C6D3F" stroke-width=".5" opacity=".5"/></svg>
+        </div>
+        <div class="prod-body">
+          <div class="prod-meta"><span class="prod-name">Vigne Layering Chain</span><span class="prod-price">€72</span></div>
+          <span class="prod-cat">Necklaces</span>
+          <a href="https://instagram.com/yourbrand" target="_blank" rel="noopener noreferrer" class="prod-btn">Order on Instagram</a>
+        </div>
+      </div>
+
+      <div class="prod-card reveal" data-cat="bracelets">
+        <div class="prod-img img-c">
+          <svg width="100" height="100" viewBox="0 0 100 100" fill="none"><circle cx="50" cy="50" r="44" stroke="#E8D5A3" stroke-width="1.5"/><circle cx="50" cy="50" r="10" stroke="#E8D5A3" stroke-width=".8" opacity=".4"/></svg>
+        </div>
+        <div class="prod-body">
+          <div class="prod-meta"><span class="prod-name">Brume Bangle</span><span class="prod-price">€46</span></div>
+          <span class="prod-cat">Bracelets</span>
+          <a href="https://instagram.com/yourbrand" target="_blank" rel="noopener noreferrer" class="prod-btn">Order on Instagram</a>
+        </div>
+      </div>
+
+      <div class="prod-card reveal" data-cat="earrings">
+        <div class="prod-img img-d">
+          <svg width="70" height="70" viewBox="0 0 70 70" fill="none"><circle cx="35" cy="35" r="30" stroke="#3D5C42" stroke-width="1.2"/><circle cx="35" cy="35" r="16" stroke="#3D5C42" stroke-width=".6" opacity=".5"/></svg>
+        </div>
+        <div class="prod-body">
+          <div class="prod-meta"><span class="prod-name">Cèdre Hoops</span><span class="prod-price">€33</span></div>
+          <span class="prod-cat">Earrings</span>
+          <a href="https://instagram.com/yourbrand" target="_blank" rel="noopener noreferrer" class="prod-btn">Order on Instagram</a>
+        </div>
+      </div>
+
+      <div class="prod-card reveal" data-cat="rings">
+        <div class="prod-img img-a">
+          <svg width="90" height="90" viewBox="0 0 90 90" fill="none"><circle cx="45" cy="45" r="40" stroke="#C8A96E" stroke-width="1"/><path d="M45 28 L57 45 L45 62 L33 45 Z" stroke="#C8A96E" stroke-width="1" fill="none" opacity=".55"/><circle cx="45" cy="45" r="5" stroke="#C8A96E" stroke-width=".6"/></svg>
+        </div>
+        <div class="prod-body">
+          <div class="prod-meta"><span class="prod-name">Rive Ring</span><span class="prod-price">€39</span></div>
+          <span class="prod-cat">Rings</span>
+          <a href="https://instagram.com/yourbrand" target="_blank" rel="noopener noreferrer" class="prod-btn">Order on Instagram</a>
+        </div>
+      </div>
+
+      <div class="prod-card reveal" data-cat="necklaces">
+        <div class="prod-img img-b">
+          <svg width="100" height="60" viewBox="0 0 100 60" fill="none"><path d="M10 30 Q30 10 50 30 Q70 50 90 30" stroke="#8C6D3F" stroke-width="1" fill="none"/><path d="M10 35 Q30 15 50 35 Q70 55 90 35" stroke="#8C6D3F" stroke-width=".5" fill="none" opacity=".4"/></svg>
+        </div>
+        <div class="prod-body">
+          <div class="prod-meta"><span class="prod-name">Dune Collar</span><span class="prod-price">€61</span></div>
+          <span class="prod-cat">Necklaces</span>
+          <a href="https://instagram.com/yourbrand" target="_blank" rel="noopener noreferrer" class="prod-btn">Order on Instagram</a>
+        </div>
+      </div>
+
+      <div class="prod-card reveal" data-cat="bracelets">
+        <div class="prod-img img-c">
+          <svg width="100" height="100" viewBox="0 0 100 100" fill="none"><circle cx="50" cy="50" r="44" stroke="#E8D5A3" stroke-width="1.5"/><circle cx="50" cy="50" r="30" stroke="#E8D5A3" stroke-width=".6" stroke-dasharray="2 6" opacity=".5"/></svg>
+        </div>
+        <div class="prod-body">
+          <div class="prod-meta"><span class="prod-name">Roseau Bracelet</span><span class="prod-price">€44</span></div>
+          <span class="prod-cat">Bracelets</span>
+          <a href="https://instagram.com/yourbrand" target="_blank" rel="noopener noreferrer" class="prod-btn">Order on Instagram</a>
+        </div>
+      </div>
+
+      <div class="prod-card reveal" data-cat="rings">
+        <div class="prod-img img-d">
+          <svg width="70" height="100" viewBox="0 0 70 100" fill="none"><path d="M35 8 C55 8 62 28 62 46 C62 68 50 92 35 92 C20 92 8 68 8 46 C8 28 15 8 35 8 Z" stroke="#3D5C42" stroke-width="1" fill="none"/><circle cx="35" cy="30" r="6" stroke="#3D5C42" stroke-width=".8" opacity=".5"/></svg>
+        </div>
+        <div class="prod-body">
+          <div class="prod-meta"><span class="prod-name">Pluie Ring</span><span class="prod-price">€41</span></div>
+          <span class="prod-cat">Rings</span>
+          <a href="https://instagram.com/yourbrand" target="_blank" rel="noopener noreferrer" class="prod-btn">Order on Instagram</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- QUOTE -->
+<section id="quote">
+  <div class="quote-wrap reveal">
+    <span class="q-rule"></span>
+    <blockquote class="q-text">"Jewellery is the punctuation of an outfit — ours is the comma that says, there is more to me."</blockquote>
+    <p class="q-attr">— The Aurèle Studio</p>
+    <span class="q-rule"></span>
+  </div>
+</section>
+
+<!-- HOW TO ORDER -->
+<section id="order" class="section-pad">
+  <div class="lux-container">
+    <p class="eyebrow">Process</p>
+    <h2 class="order-h reveal">How it works.</h2>
+    <span class="gold-rule"></span>
+    <div class="steps">
+      <div class="step reveal">
+        <span class="step-n">01</span>
+        <h3 class="step-h">Find your piece</h3>
+        <p class="step-t">Browse the 16 pieces above and note the name of the one that calls to you.</p>
+      </div>
+      <div class="step reveal">
+        <span class="step-n">02</span>
+        <h3 class="step-h">Write to us</h3>
+        <p class="step-t">Send us a DM on Instagram with the piece name, your city, and your full address.</p>
+      </div>
+      <div class="step reveal">
+        <span class="step-n">03</span>
+        <h3 class="step-h">Receive it</h3>
+        <p class="step-t">We confirm your order, pack it by hand, and ship within 2–4 working days.</p>
+      </div>
+    </div>
+    <div class="order-cta">
+      <a href="https://instagram.com/yourbrand" target="_blank" rel="noopener noreferrer" class="btn-ol dark">Message us on Instagram →</a>
+    </div>
+  </div>
+</section>
+
+<!-- SHIPPING -->
+<section id="shipping" class="section-pad">
+  <div class="lux-container">
+    <h2 class="ship-h reveal">Where we ship.</h2>
+    <p class="ship-sub reveal">Handcrafted in the Balkans. Delivered across three borders.</p>
+    <div class="country-grid">
+      <div class="c-card reveal"><span class="c-flag">🇦🇱</span><span class="c-name">Albania</span><span class="c-detail">Standard delivery 3–7 days</span><span class="c-free">Free above €80</span></div>
+      <div class="c-card reveal"><span class="c-flag">🇽🇰</span><span class="c-name">Kosovo</span><span class="c-detail">Standard delivery 3–7 days</span><span class="c-free">Free above €80</span></div>
+      <div class="c-card reveal"><span class="c-flag">🇲🇰</span><span class="c-name">North Macedonia</span><span class="c-detail">Standard delivery 3–7 days</span><span class="c-free">Free above €80</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- STORY -->
+<section id="story">
+  <div class="story-split">
+    <div class="story-left">
+      <span class="story-wm">A</span>
+      <div class="story-art">
+        <svg width="130" height="130" viewBox="0 0 130 130" fill="none" style="position:absolute"><circle cx="65" cy="65" r="62" stroke="#C8A96E" stroke-width="1"/></svg>
+        <svg width="44" height="44" viewBox="0 0 44 44" fill="none" style="position:absolute"><path d="M22 2 L42 22 L22 42 L2 22 Z" stroke="#C8A96E" stroke-width="1"/></svg>
+      </div>
+    </div>
+    <div class="story-right reveal">
+      <p class="story-eyebrow">Our Story</p>
+      <h2 class="story-h">Made slowly,<br>on purpose.</h2>
+      <span class="gold-rule" style="margin-bottom:28px"></span>
+      <p class="story-p">Aurèle was born in a small studio in Skopje, from a desire to make jewellery that doesn't follow trends — only instinct. Every piece passes through our hands three times before it reaches yours.</p>
+      <p class="story-p">We believe in less. Fewer pieces, made better. 16 designs, not 160. Each one chosen deliberately, each one a quiet statement.</p>
+      <div class="story-bq">
+        <p>"We make jewellery for the woman who already knows who she is."</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INSTAGRAM WALL -->
+<section id="instagram" class="section-pad">
+  <div class="lux-container">
+    <span class="ig-eyebrow reveal">Follow Along</span>
+    <h2 class="ig-h reveal">Our world<br>on Instagram.</h2>
+    <a href="https://instagram.com/yourbrand" target="_blank" rel="noopener noreferrer" class="ig-handle reveal">@yourbrand</a>
+
+    <div class="ig-grid">
+      <a href="https://instagram.com/yourbrand" target="_blank" rel="noopener noreferrer" class="ig-cell ig-c1">
+        <div class="ig-inner"><svg width="64" height="64" viewBox="0 0 64 64" fill="none"><circle cx="32" cy="32" r="28" stroke="rgba(200,169,110,.3)" stroke-width="1"/><circle cx="32" cy="32" r="14" stroke="rgba(200,169,110,.2)" stroke-width=".6"/></svg></div>
+      </a>
+      <a href="https://instagram.com/yourbrand" target="_blank" rel="noopener noreferrer" class="ig-cell ig-c2">
+        <div class="ig-inner"><svg width="64" height="64" viewBox="0 0 64 64" fill="none"><path d="M32 4 L60 32 L32 60 L4 32 Z" stroke="rgba(200,169,110,.3)" stroke-width="1"/></svg></div>
+      </a>
+      <a href="https://instagram.com/yourbrand" target="_blank" rel="noopener noreferrer" class="ig-cell ig-c3">
+        <div class="ig-inner"><svg width="64" height="64" viewBox="0 0 64 64" fill="none"><line x1="32" y1="8" x2="32" y2="56" stroke="rgba(200,169,110,.3)" stroke-width="1"/><line x1="8" y1="32" x2="56" y2="32" stroke="rgba(200,169,110,.3)" stroke-width="1"/><circle cx="32" cy="32" r="6" stroke="rgba(200,169,110,.25)" stroke-width=".6"/></svg></div>
+      </a>
+      <a href="https://instagram.com/yourbrand" target="_blank" rel="noopener noreferrer" class="ig-cell ig-c4">
+        <div class="ig-inner"><svg width="64" height="64" viewBox="0 0 64 64" fill="none"><circle cx="32" cy="32" r="28" stroke="rgba(200,169,110,.3)" stroke-width="1"/><circle cx="32" cy="32" r="16" stroke="rgba(200,169,110,.2)" stroke-width="1"/></svg></div>
+      </a>
+      <a href="https://instagram.com/yourbrand" target="_blank" rel="noopener noreferrer" class="ig-cell ig-c5">
+        <div class="ig-inner"><svg width="56" height="80" viewBox="0 0 56 80" fill="none"><path d="M28 6 C48 6 52 26 52 38 C52 60 42 74 28 74 C14 74 4 60 4 38 C4 26 8 6 28 6 Z" stroke="rgba(200,169,110,.3)" stroke-width="1" fill="none"/></svg></div>
+      </a>
+      <a href="https://instagram.com/yourbrand" target="_blank" rel="noopener noreferrer" class="ig-cell ig-c6">
+        <div class="ig-inner"><svg width="64" height="64" viewBox="0 0 64 64" fill="none"><circle cx="32" cy="32" r="3" fill="rgba(200,169,110,.35)"/><circle cx="20" cy="20" r="2" fill="rgba(200,169,110,.25)"/><circle cx="44" cy="20" r="2" fill="rgba(200,169,110,.25)"/><circle cx="20" cy="44" r="2" fill="rgba(200,169,110,.25)"/><circle cx="44" cy="44" r="2" fill="rgba(200,169,110,.25)"/><circle cx="32" cy="14" r="1.5" fill="rgba(200,169,110,.18)"/><circle cx="32" cy="50" r="1.5" fill="rgba(200,169,110,.18)"/></svg></div>
+      </a>
+    </div>
+
+    <div class="ig-cta">
+      <a href="https://instagram.com/yourbrand" target="_blank" rel="noopener noreferrer" class="btn-solid">Follow @yourbrand</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer id="footer">
+  <div class="lux-container">
+    <div class="footer-top">
+      <div>
+        <span class="f-brand">AU·RÈLE</span>
+        <p class="f-tag">Fine Jewellery · Since 2024 · Balkans</p>
+      </div>
+      <div>
+        <span class="f-col-head">Navigate</span>
+        <ul class="f-links">
+          <li><a href="#collection">Collections</a></li>
+          <li><a href="#story">Our Story</a></li>
+          <li><a href="#order">How to Order</a></li>
+          <li><a href="#footer">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <span class="f-col-head">Find Us</span>
+        <ul class="f-links">
+          <li><a href="https://instagram.com/yourbrand" target="_blank" rel="noopener noreferrer">Instagram @yourbrand</a></li>
+          <li><a href="mailto:hello@aurele.com">hello@aurele.com</a></li>
+          <li><span>Albania · Kosovo · North Macedonia</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="f-div"></div>
+  <div class="lux-container">
+    <div class="footer-bottom">
+      <span class="f-copy">© 2025 Aurèle. All rights reserved.</span>
+      <span class="f-copy">Made with love in the Balkans 🤍</span>
+      <div class="f-policy">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- Back to top -->
+<button id="btt" aria-label="Back to top">↑</button>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+  /* Nav scroll */
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 60), { passive: true });
+
+  /* Mobile menu */
+  const ham      = document.getElementById('ham');
+  const mob      = document.getElementById('mob');
+  const mobClose = document.getElementById('mobClose');
+  const openMob  = () => { mob.classList.add('open'); ham.classList.add('open'); document.body.style.overflow = 'hidden'; };
+  const closeMob = () => { mob.classList.remove('open'); ham.classList.remove('open'); document.body.style.overflow = ''; };
+  ham.addEventListener('click', () => mob.classList.contains('open') ? closeMob() : openMob());
+  mobClose.addEventListener('click', closeMob);
+  document.querySelectorAll('.mob-lnk').forEach(l => l.addEventListener('click', closeMob));
+
+  /* Product filter */
+  const pills = document.querySelectorAll('.f-pill');
+  const cards = document.querySelectorAll('.prod-card');
+  pills.forEach(pill => {
+    pill.addEventListener('click', () => {
+      pills.forEach(p => p.classList.remove('on'));
+      pill.classList.add('on');
+      const f = pill.dataset.f;
+      cards.forEach(c => c.classList.toggle('hide', f !== 'all' && c.dataset.cat !== f));
+    });
+  });
+
+  /* Scroll reveal */
+  const ro = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); ro.unobserve(e.target); } });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach((el, i) => {
+    const sibs = Array.from(el.parentElement.querySelectorAll('.reveal'));
+    el.style.transitionDelay = Math.min(sibs.indexOf(el) * 0.1, 0.5) + 's';
+    ro.observe(el);
+  });
+
+  /* Back to top */
+  const btt = document.getElementById('btt');
+  window.addEventListener('scroll', () => btt.classList.toggle('show', window.scrollY > 500), { passive: true });
+  btt.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+</script>
+</body>
+</html>
