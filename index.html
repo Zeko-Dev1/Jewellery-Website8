@@ -1,18 +1,19 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="sq" data-lang="sq">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AURÈLE — Fine Jewellery</title>
+  <title>AURÈLE — Bizhuteri Fine</title>
+  <meta name="description" content="Bizhuteri fine e punuar me dorë nga Ballkani. Dërgojmë në Shqipëri, Kosovë dhe Maqedoninë e Veriut.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,300;1,400;1,700;1,900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600&family=DM+Sans:wght@200;300;400;500&display=swap" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
   <style>
-    /* ===================================================
+    /* ─────────────────────────────────────────────────────
        VARIABLES
-       =================================================== */
+    ───────────────────────────────────────────────────── */
     :root {
       --c-night:  #1C2B1E;
       --c-sage:   #3D5C42;
@@ -24,63 +25,82 @@
       --c-bronze: #8C6D3F;
       --c-text:   #1C2B1E;
       --c-muted:  #5C7A60;
+      --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+      --bar-h: 44px;
     }
 
-    /* ===================================================
-       GLOBAL
-       =================================================== */
+    /* ─────────────────────────────────────────────────────
+       RESET & BASE
+    ───────────────────────────────────────────────────── */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
+    html { scroll-behavior: smooth; font-size: 16px; }
     body {
       background: var(--c-linen);
       color: var(--c-text);
       overflow-x: hidden;
       font-family: 'DM Sans', sans-serif;
       font-weight: 300;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
     }
 
+    /* Grain texture overlay */
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23g)' opacity='0.035'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 1;
+    }
+
+    /* Page enter */
+    @keyframes pageIn { from { opacity: 0; } to { opacity: 1; } }
+    body { animation: pageIn 0.6s ease forwards; }
+
+    /* Language toggle */
+    [data-en] { display: none; }
+    html[data-lang="en"] [data-sq] { display: none; }
+    html[data-lang="en"] [data-en] { display: revert; }
+
+    /* Utility */
     .gold-rule {
       display: block;
-      width: 60px;
+      width: 48px;
       height: 1px;
       background: var(--c-gold);
-      border: none;
     }
-
-    .eyebrow {
-      font-family: 'DM Sans', sans-serif;
-      font-weight: 300;
-      font-size: 11px;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: var(--c-mid);
-    }
-
     .lux-container {
       max-width: 1280px;
       margin: 0 auto;
-      padding: 0 48px;
+      padding: 0 56px;
     }
+    .section-pad { padding: 112px 0; }
 
-    .section-pad { padding: 120px 0; }
-
-    /* Reveal */
+    /* Reveal animation */
     .reveal {
       opacity: 0;
-      transform: translateY(40px);
-      transition: opacity 0.7s ease, transform 0.7s ease;
+      transform: translateY(32px);
+      transition: opacity 0.8s var(--ease-out), transform 0.8s var(--ease-out);
     }
     .reveal.in { opacity: 1; transform: none; }
+    .reveal-left {
+      opacity: 0;
+      transform: translateX(-32px);
+      transition: opacity 0.9s var(--ease-out), transform 0.9s var(--ease-out);
+    }
+    .reveal-left.in { opacity: 1; transform: none; }
 
-    /* ===================================================
+    /* ─────────────────────────────────────────────────────
        BUTTONS
-       =================================================== */
+    ───────────────────────────────────────────────────── */
     .btn-ol {
       display: inline-block;
       border: 1px solid var(--c-gold);
       color: var(--c-sage);
       background: transparent;
-      padding: 14px 44px;
+      padding: 15px 48px;
       letter-spacing: 0.18em;
       font-size: 11px;
       font-family: 'DM Sans', sans-serif;
@@ -92,14 +112,14 @@
       transition: background 0.4s, color 0.4s;
     }
     .btn-ol:hover { background: var(--c-gold); color: var(--c-night); }
-    .btn-ol.dark { color: var(--c-pgold); }
-    .btn-ol.dark:hover { background: var(--c-gold); color: var(--c-night); }
+    .btn-ol.dark { color: var(--c-pgold); border-color: rgba(200,169,110,0.7); }
+    .btn-ol.dark:hover { background: var(--c-gold); color: var(--c-night); border-color: var(--c-gold); }
 
     .btn-solid {
       display: inline-block;
       background: var(--c-sage);
       color: var(--c-pgold);
-      padding: 14px 44px;
+      padding: 15px 48px;
       letter-spacing: 0.18em;
       font-size: 11px;
       font-family: 'DM Sans', sans-serif;
@@ -113,62 +133,109 @@
     }
     .btn-solid:hover { background: var(--c-night); color: var(--c-pgold); }
 
-    /* ===================================================
-       NAV
-       =================================================== */
+    /* ─────────────────────────────────────────────────────
+       NAVBAR
+    ───────────────────────────────────────────────────── */
     #nav {
       position: fixed;
-      top: 0; left: 0; right: 0;
+      top: var(--bar-h); left: 0; right: 0;
       z-index: 1000;
       height: 80px;
+      transition: background 0.5s, border-color 0.5s, box-shadow 0.5s, top 0.4s;
       display: flex;
       align-items: center;
-      transition: background 0.4s, border-color 0.4s;
     }
     #nav.scrolled {
-      background: rgba(240,235,224,0.95);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--c-pale);
+      background: rgba(240,235,224,0.96);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(181,201,183,0.5);
+      box-shadow: 0 2px 32px rgba(28,43,30,0.06);
     }
     .nav-inner {
       max-width: 1280px;
       margin: 0 auto;
-      padding: 0 48px;
+      padding: 0 56px;
       width: 100%;
       display: flex;
       align-items: center;
       justify-content: space-between;
     }
     .nav-logo {
-      font-family: 'Playfair Display', serif;
+      font-family: 'Cormorant Garamond', serif;
       font-weight: 400;
       font-style: italic;
-      font-size: 24px;
-      color: var(--c-sage);
+      font-size: 26px;
+      color: var(--c-pgold);
       text-decoration: none;
+      letter-spacing: 0.1em;
+      flex-shrink: 0;
+      transition: color 0.3s;
     }
+    #nav.scrolled .nav-logo { color: var(--c-sage); }
     .nav-logo .dot { color: var(--c-gold); }
+
     .nav-links {
       display: flex;
-      gap: 40px;
+      gap: 36px;
       list-style: none;
+      margin: 0;
+      padding: 0;
     }
     .nav-links a {
       font-family: 'DM Sans', sans-serif;
       font-weight: 400;
-      font-size: 12px;
-      letter-spacing: 0.15em;
+      font-size: 11px;
+      letter-spacing: 0.16em;
       text-transform: uppercase;
-      color: var(--c-muted);
+      color: rgba(232,213,163,0.7);
       text-decoration: none;
       transition: color 0.3s;
+      position: relative;
+      padding-bottom: 2px;
+    }
+    #nav.scrolled .nav-links a { color: var(--c-muted); }
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -2px; left: 0;
+      width: 0; height: 1px;
+      background: var(--c-gold);
+      transition: width 0.3s;
     }
     .nav-links a:hover { color: var(--c-gold); }
-    .nav-right { display: flex; align-items: center; gap: 20px; }
-    .nav-ig { display: flex; align-items: center; text-decoration: none; }
-    .nav-ig svg { width: 20px; height: 20px; stroke: var(--c-gold); }
+    .nav-links a:hover::after { width: 100%; }
+    .nav-links a.active { color: var(--c-gold); }
+    #nav.scrolled .nav-links a.active { color: var(--c-gold); }
+    .nav-links a.active::after { width: 100%; }
 
+    .nav-right { display: flex; align-items: center; gap: 16px; }
+
+    /* Language toggle */
+    .lang-btn {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 500;
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(232,213,163,0.6);
+      background: none;
+      border: 1px solid rgba(200,169,110,0.3);
+      padding: 5px 12px;
+      border-radius: 0;
+      cursor: pointer;
+      transition: color 0.3s, border-color 0.3s;
+    }
+    #nav.scrolled .lang-btn { color: var(--c-muted); border-color: rgba(92,122,96,0.3); }
+    .lang-btn:hover { color: var(--c-gold); border-color: var(--c-gold); }
+
+    /* Social icons in nav */
+    .nav-socials { display: flex; align-items: center; gap: 12px; }
+    .nav-social-link { display: flex; align-items: center; text-decoration: none; opacity: 0.75; transition: opacity 0.3s; }
+    .nav-social-link:hover { opacity: 1; }
+    .nav-social-link svg { width: 18px; height: 18px; fill: none; stroke: var(--c-gold); }
+
+    /* Hamburger */
     .hamburger {
       display: none;
       flex-direction: column;
@@ -180,15 +247,17 @@
     }
     .hamburger span {
       display: block;
-      width: 24px;
+      width: 22px;
       height: 1px;
-      background: var(--c-sage);
+      background: var(--c-pgold);
       transition: transform 0.3s, opacity 0.3s;
     }
+    #nav.scrolled .hamburger span { background: var(--c-sage); }
     .hamburger.open span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
     .hamburger.open span:nth-child(2) { opacity: 0; }
     .hamburger.open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
 
+    /* Mobile overlay */
     .mob-overlay {
       position: fixed;
       inset: 0;
@@ -199,47 +268,57 @@
       align-items: center;
       justify-content: center;
       transform: translateX(100%);
-      transition: transform 0.4s cubic-bezier(0.76,0,0.24,1);
+      transition: transform 0.5s cubic-bezier(0.76,0,0.24,1);
     }
     .mob-overlay.open { transform: translateX(0); }
-    .mob-overlay-nav {
+    .mob-nav {
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 32px;
+      gap: 28px;
+      margin-bottom: 48px;
     }
-    .mob-overlay-nav a {
-      font-family: 'Playfair Display', serif;
+    .mob-nav a {
+      font-family: 'Cormorant Garamond', serif;
       font-weight: 300;
       font-style: italic;
-      font-size: 48px;
+      font-size: 44px;
       color: var(--c-pgold);
       text-decoration: none;
       transition: color 0.3s;
+      line-height: 1;
     }
-    .mob-overlay-nav a:hover { color: var(--c-gold); }
+    .mob-nav a:hover { color: var(--c-gold); }
+    .mob-socials { display: flex; gap: 24px; margin-top: 16px; }
+    .mob-socials a { display: flex; align-items: center; text-decoration: none; opacity: 0.6; transition: opacity 0.3s; }
+    .mob-socials a:hover { opacity: 1; }
+    .mob-socials svg { width: 22px; height: 22px; fill: none; stroke: var(--c-gold); }
+    .mob-lang { margin-top: 32px; }
     .mob-close {
       position: absolute;
       top: 28px; right: 36px;
       background: none;
       border: none;
       font-family: 'DM Sans', sans-serif;
-      font-size: 13px;
-      letter-spacing: 0.1em;
-      color: var(--c-pale);
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(181,201,183,0.5);
       cursor: pointer;
+      transition: color 0.3s;
     }
+    .mob-close:hover { color: var(--c-pale); }
 
-    /* ===================================================
+    /* ─────────────────────────────────────────────────────
        HERO
-       =================================================== */
+    ───────────────────────────────────────────────────── */
     #hero {
       height: 100vh;
+      min-height: 700px;
       background: var(--c-night);
       display: flex;
-      align-items: stretch;
-      position: relative;
       overflow: hidden;
+      position: relative;
     }
     .hero-wrap {
       display: flex;
@@ -247,158 +326,177 @@
       align-items: stretch;
     }
     .hero-left {
-      flex: 0 0 55%;
+      flex: 0 0 54%;
       display: flex;
       flex-direction: column;
       justify-content: center;
-      padding: 120px 64px 80px 48px;
-      max-width: calc(55% );
+      padding: 100px 56px 80px calc(max((100vw - 1280px) / 2, 0px) + 56px);
     }
     .hero-eyebrow {
       font-family: 'DM Sans', sans-serif;
       font-weight: 300;
-      font-size: 11px;
-      letter-spacing: 0.22em;
+      font-size: 10px;
+      letter-spacing: 0.26em;
       text-transform: uppercase;
-      color: var(--c-mid);
+      color: rgba(122,158,126,0.8);
+      margin-bottom: 0;
     }
     .hero-rule {
       display: block;
-      width: 60px;
-      height: 1px;
+      width: 48px; height: 1px;
       background: var(--c-gold);
-      margin: 24px 0;
+      margin: 22px 0;
     }
-    .h1a {
-      font-family: 'Playfair Display', serif;
+    .hero-h1a {
+      font-family: 'Cormorant Garamond', serif;
       font-weight: 300;
       font-style: italic;
-      font-size: 96px;
+      font-size: clamp(72px, 9vw, 118px);
       color: var(--c-pgold);
-      line-height: 0.9;
+      line-height: 0.85;
       display: block;
+      letter-spacing: 0.02em;
     }
-    .h1b {
-      font-family: 'Playfair Display', serif;
-      font-weight: 700;
+    .hero-h1b {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 500;
       font-style: italic;
-      font-size: 96px;
+      font-size: clamp(72px, 9vw, 118px);
       color: var(--c-gold);
-      line-height: 1;
+      line-height: 1.0;
       display: block;
+      letter-spacing: 0.02em;
     }
     .hero-sub {
       font-family: 'DM Sans', sans-serif;
       font-weight: 300;
-      font-size: 15px;
-      color: var(--c-pale);
-      line-height: 1.9;
-      max-width: 420px;
-      margin-top: 20px;
+      font-size: 14px;
+      color: rgba(181,201,183,0.75);
+      line-height: 1.95;
+      max-width: 400px;
+      margin-top: 24px;
     }
-    .hero-cta { margin-top: 40px; }
-    .hero-hint {
-      display: block;
-      font-family: 'DM Sans', sans-serif;
-      font-weight: 300;
-      font-size: 12px;
-      color: var(--c-mid);
-      margin-top: 20px;
-    }
+    .hero-cta { margin-top: 44px; display: flex; flex-direction: column; align-items: flex-start; gap: 0; }
 
+    /* Hero right art panel */
     .hero-right {
-      flex: 0 0 45%;
-      background: var(--c-sage);
+      flex: 0 0 46%;
+      background: var(--c-night);
+      position: relative;
       display: flex;
       align-items: center;
       justify-content: center;
-      position: relative;
       overflow: hidden;
     }
+    /* Fine grid overlay */
+    .hero-right::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(200,169,110,0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(200,169,110,0.035) 1px, transparent 1px);
+      background-size: 72px 72px;
+      pointer-events: none;
+    }
+    /* Left separator line */
+    .hero-right::after {
+      content: '';
+      position: absolute;
+      left: 0; top: 10%; bottom: 10%;
+      width: 1px;
+      background: linear-gradient(to bottom, transparent, rgba(200,169,110,0.18), transparent);
+      pointer-events: none;
+    }
+    /* Slow-rotating outer orbit ring */
+    @keyframes orbitSpin    { to { transform: rotate(360deg);  } }
+    @keyframes orbitSpinRev { to { transform: rotate(-360deg); } }
+
     .hero-art {
       position: relative;
-      width: 380px;
-      height: 380px;
+      width: min(380px, 80%);
+      aspect-ratio: 1;
       display: flex;
       align-items: center;
       justify-content: center;
     }
-    .h-circle-lg {
+    .ha-orbit1 {
       position: absolute;
-      width: 380px;
-      height: 380px;
-      border: 1px solid var(--c-gold);
+      inset: 0;
       border-radius: 50%;
+      border: 1px solid rgba(200,169,110,0.14);
+      animation: orbitSpin 70s linear infinite;
     }
-    .h-circle-sm {
+    .ha-orbit1::before {
+      content: '';
       position: absolute;
-      width: 200px;
-      height: 200px;
-      border: 1px solid rgba(200,169,110,0.3);
-      border-radius: 50%;
-    }
-    .h-line-v {
-      position: absolute;
-      width: 1px;
-      height: 180px;
-      background: rgba(200,169,110,0.4);
-    }
-    .h-line-h {
-      position: absolute;
-      width: 180px;
-      height: 1px;
-      background: rgba(200,169,110,0.4);
-    }
-    .h-dot {
-      position: absolute;
-      width: 6px;
-      height: 6px;
+      top: -3px; left: 50%;
+      transform: translateX(-50%);
+      width: 5px; height: 5px;
       background: var(--c-gold);
       border-radius: 50%;
+      box-shadow: 0 0 10px rgba(200,169,110,0.6);
     }
-    .hero-caption {
+    .ha-orbit2 {
       position: absolute;
-      bottom: 32px;
-      left: 0; right: 0;
+      inset: 14%;
+      border-radius: 50%;
+      border: 1px solid rgba(200,169,110,0.08);
+      animation: orbitSpinRev 90s linear infinite;
+    }
+    .ha-orbit2::before {
+      content: '';
+      position: absolute;
+      bottom: -2px; left: 50%;
+      transform: translateX(-50%);
+      width: 3px; height: 3px;
+      background: rgba(200,169,110,0.5);
+      border-radius: 50%;
+    }
+    .ha-ring-svg {
+      position: relative;
+      z-index: 1;
+      width: 72%;
+      height: 72%;
+    }
+    .hero-art-label {
+      position: absolute;
+      bottom: -44px; left: 0; right: 0;
       text-align: center;
       font-family: 'DM Sans', sans-serif;
-      font-weight: 300;
-      font-size: 10px;
-      letter-spacing: 0.2em;
-      color: var(--c-mid);
+      font-weight: 200;
+      font-size: 9px;
+      letter-spacing: 0.3em;
+      color: rgba(122,158,126,0.5);
+      text-transform: uppercase;
     }
 
+    /* Scroll indicator */
     .scroll-ind {
       position: absolute;
-      bottom: 40px;
-      left: 50%;
+      bottom: 36px; left: 27%;
       transform: translateX(-50%);
       display: flex;
       flex-direction: column;
       align-items: center;
       gap: 4px;
-      opacity: 0.6;
-      animation: bounce 2s ease-in-out infinite;
+      opacity: 0.45;
+      animation: scrollAnim 2.2s ease-in-out infinite;
       pointer-events: none;
     }
-    .scroll-ind .sl { width: 1px; height: 40px; background: var(--c-gold); }
-    .scroll-ind .sa {
-      width: 0; height: 0;
-      border-left: 4px solid transparent;
-      border-right: 4px solid transparent;
-      border-top: 6px solid var(--c-gold);
-    }
-    @keyframes bounce {
+    .scroll-ind .sl { width: 1px; height: 36px; background: var(--c-gold); }
+    .scroll-ind .sa { width: 0; height: 0; border-left: 3px solid transparent; border-right: 3px solid transparent; border-top: 5px solid var(--c-gold); }
+    @keyframes scrollAnim {
       0%,100% { transform: translateX(-50%) translateY(0); }
-      50%      { transform: translateX(-50%) translateY(8px); }
+      60% { transform: translateX(-50%) translateY(7px); }
     }
 
-    /* ===================================================
+    /* ─────────────────────────────────────────────────────
        MARQUEE
-       =================================================== */
-    .marquee-strip {
+    ───────────────────────────────────────────────────── */
+    .marquee-wrap {
       background: var(--c-gold);
-      height: 48px;
+      height: 44px;
       overflow: hidden;
       display: flex;
       align-items: center;
@@ -406,68 +504,65 @@
     .marquee-track {
       display: flex;
       white-space: nowrap;
-      animation: marquee 40s linear infinite;
+      animation: marquee 45s linear infinite;
     }
     .marquee-track span {
       font-family: 'DM Sans', sans-serif;
-      font-weight: 300;
-      font-size: 12px;
-      letter-spacing: 0.18em;
+      font-weight: 400;
+      font-size: 10px;
+      letter-spacing: 0.22em;
       text-transform: uppercase;
       color: var(--c-night);
-      padding: 0 20px;
+      padding: 0 18px;
+      opacity: 0.85;
     }
-    @keyframes marquee {
-      0%   { transform: translateX(0); }
-      100% { transform: translateX(-33.3333%); }
-    }
+    @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-33.333%); } }
 
-    /* ===================================================
+    /* ─────────────────────────────────────────────────────
        STATS
-       =================================================== */
-    #stats {
-      background: var(--c-linen);
-      padding: 64px 0;
-    }
+    ───────────────────────────────────────────────────── */
+    #stats { background: var(--c-linen); padding: 72px 0; }
     .stats-grid {
       max-width: 1280px;
       margin: 0 auto;
-      padding: 0 48px;
+      padding: 0 56px;
       display: grid;
       grid-template-columns: repeat(4,1fr);
     }
     .stat-item {
       text-align: center;
-      padding: 32px 16px;
-      border-right: 1px solid var(--c-pale);
+      padding: 40px 24px;
+      border-right: 1px solid rgba(181,201,183,0.5);
+      position: relative;
     }
     .stat-item:last-child { border-right: none; }
     .stat-num {
-      font-family: 'Playfair Display', serif;
-      font-weight: 700;
-      font-size: 56px;
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 400;
+      font-size: 68px;
       color: var(--c-sage);
       display: block;
       line-height: 1;
+      letter-spacing: -0.01em;
     }
     .stat-lbl {
       font-family: 'DM Sans', sans-serif;
-      font-weight: 300;
-      font-size: 12px;
-      letter-spacing: 0.15em;
+      font-weight: 200;
+      font-size: 9px;
+      letter-spacing: 0.28em;
       text-transform: uppercase;
       color: var(--c-muted);
       display: block;
-      margin-top: 12px;
+      margin-top: 14px;
     }
 
-    /* ===================================================
+    /* ─────────────────────────────────────────────────────
        EDITORIAL SPLIT
-       =================================================== */
+    ───────────────────────────────────────────────────── */
     .editorial-split {
       display: grid;
-      grid-template-columns: 60fr 40fr;
-      min-height: 540px;
+      grid-template-columns: 58fr 42fr;
+      min-height: 520px;
     }
     .ed-col {
       padding: 80px;
@@ -476,18 +571,18 @@
       display: flex;
       flex-direction: column;
       justify-content: flex-end;
-      min-height: 540px;
+      min-height: 520px;
     }
     .ed-col.sage { background: var(--c-sage); }
     .ed-col.pale { background: var(--c-pale); }
     .ed-wm {
-      font-family: 'Playfair Display', serif;
-      font-weight: 700;
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 900;
       font-style: italic;
-      font-size: 140px;
-      color: rgba(240,235,224,0.07);
+      font-size: 160px;
+      color: rgba(240,235,224,0.06);
       position: absolute;
-      top: 0; right: -16px;
+      top: -16px; right: -20px;
       line-height: 1;
       pointer-events: none;
       user-select: none;
@@ -495,228 +590,430 @@
     .ed-eyebrow {
       font-family: 'DM Sans', sans-serif;
       font-weight: 300;
-      font-size: 11px;
-      letter-spacing: 0.22em;
+      font-size: 10px;
+      letter-spacing: 0.24em;
       text-transform: uppercase;
       margin-bottom: 14px;
+      display: block;
     }
     .ed-h {
-      font-family: 'Playfair Display', serif;
+      font-family: 'Cormorant Garamond', serif;
       font-weight: 400;
-      font-size: 48px;
-      line-height: 1.1;
+      font-style: italic;
+      font-size: 52px;
+      line-height: 1.05;
       margin-bottom: 20px;
     }
     .ed-body {
       font-family: 'DM Sans', sans-serif;
       font-weight: 300;
-      font-size: 15px;
+      font-size: 14px;
       line-height: 1.9;
       margin-bottom: 24px;
     }
     .ed-link {
       font-family: 'DM Sans', sans-serif;
       font-weight: 500;
-      font-size: 12px;
-      letter-spacing: 0.1em;
+      font-size: 11px;
+      letter-spacing: 0.12em;
       text-decoration: none;
-      border-bottom: 1px solid transparent;
-      transition: border-color 0.3s;
+      border-bottom: 1px solid currentColor;
+      padding-bottom: 1px;
+      opacity: 0.8;
+      transition: opacity 0.3s;
       display: inline-block;
     }
-    .ed-link:hover { border-color: currentColor; }
+    .ed-link:hover { opacity: 1; }
 
-    /* ===================================================
-       PRODUCT GRID
-       =================================================== */
+    /* ─────────────────────────────────────────────────────
+       PRODUCT SECTION
+    ───────────────────────────────────────────────────── */
     #collection { background: var(--c-linen); }
 
-    .sec-eyebrow {
+    .sec-label {
       font-family: 'DM Sans', sans-serif;
       font-weight: 300;
-      font-size: 11px;
-      letter-spacing: 0.22em;
+      font-size: 10px;
+      letter-spacing: 0.26em;
       text-transform: uppercase;
       color: var(--c-mid);
-      margin-bottom: 16px;
       display: block;
+      margin-bottom: 14px;
     }
-    .sec-heading {
-      font-family: 'Playfair Display', serif;
+    .sec-h {
+      font-family: 'Cormorant Garamond', serif;
       font-weight: 400;
-      font-size: 64px;
+      font-size: clamp(40px, 5vw, 60px);
       color: var(--c-sage);
       line-height: 1.05;
     }
     .sec-sub {
       font-family: 'DM Sans', sans-serif;
       font-weight: 300;
-      font-size: 15px;
+      font-size: 14px;
       color: var(--c-muted);
       line-height: 1.9;
-      max-width: 480px;
-      margin-top: 16px;
+      max-width: 460px;
+      margin-top: 14px;
     }
 
+    /* Filter bar */
     .filter-bar {
       display: flex;
       flex-wrap: wrap;
-      gap: 8px;
-      justify-content: center;
-      margin: 48px 0 60px;
+      gap: 6px;
+      margin: 48px 0 56px;
     }
     .f-pill {
       font-family: 'DM Sans', sans-serif;
       font-weight: 400;
-      font-size: 11px;
-      letter-spacing: 0.15em;
+      font-size: 10px;
+      letter-spacing: 0.18em;
       text-transform: uppercase;
       background: transparent;
-      border: 1px solid var(--c-pale);
+      border: 1px solid rgba(181,201,183,0.6);
       color: var(--c-muted);
-      padding: 8px 24px;
+      padding: 9px 22px;
       border-radius: 0;
       cursor: pointer;
-      transition: border-color 0.3s, color 0.3s, background 0.3s;
+      transition: all 0.3s;
     }
     .f-pill:hover { border-color: var(--c-gold); color: var(--c-gold); }
     .f-pill.on { background: var(--c-sage); color: var(--c-pgold); border-color: var(--c-sage); }
 
+    /* Product grid — 3 cols desktop, editorial feel */
     .prod-grid {
       display: grid;
-      grid-template-columns: repeat(4,1fr);
-      gap: 2px;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 3px;
     }
+    /* First product: double wide (featured) */
+    .prod-card--featured {
+      grid-column: span 2;
+    }
+    .prod-card--featured .prod-visual { height: 580px; }
+
     .prod-card {
       background: var(--c-linen);
       overflow: hidden;
-      transition: opacity 0.25s ease, transform 0.25s ease;
+      transition: opacity 0.3s ease, transform 0.3s ease;
+      position: relative;
     }
     .prod-card.hide { opacity: 0; pointer-events: none; transform: scale(0.97); }
 
-    .prod-img {
-      height: 300px;
+    /* Badge */
+    .prod-badge {
+      position: absolute;
+      top: 16px; left: 16px;
+      z-index: 2;
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 500;
+      font-size: 9px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      padding: 5px 12px;
+      border-radius: 0;
+    }
+    .badge-new { background: var(--c-sage); color: var(--c-pgold); }
+    .badge-best { background: var(--c-gold); color: var(--c-night); }
+    .badge-sale { background: var(--c-bronze); color: var(--c-pgold); }
+
+    /* Product visual (image area) */
+    .prod-visual {
+      height: 420px;
       position: relative;
       overflow: hidden;
       display: flex;
       align-items: center;
       justify-content: center;
     }
-    .prod-img svg { transition: transform 0.5s ease; display: block; }
-    .prod-card:hover .prod-img svg { transform: scale(1.04); }
-    .prod-img::after {
-      content: 'Order via Instagram';
+    .prod-photo {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
       position: absolute;
       inset: 0;
-      background: rgba(28,43,30,0.7);
+      transition: transform 0.7s var(--ease-out);
+      z-index: 2;
+    }
+    /* Placeholder background */
+    .prod-visual.bg-a { background: #263829; }
+    .prod-visual.bg-b { background: #D9CCBA; }
+    .prod-visual.bg-c { background: #192a1b; }
+    .prod-visual.bg-d { background: #E8D5A3; }
+    /* Jewelry illustration placeholder */
+    .prod-art {
+      position: absolute;
+      inset: 0;
       display: flex;
       align-items: center;
       justify-content: center;
+      z-index: 1;
+      transition: transform 0.7s var(--ease-out);
+    }
+    .prod-card:hover .prod-art { transform: scale(1.04); }
+    .prod-card:hover .prod-photo { transform: scale(1.05); }
+    /* Hover overlay */
+    .prod-visual::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(28,43,30,0.6);
+      opacity: 0;
+      transition: opacity 0.4s;
+      z-index: 3;
+    }
+    .prod-overlay {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      padding-bottom: 28px;
+      z-index: 4;
+      opacity: 0;
+      transition: opacity 0.4s;
+    }
+    .prod-overlay span {
       font-family: 'DM Sans', sans-serif;
-      font-weight: 500;
-      font-size: 12px;
-      letter-spacing: 0.15em;
+      font-weight: 400;
+      font-size: 10px;
+      letter-spacing: 0.26em;
       text-transform: uppercase;
       color: var(--c-pgold);
-      opacity: 0;
-      transition: opacity 0.35s;
+      border-bottom: 1px solid rgba(232,213,163,0.4);
+      padding-bottom: 3px;
     }
-    .prod-card:hover .prod-img::after { opacity: 1; }
+    .prod-card:hover .prod-visual::after { opacity: 1; }
+    .prod-card:hover .prod-overlay { opacity: 1; }
 
-    .img-a { background: var(--c-sage); }
-    .img-b { background: var(--c-pale); }
-    .img-c { background: var(--c-night); }
-    .img-d { background: var(--c-pgold); }
-
-    .prod-body { padding: 20px 16px; }
-    .prod-meta { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 6px; }
+    /* Card body */
+    .prod-body {
+      padding: 22px 20px 24px;
+      border-top: 1px solid rgba(181,201,183,0.2);
+      background: var(--c-linen);
+    }
+    .prod-row1 { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 5px; }
     .prod-name {
-      font-family: 'Playfair Display', serif;
+      font-family: 'Cormorant Garamond', serif;
       font-weight: 400;
-      font-size: 18px;
+      font-style: italic;
+      font-size: 22px;
       color: var(--c-sage);
+      letter-spacing: 0.02em;
     }
+    .prod-price-wrap { display: flex; align-items: baseline; gap: 8px; }
     .prod-price {
-      font-family: 'DM Sans', sans-serif;
+      font-family: 'Cormorant Garamond', serif;
       font-weight: 500;
-      font-size: 15px;
+      font-size: 18px;
       color: var(--c-gold);
+    }
+    .prod-price-old {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      font-size: 12px;
+      color: rgba(92,122,96,0.45);
+      text-decoration: line-through;
     }
     .prod-cat {
       font-family: 'DM Sans', sans-serif;
       font-weight: 300;
-      font-size: 10px;
+      font-size: 9px;
       text-transform: uppercase;
-      letter-spacing: 0.12em;
+      letter-spacing: 0.22em;
       color: var(--c-muted);
-      margin-bottom: 14px;
       display: block;
+      margin-bottom: 18px;
     }
     .prod-btn {
       display: block;
       width: 100%;
-      background: var(--c-sage);
-      color: var(--c-pgold);
+      background: transparent;
+      color: var(--c-sage);
       font-family: 'DM Sans', sans-serif;
-      font-weight: 500;
-      font-size: 11px;
+      font-weight: 400;
+      font-size: 9px;
       text-transform: uppercase;
-      letter-spacing: 0.15em;
-      padding: 12px;
+      letter-spacing: 0.24em;
+      padding: 13px;
       text-align: center;
       text-decoration: none;
-      border: none;
+      border: 1px solid rgba(61,92,66,0.3);
       border-radius: 0;
-      transition: background 0.3s;
+      transition: background 0.35s, color 0.35s, border-color 0.35s;
     }
-    .prod-btn:hover { background: var(--c-night); color: var(--c-pgold); }
+    .prod-btn:hover { background: var(--c-sage); color: var(--c-pgold); border-color: var(--c-sage); }
 
-    /* ===================================================
+    /* ─────────────────────────────────────────────────────
        QUOTE
-       =================================================== */
+    ───────────────────────────────────────────────────── */
     #quote {
       background: var(--c-night);
-      min-height: 60vh;
+      min-height: 56vh;
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 80px 48px;
+      padding: 80px 56px;
+      position: relative;
+      overflow: hidden;
+    }
+    #quote::before {
+      content: '"';
+      position: absolute;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 400px;
+      color: rgba(200,169,110,0.04);
+      top: -60px; left: -20px;
+      line-height: 1;
+      pointer-events: none;
+      font-style: italic;
     }
     .quote-wrap {
       text-align: center;
-      max-width: 700px;
+      max-width: 680px;
       display: flex;
       flex-direction: column;
       align-items: center;
+      position: relative;
+      z-index: 1;
     }
-    .q-rule { display: block; width: 60px; height: 1px; background: var(--c-gold); }
+    .q-rule { display: block; width: 48px; height: 1px; background: var(--c-gold); }
     .q-text {
-      font-family: 'Playfair Display', serif;
+      font-family: 'Cormorant Garamond', serif;
       font-weight: 300;
       font-style: italic;
-      font-size: 38px;
+      font-size: clamp(28px, 4vw, 48px);
       color: var(--c-pgold);
-      line-height: 1.4;
-      margin: 32px 0 28px;
+      line-height: 1.45;
+      margin: 36px 0 28px;
+      letter-spacing: 0.01em;
     }
     .q-attr {
       font-family: 'DM Sans', sans-serif;
-      font-weight: 300;
-      font-size: 12px;
-      letter-spacing: 0.2em;
+      font-weight: 200;
+      font-size: 10px;
+      letter-spacing: 0.3em;
       text-transform: uppercase;
-      color: var(--c-mid);
+      color: rgba(122,158,126,0.55);
       margin-bottom: 28px;
     }
 
-    /* ===================================================
-       HOW TO ORDER
-       =================================================== */
-    #order { background: var(--c-sage); }
-    .order-h {
-      font-family: 'Playfair Display', serif;
+    /* ─────────────────────────────────────────────────────
+       HERITAGE
+    ───────────────────────────────────────────────────── */
+    #heritage {
+      background: var(--c-night);
+      padding: 112px 0;
+      position: relative;
+      overflow: hidden;
+    }
+    #heritage::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 70% 50%, rgba(61,92,66,0.15), transparent 70%);
+      pointer-events: none;
+    }
+    .heritage-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 56px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 96px;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+    }
+    .heritage-left .hl-label {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      font-size: 10px;
+      letter-spacing: 0.26em;
+      text-transform: uppercase;
+      color: var(--c-mid);
+      display: block;
+      margin-bottom: 20px;
+    }
+    .hl-h {
+      font-family: 'Cormorant Garamond', serif;
       font-weight: 400;
-      font-size: 64px;
+      font-style: italic;
+      font-size: clamp(36px, 4vw, 56px);
+      color: var(--c-pgold);
+      line-height: 1.1;
+      margin-bottom: 8px;
+    }
+    .hl-sub {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      font-size: 12px;
+      letter-spacing: 0.1em;
+      color: var(--c-mid);
+      margin-bottom: 32px;
+      display: block;
+    }
+    .hl-body {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      font-size: 14px;
+      color: rgba(181,201,183,0.75);
+      line-height: 2;
+      margin-bottom: 16px;
+    }
+    /* Heritage visual: 3 decorative cards */
+    .heritage-right {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr 1fr;
+      gap: 3px;
+      aspect-ratio: 1 / 1.05;
+    }
+    .her-card {
+      background: var(--c-sage);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      position: relative;
+    }
+    .her-card:first-child { grid-row: span 2; background: rgba(61,92,66,0.6); }
+    .her-card:nth-child(2) { background: rgba(140,109,63,0.3); }
+    .her-card:nth-child(3) { background: rgba(61,92,66,0.4); }
+    .her-card img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .her-card-placeholder {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* ─────────────────────────────────────────────────────
+       HOW TO ORDER
+    ───────────────────────────────────────────────────── */
+    #order { background: var(--c-sage); }
+    .order-label {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      font-size: 10px;
+      letter-spacing: 0.26em;
+      text-transform: uppercase;
+      color: var(--c-mid);
+      display: block;
+      margin-bottom: 16px;
+    }
+    .order-h {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 400;
+      font-size: clamp(40px, 5vw, 60px);
       color: var(--c-pgold);
       line-height: 1.05;
       margin-bottom: 24px;
@@ -724,108 +1021,131 @@
     .steps {
       display: grid;
       grid-template-columns: repeat(3,1fr);
-      gap: 48px;
-      margin-top: 64px;
-    }
-    .step {
+      gap: 0;
+      margin-top: 72px;
       position: relative;
-      padding-top: 56px;
+    }
+    /* Connecting line between step circles */
+    .steps::before {
+      content: '';
+      position: absolute;
+      top: 27px;
+      left: calc(16.67% + 10px);
+      right: calc(16.67% + 10px);
+      height: 1px;
+      background: linear-gradient(to right, rgba(200,169,110,0.25), rgba(200,169,110,0.1), rgba(200,169,110,0.25));
+    }
+    .step { position: relative; padding: 0 48px 0 0; }
+    .step:last-child { padding-right: 0; }
+    .step-n-wrap {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      margin-bottom: 28px;
+    }
+    .step-n-circle {
+      width: 54px; height: 54px;
+      border: 1px solid rgba(200,169,110,0.35);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      background: rgba(28,43,30,0.3);
     }
     .step-n {
-      font-family: 'Playfair Display', serif;
-      font-weight: 900;
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 400;
       font-style: italic;
-      font-size: 100px;
+      font-size: 26px;
       color: var(--c-gold);
-      opacity: 0.15;
-      position: absolute;
-      top: -24px;
-      left: -8px;
       line-height: 1;
-      pointer-events: none;
-      user-select: none;
     }
     .step-h {
-      font-family: 'Playfair Display', serif;
+      font-family: 'Cormorant Garamond', serif;
       font-weight: 400;
       font-size: 26px;
       color: var(--c-pgold);
       margin-bottom: 14px;
-      position: relative;
     }
     .step-t {
       font-family: 'DM Sans', sans-serif;
       font-weight: 300;
-      font-size: 14px;
-      color: var(--c-pale);
-      line-height: 1.9;
-      position: relative;
+      font-size: 13px;
+      color: rgba(181,201,183,0.75);
+      line-height: 2;
     }
-    .order-cta { text-align: center; margin-top: 60px; }
+    .order-cta { text-align: center; margin-top: 64px; }
 
-    /* ===================================================
+    /* ─────────────────────────────────────────────────────
        SHIPPING
-       =================================================== */
+    ───────────────────────────────────────────────────── */
     #shipping { background: var(--c-linen); }
     .ship-h {
-      font-family: 'Playfair Display', serif;
+      font-family: 'Cormorant Garamond', serif;
       font-weight: 400;
-      font-size: 48px;
+      font-size: clamp(32px, 4vw, 48px);
       color: var(--c-sage);
-      margin-bottom: 16px;
+      margin-bottom: 12px;
     }
     .ship-sub {
       font-family: 'DM Sans', sans-serif;
       font-weight: 300;
-      font-size: 15px;
+      font-size: 14px;
       color: var(--c-muted);
-      margin-bottom: 64px;
+      margin-bottom: 56px;
+      max-width: 480px;
     }
-    .country-grid {
-      display: grid;
-      grid-template-columns: repeat(3,1fr);
-    }
+    .country-grid { display: grid; grid-template-columns: repeat(3,1fr); }
     .c-card {
       background: var(--c-pale);
-      padding: 48px 36px;
+      padding: 64px 48px;
       text-align: center;
-      border-right: 1px solid rgba(181,201,183,0.4);
+      border-right: 1px solid rgba(181,201,183,0.35);
+      transition: background 0.35s;
+      position: relative;
+      overflow: hidden;
+    }
+    .c-card::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 2px;
+      background: var(--c-gold);
+      transform: scaleX(0);
+      transition: transform 0.4s var(--ease-out);
     }
     .c-card:last-child { border-right: none; }
-    .c-flag { font-size: 40px; line-height: 1; display: block; }
+    .c-card:hover { background: rgba(181,201,183,0.5); }
+    .c-card:hover::after { transform: scaleX(1); }
+    .c-flag { font-size: 44px; line-height: 1; display: block; }
     .c-name {
-      font-family: 'Playfair Display', serif;
+      font-family: 'Cormorant Garamond', serif;
       font-weight: 400;
-      font-size: 28px;
+      font-style: italic;
+      font-size: 32px;
       color: var(--c-sage);
-      margin-top: 16px;
+      margin-top: 20px;
       display: block;
     }
     .c-detail {
       font-family: 'DM Sans', sans-serif;
       font-weight: 300;
-      font-size: 13px;
+      font-size: 11px;
+      letter-spacing: 0.1em;
       color: var(--c-muted);
-      margin-top: 8px;
-      display: block;
-    }
-    .c-free {
-      font-family: 'DM Sans', sans-serif;
-      font-weight: 300;
-      font-size: 12px;
-      color: var(--c-gold);
-      margin-top: 8px;
+      margin-top: 12px;
       display: block;
     }
 
-    /* ===================================================
+    /* ─────────────────────────────────────────────────────
        STORY
-       =================================================== */
+    ───────────────────────────────────────────────────── */
     #story { background: var(--c-linen); }
     .story-split {
       display: grid;
-      grid-template-columns: 40fr 60fr;
-      min-height: 600px;
+      grid-template-columns: 38fr 62fr;
+      min-height: 580px;
     }
     .story-left {
       background: var(--c-pale);
@@ -834,17 +1154,18 @@
       justify-content: center;
       position: relative;
       overflow: hidden;
-      min-height: 500px;
+      min-height: 480px;
     }
     .story-wm {
-      font-family: 'Playfair Display', serif;
+      font-family: 'Cormorant Garamond', serif;
       font-weight: 900;
       font-style: italic;
-      font-size: 260px;
-      color: rgba(61,92,66,0.07);
+      font-size: 280px;
+      color: rgba(61,92,66,0.06);
       position: absolute;
       line-height: 1;
       user-select: none;
+      letter-spacing: -0.05em;
     }
     .story-art {
       position: relative;
@@ -855,25 +1176,26 @@
     }
     .story-right {
       background: var(--c-linen);
-      padding: 80px;
+      padding: 88px 80px;
       display: flex;
       flex-direction: column;
       justify-content: center;
     }
-    .story-eyebrow {
+    .story-label {
       font-family: 'DM Sans', sans-serif;
       font-weight: 300;
-      font-size: 11px;
-      letter-spacing: 0.22em;
+      font-size: 10px;
+      letter-spacing: 0.26em;
       text-transform: uppercase;
       color: var(--c-mid);
       margin-bottom: 16px;
+      display: block;
     }
     .story-h {
-      font-family: 'Playfair Display', serif;
+      font-family: 'Cormorant Garamond', serif;
       font-weight: 400;
       font-style: italic;
-      font-size: 48px;
+      font-size: clamp(32px, 3.5vw, 46px);
       color: var(--c-sage);
       line-height: 1.1;
       margin-bottom: 24px;
@@ -881,62 +1203,63 @@
     .story-p {
       font-family: 'DM Sans', sans-serif;
       font-weight: 300;
-      font-size: 15px;
+      font-size: 14px;
       color: var(--c-text);
-      line-height: 1.9;
-      margin-bottom: 20px;
+      line-height: 1.95;
+      margin-bottom: 18px;
     }
     .story-bq {
       border-left: 2px solid var(--c-gold);
-      padding-left: 24px;
-      margin: 32px 0;
+      padding-left: 22px;
+      margin: 28px 0;
     }
     .story-bq p {
-      font-family: 'Playfair Display', serif;
+      font-family: 'Cormorant Garamond', serif;
       font-weight: 300;
       font-style: italic;
-      font-size: 22px;
+      font-size: 20px;
       color: var(--c-sage);
-      line-height: 1.5;
+      line-height: 1.55;
     }
 
-    /* ===================================================
+    /* ─────────────────────────────────────────────────────
        INSTAGRAM WALL
-       =================================================== */
+    ───────────────────────────────────────────────────── */
     #instagram { background: var(--c-night); }
-    .ig-eyebrow {
+    .ig-label {
       font-family: 'DM Sans', sans-serif;
       font-weight: 300;
-      font-size: 11px;
-      letter-spacing: 0.22em;
+      font-size: 10px;
+      letter-spacing: 0.26em;
       text-transform: uppercase;
       color: var(--c-mid);
-      margin-bottom: 16px;
       display: block;
+      margin-bottom: 14px;
     }
     .ig-h {
-      font-family: 'Playfair Display', serif;
+      font-family: 'Cormorant Garamond', serif;
       font-weight: 400;
       font-style: italic;
-      font-size: 56px;
+      font-size: clamp(36px, 4.5vw, 52px);
       color: var(--c-pgold);
       line-height: 1.05;
-      margin-bottom: 16px;
+      margin-bottom: 12px;
     }
     .ig-handle {
       font-family: 'DM Sans', sans-serif;
       font-weight: 300;
-      font-size: 14px;
-      color: var(--c-mid);
+      font-size: 13px;
+      color: rgba(122,158,126,0.7);
       text-decoration: none;
-      transition: color 0.3s;
+      letter-spacing: 0.05em;
       display: block;
+      transition: color 0.3s;
     }
     .ig-handle:hover { color: var(--c-gold); }
     .ig-grid {
       display: grid;
       grid-template-columns: repeat(3,1fr);
-      gap: 2px;
+      gap: 3px;
       margin-top: 48px;
     }
     .ig-cell {
@@ -947,94 +1270,109 @@
       text-decoration: none;
     }
     .ig-inner {
-      width: 100%;
-      height: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: transform 0.4s ease;
+      width: 100%; height: 100%;
+      display: flex; align-items: center; justify-content: center;
+      transition: transform 0.5s var(--ease-out);
     }
-    .ig-cell:hover .ig-inner { transform: scale(1.05); }
+    .ig-inner img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .ig-cell:hover .ig-inner { transform: scale(1.06); }
     .ig-cell::after {
-      content: 'View on Instagram';
+      content: '';
       position: absolute;
       inset: 0;
-      background: rgba(28,43,30,0.85);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: 'DM Sans', sans-serif;
-      font-weight: 500;
-      font-size: 12px;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--c-pgold);
+      background: rgba(28,43,30,0.75);
       opacity: 0;
       transition: opacity 0.4s;
     }
+    .ig-overlay {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1;
+      opacity: 0;
+      transition: opacity 0.4s;
+    }
+    .ig-overlay span {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 500;
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--c-pgold);
+    }
     .ig-cell:hover::after { opacity: 1; }
+    .ig-cell:hover .ig-overlay { opacity: 1; }
     .ig-c1 .ig-inner { background: var(--c-sage); }
-    .ig-c2 .ig-inner { background: var(--c-night); border: 1px solid rgba(200,169,110,0.08); }
+    .ig-c2 .ig-inner { background: #2a3c2c; }
     .ig-c3 .ig-inner { background: var(--c-pale); }
     .ig-c4 .ig-inner { background: var(--c-bronze); }
-    .ig-c5 .ig-inner { background: var(--c-mid); }
-    .ig-c6 .ig-inner { background: var(--c-sage); }
+    .ig-c5 .ig-inner { background: rgba(61,92,66,0.7); }
+    .ig-c6 .ig-inner { background: #22351f; }
     .ig-cta { text-align: center; margin-top: 48px; }
 
-    /* ===================================================
+    /* ─────────────────────────────────────────────────────
        FOOTER
-       =================================================== */
+    ───────────────────────────────────────────────────── */
     #footer { background: var(--c-night); }
+
     .footer-top {
-      padding: 80px 0;
+      padding: 80px 0 64px;
       display: grid;
-      grid-template-columns: repeat(3,1fr);
+      grid-template-columns: 1.4fr 1fr 1fr 1fr;
       gap: 48px;
+      border-bottom: 1px solid rgba(181,201,183,0.1);
     }
-    .f-brand {
-      font-family: 'Playfair Display', serif;
+    .f-logo-text {
+      font-family: 'Cormorant Garamond', serif;
       font-weight: 400;
       font-style: italic;
-      font-size: 28px;
+      font-size: 30px;
       color: var(--c-pgold);
       display: block;
-      margin-bottom: 12px;
+      margin-bottom: 14px;
+      letter-spacing: 0.08em;
     }
-    .f-tag {
+    .f-brand-desc {
       font-family: 'DM Sans', sans-serif;
       font-weight: 300;
-      font-size: 13px;
-      color: var(--c-mid);
+      font-size: 12px;
+      color: rgba(122,158,126,0.6);
+      line-height: 1.8;
+      max-width: 200px;
+      margin-bottom: 24px;
     }
+    .f-socials { display: flex; gap: 14px; align-items: center; }
+    .f-social-link { display: flex; align-items: center; text-decoration: none; opacity: 0.5; transition: opacity 0.3s; }
+    .f-social-link:hover { opacity: 1; }
+    .f-social-link svg { width: 18px; height: 18px; fill: none; stroke: var(--c-gold); }
+
     .f-col-head {
       font-family: 'DM Sans', sans-serif;
       font-weight: 500;
-      font-size: 11px;
-      letter-spacing: 0.15em;
+      font-size: 10px;
+      letter-spacing: 0.2em;
       text-transform: uppercase;
       color: var(--c-gold);
       margin-bottom: 20px;
       display: block;
     }
-    .f-links { display: flex; flex-direction: column; gap: 10px; list-style: none; }
-    .f-links a {
+    .f-links { display: flex; flex-direction: column; gap: 11px; list-style: none; }
+    .f-links li a, .f-links li span {
       font-family: 'DM Sans', sans-serif;
       font-weight: 300;
       font-size: 13px;
-      color: var(--c-pale);
+      color: rgba(181,201,183,0.55);
       text-decoration: none;
       transition: color 0.3s;
+      letter-spacing: 0.01em;
     }
-    .f-links a:hover { color: var(--c-gold); }
-    .f-links span {
-      font-family: 'DM Sans', sans-serif;
-      font-weight: 300;
-      font-size: 13px;
-      color: var(--c-pale);
-    }
-    .f-div { height: 1px; background: rgba(181,201,183,0.15); }
+    .f-links li a:hover { color: var(--c-pgold); }
+    .f-links li .highlight { color: var(--c-mid); }
+
     .footer-bottom {
-      padding: 24px 0;
+      padding: 20px 0;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -1042,126 +1380,599 @@
     .f-copy {
       font-family: 'DM Sans', sans-serif;
       font-weight: 300;
-      font-size: 12px;
-      color: var(--c-mid);
+      font-size: 11px;
+      color: rgba(122,158,126,0.4);
     }
-    .f-policy a {
+    .f-legal { display: flex; gap: 20px; }
+    .f-legal a {
       font-family: 'DM Sans', sans-serif;
       font-weight: 300;
-      font-size: 12px;
-      color: var(--c-mid);
+      font-size: 11px;
+      color: rgba(122,158,126,0.4);
       text-decoration: none;
-      margin-left: 16px;
       transition: color 0.3s;
     }
-    .f-policy a:hover { color: var(--c-gold); }
+    .f-legal a:hover { color: var(--c-mid); }
 
-    /* ===================================================
+    /* ─────────────────────────────────────────────────────
        BACK TO TOP
-       =================================================== */
+    ───────────────────────────────────────────────────── */
     #btt {
       position: fixed;
-      bottom: 32px; right: 32px;
-      width: 44px; height: 44px;
-      background: var(--c-sage);
+      bottom: 28px; right: 28px;
+      width: 42px; height: 42px;
+      background: rgba(61,92,66,0.9);
       color: var(--c-pgold);
-      border: none;
+      border: 1px solid rgba(200,169,110,0.2);
       border-radius: 0;
       cursor: pointer;
-      font-size: 16px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      opacity: 0;
-      pointer-events: none;
+      font-size: 14px;
+      display: flex; align-items: center; justify-content: center;
+      opacity: 0; pointer-events: none;
       transition: opacity 0.3s, background 0.3s;
       z-index: 900;
       font-family: 'DM Sans', sans-serif;
+      backdrop-filter: blur(8px);
     }
     #btt.show { opacity: 1; pointer-events: auto; }
     #btt:hover { background: var(--c-night); }
 
-    /* ===================================================
+    /* ─────────────────────────────────────────────────────
        RESPONSIVE
-       =================================================== */
+    ───────────────────────────────────────────────────── */
+    @media (max-width: 1199px) {
+      .hero-left { padding-left: 56px; }
+      .footer-top { grid-template-columns: 1fr 1fr; gap: 40px; }
+    }
+
     @media (max-width: 991px) {
-      .nav-links, .nav-ig { display: none; }
+      /* Nav */
+      .nav-links, .nav-socials { display: none; }
       .hamburger { display: flex; }
       #nav { height: 64px; }
       .nav-inner { padding: 0 24px; }
+      .lang-btn { font-size: 9px; padding: 4px 10px; }
 
-      #hero { height: auto; min-height: 100svh; }
-      .hero-wrap { flex-direction: column; }
-      .hero-right { flex: none; width: 100%; height: 280px; order: -1; }
-      .hero-left { flex: none; width: 100%; max-width: 100%; padding: 64px 24px 80px; }
-      .h1a, .h1b { font-size: 52px; }
-      .hero-art { width: 200px; height: 200px; }
-      .h-circle-lg { width: 200px; height: 200px; }
-      .h-circle-sm { width: 110px; height: 110px; }
-      .h-line-v { height: 100px; }
-      .h-line-h { width: 100px; }
+      /* Hero */
+      #hero { height: auto; min-height: 100svh; flex-direction: column; }
+      .hero-wrap { flex-direction: column-reverse; }
+      .hero-right { flex: none; width: 100%; min-height: 50vw; max-height: 60vh; }
+      .hero-left { flex: none; width: 100%; padding: 56px 24px 72px; }
+      .hero-h1a, .hero-h1b { font-size: clamp(42px, 10vw, 72px); }
+      .hero-art { width: 180px; }
+      .scroll-ind { left: 50%; }
 
+      /* Stats */
       .stats-grid { grid-template-columns: repeat(2,1fr); padding: 0 24px; }
       .stat-item:nth-child(2) { border-right: none; }
-      .stat-item { border-bottom: 1px solid var(--c-pale); }
-      .stat-item:nth-child(3), .stat-item:nth-child(4) { border-bottom: none; }
+      .stat-item { border-bottom: 1px solid rgba(181,201,183,0.4); }
+      .stat-item:nth-child(3),.stat-item:nth-child(4) { border-bottom: none; }
 
+      /* Editorial */
       .editorial-split { grid-template-columns: 1fr; }
-      .ed-col { min-height: 380px; padding: 48px; }
+      .ed-col { min-height: 360px; padding: 52px 40px; }
 
-      .prod-grid { grid-template-columns: repeat(2,1fr); }
-      .sec-heading { font-size: 38px; }
+      /* Products — HORIZONTAL SCROLL on tablet (2 wide) + mobile (1 wide) */
+      .prod-grid {
+        display: flex;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        gap: 3px;
+        padding-bottom: 12px;
+        /* hide scrollbar */
+        scrollbar-width: none;
+      }
+      .prod-grid::-webkit-scrollbar { display: none; }
+      .prod-card {
+        flex: 0 0 calc(50% - 2px);
+        scroll-snap-align: start;
+      }
+      .prod-card--featured {
+        flex: 0 0 calc(50% - 2px);
+      }
+      .prod-card--featured .prod-visual { height: 420px; }
 
+      /* Quote */
+      #quote { padding: 64px 24px; }
+      #quote::before { font-size: 200px; }
+
+      /* Heritage */
+      .heritage-inner { grid-template-columns: 1fr; gap: 48px; }
+      .heritage-right { max-width: 400px; }
+
+      /* Order */
       .steps { grid-template-columns: 1fr; gap: 40px; }
       .order-h { font-size: 38px; }
 
+      /* Shipping */
       .country-grid { grid-template-columns: 1fr; }
-      .c-card { border-right: none; border-bottom: 1px solid rgba(181,201,183,0.4); }
+      .c-card { border-right: none; border-bottom: 1px solid rgba(181,201,183,0.3); }
       .c-card:last-child { border-bottom: none; }
 
+      /* Story */
       .story-split { grid-template-columns: 1fr; }
-      .story-left { min-height: 300px; }
-      .story-right { padding: 48px 24px; }
-      .story-h { font-size: 36px; }
+      .story-left { min-height: 280px; }
+      .story-right { padding: 52px 32px; }
 
-      .ig-h { font-size: 38px; }
+      /* Instagram */
+      .ig-h { font-size: 36px; }
 
-      .footer-top { grid-template-columns: 1fr; gap: 40px; }
+      /* Footer */
+      .footer-top { grid-template-columns: 1fr 1fr; gap: 36px; padding: 56px 0 48px; }
       .footer-bottom { flex-direction: column; gap: 12px; text-align: center; }
-      .f-policy a { margin: 0 8px; }
 
+      /* Global */
       .lux-container { padding: 0 24px; }
-      .section-pad { padding: 64px 0; }
-      #quote { padding: 60px 24px; }
-      .q-text { font-size: 22px; }
+      .section-pad { padding: 72px 0; }
     }
 
     @media (max-width: 575px) {
-      .prod-grid { grid-template-columns: 1fr; }
+      .prod-card {
+        flex: 0 0 calc(85vw);
+      }
+      .prod-card--featured { flex: 0 0 calc(85vw); }
       .ig-grid { grid-template-columns: repeat(2,1fr); }
+      .footer-top { grid-template-columns: 1fr; gap: 32px; }
+      .f-brand-col { border-bottom: 1px solid rgba(181,201,183,0.1); padding-bottom: 32px; }
+    }
+
+    /* Scroll indicator for product slider */
+    .slider-hint {
+      display: none;
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      font-size: 10px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--c-muted);
+      margin-top: 14px;
+      align-items: center;
+      gap: 8px;
+    }
+    .slider-hint::after { content: '→'; color: var(--c-gold); }
+    @media (max-width: 991px) { .slider-hint { display: flex; } }
+
+    /* ─────────────────────────────────────────────────────
+       BUG FIXES
+    ───────────────────────────────────────────────────── */
+    /* Badge must sit above hover overlay */
+    .prod-badge { z-index: 5; }
+    /* SVG art must not capture mouse events */
+    .prod-art { pointer-events: none; }
+    /* Hide connecting line when steps collapse to single col */
+    @media (max-width: 991px) { .steps::before { display: none; } }
+    /* Hidden filter cards: collapse fully so grid has no gaps */
+    .prod-card.hide { display: none; }
+
+    /* ─────────────────────────────────────────────────────
+       ANNOUNCEMENT BAR
+    ───────────────────────────────────────────────────── */
+    #announce-bar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: var(--bar-h);
+      background: var(--c-night);
+      border-bottom: 1px solid rgba(200,169,110,0.18);
+      z-index: 1001;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 56px;
+      transition: transform 0.4s var(--ease-out);
+    }
+    #announce-bar.hidden { transform: translateY(-100%); }
+    .ann-text {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(232,213,163,0.75);
+      text-align: center;
+    }
+    .ann-text strong {
+      font-weight: 500;
+      color: var(--c-gold);
+      letter-spacing: 0.12em;
+    }
+    .ann-sep { margin: 0 16px; opacity: 0.3; }
+    #ann-close {
+      position: absolute;
+      right: 24px;
+      background: none;
+      border: none;
+      color: rgba(181,201,183,0.4);
+      cursor: pointer;
+      font-size: 14px;
+      line-height: 1;
+      padding: 4px 8px;
+      transition: color 0.3s;
+    }
+    #ann-close:hover { color: var(--c-gold); }
+    body.bar-gone { --bar-h: 0px; }
+    @media (max-width: 767px) {
+      #announce-bar { padding: 0 44px 0 16px; }
+      .ann-sep { margin: 0 8px; }
+    }
+
+    /* ─────────────────────────────────────────────────────
+       FLASH SALE / EXCLUSIVE DEALS
+    ───────────────────────────────────────────────────── */
+    #flash-sale {
+      background: var(--c-night);
+      padding: 112px 0;
+      position: relative;
+      overflow: hidden;
+    }
+    #flash-sale::before {
+      content: 'SALE';
+      position: absolute;
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 900;
+      font-style: italic;
+      font-size: clamp(180px, 22vw, 320px);
+      color: rgba(200,169,110,0.035);
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      white-space: nowrap;
+      pointer-events: none;
+      letter-spacing: -0.04em;
+      line-height: 1;
+    }
+    .sale-top-row {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 32px;
+      flex-wrap: wrap;
+      margin-bottom: 64px;
+    }
+    .sec-label-light {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      font-size: 10px;
+      letter-spacing: 0.26em;
+      text-transform: uppercase;
+      color: var(--c-mid);
+      display: block;
+      margin-bottom: 14px;
+    }
+    .sale-h {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 400;
+      font-style: italic;
+      font-size: clamp(40px, 5vw, 64px);
+      color: var(--c-pgold);
+      line-height: 1.0;
+    }
+    /* Countdown */
+    .countdown {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding-bottom: 6px;
+    }
+    .cd-unit { display: flex; flex-direction: column; align-items: center; }
+    .cd-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-style: italic;
+      font-size: clamp(36px, 5vw, 56px);
+      color: var(--c-gold);
+      line-height: 1;
+      min-width: 52px;
+      text-align: center;
+    }
+    .cd-lbl {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 200;
+      font-size: 8px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: rgba(122,158,126,0.5);
+      margin-top: 4px;
+    }
+    .cd-sep {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 32px;
+      color: rgba(200,169,110,0.3);
+      align-self: flex-start;
+      margin-top: 4px;
+      line-height: 1;
+    }
+    /* Sale grid — 3 cols */
+    .sale-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 3px;
+    }
+    .sale-card {
+      background: rgba(61,92,66,0.1);
+      border: 1px solid rgba(200,169,110,0.08);
+      overflow: hidden;
+      transition: border-color 0.35s;
+    }
+    .sale-card:hover { border-color: rgba(200,169,110,0.25); }
+    .sale-visual {
+      height: 380px;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+    .sale-visual .prod-art { transition: transform 0.7s var(--ease-out); }
+    .sale-card:hover .prod-art { transform: scale(1.04); }
+    .sale-pct {
+      position: absolute;
+      top: 16px; right: 16px;
+      z-index: 5;
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 500;
+      font-style: italic;
+      font-size: 28px;
+      color: var(--c-pgold);
+      line-height: 1;
+    }
+    .sale-pct::after {
+      content: '';
+      display: block;
+      height: 1px;
+      background: rgba(200,169,110,0.3);
+      margin-top: 4px;
+    }
+    .sale-body {
+      padding: 24px 24px 28px;
+      border-top: 1px solid rgba(200,169,110,0.08);
+    }
+    .sale-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 400;
+      font-style: italic;
+      font-size: 22px;
+      color: var(--c-pgold);
+      display: block;
+      margin-bottom: 10px;
+    }
+    .sale-price-row {
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+    .sale-price-new {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 500;
+      font-size: 22px;
+      color: var(--c-gold);
+    }
+    .sale-price-was {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      font-size: 13px;
+      color: rgba(122,158,126,0.4);
+      text-decoration: line-through;
+    }
+    .sale-btn {
+      display: block;
+      text-align: center;
+      padding: 13px;
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 400;
+      font-size: 9px;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--c-gold);
+      text-decoration: none;
+      border: 1px solid rgba(200,169,110,0.25);
+      transition: background 0.35s, color 0.35s;
+    }
+    .sale-btn:hover { background: var(--c-gold); color: var(--c-night); }
+    @media (max-width: 991px) {
+      .sale-grid { grid-template-columns: 1fr; gap: 3px; }
+      .sale-top-row { flex-direction: column; align-items: flex-start; }
+    }
+
+    /* ─────────────────────────────────────────────────────
+       INNER CIRCLE (newsletter / exclusive access)
+    ───────────────────────────────────────────────────── */
+    #inner-circle {
+      background: var(--c-sage);
+      padding: 112px 0;
+      position: relative;
+      overflow: hidden;
+    }
+    #inner-circle::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 30% 50%, rgba(200,169,110,0.08), transparent 65%);
+      pointer-events: none;
+    }
+    .ic-wm {
+      position: absolute;
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 900;
+      font-style: italic;
+      font-size: clamp(120px, 16vw, 220px);
+      color: rgba(28,43,30,0.2);
+      top: 50%; right: -2%;
+      transform: translateY(-50%);
+      letter-spacing: -0.03em;
+      pointer-events: none;
+      user-select: none;
+      line-height: 1;
+    }
+    .ic-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 56px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 96px;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+    }
+    .ic-label {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      font-size: 10px;
+      letter-spacing: 0.26em;
+      text-transform: uppercase;
+      color: rgba(181,201,183,0.6);
+      display: block;
+      margin-bottom: 18px;
+    }
+    .ic-h {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 400;
+      font-style: italic;
+      font-size: clamp(40px, 5vw, 64px);
+      color: var(--c-pgold);
+      line-height: 1.05;
+      margin-bottom: 24px;
+    }
+    .ic-p {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      font-size: 14px;
+      color: rgba(181,201,183,0.8);
+      line-height: 2;
+      max-width: 420px;
+    }
+    .ic-perks {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      margin-top: 36px;
+    }
+    .ic-perk {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .ic-perk-dot {
+      width: 5px; height: 5px;
+      background: var(--c-gold);
+      transform: rotate(45deg);
+      flex-shrink: 0;
+    }
+    .ic-perk-text {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      font-size: 13px;
+      color: rgba(181,201,183,0.75);
+      letter-spacing: 0.03em;
+    }
+    /* Right side */
+    .ic-right {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 32px;
+    }
+    .ic-art-wrap {
+      width: 200px;
+      height: 200px;
+      position: relative;
+    }
+    .ic-art-ring {
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      border: 1px solid rgba(200,169,110,0.18);
+      animation: orbitSpin 60s linear infinite;
+    }
+    .ic-art-ring::before {
+      content: '';
+      position: absolute;
+      top: -3px; left: 50%;
+      transform: translateX(-50%);
+      width: 5px; height: 5px;
+      background: var(--c-gold);
+      border-radius: 50%;
+      box-shadow: 0 0 8px rgba(200,169,110,0.5);
+    }
+    .ic-art-ring2 {
+      position: absolute;
+      inset: 20%;
+      border-radius: 50%;
+      border: 1px solid rgba(200,169,110,0.08);
+      animation: orbitSpinRev 80s linear infinite;
+    }
+    .ic-ig-cta {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: rgba(28,43,30,0.5);
+      border: 1px solid rgba(200,169,110,0.22);
+      padding: 18px 36px;
+      text-decoration: none;
+      transition: background 0.35s, border-color 0.35s;
+    }
+    .ic-ig-cta:hover { background: rgba(28,43,30,0.85); border-color: rgba(200,169,110,0.5); }
+    .ic-ig-cta svg { width: 20px; height: 20px; fill: none; stroke: var(--c-gold); }
+    .ic-ig-cta span {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 400;
+      font-size: 10px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--c-pgold);
+    }
+    .ic-note {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 200;
+      font-size: 11px;
+      letter-spacing: 0.06em;
+      color: rgba(181,201,183,0.45);
+      text-align: center;
+    }
+    @media (max-width: 991px) {
+      .ic-inner { grid-template-columns: 1fr; gap: 56px; }
+      .ic-right { align-items: flex-start; }
     }
   </style>
 </head>
 <body>
 
-<!-- NAV -->
+<!-- ══════════════════════════════════════════
+     ANNOUNCEMENT BAR
+══════════════════════════════════════════ -->
+<div id="announce-bar">
+  <p class="ann-text">
+    <span data-sq>Dërgim falas për të gjitha porositë<span class="ann-sep">·</span>Kodi <strong>AURELE15</strong> — 15% zbritje në porosinë tuaj të parë</span>
+    <span data-en>Free shipping on all orders<span class="ann-sep">·</span>Code <strong>AURELE15</strong> — 15% off your first order</span>
+  </p>
+  <button id="ann-close" aria-label="Close announcement">✕</button>
+</div>
+
+<!-- ══════════════════════════════════════════
+     NAV
+══════════════════════════════════════════ -->
 <nav id="nav">
   <div class="nav-inner">
     <a href="#" class="nav-logo">AU<span class="dot">·</span>RÈLE</a>
+
     <ul class="nav-links">
-      <li><a href="#collection">Collections</a></li>
-      <li><a href="#story">Story</a></li>
-      <li><a href="#order">Order</a></li>
-      <li><a href="#footer">Contact</a></li>
+      <li><a href="#collection" data-section="collection"><span data-sq>Koleksioni</span><span data-en>Collections</span></a></li>
+      <li><a href="#story" data-section="story"><span data-sq>Historia</span><span data-en>Story</span></a></li>
+      <li><a href="#order" data-section="order"><span data-sq>Porosit</span><span data-en>Order</span></a></li>
+      <li><a href="#footer" data-section="footer"><span data-sq>Kontakt</span><span data-en>Contact</span></a></li>
     </ul>
+
     <div class="nav-right">
-      <a href="https://instagram.com/yourbrand" target="_blank" rel="noopener noreferrer" class="nav-ig" aria-label="Instagram">
-        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-          <rect x="2" y="2" width="20" height="20" rx="5"/>
-          <circle cx="12" cy="12" r="4"/>
-          <circle cx="17.5" cy="6.5" r="1" fill="#C8A96E" stroke="none"/>
-        </svg>
-      </a>
+      <button class="lang-btn" id="langBtn">EN</button>
+      <div class="nav-socials">
+        <a href="https://instagram.com/yourbrand" target="_blank" rel="noopener noreferrer" class="nav-social-link" aria-label="Instagram">
+          <svg viewBox="0 0 24 24" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="#C8A96E" stroke="none"/></svg>
+        </a>
+        <a href="https://tiktok.com/@yourbrand" target="_blank" rel="noopener noreferrer" class="nav-social-link" aria-label="TikTok">
+          <svg viewBox="0 0 24 24" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"/></svg>
+        </a>
+      </div>
       <button class="hamburger" id="ham" aria-label="Menu">
         <span></span><span></span><span></span>
       </button>
@@ -1172,425 +1983,1156 @@
 <!-- Mobile overlay -->
 <div class="mob-overlay" id="mob">
   <button class="mob-close" id="mobClose">Close ✕</button>
-  <nav class="mob-overlay-nav">
-    <a href="#collection" class="mob-lnk">Collections</a>
-    <a href="#story"      class="mob-lnk">Story</a>
-    <a href="#order"      class="mob-lnk">Order</a>
-    <a href="#footer"     class="mob-lnk">Contact</a>
+  <nav class="mob-nav">
+    <a href="#collection" class="mob-lnk"><span data-sq>Koleksioni</span><span data-en>Collections</span></a>
+    <a href="#story"      class="mob-lnk"><span data-sq>Historia</span><span data-en>Story</span></a>
+    <a href="#order"      class="mob-lnk"><span data-sq>Porosit</span><span data-en>Order</span></a>
+    <a href="#footer"     class="mob-lnk"><span data-sq>Kontakt</span><span data-en>Contact</span></a>
   </nav>
+  <div class="mob-socials">
+    <a href="https://instagram.com/yourbrand" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+      <svg viewBox="0 0 24 24" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="#C8A96E" stroke="none"/></svg>
+    </a>
+    <a href="https://tiktok.com/@yourbrand" target="_blank" rel="noopener noreferrer" aria-label="TikTok">
+      <svg viewBox="0 0 24 24" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"/></svg>
+    </a>
+  </div>
+  <div class="mob-lang">
+    <button class="lang-btn" id="langBtnMob" style="color:var(--c-pgold);border-color:rgba(200,169,110,0.4)">EN</button>
+  </div>
 </div>
 
-<!-- HERO -->
+<!-- ══════════════════════════════════════════
+     HERO
+══════════════════════════════════════════ -->
 <section id="hero">
   <div class="hero-wrap">
+
     <div class="hero-left">
-      <p class="hero-eyebrow">Fine Jewellery · Handcrafted · Balkans</p>
+      <p class="hero-eyebrow"><span data-sq>Bizhuteri Fine · Punuar me Dorë · Ballkani</span><span data-en>Fine Jewellery · Handcrafted · Balkans</span></p>
       <span class="hero-rule"></span>
-      <span class="h1a">Worn close</span>
-      <span class="h1b">to the heart.</span>
-      <p class="hero-sub">Each piece is a quiet ceremony. Handcrafted in small batches, shipped with intention across Albania, Kosovo, and North Macedonia.</p>
+      <span class="hero-h1a"><span data-sq>Afër zemrës</span><span data-en>Worn close</span></span>
+      <span class="hero-h1b"><span data-sq>mbajtura gjithmonë.</span><span data-en>to the heart.</span></span>
+      <p class="hero-sub">
+        <span data-sq>Çdo copë është një ceremoni e heshtur. Krijuar me durim dhe dërguar me kujdes në Shqipëri, Kosovë dhe Maqedoninë e Veriut.</span>
+        <span data-en>Each piece is a quiet ceremony. Created with patience and delivered with care across Albania, Kosovo, and North Macedonia.</span>
+      </p>
       <div class="hero-cta">
-        <a href="#collection" class="btn-ol dark">Explore the Collection</a>
-        <span class="hero-hint">or ↓ scroll to discover</span>
+        <a href="#collection" class="btn-ol dark">
+          <span data-sq>Zbulo Koleksionin</span><span data-en>Explore the Collection</span>
+        </a>
       </div>
     </div>
+
     <div class="hero-right">
       <div class="hero-art">
-        <div class="h-circle-lg"></div>
-        <div class="h-circle-sm"></div>
-        <div class="h-line-v"></div>
-        <div class="h-line-h"></div>
-        <div class="h-dot"></div>
+        <div class="ha-orbit1"></div>
+        <div class="ha-orbit2"></div>
+        <!-- Elaborate ring illustration -->
+        <svg class="ha-ring-svg" viewBox="0 0 320 360" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Band outer bottom ellipse -->
+          <ellipse cx="160" cy="296" rx="108" ry="27" stroke="rgba(200,169,110,0.52)" stroke-width="1.3"/>
+          <!-- Band inner ellipse -->
+          <ellipse cx="160" cy="296" rx="80" ry="20" stroke="rgba(200,169,110,0.2)" stroke-width="0.8"/>
+          <!-- Band walls -->
+          <line x1="52"  y1="296" x2="52"  y2="226" stroke="rgba(200,169,110,0.52)" stroke-width="1.3"/>
+          <line x1="268" y1="296" x2="268" y2="226" stroke="rgba(200,169,110,0.52)" stroke-width="1.3"/>
+          <line x1="80"  y1="296" x2="80"  y2="232" stroke="rgba(200,169,110,0.18)" stroke-width="0.8"/>
+          <line x1="240" y1="296" x2="240" y2="232" stroke="rgba(200,169,110,0.18)" stroke-width="0.8"/>
+          <!-- Band top curve -->
+          <path d="M52 226 Q160 192 268 226" stroke="rgba(200,169,110,0.52)" stroke-width="1.3" fill="none"/>
+          <path d="M80 232 Q160 204 240 232" stroke="rgba(200,169,110,0.18)" stroke-width="0.8" fill="none"/>
+          <!-- Setting base collar -->
+          <ellipse cx="160" cy="206" rx="54" ry="14" stroke="rgba(200,169,110,0.4)" stroke-width="1" fill="rgba(200,169,110,0.03)"/>
+          <!-- 4 prongs -->
+          <path d="M116 202 L106 144" stroke="rgba(200,169,110,0.5)" stroke-width="1.1" stroke-linecap="round"/>
+          <path d="M204 202 L214 144" stroke="rgba(200,169,110,0.5)" stroke-width="1.1" stroke-linecap="round"/>
+          <path d="M140 198 L136 142" stroke="rgba(200,169,110,0.32)" stroke-width="0.8" stroke-linecap="round"/>
+          <path d="M180 198 L184 142" stroke="rgba(200,169,110,0.32)" stroke-width="0.8" stroke-linecap="round"/>
+          <!-- Emerald-cut gemstone outer girdle -->
+          <polygon points="106,100 112,78 208,78 214,100 214,142 208,164 112,164 106,142" stroke="rgba(200,169,110,0.68)" stroke-width="1.3" fill="rgba(200,169,110,0.04)"/>
+          <!-- Table facet -->
+          <polygon points="118,96 124,80 196,80 202,96 202,146 196,162 124,162 118,146" stroke="rgba(200,169,110,0.26)" stroke-width="0.8" fill="rgba(200,169,110,0.03)"/>
+          <!-- Inner step -->
+          <rect x="134" y="98" width="52" height="44" stroke="rgba(200,169,110,0.2)" stroke-width="0.7" fill="rgba(200,169,110,0.03)"/>
+          <!-- Crown corner facets -->
+          <line x1="106" y1="100" x2="118" y2="96"  stroke="rgba(200,169,110,0.2)" stroke-width="0.6"/>
+          <line x1="214" y1="100" x2="202" y2="96"  stroke="rgba(200,169,110,0.2)" stroke-width="0.6"/>
+          <line x1="214" y1="142" x2="202" y2="146" stroke="rgba(200,169,110,0.2)" stroke-width="0.6"/>
+          <line x1="106" y1="142" x2="118" y2="146" stroke="rgba(200,169,110,0.2)" stroke-width="0.6"/>
+          <!-- Sparkle highlight -->
+          <circle cx="143" cy="90" r="2.5" fill="rgba(232,213,163,0.8)"/>
+          <circle cx="151" cy="86" r="1.2" fill="rgba(232,213,163,0.45)"/>
+          <!-- Blueprint guide lines -->
+          <line x1="6"   y1="121" x2="48"  y2="121" stroke="rgba(200,169,110,0.1)" stroke-width="0.5" stroke-dasharray="2 4"/>
+          <line x1="272" y1="121" x2="314" y2="121" stroke="rgba(200,169,110,0.1)" stroke-width="0.5" stroke-dasharray="2 4"/>
+          <line x1="160" y1="6"   x2="160" y2="64"  stroke="rgba(200,169,110,0.1)" stroke-width="0.5" stroke-dasharray="2 4"/>
+        </svg>
+        <p class="hero-art-label">Est. 2024 · Balkans</p>
       </div>
-      <p class="hero-caption">Est. 2024 · Balkans</p>
     </div>
+
   </div>
   <div class="scroll-ind" aria-hidden="true">
-    <div class="sl"></div>
-    <div class="sa"></div>
+    <div class="sl"></div><div class="sa"></div>
   </div>
 </section>
 
-<!-- MARQUEE -->
-<div class="marquee-strip" aria-hidden="true">
+<!-- ══════════════════════════════════════════
+     MARQUEE
+══════════════════════════════════════════ -->
+<div class="marquee-wrap" aria-hidden="true">
   <div class="marquee-track">
-    <span>Albania · Kosovo · North Macedonia · Handcrafted with care · Order via Instagram · Small-batch jewellery · Free shipping above €80 ·</span>
-    <span>Albania · Kosovo · North Macedonia · Handcrafted with care · Order via Instagram · Small-batch jewellery · Free shipping above €80 ·</span>
-    <span>Albania · Kosovo · North Macedonia · Handcrafted with care · Order via Instagram · Small-batch jewellery · Free shipping above €80 ·</span>
+    <span data-sq>Shqipëri · Kosovë · Maqedonia e Veriut · Punuar me Dorë · Porosit në Instagram · Bizhuteri e Kufizuar · Dërgim i Shpejtë ·</span>
+    <span data-en style="display:none">Albania · Kosovo · North Macedonia · Handcrafted · Order via Instagram · Limited Jewellery · Fast Delivery ·</span>
+    <span data-sq>Shqipëri · Kosovë · Maqedonia e Veriut · Punuar me Dorë · Porosit në Instagram · Bizhuteri e Kufizuar · Dërgim i Shpejtë ·</span>
+    <span data-en style="display:none">Albania · Kosovo · North Macedonia · Handcrafted · Order via Instagram · Limited Jewellery · Fast Delivery ·</span>
+    <span data-sq>Shqipëri · Kosovë · Maqedonia e Veriut · Punuar me Dorë · Porosit në Instagram · Bizhuteri e Kufizuar · Dërgim i Shpejtë ·</span>
+    <span data-en style="display:none">Albania · Kosovo · North Macedonia · Handcrafted · Order via Instagram · Limited Jewellery · Fast Delivery ·</span>
   </div>
 </div>
 
-<!-- STATS -->
+<!-- ══════════════════════════════════════════
+     STATS
+══════════════════════════════════════════ -->
 <section id="stats">
   <div class="stats-grid">
-    <div class="stat-item reveal"><span class="stat-num">16+</span><span class="stat-lbl">Unique Pieces</span></div>
-    <div class="stat-item reveal"><span class="stat-num">3</span><span class="stat-lbl">Countries</span></div>
-    <div class="stat-item reveal"><span class="stat-num">100%</span><span class="stat-lbl">Handcrafted</span></div>
-    <div class="stat-item reveal"><span class="stat-num">∞</span><span class="stat-lbl">With Love</span></div>
+    <div class="stat-item reveal">
+      <span class="stat-num">16+</span>
+      <span class="stat-lbl"><span data-sq>Krijime Unike</span><span data-en>Unique Pieces</span></span>
+    </div>
+    <div class="stat-item reveal">
+      <span class="stat-num">3</span>
+      <span class="stat-lbl"><span data-sq>Shtete</span><span data-en>Countries</span></span>
+    </div>
+    <div class="stat-item reveal">
+      <span class="stat-num">100%</span>
+      <span class="stat-lbl"><span data-sq>Me Dorë</span><span data-en>Handmade</span></span>
+    </div>
+    <div class="stat-item reveal">
+      <span class="stat-num">∞</span>
+      <span class="stat-lbl"><span data-sq>Me Dashuri</span><span data-en>With Love</span></span>
+    </div>
   </div>
 </section>
 
-<!-- EDITORIAL SPLIT -->
+<!-- ══════════════════════════════════════════
+     EDITORIAL SPLIT
+══════════════════════════════════════════ -->
 <section id="collections-intro">
   <div class="editorial-split">
-    <div class="ed-col sage reveal">
-      <span class="ed-wm">Rings</span>
-      <p class="ed-eyebrow" style="color:var(--c-mid)">Collection 01</p>
-      <h2 class="ed-h" style="color:var(--c-pgold)">The Ring Edit</h2>
-      <p class="ed-body" style="color:var(--c-pale)">Each ring is cast once and cast with purpose. Minimal forms that carry maximal meaning.</p>
-      <a href="#collection" class="ed-link" style="color:var(--c-gold)">Explore Rings →</a>
+    <div class="ed-col sage reveal-left">
+      <span class="ed-wm"><span data-sq>Unaza</span><span data-en>Rings</span></span>
+      <span class="ed-eyebrow" style="color:var(--c-mid)"><span data-sq>Koleksioni 01</span><span data-en>Collection 01</span></span>
+      <h2 class="ed-h" style="color:var(--c-pgold)"><span data-sq>Unazat Tona</span><span data-en>The Ring Edit</span></h2>
+      <p class="ed-body" style="color:rgba(181,201,183,0.8)">
+        <span data-sq>Çdo unazë formohet njëherë dhe me qëllim të plotë. Forma minimale me kuptim maksimal.</span>
+        <span data-en>Each ring is formed once, with full intention. Minimal form, maximal meaning.</span>
+      </p>
+      <a href="#collection" class="ed-link" style="color:var(--c-gold)">
+        <span data-sq>Zbulo Unazat →</span><span data-en>Explore Rings →</span>
+      </a>
     </div>
     <div class="ed-col pale reveal">
-      <p class="ed-eyebrow" style="color:var(--c-bronze)">Collection 02</p>
-      <h2 class="ed-h" style="color:var(--c-sage)">Neck &amp; Wrist</h2>
-      <p class="ed-body" style="color:var(--c-muted)">Chokers, chains, and cuffs. Designed to be layered, stacked, worn endlessly.</p>
-      <a href="#collection" class="ed-link" style="color:var(--c-bronze)">Explore →</a>
+      <span class="ed-eyebrow" style="color:var(--c-bronze)"><span data-sq>Koleksioni 02</span><span data-en>Collection 02</span></span>
+      <h2 class="ed-h" style="color:var(--c-sage)"><span data-sq>Qafët &amp; Duart</span><span data-en>Neck &amp; Wrist</span></h2>
+      <p class="ed-body" style="color:var(--c-muted)">
+        <span data-sq>Gerdane, zinxhirë dhe byzylykë. Krijuar për t'u vendosur mbi njëra-tjetrën, mbajtur pa fund.</span>
+        <span data-en>Chokers, chains, and cuffs. Designed to layer, stack, and wear endlessly.</span>
+      </p>
+      <a href="#collection" class="ed-link" style="color:var(--c-bronze)">
+        <span data-sq>Zbulo →</span><span data-en>Explore →</span>
+      </a>
     </div>
   </div>
 </section>
 
-<!-- PRODUCT GRID -->
+<!-- ══════════════════════════════════════════
+     PRODUCT GRID
+══════════════════════════════════════════ -->
 <section id="collection" class="section-pad">
   <div class="lux-container">
-    <span class="sec-eyebrow reveal">The Collection</span>
-    <h2 class="sec-heading reveal">All Pieces</h2>
-    <p class="sec-sub reveal">16 handcrafted works. Order any piece via Instagram.</p>
-    <span class="gold-rule" style="margin:32px 0 0"></span>
+    <span class="sec-label reveal"><span data-sq>Koleksioni</span><span data-en>The Collection</span></span>
+    <h2 class="sec-h reveal"><span data-sq>Të Gjitha Krijimet</span><span data-en>All Pieces</span></h2>
+    <p class="sec-sub reveal">
+      <span data-sq>16 krijime bizhuterisë. Porosit çdo copë nëpërmjet Instagram.</span>
+      <span data-en>16 jewellery pieces. Order any piece through Instagram.</span>
+    </p>
+    <span class="gold-rule" style="margin:28px 0 0"></span>
 
     <div class="filter-bar">
-      <button class="f-pill on" data-f="all">All</button>
-      <button class="f-pill" data-f="rings">Rings</button>
-      <button class="f-pill" data-f="necklaces">Necklaces</button>
-      <button class="f-pill" data-f="bracelets">Bracelets</button>
-      <button class="f-pill" data-f="earrings">Earrings</button>
+      <button class="f-pill on" data-f="all"><span data-sq>Të Gjitha</span><span data-en>All</span></button>
+      <button class="f-pill" data-f="rings"><span data-sq>Unaza</span><span data-en>Rings</span></button>
+      <button class="f-pill" data-f="necklaces"><span data-sq>Gerdane</span><span data-en>Necklaces</span></button>
+      <button class="f-pill" data-f="bracelets"><span data-sq>Byzylykë</span><span data-en>Bracelets</span></button>
+      <button class="f-pill" data-f="earrings"><span data-sq>Vathë</span><span data-en>Earrings</span></button>
     </div>
 
-    <div class="prod-grid">
+    <div class="prod-grid" id="pgrid">
 
-      <div class="prod-card reveal" data-cat="rings">
-        <div class="prod-img img-a">
-          <svg width="90" height="90" viewBox="0 0 90 90" fill="none"><circle cx="45" cy="45" r="40" stroke="#C8A96E" stroke-width="1"/><path d="M45 30 L57 45 L45 60 L33 45 Z" stroke="#C8A96E" stroke-width="1" fill="none" opacity=".55"/></svg>
+      <!-- 1 — Featured, rings -->
+      <div class="prod-card prod-card--featured reveal" data-cat="rings">
+        <span class="prod-badge badge-best"><span data-sq>Bestseller</span><span data-en>Bestseller</span></span>
+        <div class="prod-visual bg-a">
+          <div class="prod-art">
+            <svg width="220" height="260" viewBox="0 0 280 320" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <ellipse cx="140" cy="248" rx="96" ry="24" stroke="rgba(200,169,110,0.55)" stroke-width="1.2"/>
+              <ellipse cx="140" cy="248" rx="72" ry="18" stroke="rgba(200,169,110,0.2)" stroke-width="0.8"/>
+              <line x1="44"  y1="248" x2="44"  y2="188" stroke="rgba(200,169,110,0.55)" stroke-width="1.2"/>
+              <line x1="236" y1="248" x2="236" y2="188" stroke="rgba(200,169,110,0.55)" stroke-width="1.2"/>
+              <line x1="68"  y1="248" x2="68"  y2="193" stroke="rgba(200,169,110,0.18)" stroke-width="0.8"/>
+              <line x1="212" y1="248" x2="212" y2="193" stroke="rgba(200,169,110,0.18)" stroke-width="0.8"/>
+              <path d="M44 188 Q140 156 236 188" stroke="rgba(200,169,110,0.55)" stroke-width="1.2" fill="none"/>
+              <path d="M68 193 Q140 166 212 193" stroke="rgba(200,169,110,0.18)" stroke-width="0.8" fill="none"/>
+              <ellipse cx="140" cy="170" rx="48" ry="13" stroke="rgba(200,169,110,0.38)" stroke-width="1" fill="rgba(200,169,110,0.03)"/>
+              <path d="M100 165 L92 110" stroke="rgba(200,169,110,0.5)" stroke-width="1" stroke-linecap="round"/>
+              <path d="M180 165 L188 110" stroke="rgba(200,169,110,0.5)" stroke-width="1" stroke-linecap="round"/>
+              <path d="M126 161 L120 108" stroke="rgba(200,169,110,0.3)" stroke-width="0.8" stroke-linecap="round"/>
+              <path d="M154 161 L160 108" stroke="rgba(200,169,110,0.3)" stroke-width="0.8" stroke-linecap="round"/>
+              <circle cx="140" cy="74" r="38" stroke="rgba(200,169,110,0.65)" stroke-width="1.2" fill="rgba(200,169,110,0.05)"/>
+              <circle cx="140" cy="74" r="24" stroke="rgba(200,169,110,0.3)" stroke-width="0.7" fill="rgba(200,169,110,0.04)"/>
+              <line x1="140" y1="36" x2="140" y2="50" stroke="rgba(200,169,110,0.22)" stroke-width="0.6"/>
+              <line x1="178" y1="74" x2="164" y2="74" stroke="rgba(200,169,110,0.22)" stroke-width="0.6"/>
+              <line x1="140" y1="112" x2="140" y2="98" stroke="rgba(200,169,110,0.22)" stroke-width="0.6"/>
+              <line x1="102" y1="74" x2="116" y2="74" stroke="rgba(200,169,110,0.22)" stroke-width="0.6"/>
+              <line x1="167" y1="47" x2="157" y2="57" stroke="rgba(200,169,110,0.18)" stroke-width="0.6"/>
+              <line x1="167" y1="101" x2="157" y2="91" stroke="rgba(200,169,110,0.18)" stroke-width="0.6"/>
+              <line x1="113" y1="47" x2="123" y2="57" stroke="rgba(200,169,110,0.18)" stroke-width="0.6"/>
+              <line x1="113" y1="101" x2="123" y2="91" stroke="rgba(200,169,110,0.18)" stroke-width="0.6"/>
+              <circle cx="126" cy="60" r="2.2" fill="rgba(232,213,163,0.75)"/>
+            </svg>
+          </div>
+          <img src="" alt="Selène Ring" class="prod-photo" loading="lazy">
+          <div class="prod-overlay"><span><span data-sq>Porosit në Instagram</span><span data-en>Order via Instagram</span></span></div>
         </div>
         <div class="prod-body">
-          <div class="prod-meta"><span class="prod-name">Selène Ring</span><span class="prod-price">€42</span></div>
-          <span class="prod-cat">Rings</span>
-          <a href="https://instagram.com/yourbrand" target="_blank" rel="noopener noreferrer" class="prod-btn">Order on Instagram</a>
+          <div class="prod-row1">
+            <span class="prod-name">Selène Ring</span>
+            <div class="prod-price-wrap"><span class="prod-price">€42</span></div>
+          </div>
+          <span class="prod-cat"><span data-sq>Unazë</span><span data-en>Ring</span></span>
+          <a href="https://instagram.com/yourbrand" target="_blank" rel="noopener noreferrer" class="prod-btn">
+            <span data-sq>Porosit në Instagram</span><span data-en>Order on Instagram</span>
+          </a>
         </div>
       </div>
 
+      <!-- 2 — necklaces -->
       <div class="prod-card reveal" data-cat="necklaces">
-        <div class="prod-img img-b">
-          <svg width="90" height="70" viewBox="0 0 90 70" fill="none"><line x1="10" y1="25" x2="80" y2="25" stroke="#8C6D3F" stroke-width="1"/><line x1="10" y1="35" x2="80" y2="35" stroke="#8C6D3F" stroke-width="1"/><line x1="10" y1="45" x2="80" y2="45" stroke="#8C6D3F" stroke-width="1"/></svg>
+        <span class="prod-badge badge-new"><span data-sq>E Re</span><span data-en>New</span></span>
+        <div class="prod-visual bg-b">
+          <div class="prod-art">
+            <svg width="200" height="240" viewBox="0 0 240 280" fill="none">
+              <path d="M20 44 C50 26 100 16 120 15" stroke="rgba(90,60,20,0.6)" stroke-width="1" fill="none"/>
+              <path d="M120 15 C140 16 190 26 220 44" stroke="rgba(90,60,20,0.6)" stroke-width="1" fill="none"/>
+              <path d="M20 44 C50 26 100 16 120 15" stroke="rgba(90,60,20,0.3)" stroke-width="2.5" fill="none" stroke-dasharray="2.5 3.5"/>
+              <path d="M120 15 C140 16 190 26 220 44" stroke="rgba(90,60,20,0.3)" stroke-width="2.5" fill="none" stroke-dasharray="2.5 3.5"/>
+              <line x1="120" y1="15" x2="120" y2="82" stroke="rgba(90,60,20,0.5)" stroke-width="0.9"/>
+              <circle cx="120" cy="15" r="3" stroke="rgba(90,60,20,0.5)" stroke-width="0.8" fill="rgba(90,60,20,0.1)"/>
+              <path d="M120 82 L146 118 L120 162 L94 118 Z" stroke="rgba(90,60,20,0.72)" stroke-width="1.1" fill="rgba(90,60,20,0.06)"/>
+              <rect x="113" y="70" width="14" height="12" rx="3" stroke="rgba(90,60,20,0.45)" stroke-width="0.8" fill="none"/>
+              <line x1="94"  y1="118" x2="146" y2="118" stroke="rgba(90,60,20,0.28)" stroke-width="0.6"/>
+              <line x1="120" y1="82"  x2="120" y2="162" stroke="rgba(90,60,20,0.28)" stroke-width="0.6"/>
+              <circle cx="120" cy="118" r="10" stroke="rgba(90,60,20,0.45)" stroke-width="0.8" fill="rgba(90,60,20,0.1)"/>
+              <circle cx="114" cy="112" r="1.5" fill="rgba(140,100,40,0.65)"/>
+            </svg>
+          </div>
+          <img src="" alt="Aurel Choker" class="prod-photo" loading="lazy">
+          <div class="prod-overlay"><span><span data-sq>Porosit në Instagram</span><span data-en>Order via Instagram</span></span></div>
         </div>
         <div class="prod-body">
-          <div class="prod-meta"><span class="prod-name">Aurel Choker</span><span class="prod-price">€58</span></div>
-          <span class="prod-cat">Necklaces</span>
-          <a href="https://instagram.com/yourbrand" target="_blank" rel="noopener noreferrer" class="prod-btn">Order on Instagram</a>
+          <div class="prod-row1">
+            <span class="prod-name">Aurel Choker</span>
+            <div class="prod-price-wrap"><span class="prod-price">€58</span></div>
+          </div>
+          <span class="prod-cat"><span data-sq>Gerdane</span><span data-en>Necklace</span></span>
+          <a href="https://instagram.com/yourbrand" target="_blank" rel="noopener noreferrer" class="prod-btn">
+            <span data-sq>Porosit në Instagram</span><span data-en>Order on Instagram</span>
+          </a>
         </div>
       </div>
 
+      <!-- 3 — bracelets -->
       <div class="prod-card reveal" data-cat="bracelets">
-        <div class="prod-img img-c">
-          <svg width="100" height="100" viewBox="0 0 100 100" fill="none"><circle cx="50" cy="50" r="44" stroke="#E8D5A3" stroke-width="1.5"/><circle cx="50" cy="50" r="24" stroke="#E8D5A3" stroke-width=".6" stroke-dasharray="3 5"/></svg>
+        <div class="prod-visual bg-c">
+          <div class="prod-art">
+            <svg width="200" height="180" viewBox="0 0 260 210" fill="none">
+              <path d="M44 72 Q44 18 130 18 Q216 18 216 72 Q216 152 130 152 Q78 152 58 122" stroke="rgba(200,169,110,0.58)" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+              <path d="M62 78 Q62 36 130 36 Q198 36 198 78 Q198 136 130 136 Q86 136 70 112" stroke="rgba(200,169,110,0.22)" stroke-width="0.9" fill="none" stroke-linecap="round"/>
+              <path d="M70 34 Q130 26 190 34"   stroke="rgba(200,169,110,0.16)" stroke-width="0.7" fill="none"/>
+              <path d="M52 84 Q130 80 208 84"   stroke="rgba(200,169,110,0.16)" stroke-width="0.7" fill="none"/>
+              <path d="M52 104 Q130 108 208 104" stroke="rgba(200,169,110,0.16)" stroke-width="0.7" fill="none"/>
+              <path d="M70 144 Q130 150 190 144" stroke="rgba(200,169,110,0.16)" stroke-width="0.7" fill="none"/>
+              <line x1="44" y1="72" x2="58" y2="80"   stroke="rgba(200,169,110,0.28)" stroke-width="0.8"/>
+              <line x1="44" y1="122" x2="58" y2="114"  stroke="rgba(200,169,110,0.28)" stroke-width="0.8"/>
+              <circle cx="214" cy="84"  r="8" stroke="rgba(200,169,110,0.42)" stroke-width="0.9" fill="rgba(200,169,110,0.05)"/>
+              <circle cx="214" cy="84"  r="3" fill="rgba(200,169,110,0.22)"/>
+            </svg>
+          </div>
+          <img src="" alt="Arc De Bangle" class="prod-photo" loading="lazy">
+          <div class="prod-overlay"><span><span data-sq>Porosit në Instagram</span><span data-en>Order via Instagram</span></span></div>
         </div>
         <div class="prod-body">
-          <div class="prod-meta"><span class="prod-name">Arc De Bangle</span><span class="prod-price">€49</span></div>
-          <span class="prod-cat">Bracelets</span>
-          <a href="https://instagram.com/yourbrand" target="_blank" rel="noopener noreferrer" class="prod-btn">Order on Instagram</a>
+          <div class="prod-row1">
+            <span class="prod-name">Arc De Bangle</span>
+            <div class="prod-price-wrap"><span class="prod-price">€49</span></div>
+          </div>
+          <span class="prod-cat"><span data-sq>Byzylyk</span><span data-en>Bracelet</span></span>
+          <a href="https://instagram.com/yourbrand" target="_blank" rel="noopener noreferrer" class="prod-btn">
+            <span data-sq>Porosit në Instagram</span><span data-en>Order on Instagram</span>
+          </a>
         </div>
       </div>
 
+      <!-- 4 — earrings -->
       <div class="prod-card reveal" data-cat="earrings">
-        <div class="prod-img img-d">
-          <svg width="60" height="100" viewBox="0 0 60 100" fill="none"><path d="M30 8 C50 8 56 30 56 48 C56 70 44 92 30 92 C16 92 4 70 4 48 C4 30 10 8 30 8 Z" stroke="#3D5C42" stroke-width="1" fill="none"/><circle cx="30" cy="14" r="4" stroke="#3D5C42" stroke-width="1"/></svg>
+        <span class="prod-badge badge-sale">−15%</span>
+        <div class="prod-visual bg-d">
+          <div class="prod-art">
+            <svg width="190" height="230" viewBox="0 0 220 260" fill="none">
+              <path d="M62 20 Q62 8 74 8 Q86 8 86 20 L86 36" stroke="rgba(90,60,20,0.7)" stroke-width="1.3" fill="none" stroke-linecap="round"/>
+              <line x1="86" y1="36" x2="86" y2="82" stroke="rgba(90,60,20,0.52)" stroke-width="0.9"/>
+              <circle cx="86" cy="36" r="2.8" stroke="rgba(90,60,20,0.48)" stroke-width="0.8" fill="rgba(90,60,20,0.1)"/>
+              <path d="M86 82 Q68 108 86 140 Q104 108 86 82" stroke="rgba(90,60,20,0.78)" stroke-width="1.1" fill="rgba(90,60,20,0.08)"/>
+              <line x1="86" y1="82" x2="86" y2="140" stroke="rgba(90,60,20,0.26)" stroke-width="0.6"/>
+              <ellipse cx="81" cy="103" rx="4" ry="6" fill="none" stroke="rgba(120,80,30,0.3)" stroke-width="0.5"/>
+              <path d="M158 20 Q158 8 146 8 Q134 8 134 20 L134 36" stroke="rgba(90,60,20,0.7)" stroke-width="1.3" fill="none" stroke-linecap="round"/>
+              <line x1="134" y1="36" x2="134" y2="82" stroke="rgba(90,60,20,0.52)" stroke-width="0.9"/>
+              <circle cx="134" cy="36" r="2.8" stroke="rgba(90,60,20,0.48)" stroke-width="0.8" fill="rgba(90,60,20,0.1)"/>
+              <path d="M134 82 Q116 108 134 140 Q152 108 134 82" stroke="rgba(90,60,20,0.78)" stroke-width="1.1" fill="rgba(90,60,20,0.08)"/>
+              <line x1="134" y1="82" x2="134" y2="140" stroke="rgba(90,60,20,0.26)" stroke-width="0.6"/>
+              <ellipse cx="129" cy="103" rx="4" ry="6" fill="none" stroke="rgba(120,80,30,0.3)" stroke-width="0.5"/>
+              <circle cx="78"  cy="90" r="1.5" fill="rgba(140,100,40,0.65)"/>
+              <circle cx="126" cy="90" r="1.5" fill="rgba(140,100,40,0.65)"/>
+            </svg>
+          </div>
+          <img src="" alt="Mira Drop Earrings" class="prod-photo" loading="lazy">
+          <div class="prod-overlay"><span><span data-sq>Porosit në Instagram</span><span data-en>Order via Instagram</span></span></div>
         </div>
         <div class="prod-body">
-          <div class="prod-meta"><span class="prod-name">Mira Drop Earrings</span><span class="prod-price">€31</span></div>
-          <span class="prod-cat">Earrings</span>
-          <a href="https://instagram.com/yourbrand" target="_blank" rel="noopener noreferrer" class="prod-btn">Order on Instagram</a>
+          <div class="prod-row1">
+            <span class="prod-name">Mira Drop Earrings</span>
+            <div class="prod-price-wrap"><span class="prod-price">€26</span><span class="prod-price-old">€31</span></div>
+          </div>
+          <span class="prod-cat"><span data-sq>Vathë</span><span data-en>Earrings</span></span>
+          <a href="https://instagram.com/yourbrand" target="_blank" rel="noopener noreferrer" class="prod-btn">
+            <span data-sq>Porosit në Instagram</span><span data-en>Order on Instagram</span>
+          </a>
         </div>
       </div>
 
+      <!-- 5 — rings -->
       <div class="prod-card reveal" data-cat="rings">
-        <div class="prod-img img-a">
-          <svg width="90" height="90" viewBox="0 0 90 90" fill="none"><circle cx="45" cy="45" r="40" stroke="#C8A96E" stroke-width="1"/><circle cx="45" cy="45" r="22" stroke="#C8A96E" stroke-width=".6" opacity=".5"/></svg>
+        <div class="prod-visual bg-a">
+          <div class="prod-art">
+            <svg width="200" height="240" viewBox="0 0 280 320" fill="none"><ellipse cx="140" cy="248" rx="96" ry="24" stroke="rgba(200,169,110,0.55)" stroke-width="1.2"/><ellipse cx="140" cy="248" rx="72" ry="18" stroke="rgba(200,169,110,0.2)" stroke-width="0.8"/><line x1="44" y1="248" x2="44" y2="188" stroke="rgba(200,169,110,0.55)" stroke-width="1.2"/><line x1="236" y1="248" x2="236" y2="188" stroke="rgba(200,169,110,0.55)" stroke-width="1.2"/><path d="M44 188 Q140 156 236 188" stroke="rgba(200,169,110,0.55)" stroke-width="1.2" fill="none"/><ellipse cx="140" cy="170" rx="48" ry="13" stroke="rgba(200,169,110,0.38)" stroke-width="1" fill="rgba(200,169,110,0.03)"/><path d="M100 165 L92 110" stroke="rgba(200,169,110,0.5)" stroke-width="1" stroke-linecap="round"/><path d="M180 165 L188 110" stroke="rgba(200,169,110,0.5)" stroke-width="1" stroke-linecap="round"/><circle cx="140" cy="74" r="38" stroke="rgba(200,169,110,0.65)" stroke-width="1.2" fill="rgba(200,169,110,0.05)"/><circle cx="140" cy="74" r="24" stroke="rgba(200,169,110,0.3)" stroke-width="0.7" fill="rgba(200,169,110,0.04)"/><circle cx="126" cy="60" r="2.2" fill="rgba(232,213,163,0.75)"/></svg>
+          </div>
+          <img src="" alt="Lune Stacking Ring" class="prod-photo" loading="lazy">
+          <div class="prod-overlay"><span><span data-sq>Porosit në Instagram</span><span data-en>Order via Instagram</span></span></div>
         </div>
         <div class="prod-body">
-          <div class="prod-meta"><span class="prod-name">Lune Stacking Ring</span><span class="prod-price">€38</span></div>
-          <span class="prod-cat">Rings</span>
-          <a href="https://instagram.com/yourbrand" target="_blank" rel="noopener noreferrer" class="prod-btn">Order on Instagram</a>
+          <div class="prod-row1">
+            <span class="prod-name">Lune Stacking Ring</span>
+            <div class="prod-price-wrap"><span class="prod-price">€38</span></div>
+          </div>
+          <span class="prod-cat"><span data-sq>Unazë</span><span data-en>Ring</span></span>
+          <a href="https://instagram.com/yourbrand" target="_blank" rel="noopener noreferrer" class="prod-btn">
+            <span data-sq>Porosit në Instagram</span><span data-en>Order on Instagram</span>
+          </a>
         </div>
       </div>
 
+      <!-- 6 — necklaces -->
       <div class="prod-card reveal" data-cat="necklaces">
-        <div class="prod-img img-b">
-          <svg width="80" height="80" viewBox="0 0 80 80" fill="none"><path d="M40 10 Q70 10 70 40 Q70 70 40 70 Q10 70 10 40 Q10 10 40 10 Z" stroke="#8C6D3F" stroke-width="1" fill="none"/><line x1="40" y1="20" x2="40" y2="60" stroke="#8C6D3F" stroke-width=".6" opacity=".5"/></svg>
+        <div class="prod-visual bg-b">
+          <div class="prod-art">
+            <svg width="200" height="240" viewBox="0 0 240 280" fill="none"><path d="M20 44 C50 26 100 16 120 15" stroke="rgba(90,60,20,0.6)" stroke-width="1" fill="none"/><path d="M120 15 C140 16 190 26 220 44" stroke="rgba(90,60,20,0.6)" stroke-width="1" fill="none"/><path d="M20 44 C50 26 100 16 120 15" stroke="rgba(90,60,20,0.3)" stroke-width="2.5" fill="none" stroke-dasharray="2.5 3.5"/><path d="M120 15 C140 16 190 26 220 44" stroke="rgba(90,60,20,0.3)" stroke-width="2.5" fill="none" stroke-dasharray="2.5 3.5"/><line x1="120" y1="15" x2="120" y2="82" stroke="rgba(90,60,20,0.5)" stroke-width="0.9"/><circle cx="120" cy="15" r="3" stroke="rgba(90,60,20,0.5)" stroke-width="0.8" fill="rgba(90,60,20,0.1)"/><path d="M120 82 L146 118 L120 162 L94 118 Z" stroke="rgba(90,60,20,0.72)" stroke-width="1.1" fill="rgba(90,60,20,0.06)"/><rect x="113" y="70" width="14" height="12" rx="3" stroke="rgba(90,60,20,0.45)" stroke-width="0.8" fill="none"/><line x1="94" y1="118" x2="146" y2="118" stroke="rgba(90,60,20,0.28)" stroke-width="0.6"/><line x1="120" y1="82" x2="120" y2="162" stroke="rgba(90,60,20,0.28)" stroke-width="0.6"/><circle cx="120" cy="118" r="10" stroke="rgba(90,60,20,0.45)" stroke-width="0.8" fill="rgba(90,60,20,0.1)"/><circle cx="114" cy="112" r="1.5" fill="rgba(140,100,40,0.65)"/></svg>
+          </div>
+          <img src="" alt="Forêt Pendant" class="prod-photo" loading="lazy">
+          <div class="prod-overlay"><span><span data-sq>Porosit në Instagram</span><span data-en>Order via Instagram</span></span></div>
         </div>
         <div class="prod-body">
-          <div class="prod-meta"><span class="prod-name">Forêt Pendant</span><span class="prod-price">€67</span></div>
-          <span class="prod-cat">Necklaces</span>
-          <a href="https://instagram.com/yourbrand" target="_blank" rel="noopener noreferrer" class="prod-btn">Order on Instagram</a>
+          <div class="prod-row1">
+            <span class="prod-name">Forêt Pendant</span>
+            <div class="prod-price-wrap"><span class="prod-price">€67</span></div>
+          </div>
+          <span class="prod-cat"><span data-sq>Gerdane</span><span data-en>Necklace</span></span>
+          <a href="https://instagram.com/yourbrand" target="_blank" rel="noopener noreferrer" class="prod-btn">
+            <span data-sq>Porosit në Instagram</span><span data-en>Order on Instagram</span>
+          </a>
         </div>
       </div>
 
+      <!-- 7 — bracelets -->
       <div class="prod-card reveal" data-cat="bracelets">
-        <div class="prod-img img-c">
-          <svg width="100" height="100" viewBox="0 0 100 100" fill="none"><circle cx="50" cy="50" r="44" stroke="#E8D5A3" stroke-width="1.5"/><path d="M30 50 L50 30 L70 50 L50 70 Z" stroke="#E8D5A3" stroke-width=".6" fill="none" opacity=".4"/></svg>
+        <span class="prod-badge badge-best"><span data-sq>Bestseller</span><span data-en>Bestseller</span></span>
+        <div class="prod-visual bg-c">
+          <div class="prod-art">
+            <svg width="200" height="180" viewBox="0 0 260 210" fill="none"><path d="M44 72 Q44 18 130 18 Q216 18 216 72 Q216 152 130 152 Q78 152 58 122" stroke="rgba(200,169,110,0.58)" stroke-width="1.5" fill="none" stroke-linecap="round"/><path d="M62 78 Q62 36 130 36 Q198 36 198 78 Q198 136 130 136 Q86 136 70 112" stroke="rgba(200,169,110,0.22)" stroke-width="0.9" fill="none" stroke-linecap="round"/><path d="M70 34 Q130 26 190 34" stroke="rgba(200,169,110,0.16)" stroke-width="0.7" fill="none"/><path d="M52 84 Q130 80 208 84" stroke="rgba(200,169,110,0.16)" stroke-width="0.7" fill="none"/><path d="M52 104 Q130 108 208 104" stroke="rgba(200,169,110,0.16)" stroke-width="0.7" fill="none"/><circle cx="214" cy="84" r="8" stroke="rgba(200,169,110,0.42)" stroke-width="0.9" fill="rgba(200,169,110,0.05)"/><circle cx="214" cy="84" r="3" fill="rgba(200,169,110,0.22)"/></svg>
+          </div>
+          <img src="" alt="Olive Cuff" class="prod-photo" loading="lazy">
+          <div class="prod-overlay"><span><span data-sq>Porosit në Instagram</span><span data-en>Order via Instagram</span></span></div>
         </div>
         <div class="prod-body">
-          <div class="prod-meta"><span class="prod-name">Olive Cuff</span><span class="prod-price">€54</span></div>
-          <span class="prod-cat">Bracelets</span>
-          <a href="https://instagram.com/yourbrand" target="_blank" rel="noopener noreferrer" class="prod-btn">Order on Instagram</a>
+          <div class="prod-row1">
+            <span class="prod-name">Olive Cuff</span>
+            <div class="prod-price-wrap"><span class="prod-price">€54</span></div>
+          </div>
+          <span class="prod-cat"><span data-sq>Byzylyk</span><span data-en>Bracelet</span></span>
+          <a href="https://instagram.com/yourbrand" target="_blank" rel="noopener noreferrer" class="prod-btn">
+            <span data-sq>Porosit në Instagram</span><span data-en>Order on Instagram</span>
+          </a>
         </div>
       </div>
 
+      <!-- 8 — earrings -->
       <div class="prod-card reveal" data-cat="earrings">
-        <div class="prod-img img-d">
-          <svg width="80" height="80" viewBox="0 0 80 80" fill="none"><polygon points="40,6 74,40 40,74 6,40" stroke="#3D5C42" stroke-width="1" fill="none"/><polygon points="40,20 60,40 40,60 20,40" stroke="#3D5C42" stroke-width=".6" fill="none" opacity=".5"/></svg>
+        <div class="prod-visual bg-d">
+          <div class="prod-art">
+            <svg width="190" height="230" viewBox="0 0 220 260" fill="none"><path d="M62 20 Q62 8 74 8 Q86 8 86 20 L86 36" stroke="rgba(90,60,20,0.7)" stroke-width="1.3" fill="none" stroke-linecap="round"/><line x1="86" y1="36" x2="86" y2="82" stroke="rgba(90,60,20,0.52)" stroke-width="0.9"/><circle cx="86" cy="36" r="2.8" stroke="rgba(90,60,20,0.48)" stroke-width="0.8" fill="rgba(90,60,20,0.1)"/><path d="M86 82 Q68 108 86 140 Q104 108 86 82" stroke="rgba(90,60,20,0.78)" stroke-width="1.1" fill="rgba(90,60,20,0.08)"/><line x1="86" y1="82" x2="86" y2="140" stroke="rgba(90,60,20,0.26)" stroke-width="0.6"/><path d="M158 20 Q158 8 146 8 Q134 8 134 20 L134 36" stroke="rgba(90,60,20,0.7)" stroke-width="1.3" fill="none" stroke-linecap="round"/><line x1="134" y1="36" x2="134" y2="82" stroke="rgba(90,60,20,0.52)" stroke-width="0.9"/><circle cx="134" cy="36" r="2.8" stroke="rgba(90,60,20,0.48)" stroke-width="0.8" fill="rgba(90,60,20,0.1)"/><path d="M134 82 Q116 108 134 140 Q152 108 134 82" stroke="rgba(90,60,20,0.78)" stroke-width="1.1" fill="rgba(90,60,20,0.08)"/><line x1="134" y1="82" x2="134" y2="140" stroke="rgba(90,60,20,0.26)" stroke-width="0.6"/><circle cx="78" cy="90" r="1.5" fill="rgba(140,100,40,0.65)"/><circle cx="126" cy="90" r="1.5" fill="rgba(140,100,40,0.65)"/></svg>
+          </div>
+          <img src="" alt="Étoile Studs" class="prod-photo" loading="lazy">
+          <div class="prod-overlay"><span><span data-sq>Porosit në Instagram</span><span data-en>Order via Instagram</span></span></div>
         </div>
         <div class="prod-body">
-          <div class="prod-meta"><span class="prod-name">Étoile Studs</span><span class="prod-price">€28</span></div>
-          <span class="prod-cat">Earrings</span>
-          <a href="https://instagram.com/yourbrand" target="_blank" rel="noopener noreferrer" class="prod-btn">Order on Instagram</a>
+          <div class="prod-row1">
+            <span class="prod-name">Étoile Studs</span>
+            <div class="prod-price-wrap"><span class="prod-price">€28</span></div>
+          </div>
+          <span class="prod-cat"><span data-sq>Vathë</span><span data-en>Earrings</span></span>
+          <a href="https://instagram.com/yourbrand" target="_blank" rel="noopener noreferrer" class="prod-btn">
+            <span data-sq>Porosit në Instagram</span><span data-en>Order on Instagram</span>
+          </a>
         </div>
       </div>
 
+      <!-- 9 — rings -->
       <div class="prod-card reveal" data-cat="rings">
-        <div class="prod-img img-a">
-          <svg width="90" height="90" viewBox="0 0 90 90" fill="none"><circle cx="45" cy="45" r="40" stroke="#C8A96E" stroke-width="1"/><line x1="45" y1="10" x2="45" y2="80" stroke="#C8A96E" stroke-width=".5" opacity=".4"/><line x1="10" y1="45" x2="80" y2="45" stroke="#C8A96E" stroke-width=".5" opacity=".4"/></svg>
+        <span class="prod-badge badge-sale">−15%</span>
+        <div class="prod-visual bg-a">
+          <div class="prod-art"><svg width="200" height="240" viewBox="0 0 280 320" fill="none"><ellipse cx="140" cy="248" rx="96" ry="24" stroke="rgba(200,169,110,0.55)" stroke-width="1.2"/><ellipse cx="140" cy="248" rx="72" ry="18" stroke="rgba(200,169,110,0.2)" stroke-width="0.8"/><line x1="44" y1="248" x2="44" y2="188" stroke="rgba(200,169,110,0.55)" stroke-width="1.2"/><line x1="236" y1="248" x2="236" y2="188" stroke="rgba(200,169,110,0.55)" stroke-width="1.2"/><path d="M44 188 Q140 156 236 188" stroke="rgba(200,169,110,0.55)" stroke-width="1.2" fill="none"/><ellipse cx="140" cy="170" rx="48" ry="13" stroke="rgba(200,169,110,0.38)" stroke-width="1" fill="rgba(200,169,110,0.03)"/><path d="M100 165 L92 110" stroke="rgba(200,169,110,0.5)" stroke-width="1" stroke-linecap="round"/><path d="M180 165 L188 110" stroke="rgba(200,169,110,0.5)" stroke-width="1" stroke-linecap="round"/><circle cx="140" cy="74" r="38" stroke="rgba(200,169,110,0.65)" stroke-width="1.2" fill="rgba(200,169,110,0.05)"/><circle cx="140" cy="74" r="24" stroke="rgba(200,169,110,0.3)" stroke-width="0.7" fill="rgba(200,169,110,0.04)"/><circle cx="126" cy="60" r="2.2" fill="rgba(232,213,163,0.75)"/></svg></div>
+          <img src="" alt="Seren Ring" class="prod-photo" loading="lazy">
+          <div class="prod-overlay"><span><span data-sq>Porosit në Instagram</span><span data-en>Order via Instagram</span></span></div>
         </div>
         <div class="prod-body">
-          <div class="prod-meta"><span class="prod-name">Seren Ring</span><span class="prod-price">€45</span></div>
-          <span class="prod-cat">Rings</span>
-          <a href="https://instagram.com/yourbrand" target="_blank" rel="noopener noreferrer" class="prod-btn">Order on Instagram</a>
+          <div class="prod-row1">
+            <span class="prod-name">Seren Ring</span>
+            <div class="prod-price-wrap"><span class="prod-price">€38</span><span class="prod-price-old">€45</span></div>
+          </div>
+          <span class="prod-cat"><span data-sq>Unazë</span><span data-en>Ring</span></span>
+          <a href="https://instagram.com/yourbrand" target="_blank" rel="noopener noreferrer" class="prod-btn">
+            <span data-sq>Porosit në Instagram</span><span data-en>Order on Instagram</span>
+          </a>
         </div>
       </div>
 
+      <!-- 10 — necklaces -->
       <div class="prod-card reveal" data-cat="necklaces">
-        <div class="prod-img img-b">
-          <svg width="90" height="70" viewBox="0 0 90 70" fill="none"><line x1="10" y1="20" x2="80" y2="20" stroke="#8C6D3F" stroke-width="1"/><line x1="10" y1="30" x2="80" y2="30" stroke="#8C6D3F" stroke-width="1"/><line x1="10" y1="40" x2="80" y2="40" stroke="#8C6D3F" stroke-width="1"/><line x1="10" y1="50" x2="80" y2="50" stroke="#8C6D3F" stroke-width=".5" opacity=".5"/></svg>
+        <div class="prod-visual bg-b">
+          <div class="prod-art"><svg width="200" height="240" viewBox="0 0 240 280" fill="none"><path d="M20 44 C50 26 100 16 120 15" stroke="rgba(90,60,20,0.6)" stroke-width="1" fill="none"/><path d="M120 15 C140 16 190 26 220 44" stroke="rgba(90,60,20,0.6)" stroke-width="1" fill="none"/><path d="M20 44 C50 26 100 16 120 15" stroke="rgba(90,60,20,0.3)" stroke-width="2.5" fill="none" stroke-dasharray="2.5 3.5"/><path d="M120 15 C140 16 190 26 220 44" stroke="rgba(90,60,20,0.3)" stroke-width="2.5" fill="none" stroke-dasharray="2.5 3.5"/><line x1="120" y1="15" x2="120" y2="82" stroke="rgba(90,60,20,0.5)" stroke-width="0.9"/><circle cx="120" cy="15" r="3" stroke="rgba(90,60,20,0.5)" stroke-width="0.8" fill="rgba(90,60,20,0.1)"/><path d="M120 82 L146 118 L120 162 L94 118 Z" stroke="rgba(90,60,20,0.72)" stroke-width="1.1" fill="rgba(90,60,20,0.06)"/><rect x="113" y="70" width="14" height="12" rx="3" stroke="rgba(90,60,20,0.45)" stroke-width="0.8" fill="none"/><line x1="94" y1="118" x2="146" y2="118" stroke="rgba(90,60,20,0.28)" stroke-width="0.6"/><line x1="120" y1="82" x2="120" y2="162" stroke="rgba(90,60,20,0.28)" stroke-width="0.6"/><circle cx="120" cy="118" r="10" stroke="rgba(90,60,20,0.45)" stroke-width="0.8" fill="rgba(90,60,20,0.1)"/><circle cx="114" cy="112" r="1.5" fill="rgba(140,100,40,0.65)"/></svg></div>
+          <img src="" alt="Vigne Layering Chain" class="prod-photo" loading="lazy">
+          <div class="prod-overlay"><span><span data-sq>Porosit në Instagram</span><span data-en>Order via Instagram</span></span></div>
         </div>
         <div class="prod-body">
-          <div class="prod-meta"><span class="prod-name">Vigne Layering Chain</span><span class="prod-price">€72</span></div>
-          <span class="prod-cat">Necklaces</span>
-          <a href="https://instagram.com/yourbrand" target="_blank" rel="noopener noreferrer" class="prod-btn">Order on Instagram</a>
+          <div class="prod-row1">
+            <span class="prod-name">Vigne Layering Chain</span>
+            <div class="prod-price-wrap"><span class="prod-price">€72</span></div>
+          </div>
+          <span class="prod-cat"><span data-sq>Gerdane</span><span data-en>Necklace</span></span>
+          <a href="https://instagram.com/yourbrand" target="_blank" rel="noopener noreferrer" class="prod-btn">
+            <span data-sq>Porosit në Instagram</span><span data-en>Order on Instagram</span>
+          </a>
         </div>
       </div>
 
+      <!-- 11 — bracelets -->
       <div class="prod-card reveal" data-cat="bracelets">
-        <div class="prod-img img-c">
-          <svg width="100" height="100" viewBox="0 0 100 100" fill="none"><circle cx="50" cy="50" r="44" stroke="#E8D5A3" stroke-width="1.5"/><circle cx="50" cy="50" r="10" stroke="#E8D5A3" stroke-width=".8" opacity=".4"/></svg>
+        <div class="prod-visual bg-c">
+          <div class="prod-art"><svg width="200" height="180" viewBox="0 0 260 210" fill="none"><path d="M44 72 Q44 18 130 18 Q216 18 216 72 Q216 152 130 152 Q78 152 58 122" stroke="rgba(200,169,110,0.58)" stroke-width="1.5" fill="none" stroke-linecap="round"/><path d="M62 78 Q62 36 130 36 Q198 36 198 78 Q198 136 130 136 Q86 136 70 112" stroke="rgba(200,169,110,0.22)" stroke-width="0.9" fill="none" stroke-linecap="round"/><path d="M70 34 Q130 26 190 34" stroke="rgba(200,169,110,0.16)" stroke-width="0.7" fill="none"/><path d="M52 84 Q130 80 208 84" stroke="rgba(200,169,110,0.16)" stroke-width="0.7" fill="none"/><path d="M52 104 Q130 108 208 104" stroke="rgba(200,169,110,0.16)" stroke-width="0.7" fill="none"/><circle cx="214" cy="84" r="8" stroke="rgba(200,169,110,0.42)" stroke-width="0.9" fill="rgba(200,169,110,0.05)"/><circle cx="214" cy="84" r="3" fill="rgba(200,169,110,0.22)"/></svg></div>
+          <img src="" alt="Brume Bangle" class="prod-photo" loading="lazy">
+          <div class="prod-overlay"><span><span data-sq>Porosit në Instagram</span><span data-en>Order via Instagram</span></span></div>
         </div>
         <div class="prod-body">
-          <div class="prod-meta"><span class="prod-name">Brume Bangle</span><span class="prod-price">€46</span></div>
-          <span class="prod-cat">Bracelets</span>
-          <a href="https://instagram.com/yourbrand" target="_blank" rel="noopener noreferrer" class="prod-btn">Order on Instagram</a>
+          <div class="prod-row1">
+            <span class="prod-name">Brume Bangle</span>
+            <div class="prod-price-wrap"><span class="prod-price">€46</span></div>
+          </div>
+          <span class="prod-cat"><span data-sq>Byzylyk</span><span data-en>Bracelet</span></span>
+          <a href="https://instagram.com/yourbrand" target="_blank" rel="noopener noreferrer" class="prod-btn">
+            <span data-sq>Porosit në Instagram</span><span data-en>Order on Instagram</span>
+          </a>
         </div>
       </div>
 
+      <!-- 12 — earrings -->
       <div class="prod-card reveal" data-cat="earrings">
-        <div class="prod-img img-d">
-          <svg width="70" height="70" viewBox="0 0 70 70" fill="none"><circle cx="35" cy="35" r="30" stroke="#3D5C42" stroke-width="1.2"/><circle cx="35" cy="35" r="16" stroke="#3D5C42" stroke-width=".6" opacity=".5"/></svg>
+        <span class="prod-badge badge-new"><span data-sq>E Re</span><span data-en>New</span></span>
+        <div class="prod-visual bg-d">
+          <div class="prod-art"><svg width="190" height="230" viewBox="0 0 220 260" fill="none"><path d="M62 20 Q62 8 74 8 Q86 8 86 20 L86 36" stroke="rgba(90,60,20,0.7)" stroke-width="1.3" fill="none" stroke-linecap="round"/><line x1="86" y1="36" x2="86" y2="82" stroke="rgba(90,60,20,0.52)" stroke-width="0.9"/><circle cx="86" cy="36" r="2.8" stroke="rgba(90,60,20,0.48)" stroke-width="0.8" fill="rgba(90,60,20,0.1)"/><path d="M86 82 Q68 108 86 140 Q104 108 86 82" stroke="rgba(90,60,20,0.78)" stroke-width="1.1" fill="rgba(90,60,20,0.08)"/><line x1="86" y1="82" x2="86" y2="140" stroke="rgba(90,60,20,0.26)" stroke-width="0.6"/><path d="M158 20 Q158 8 146 8 Q134 8 134 20 L134 36" stroke="rgba(90,60,20,0.7)" stroke-width="1.3" fill="none" stroke-linecap="round"/><line x1="134" y1="36" x2="134" y2="82" stroke="rgba(90,60,20,0.52)" stroke-width="0.9"/><circle cx="134" cy="36" r="2.8" stroke="rgba(90,60,20,0.48)" stroke-width="0.8" fill="rgba(90,60,20,0.1)"/><path d="M134 82 Q116 108 134 140 Q152 108 134 82" stroke="rgba(90,60,20,0.78)" stroke-width="1.1" fill="rgba(90,60,20,0.08)"/><line x1="134" y1="82" x2="134" y2="140" stroke="rgba(90,60,20,0.26)" stroke-width="0.6"/><circle cx="78" cy="90" r="1.5" fill="rgba(140,100,40,0.65)"/><circle cx="126" cy="90" r="1.5" fill="rgba(140,100,40,0.65)"/></svg></div>
+          <img src="" alt="Cèdre Hoops" class="prod-photo" loading="lazy">
+          <div class="prod-overlay"><span><span data-sq>Porosit në Instagram</span><span data-en>Order via Instagram</span></span></div>
         </div>
         <div class="prod-body">
-          <div class="prod-meta"><span class="prod-name">Cèdre Hoops</span><span class="prod-price">€33</span></div>
-          <span class="prod-cat">Earrings</span>
-          <a href="https://instagram.com/yourbrand" target="_blank" rel="noopener noreferrer" class="prod-btn">Order on Instagram</a>
+          <div class="prod-row1">
+            <span class="prod-name">Cèdre Hoops</span>
+            <div class="prod-price-wrap"><span class="prod-price">€33</span></div>
+          </div>
+          <span class="prod-cat"><span data-sq>Vathë</span><span data-en>Earrings</span></span>
+          <a href="https://instagram.com/yourbrand" target="_blank" rel="noopener noreferrer" class="prod-btn">
+            <span data-sq>Porosit në Instagram</span><span data-en>Order on Instagram</span>
+          </a>
         </div>
       </div>
 
+      <!-- 13 — rings -->
       <div class="prod-card reveal" data-cat="rings">
-        <div class="prod-img img-a">
-          <svg width="90" height="90" viewBox="0 0 90 90" fill="none"><circle cx="45" cy="45" r="40" stroke="#C8A96E" stroke-width="1"/><path d="M45 28 L57 45 L45 62 L33 45 Z" stroke="#C8A96E" stroke-width="1" fill="none" opacity=".55"/><circle cx="45" cy="45" r="5" stroke="#C8A96E" stroke-width=".6"/></svg>
+        <div class="prod-visual bg-a">
+          <div class="prod-art"><svg width="200" height="240" viewBox="0 0 280 320" fill="none"><ellipse cx="140" cy="248" rx="96" ry="24" stroke="rgba(200,169,110,0.55)" stroke-width="1.2"/><ellipse cx="140" cy="248" rx="72" ry="18" stroke="rgba(200,169,110,0.2)" stroke-width="0.8"/><line x1="44" y1="248" x2="44" y2="188" stroke="rgba(200,169,110,0.55)" stroke-width="1.2"/><line x1="236" y1="248" x2="236" y2="188" stroke="rgba(200,169,110,0.55)" stroke-width="1.2"/><path d="M44 188 Q140 156 236 188" stroke="rgba(200,169,110,0.55)" stroke-width="1.2" fill="none"/><ellipse cx="140" cy="170" rx="48" ry="13" stroke="rgba(200,169,110,0.38)" stroke-width="1" fill="rgba(200,169,110,0.03)"/><path d="M100 165 L92 110" stroke="rgba(200,169,110,0.5)" stroke-width="1" stroke-linecap="round"/><path d="M180 165 L188 110" stroke="rgba(200,169,110,0.5)" stroke-width="1" stroke-linecap="round"/><circle cx="140" cy="74" r="38" stroke="rgba(200,169,110,0.65)" stroke-width="1.2" fill="rgba(200,169,110,0.05)"/><circle cx="140" cy="74" r="24" stroke="rgba(200,169,110,0.3)" stroke-width="0.7" fill="rgba(200,169,110,0.04)"/><circle cx="126" cy="60" r="2.2" fill="rgba(232,213,163,0.75)"/></svg></div>
+          <img src="" alt="Rive Ring" class="prod-photo" loading="lazy">
+          <div class="prod-overlay"><span><span data-sq>Porosit në Instagram</span><span data-en>Order via Instagram</span></span></div>
         </div>
         <div class="prod-body">
-          <div class="prod-meta"><span class="prod-name">Rive Ring</span><span class="prod-price">€39</span></div>
-          <span class="prod-cat">Rings</span>
-          <a href="https://instagram.com/yourbrand" target="_blank" rel="noopener noreferrer" class="prod-btn">Order on Instagram</a>
+          <div class="prod-row1">
+            <span class="prod-name">Rive Ring</span>
+            <div class="prod-price-wrap"><span class="prod-price">€39</span></div>
+          </div>
+          <span class="prod-cat"><span data-sq>Unazë</span><span data-en>Ring</span></span>
+          <a href="https://instagram.com/yourbrand" target="_blank" rel="noopener noreferrer" class="prod-btn">
+            <span data-sq>Porosit në Instagram</span><span data-en>Order on Instagram</span>
+          </a>
         </div>
       </div>
 
+      <!-- 14 — necklaces -->
       <div class="prod-card reveal" data-cat="necklaces">
-        <div class="prod-img img-b">
-          <svg width="100" height="60" viewBox="0 0 100 60" fill="none"><path d="M10 30 Q30 10 50 30 Q70 50 90 30" stroke="#8C6D3F" stroke-width="1" fill="none"/><path d="M10 35 Q30 15 50 35 Q70 55 90 35" stroke="#8C6D3F" stroke-width=".5" fill="none" opacity=".4"/></svg>
+        <span class="prod-badge badge-sale">−15%</span>
+        <div class="prod-visual bg-b">
+          <div class="prod-art"><svg width="200" height="240" viewBox="0 0 240 280" fill="none"><path d="M20 44 C50 26 100 16 120 15" stroke="rgba(90,60,20,0.6)" stroke-width="1" fill="none"/><path d="M120 15 C140 16 190 26 220 44" stroke="rgba(90,60,20,0.6)" stroke-width="1" fill="none"/><path d="M20 44 C50 26 100 16 120 15" stroke="rgba(90,60,20,0.3)" stroke-width="2.5" fill="none" stroke-dasharray="2.5 3.5"/><path d="M120 15 C140 16 190 26 220 44" stroke="rgba(90,60,20,0.3)" stroke-width="2.5" fill="none" stroke-dasharray="2.5 3.5"/><line x1="120" y1="15" x2="120" y2="82" stroke="rgba(90,60,20,0.5)" stroke-width="0.9"/><circle cx="120" cy="15" r="3" stroke="rgba(90,60,20,0.5)" stroke-width="0.8" fill="rgba(90,60,20,0.1)"/><path d="M120 82 L146 118 L120 162 L94 118 Z" stroke="rgba(90,60,20,0.72)" stroke-width="1.1" fill="rgba(90,60,20,0.06)"/><rect x="113" y="70" width="14" height="12" rx="3" stroke="rgba(90,60,20,0.45)" stroke-width="0.8" fill="none"/><line x1="94" y1="118" x2="146" y2="118" stroke="rgba(90,60,20,0.28)" stroke-width="0.6"/><line x1="120" y1="82" x2="120" y2="162" stroke="rgba(90,60,20,0.28)" stroke-width="0.6"/><circle cx="120" cy="118" r="10" stroke="rgba(90,60,20,0.45)" stroke-width="0.8" fill="rgba(90,60,20,0.1)"/><circle cx="114" cy="112" r="1.5" fill="rgba(140,100,40,0.65)"/></svg></div>
+          <img src="" alt="Dune Collar" class="prod-photo" loading="lazy">
+          <div class="prod-overlay"><span><span data-sq>Porosit në Instagram</span><span data-en>Order via Instagram</span></span></div>
         </div>
         <div class="prod-body">
-          <div class="prod-meta"><span class="prod-name">Dune Collar</span><span class="prod-price">€61</span></div>
-          <span class="prod-cat">Necklaces</span>
-          <a href="https://instagram.com/yourbrand" target="_blank" rel="noopener noreferrer" class="prod-btn">Order on Instagram</a>
+          <div class="prod-row1">
+            <span class="prod-name">Dune Collar</span>
+            <div class="prod-price-wrap"><span class="prod-price">€52</span><span class="prod-price-old">€61</span></div>
+          </div>
+          <span class="prod-cat"><span data-sq>Gerdane</span><span data-en>Necklace</span></span>
+          <a href="https://instagram.com/yourbrand" target="_blank" rel="noopener noreferrer" class="prod-btn">
+            <span data-sq>Porosit në Instagram</span><span data-en>Order on Instagram</span>
+          </a>
         </div>
       </div>
 
+      <!-- 15 — bracelets -->
       <div class="prod-card reveal" data-cat="bracelets">
-        <div class="prod-img img-c">
-          <svg width="100" height="100" viewBox="0 0 100 100" fill="none"><circle cx="50" cy="50" r="44" stroke="#E8D5A3" stroke-width="1.5"/><circle cx="50" cy="50" r="30" stroke="#E8D5A3" stroke-width=".6" stroke-dasharray="2 6" opacity=".5"/></svg>
+        <div class="prod-visual bg-c">
+          <div class="prod-art"><svg width="200" height="180" viewBox="0 0 260 210" fill="none"><path d="M44 72 Q44 18 130 18 Q216 18 216 72 Q216 152 130 152 Q78 152 58 122" stroke="rgba(200,169,110,0.58)" stroke-width="1.5" fill="none" stroke-linecap="round"/><path d="M62 78 Q62 36 130 36 Q198 36 198 78 Q198 136 130 136 Q86 136 70 112" stroke="rgba(200,169,110,0.22)" stroke-width="0.9" fill="none" stroke-linecap="round"/><path d="M70 34 Q130 26 190 34" stroke="rgba(200,169,110,0.16)" stroke-width="0.7" fill="none"/><path d="M52 84 Q130 80 208 84" stroke="rgba(200,169,110,0.16)" stroke-width="0.7" fill="none"/><path d="M52 104 Q130 108 208 104" stroke="rgba(200,169,110,0.16)" stroke-width="0.7" fill="none"/><circle cx="214" cy="84" r="8" stroke="rgba(200,169,110,0.42)" stroke-width="0.9" fill="rgba(200,169,110,0.05)"/><circle cx="214" cy="84" r="3" fill="rgba(200,169,110,0.22)"/></svg></div>
+          <img src="" alt="Roseau Bracelet" class="prod-photo" loading="lazy">
+          <div class="prod-overlay"><span><span data-sq>Porosit në Instagram</span><span data-en>Order via Instagram</span></span></div>
         </div>
         <div class="prod-body">
-          <div class="prod-meta"><span class="prod-name">Roseau Bracelet</span><span class="prod-price">€44</span></div>
-          <span class="prod-cat">Bracelets</span>
-          <a href="https://instagram.com/yourbrand" target="_blank" rel="noopener noreferrer" class="prod-btn">Order on Instagram</a>
+          <div class="prod-row1">
+            <span class="prod-name">Roseau Bracelet</span>
+            <div class="prod-price-wrap"><span class="prod-price">€44</span></div>
+          </div>
+          <span class="prod-cat"><span data-sq>Byzylyk</span><span data-en>Bracelet</span></span>
+          <a href="https://instagram.com/yourbrand" target="_blank" rel="noopener noreferrer" class="prod-btn">
+            <span data-sq>Porosit në Instagram</span><span data-en>Order on Instagram</span>
+          </a>
         </div>
       </div>
 
+      <!-- 16 — rings -->
       <div class="prod-card reveal" data-cat="rings">
-        <div class="prod-img img-d">
-          <svg width="70" height="100" viewBox="0 0 70 100" fill="none"><path d="M35 8 C55 8 62 28 62 46 C62 68 50 92 35 92 C20 92 8 68 8 46 C8 28 15 8 35 8 Z" stroke="#3D5C42" stroke-width="1" fill="none"/><circle cx="35" cy="30" r="6" stroke="#3D5C42" stroke-width=".8" opacity=".5"/></svg>
+        <div class="prod-visual bg-d">
+          <div class="prod-art"><svg width="200" height="240" viewBox="0 0 280 320" fill="none"><ellipse cx="140" cy="248" rx="96" ry="24" stroke="rgba(90,60,20,0.55)" stroke-width="1.2"/><ellipse cx="140" cy="248" rx="72" ry="18" stroke="rgba(90,60,20,0.2)" stroke-width="0.8"/><line x1="44" y1="248" x2="44" y2="188" stroke="rgba(90,60,20,0.55)" stroke-width="1.2"/><line x1="236" y1="248" x2="236" y2="188" stroke="rgba(90,60,20,0.55)" stroke-width="1.2"/><path d="M44 188 Q140 156 236 188" stroke="rgba(90,60,20,0.55)" stroke-width="1.2" fill="none"/><ellipse cx="140" cy="170" rx="48" ry="13" stroke="rgba(90,60,20,0.38)" stroke-width="1" fill="rgba(90,60,20,0.03)"/><path d="M100 165 L92 110" stroke="rgba(90,60,20,0.5)" stroke-width="1" stroke-linecap="round"/><path d="M180 165 L188 110" stroke="rgba(90,60,20,0.5)" stroke-width="1" stroke-linecap="round"/><circle cx="140" cy="74" r="38" stroke="rgba(90,60,20,0.65)" stroke-width="1.2" fill="rgba(90,60,20,0.05)"/><circle cx="140" cy="74" r="24" stroke="rgba(90,60,20,0.3)" stroke-width="0.7" fill="rgba(90,60,20,0.04)"/><circle cx="126" cy="60" r="2.2" fill="rgba(140,100,40,0.75)"/></svg></div>
+          <img src="" alt="Pluie Ring" class="prod-photo" loading="lazy">
+          <div class="prod-overlay"><span><span data-sq>Porosit në Instagram</span><span data-en>Order via Instagram</span></span></div>
         </div>
         <div class="prod-body">
-          <div class="prod-meta"><span class="prod-name">Pluie Ring</span><span class="prod-price">€41</span></div>
-          <span class="prod-cat">Rings</span>
-          <a href="https://instagram.com/yourbrand" target="_blank" rel="noopener noreferrer" class="prod-btn">Order on Instagram</a>
+          <div class="prod-row1">
+            <span class="prod-name">Pluie Ring</span>
+            <div class="prod-price-wrap"><span class="prod-price">€41</span></div>
+          </div>
+          <span class="prod-cat"><span data-sq>Unazë</span><span data-en>Ring</span></span>
+          <a href="https://instagram.com/yourbrand" target="_blank" rel="noopener noreferrer" class="prod-btn">
+            <span data-sq>Porosit në Instagram</span><span data-en>Order on Instagram</span>
+          </a>
         </div>
       </div>
 
-    </div>
+    </div><!-- /prod-grid -->
+
+    <p class="slider-hint">
+      <span data-sq>Rrëshqit për të parë më shumë</span>
+      <span data-en>Swipe to see more</span>
+    </p>
   </div>
 </section>
 
-<!-- QUOTE -->
+<!-- ══════════════════════════════════════════
+     FLASH SALE / EXCLUSIVE DEALS
+══════════════════════════════════════════ -->
+<section id="flash-sale">
+  <div class="lux-container" style="position:relative;z-index:1">
+
+    <div class="sale-top-row reveal">
+      <div>
+        <span class="sec-label-light"><span data-sq>Ofertë Ekskluzive</span><span data-en>Exclusive Deals</span></span>
+        <h2 class="sale-h"><span data-sq>Shumë Speciale.</span><span data-en>Limited Offers.</span></h2>
+      </div>
+      <div class="countdown" id="cdWrap" aria-label="Countdown timer">
+        <div class="cd-unit"><span class="cd-num" id="cdH">23</span><span class="cd-lbl"><span data-sq>Orë</span><span data-en>Hrs</span></span></div>
+        <span class="cd-sep" aria-hidden="true">:</span>
+        <div class="cd-unit"><span class="cd-num" id="cdM">59</span><span class="cd-lbl"><span data-sq>Min</span><span data-en>Min</span></span></div>
+        <span class="cd-sep" aria-hidden="true">:</span>
+        <div class="cd-unit"><span class="cd-num" id="cdS">00</span><span class="cd-lbl"><span data-sq>Sek</span><span data-en>Sec</span></span></div>
+      </div>
+    </div>
+
+    <div class="sale-grid">
+
+      <!-- Sale 1: Mira Drop Earrings −15% -->
+      <div class="sale-card reveal">
+        <div class="sale-visual bg-d">
+          <span class="sale-pct">−15%</span>
+          <div class="prod-art">
+            <svg width="190" height="230" viewBox="0 0 220 260" fill="none">
+              <path d="M62 20 Q62 8 74 8 Q86 8 86 20 L86 36" stroke="rgba(90,60,20,0.7)" stroke-width="1.3" fill="none" stroke-linecap="round"/>
+              <line x1="86" y1="36" x2="86" y2="82" stroke="rgba(90,60,20,0.52)" stroke-width="0.9"/>
+              <circle cx="86" cy="36" r="2.8" stroke="rgba(90,60,20,0.48)" stroke-width="0.8" fill="rgba(90,60,20,0.1)"/>
+              <path d="M86 82 Q68 108 86 140 Q104 108 86 82" stroke="rgba(90,60,20,0.78)" stroke-width="1.1" fill="rgba(90,60,20,0.08)"/>
+              <line x1="86" y1="82" x2="86" y2="140" stroke="rgba(90,60,20,0.26)" stroke-width="0.6"/>
+              <path d="M158 20 Q158 8 146 8 Q134 8 134 20 L134 36" stroke="rgba(90,60,20,0.7)" stroke-width="1.3" fill="none" stroke-linecap="round"/>
+              <line x1="134" y1="36" x2="134" y2="82" stroke="rgba(90,60,20,0.52)" stroke-width="0.9"/>
+              <circle cx="134" cy="36" r="2.8" stroke="rgba(90,60,20,0.48)" stroke-width="0.8" fill="rgba(90,60,20,0.1)"/>
+              <path d="M134 82 Q116 108 134 140 Q152 108 134 82" stroke="rgba(90,60,20,0.78)" stroke-width="1.1" fill="rgba(90,60,20,0.08)"/>
+              <line x1="134" y1="82" x2="134" y2="140" stroke="rgba(90,60,20,0.26)" stroke-width="0.6"/>
+              <circle cx="78" cy="90" r="1.5" fill="rgba(140,100,40,0.65)"/>
+              <circle cx="126" cy="90" r="1.5" fill="rgba(140,100,40,0.65)"/>
+            </svg>
+          </div>
+        </div>
+        <div class="sale-body">
+          <span class="sale-name">Mira Drop Earrings</span>
+          <div class="sale-price-row">
+            <span class="sale-price-new">€26</span>
+            <span class="sale-price-was">€31</span>
+          </div>
+          <a href="https://instagram.com/yourbrand" target="_blank" rel="noopener noreferrer" class="sale-btn">
+            <span data-sq>Porosit në Instagram →</span><span data-en>Order on Instagram →</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Sale 2: Seren Ring −15% -->
+      <div class="sale-card reveal">
+        <div class="sale-visual bg-a">
+          <span class="sale-pct">−15%</span>
+          <div class="prod-art">
+            <svg width="200" height="240" viewBox="0 0 280 320" fill="none">
+              <ellipse cx="140" cy="248" rx="96" ry="24" stroke="rgba(200,169,110,0.55)" stroke-width="1.2"/>
+              <ellipse cx="140" cy="248" rx="72" ry="18" stroke="rgba(200,169,110,0.2)" stroke-width="0.8"/>
+              <line x1="44" y1="248" x2="44" y2="188" stroke="rgba(200,169,110,0.55)" stroke-width="1.2"/>
+              <line x1="236" y1="248" x2="236" y2="188" stroke="rgba(200,169,110,0.55)" stroke-width="1.2"/>
+              <path d="M44 188 Q140 156 236 188" stroke="rgba(200,169,110,0.55)" stroke-width="1.2" fill="none"/>
+              <ellipse cx="140" cy="170" rx="48" ry="13" stroke="rgba(200,169,110,0.38)" stroke-width="1" fill="rgba(200,169,110,0.03)"/>
+              <path d="M100 165 L92 110" stroke="rgba(200,169,110,0.5)" stroke-width="1" stroke-linecap="round"/>
+              <path d="M180 165 L188 110" stroke="rgba(200,169,110,0.5)" stroke-width="1" stroke-linecap="round"/>
+              <circle cx="140" cy="74" r="38" stroke="rgba(200,169,110,0.65)" stroke-width="1.2" fill="rgba(200,169,110,0.05)"/>
+              <circle cx="140" cy="74" r="24" stroke="rgba(200,169,110,0.3)" stroke-width="0.7" fill="rgba(200,169,110,0.04)"/>
+              <circle cx="126" cy="60" r="2.2" fill="rgba(232,213,163,0.75)"/>
+            </svg>
+          </div>
+        </div>
+        <div class="sale-body">
+          <span class="sale-name">Seren Ring</span>
+          <div class="sale-price-row">
+            <span class="sale-price-new">€38</span>
+            <span class="sale-price-was">€45</span>
+          </div>
+          <a href="https://instagram.com/yourbrand" target="_blank" rel="noopener noreferrer" class="sale-btn">
+            <span data-sq>Porosit në Instagram →</span><span data-en>Order on Instagram →</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Sale 3: Dune Collar −15% -->
+      <div class="sale-card reveal">
+        <div class="sale-visual bg-b">
+          <span class="sale-pct">−15%</span>
+          <div class="prod-art">
+            <svg width="200" height="240" viewBox="0 0 240 280" fill="none">
+              <path d="M20 44 C50 26 100 16 120 15" stroke="rgba(90,60,20,0.6)" stroke-width="1" fill="none"/>
+              <path d="M120 15 C140 16 190 26 220 44" stroke="rgba(90,60,20,0.6)" stroke-width="1" fill="none"/>
+              <path d="M20 44 C50 26 100 16 120 15" stroke="rgba(90,60,20,0.3)" stroke-width="2.5" fill="none" stroke-dasharray="2.5 3.5"/>
+              <path d="M120 15 C140 16 190 26 220 44" stroke="rgba(90,60,20,0.3)" stroke-width="2.5" fill="none" stroke-dasharray="2.5 3.5"/>
+              <line x1="120" y1="15" x2="120" y2="82" stroke="rgba(90,60,20,0.5)" stroke-width="0.9"/>
+              <circle cx="120" cy="15" r="3" stroke="rgba(90,60,20,0.5)" stroke-width="0.8" fill="rgba(90,60,20,0.1)"/>
+              <path d="M120 82 L146 118 L120 162 L94 118 Z" stroke="rgba(90,60,20,0.72)" stroke-width="1.1" fill="rgba(90,60,20,0.06)"/>
+              <rect x="113" y="70" width="14" height="12" rx="3" stroke="rgba(90,60,20,0.45)" stroke-width="0.8" fill="none"/>
+              <line x1="94" y1="118" x2="146" y2="118" stroke="rgba(90,60,20,0.28)" stroke-width="0.6"/>
+              <line x1="120" y1="82" x2="120" y2="162" stroke="rgba(90,60,20,0.28)" stroke-width="0.6"/>
+              <circle cx="120" cy="118" r="10" stroke="rgba(90,60,20,0.45)" stroke-width="0.8" fill="rgba(90,60,20,0.1)"/>
+              <circle cx="114" cy="112" r="1.5" fill="rgba(140,100,40,0.65)"/>
+            </svg>
+          </div>
+        </div>
+        <div class="sale-body">
+          <span class="sale-name">Dune Collar</span>
+          <div class="sale-price-row">
+            <span class="sale-price-new">€52</span>
+            <span class="sale-price-was">€61</span>
+          </div>
+          <a href="https://instagram.com/yourbrand" target="_blank" rel="noopener noreferrer" class="sale-btn">
+            <span data-sq>Porosit në Instagram →</span><span data-en>Order on Instagram →</span>
+          </a>
+        </div>
+      </div>
+
+    </div><!-- /sale-grid -->
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     QUOTE
+══════════════════════════════════════════ -->
 <section id="quote">
   <div class="quote-wrap reveal">
-    <span class="q-rule"></span>
-    <blockquote class="q-text">"Jewellery is the punctuation of an outfit — ours is the comma that says, there is more to me."</blockquote>
-    <p class="q-attr">— The Aurèle Studio</p>
-    <span class="q-rule"></span>
+    <!-- Ornamental divider top -->
+    <div style="display:flex;align-items:center;justify-content:center;gap:14px;margin-bottom:8px;">
+      <div style="width:56px;height:1px;background:linear-gradient(to right,transparent,rgba(200,169,110,0.5));"></div>
+      <div style="width:7px;height:7px;border:1px solid rgba(200,169,110,0.6);transform:rotate(45deg);"></div>
+      <div style="width:56px;height:1px;background:linear-gradient(to left,transparent,rgba(200,169,110,0.5));"></div>
+    </div>
+    <blockquote class="q-text">
+      <span data-sq>"Bizhuteri është pikëzimi i veshjes — tona janë presja që thotë, ka më shumë tek unë."</span>
+      <span data-en>"Jewellery is the punctuation of an outfit — ours is the comma that says, there is more to me."</span>
+    </blockquote>
+    <p class="q-attr">— Aurèle Studio</p>
+    <!-- Ornamental divider bottom -->
+    <div style="display:flex;align-items:center;justify-content:center;gap:14px;margin-top:8px;">
+      <div style="width:56px;height:1px;background:linear-gradient(to right,transparent,rgba(200,169,110,0.5));"></div>
+      <div style="width:7px;height:7px;border:1px solid rgba(200,169,110,0.6);transform:rotate(45deg);"></div>
+      <div style="width:56px;height:1px;background:linear-gradient(to left,transparent,rgba(200,169,110,0.5));"></div>
+    </div>
   </div>
 </section>
 
-<!-- HOW TO ORDER -->
+<!-- ══════════════════════════════════════════
+     HERITAGE
+══════════════════════════════════════════ -->
+<section id="heritage">
+  <div class="heritage-inner">
+    <div class="heritage-left reveal-left">
+      <span class="hl-label"><span data-sq>Trashëgimia</span><span data-en>Heritage</span></span>
+      <h2 class="hl-h"><span data-sq>Ari i nuses</span><span data-en>The bride's gold</span></h2>
+      <span class="hl-sub">
+        <span data-sq>Tradita ballkanike e bizhuterisë në dasma</span>
+        <span data-en>Balkan jewellery tradition and ceremony</span>
+      </span>
+      <span class="gold-rule" style="margin-bottom:28px"></span>
+      <p class="hl-body">
+        <span data-sq>Për shekuj, ari ka qenë pjesa qendrore e ceremonisë ballkanike. Nusja mbante unazën, nëna ia kalonte byzylykun vajzës — çdo copë kishte historinë e vet, transmeton brezi pas brezi.</span>
+        <span data-en>For centuries, gold has been at the heart of Balkan ceremony. The bride wore her ring, the mother passed her bracelet to her daughter — every piece carried its own story, passed from one generation to the next.</span>
+      </p>
+      <p class="hl-body">
+        <span data-sq>Ne e vazhdojmë këtë traditë me forma moderne dhe të qeta. Krijimet tona nuk janë thjesht zbukurime — ato janë kujtesa që mbarten afër zemrës.</span>
+        <span data-en>We carry this tradition forward through quiet, modern forms. Our pieces are not merely decoration — they are memories worn close to the heart.</span>
+      </p>
+    </div>
+    <div class="heritage-right reveal">
+      <!-- Tall left: ring illustration -->
+      <div class="her-card" style="background:rgba(45,68,48,0.6);">
+        <div class="her-card-placeholder">
+          <svg width="120" height="160" viewBox="0 0 180 240" fill="none">
+            <ellipse cx="90" cy="188" rx="72" ry="18" stroke="rgba(200,169,110,0.45)" stroke-width="1"/>
+            <line x1="18" y1="188" x2="18" y2="142" stroke="rgba(200,169,110,0.45)" stroke-width="1"/>
+            <line x1="162" y1="188" x2="162" y2="142" stroke="rgba(200,169,110,0.45)" stroke-width="1"/>
+            <path d="M18 142 Q90 116 162 142" stroke="rgba(200,169,110,0.45)" stroke-width="1" fill="none"/>
+            <ellipse cx="90" cy="128" rx="36" ry="10" stroke="rgba(200,169,110,0.3)" stroke-width="0.8" fill="rgba(200,169,110,0.03)"/>
+            <path d="M64 124 L58 82" stroke="rgba(200,169,110,0.38)" stroke-width="0.8" stroke-linecap="round"/>
+            <path d="M116 124 L122 82" stroke="rgba(200,169,110,0.38)" stroke-width="0.8" stroke-linecap="round"/>
+            <circle cx="90" cy="54" r="30" stroke="rgba(200,169,110,0.5)" stroke-width="1" fill="rgba(200,169,110,0.04)"/>
+            <circle cx="90" cy="54" r="18" stroke="rgba(200,169,110,0.22)" stroke-width="0.7" fill="rgba(200,169,110,0.03)"/>
+            <circle cx="80" cy="44" r="2" fill="rgba(232,213,163,0.65)"/>
+          </svg>
+        </div>
+      </div>
+      <!-- Top right: necklace -->
+      <div class="her-card" style="background:rgba(110,83,48,0.22);">
+        <div class="her-card-placeholder">
+          <svg width="100" height="90" viewBox="0 0 160 130" fill="none">
+            <path d="M16 38 C46 22 78 16 80 15 C82 16 114 22 144 38" stroke="rgba(200,169,110,0.42)" stroke-width="1" fill="none"/>
+            <path d="M16 38 C46 22 78 16 80 15" stroke="rgba(200,169,110,0.2)" stroke-width="2" fill="none" stroke-dasharray="2 3"/>
+            <path d="M80 15 C82 16 114 22 144 38" stroke="rgba(200,169,110,0.2)" stroke-width="2" fill="none" stroke-dasharray="2 3"/>
+            <line x1="80" y1="15" x2="80" y2="60" stroke="rgba(200,169,110,0.38)" stroke-width="0.8"/>
+            <path d="M80 60 L96 84 L80 110 L64 84 Z" stroke="rgba(200,169,110,0.55)" stroke-width="1" fill="rgba(200,169,110,0.05)"/>
+            <circle cx="74" cy="68" r="1.5" fill="rgba(232,213,163,0.6)"/>
+          </svg>
+        </div>
+      </div>
+      <!-- Bottom right: earrings -->
+      <div class="her-card" style="background:rgba(45,68,48,0.35);">
+        <div class="her-card-placeholder">
+          <svg width="100" height="90" viewBox="0 0 160 130" fill="none">
+            <path d="M46 14 Q46 6 54 6 Q62 6 62 14 L62 26" stroke="rgba(200,169,110,0.55)" stroke-width="1.1" fill="none" stroke-linecap="round"/>
+            <line x1="62" y1="26" x2="62" y2="56" stroke="rgba(200,169,110,0.42)" stroke-width="0.8"/>
+            <path d="M62 56 Q50 76 62 100 Q74 76 62 56" stroke="rgba(200,169,110,0.6)" stroke-width="1" fill="rgba(200,169,110,0.06)"/>
+            <path d="M114 14 Q114 6 106 6 Q98 6 98 14 L98 26" stroke="rgba(200,169,110,0.55)" stroke-width="1.1" fill="none" stroke-linecap="round"/>
+            <line x1="98" y1="26" x2="98" y2="56" stroke="rgba(200,169,110,0.42)" stroke-width="0.8"/>
+            <path d="M98 56 Q86 76 98 100 Q110 76 98 56" stroke="rgba(200,169,110,0.6)" stroke-width="1" fill="rgba(200,169,110,0.06)"/>
+            <circle cx="57" cy="64" r="1.2" fill="rgba(232,213,163,0.6)"/>
+            <circle cx="93" cy="64" r="1.2" fill="rgba(232,213,163,0.6)"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     HOW TO ORDER
+══════════════════════════════════════════ -->
 <section id="order" class="section-pad">
   <div class="lux-container">
-    <p class="eyebrow">Process</p>
-    <h2 class="order-h reveal">How it works.</h2>
+    <span class="order-label"><span data-sq>Procesi</span><span data-en>Process</span></span>
+    <h2 class="order-h reveal"><span data-sq>Si funksionon.</span><span data-en>How it works.</span></h2>
     <span class="gold-rule"></span>
     <div class="steps">
       <div class="step reveal">
-        <span class="step-n">01</span>
-        <h3 class="step-h">Find your piece</h3>
-        <p class="step-t">Browse the 16 pieces above and note the name of the one that calls to you.</p>
+        <div class="step-n-wrap">
+          <div class="step-n-circle"><span class="step-n">01</span></div>
+        </div>
+        <h3 class="step-h"><span data-sq>Gjej copën tënde</span><span data-en>Find your piece</span></h3>
+        <p class="step-t">
+          <span data-sq>Shfleto krijimet tona dhe mbaj mend emrin e asaj copë që të bën të ndihesh vetja.</span>
+          <span data-en>Browse our pieces and note the name of the one that feels like you.</span>
+        </p>
       </div>
       <div class="step reveal">
-        <span class="step-n">02</span>
-        <h3 class="step-h">Write to us</h3>
-        <p class="step-t">Send us a DM on Instagram with the piece name, your city, and your full address.</p>
+        <div class="step-n-wrap">
+          <div class="step-n-circle"><span class="step-n">02</span></div>
+        </div>
+        <h3 class="step-h"><span data-sq>Na shkruaj</span><span data-en>Write to us</span></h3>
+        <p class="step-t">
+          <span data-sq>Dërgo DM në Instagram me emrin e copës dhe adresën tënde të dërgimit.</span>
+          <span data-en>Send us a DM on Instagram with the piece name and your delivery address.</span>
+        </p>
       </div>
       <div class="step reveal">
-        <span class="step-n">03</span>
-        <h3 class="step-h">Receive it</h3>
-        <p class="step-t">We confirm your order, pack it by hand, and ship within 2–4 working days.</p>
+        <div class="step-n-wrap">
+          <div class="step-n-circle"><span class="step-n">03</span></div>
+        </div>
+        <h3 class="step-h"><span data-sq>Merre</span><span data-en>Receive it</span></h3>
+        <p class="step-t">
+          <span data-sq>Ne konfirmojmë porosinë dhe dërgojmë brenda 2–4 ditëve pune.</span>
+          <span data-en>We confirm your order and ship within 2–4 working days.</span>
+        </p>
       </div>
     </div>
     <div class="order-cta">
-      <a href="https://instagram.com/yourbrand" target="_blank" rel="noopener noreferrer" class="btn-ol dark">Message us on Instagram →</a>
+      <a href="https://instagram.com/yourbrand" target="_blank" rel="noopener noreferrer" class="btn-ol dark">
+        <span data-sq>Na dërgo mesazh →</span><span data-en>Message us on Instagram →</span>
+      </a>
     </div>
   </div>
 </section>
 
-<!-- SHIPPING -->
+<!-- ══════════════════════════════════════════
+     SHIPPING
+══════════════════════════════════════════ -->
 <section id="shipping" class="section-pad">
   <div class="lux-container">
-    <h2 class="ship-h reveal">Where we ship.</h2>
-    <p class="ship-sub reveal">Handcrafted in the Balkans. Delivered across three borders.</p>
+    <h2 class="ship-h reveal"><span data-sq>Ku dërgojmë.</span><span data-en>Where we ship.</span></h2>
+    <p class="ship-sub reveal">
+      <span data-sq>Krijuar në Ballkan. Dërguar në tre shtete.</span>
+      <span data-en>Created in the Balkans. Delivered across three countries.</span>
+    </p>
     <div class="country-grid">
-      <div class="c-card reveal"><span class="c-flag">🇦🇱</span><span class="c-name">Albania</span><span class="c-detail">Standard delivery 3–7 days</span><span class="c-free">Free above €80</span></div>
-      <div class="c-card reveal"><span class="c-flag">🇽🇰</span><span class="c-name">Kosovo</span><span class="c-detail">Standard delivery 3–7 days</span><span class="c-free">Free above €80</span></div>
-      <div class="c-card reveal"><span class="c-flag">🇲🇰</span><span class="c-name">North Macedonia</span><span class="c-detail">Standard delivery 3–7 days</span><span class="c-free">Free above €80</span></div>
+      <div class="c-card reveal">
+        <span class="c-flag">🇦🇱</span>
+        <span class="c-name"><span data-sq>Shqipëri</span><span data-en>Albania</span></span>
+        <span class="c-detail"><span data-sq>Dorëzim standard 3–7 ditë</span><span data-en>Standard delivery 3–7 days</span></span>
+      </div>
+      <div class="c-card reveal">
+        <span class="c-flag">🇽🇰</span>
+        <span class="c-name"><span data-sq>Kosovë</span><span data-en>Kosovo</span></span>
+        <span class="c-detail"><span data-sq>Dorëzim standard 3–7 ditë</span><span data-en>Standard delivery 3–7 days</span></span>
+      </div>
+      <div class="c-card reveal">
+        <span class="c-flag">🇲🇰</span>
+        <span class="c-name"><span data-sq>Maqedonia e Veriut</span><span data-en>North Macedonia</span></span>
+        <span class="c-detail"><span data-sq>Dorëzim standard 3–7 ditë</span><span data-en>Standard delivery 3–7 days</span></span>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- STORY -->
+<!-- ══════════════════════════════════════════
+     STORY
+══════════════════════════════════════════ -->
 <section id="story">
   <div class="story-split">
     <div class="story-left">
       <span class="story-wm">A</span>
       <div class="story-art">
-        <svg width="130" height="130" viewBox="0 0 130 130" fill="none" style="position:absolute"><circle cx="65" cy="65" r="62" stroke="#C8A96E" stroke-width="1"/></svg>
-        <svg width="44" height="44" viewBox="0 0 44 44" fill="none" style="position:absolute"><path d="M22 2 L42 22 L22 42 L2 22 Z" stroke="#C8A96E" stroke-width="1"/></svg>
+        <!-- Premium layered jewelry art -->
+        <svg width="240" height="240" viewBox="0 0 240 240" fill="none" style="position:relative;z-index:1;">
+          <!-- Outer precision circle -->
+          <circle cx="120" cy="120" r="108" stroke="rgba(200,169,110,0.18)" stroke-width="0.8"/>
+          <!-- Mid circle -->
+          <circle cx="120" cy="120" r="80" stroke="rgba(200,169,110,0.12)" stroke-width="0.8"/>
+          <!-- Ring illustration centered -->
+          <ellipse cx="120" cy="148" rx="52" ry="13" stroke="rgba(200,169,110,0.5)" stroke-width="1"/>
+          <ellipse cx="120" cy="148" rx="38" ry="9" stroke="rgba(200,169,110,0.18)" stroke-width="0.7"/>
+          <line x1="68" y1="148" x2="68" y2="118" stroke="rgba(200,169,110,0.5)" stroke-width="1"/>
+          <line x1="172" y1="148" x2="172" y2="118" stroke="rgba(200,169,110,0.5)" stroke-width="1"/>
+          <path d="M68 118 Q120 100 172 118" stroke="rgba(200,169,110,0.5)" stroke-width="1" fill="none"/>
+          <ellipse cx="120" cy="108" rx="28" ry="8" stroke="rgba(200,169,110,0.35)" stroke-width="0.8" fill="rgba(200,169,110,0.03)"/>
+          <path d="M100 105 L94 70" stroke="rgba(200,169,110,0.4)" stroke-width="0.9" stroke-linecap="round"/>
+          <path d="M140 105 L146 70" stroke="rgba(200,169,110,0.4)" stroke-width="0.9" stroke-linecap="round"/>
+          <!-- Small gemstone -->
+          <circle cx="120" cy="56" r="18" stroke="rgba(200,169,110,0.55)" stroke-width="1" fill="rgba(200,169,110,0.04)"/>
+          <circle cx="120" cy="56" r="10" stroke="rgba(200,169,110,0.25)" stroke-width="0.6" fill="rgba(200,169,110,0.03)"/>
+          <!-- Corner tick marks on outer ring -->
+          <line x1="120" y1="12"  x2="120" y2="20"  stroke="rgba(200,169,110,0.25)" stroke-width="0.8"/>
+          <line x1="120" y1="220" x2="120" y2="228" stroke="rgba(200,169,110,0.25)" stroke-width="0.8"/>
+          <line x1="12"  y1="120" x2="20"  y2="120" stroke="rgba(200,169,110,0.25)" stroke-width="0.8"/>
+          <line x1="220" y1="120" x2="228" y2="120" stroke="rgba(200,169,110,0.25)" stroke-width="0.8"/>
+          <!-- Sparkle -->
+          <circle cx="112" cy="48" r="1.5" fill="rgba(232,213,163,0.65)"/>
+        </svg>
       </div>
     </div>
     <div class="story-right reveal">
-      <p class="story-eyebrow">Our Story</p>
-      <h2 class="story-h">Made slowly,<br>on purpose.</h2>
-      <span class="gold-rule" style="margin-bottom:28px"></span>
-      <p class="story-p">Aurèle was born in a small studio in Skopje, from a desire to make jewellery that doesn't follow trends — only instinct. Every piece passes through our hands three times before it reaches yours.</p>
-      <p class="story-p">We believe in less. Fewer pieces, made better. 16 designs, not 160. Each one chosen deliberately, each one a quiet statement.</p>
+      <span class="story-label"><span data-sq>Historia Jonë</span><span data-en>Our Story</span></span>
+      <h2 class="story-h">
+        <span data-sq>Krijuar ngadalë,<br>me qëllim.</span>
+        <span data-en>Made slowly,<br>on purpose.</span>
+      </h2>
+      <span class="gold-rule" style="margin-bottom:26px"></span>
+      <p class="story-p">
+        <span data-sq>Aurèle lindi nga dëshira për të bërë bizhuteri që nuk ndjek trendet — vetëm instinktin. Çdo copë është zgjedhur me kujdes, dizenjuar për të zgjatur.</span>
+        <span data-en>Aurèle was born from a desire to make jewellery that follows no trend — only instinct. Every piece is chosen carefully, designed to last.</span>
+      </p>
+      <p class="story-p">
+        <span data-sq>Besojmë në pak, mirë bërë. 16 modele, jo 160. Çdo model me qëllim, çdo copë një deklaratë e heshtur.</span>
+        <span data-en>We believe in less, made well. 16 designs, not 160. Each one intentional, each one a quiet statement.</span>
+      </p>
       <div class="story-bq">
-        <p>"We make jewellery for the woman who already knows who she is."</p>
+        <p>
+          <span data-sq>"Ne krijojmë bizhuteri për gruan që tashmë e di kush është."</span>
+          <span data-en>"We make jewellery for the woman who already knows who she is."</span>
+        </p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- INSTAGRAM WALL -->
+<!-- ══════════════════════════════════════════
+     INSTAGRAM WALL
+══════════════════════════════════════════ -->
 <section id="instagram" class="section-pad">
   <div class="lux-container">
-    <span class="ig-eyebrow reveal">Follow Along</span>
-    <h2 class="ig-h reveal">Our world<br>on Instagram.</h2>
+    <span class="ig-label reveal"><span data-sq>Na Ndiq</span><span data-en>Follow Along</span></span>
+    <h2 class="ig-h reveal">
+      <span data-sq>Bota jonë<br>në Instagram.</span>
+      <span data-en>Our world<br>on Instagram.</span>
+    </h2>
     <a href="https://instagram.com/yourbrand" target="_blank" rel="noopener noreferrer" class="ig-handle reveal">@yourbrand</a>
 
     <div class="ig-grid">
       <a href="https://instagram.com/yourbrand" target="_blank" rel="noopener noreferrer" class="ig-cell ig-c1">
-        <div class="ig-inner"><svg width="64" height="64" viewBox="0 0 64 64" fill="none"><circle cx="32" cy="32" r="28" stroke="rgba(200,169,110,.3)" stroke-width="1"/><circle cx="32" cy="32" r="14" stroke="rgba(200,169,110,.2)" stroke-width=".6"/></svg></div>
+        <div class="ig-inner">
+          <!-- <img src="images/insta-1.jpg" alt="Instagram post"> -->
+          <svg width="48" height="48" viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="20" stroke="rgba(200,169,110,.2)" stroke-width="1"/></svg>
+        </div>
+        <div class="ig-overlay"><span><span data-sq>Shiko</span><span data-en>View</span></span></div>
       </a>
       <a href="https://instagram.com/yourbrand" target="_blank" rel="noopener noreferrer" class="ig-cell ig-c2">
-        <div class="ig-inner"><svg width="64" height="64" viewBox="0 0 64 64" fill="none"><path d="M32 4 L60 32 L32 60 L4 32 Z" stroke="rgba(200,169,110,.3)" stroke-width="1"/></svg></div>
+        <div class="ig-inner">
+          <svg width="48" height="48" viewBox="0 0 48 48" fill="none"><path d="M24 4 L44 24 L24 44 L4 24 Z" stroke="rgba(200,169,110,.2)" stroke-width="1"/></svg>
+        </div>
+        <div class="ig-overlay"><span><span data-sq>Shiko</span><span data-en>View</span></span></div>
       </a>
       <a href="https://instagram.com/yourbrand" target="_blank" rel="noopener noreferrer" class="ig-cell ig-c3">
-        <div class="ig-inner"><svg width="64" height="64" viewBox="0 0 64 64" fill="none"><line x1="32" y1="8" x2="32" y2="56" stroke="rgba(200,169,110,.3)" stroke-width="1"/><line x1="8" y1="32" x2="56" y2="32" stroke="rgba(200,169,110,.3)" stroke-width="1"/><circle cx="32" cy="32" r="6" stroke="rgba(200,169,110,.25)" stroke-width=".6"/></svg></div>
+        <div class="ig-inner">
+          <svg width="48" height="48" viewBox="0 0 48 48" fill="none"><line x1="24" y1="6" x2="24" y2="42" stroke="rgba(200,169,110,.2)" stroke-width="1"/><line x1="6" y1="24" x2="42" y2="24" stroke="rgba(200,169,110,.2)" stroke-width="1"/></svg>
+        </div>
+        <div class="ig-overlay"><span><span data-sq>Shiko</span><span data-en>View</span></span></div>
       </a>
       <a href="https://instagram.com/yourbrand" target="_blank" rel="noopener noreferrer" class="ig-cell ig-c4">
-        <div class="ig-inner"><svg width="64" height="64" viewBox="0 0 64 64" fill="none"><circle cx="32" cy="32" r="28" stroke="rgba(200,169,110,.3)" stroke-width="1"/><circle cx="32" cy="32" r="16" stroke="rgba(200,169,110,.2)" stroke-width="1"/></svg></div>
+        <div class="ig-inner">
+          <svg width="48" height="48" viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="20" stroke="rgba(200,169,110,.25)" stroke-width="1"/><circle cx="24" cy="24" r="10" stroke="rgba(200,169,110,.15)" stroke-width="1"/></svg>
+        </div>
+        <div class="ig-overlay"><span><span data-sq>Shiko</span><span data-en>View</span></span></div>
       </a>
       <a href="https://instagram.com/yourbrand" target="_blank" rel="noopener noreferrer" class="ig-cell ig-c5">
-        <div class="ig-inner"><svg width="56" height="80" viewBox="0 0 56 80" fill="none"><path d="M28 6 C48 6 52 26 52 38 C52 60 42 74 28 74 C14 74 4 60 4 38 C4 26 8 6 28 6 Z" stroke="rgba(200,169,110,.3)" stroke-width="1" fill="none"/></svg></div>
+        <div class="ig-inner">
+          <svg width="42" height="56" viewBox="0 0 42 56" fill="none"><path d="M21 4 C36 4 38 18 38 28 C38 44 30 52 21 52 C12 52 4 44 4 28 C4 18 6 4 21 4 Z" stroke="rgba(200,169,110,.2)" stroke-width="1" fill="none"/></svg>
+        </div>
+        <div class="ig-overlay"><span><span data-sq>Shiko</span><span data-en>View</span></span></div>
       </a>
       <a href="https://instagram.com/yourbrand" target="_blank" rel="noopener noreferrer" class="ig-cell ig-c6">
-        <div class="ig-inner"><svg width="64" height="64" viewBox="0 0 64 64" fill="none"><circle cx="32" cy="32" r="3" fill="rgba(200,169,110,.35)"/><circle cx="20" cy="20" r="2" fill="rgba(200,169,110,.25)"/><circle cx="44" cy="20" r="2" fill="rgba(200,169,110,.25)"/><circle cx="20" cy="44" r="2" fill="rgba(200,169,110,.25)"/><circle cx="44" cy="44" r="2" fill="rgba(200,169,110,.25)"/><circle cx="32" cy="14" r="1.5" fill="rgba(200,169,110,.18)"/><circle cx="32" cy="50" r="1.5" fill="rgba(200,169,110,.18)"/></svg></div>
+        <div class="ig-inner">
+          <svg width="48" height="48" viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="3" fill="rgba(200,169,110,.3)"/><circle cx="14" cy="14" r="2" fill="rgba(200,169,110,.2)"/><circle cx="34" cy="14" r="2" fill="rgba(200,169,110,.2)"/><circle cx="14" cy="34" r="2" fill="rgba(200,169,110,.2)"/><circle cx="34" cy="34" r="2" fill="rgba(200,169,110,.2)"/></svg>
+        </div>
+        <div class="ig-overlay"><span><span data-sq>Shiko</span><span data-en>View</span></span></div>
       </a>
     </div>
-
     <div class="ig-cta">
-      <a href="https://instagram.com/yourbrand" target="_blank" rel="noopener noreferrer" class="btn-solid">Follow @yourbrand</a>
+      <a href="https://instagram.com/yourbrand" target="_blank" rel="noopener noreferrer" class="btn-solid">
+        <span data-sq>Na Ndiq @yourbrand</span><span data-en>Follow @yourbrand</span>
+      </a>
     </div>
   </div>
 </section>
 
-<!-- FOOTER -->
-<footer id="footer">
-  <div class="lux-container">
-    <div class="footer-top">
-      <div>
-        <span class="f-brand">AU·RÈLE</span>
-        <p class="f-tag">Fine Jewellery · Since 2024 · Balkans</p>
-      </div>
-      <div>
-        <span class="f-col-head">Navigate</span>
-        <ul class="f-links">
-          <li><a href="#collection">Collections</a></li>
-          <li><a href="#story">Our Story</a></li>
-          <li><a href="#order">How to Order</a></li>
-          <li><a href="#footer">Contact</a></li>
-        </ul>
-      </div>
-      <div>
-        <span class="f-col-head">Find Us</span>
-        <ul class="f-links">
-          <li><a href="https://instagram.com/yourbrand" target="_blank" rel="noopener noreferrer">Instagram @yourbrand</a></li>
-          <li><a href="mailto:hello@aurele.com">hello@aurele.com</a></li>
-          <li><span>Albania · Kosovo · North Macedonia</span></li>
-        </ul>
+<!-- ══════════════════════════════════════════
+     INNER CIRCLE
+══════════════════════════════════════════ -->
+<section id="inner-circle">
+  <div class="ic-wm" aria-hidden="true">AURÈLE</div>
+  <div class="ic-inner">
+
+    <div class="reveal-left">
+      <span class="ic-label"><span data-sq>Ekskluziv</span><span data-en>Exclusive Access</span></span>
+      <h2 class="ic-h">
+        <span data-sq>Bashkohuni me<br>Rrethin Tonë.</span>
+        <span data-en>Join Our<br>Inner Circle.</span>
+      </h2>
+      <p class="ic-p">
+        <span data-sq>Jini të parët që mësoni për krijimet e reja, çmimet ekskluzive dhe ofertat sezonale. Vetëm nëpërmjet Instagram DM.</span>
+        <span data-en>Be the first to discover new pieces, exclusive pricing, and seasonal drops. Available only through Instagram DM.</span>
+      </p>
+      <div class="ic-perks">
+        <div class="ic-perk">
+          <div class="ic-perk-dot"></div>
+          <span class="ic-perk-text"><span data-sq>Krijimet e reja para të gjithëve</span><span data-en>New pieces before anyone else</span></span>
+        </div>
+        <div class="ic-perk">
+          <div class="ic-perk-dot"></div>
+          <span class="ic-perk-text"><span data-sq>Zbritje ekskluzive 10–20%</span><span data-en>Exclusive 10–20% member discounts</span></span>
+        </div>
+        <div class="ic-perk">
+          <div class="ic-perk-dot"></div>
+          <span class="ic-perk-text"><span data-sq>Akses privat në koleksione të kufizuara</span><span data-en>Private access to limited collections</span></span>
+        </div>
       </div>
     </div>
+
+    <div class="ic-right reveal">
+      <div class="ic-art-wrap">
+        <div class="ic-art-ring"></div>
+        <div class="ic-art-ring2"></div>
+        <svg width="100%" height="100%" viewBox="0 0 200 200" fill="none" style="position:absolute;inset:0;">
+          <circle cx="100" cy="100" r="60" stroke="rgba(200,169,110,0.12)" stroke-width="0.8"/>
+          <ellipse cx="100" cy="128" rx="36" ry="9" stroke="rgba(200,169,110,0.45)" stroke-width="1"/>
+          <line x1="64" y1="128" x2="64" y2="108" stroke="rgba(200,169,110,0.45)" stroke-width="1"/>
+          <line x1="136" y1="128" x2="136" y2="108" stroke="rgba(200,169,110,0.45)" stroke-width="1"/>
+          <path d="M64 108 Q100 92 136 108" stroke="rgba(200,169,110,0.45)" stroke-width="1" fill="none"/>
+          <ellipse cx="100" cy="100" rx="22" ry="6" stroke="rgba(200,169,110,0.28)" stroke-width="0.8" fill="rgba(200,169,110,0.03)"/>
+          <path d="M80 98 L76 70" stroke="rgba(200,169,110,0.35)" stroke-width="0.8" stroke-linecap="round"/>
+          <path d="M120 98 L124 70" stroke="rgba(200,169,110,0.35)" stroke-width="0.8" stroke-linecap="round"/>
+          <circle cx="100" cy="54" r="18" stroke="rgba(200,169,110,0.52)" stroke-width="1" fill="rgba(200,169,110,0.04)"/>
+          <circle cx="100" cy="54" r="10" stroke="rgba(200,169,110,0.22)" stroke-width="0.6" fill="rgba(200,169,110,0.03)"/>
+          <circle cx="92" cy="46" r="1.5" fill="rgba(232,213,163,0.6)"/>
+          <line x1="100" y1="12" x2="100" y2="22" stroke="rgba(200,169,110,0.2)" stroke-width="0.7"/>
+          <line x1="100" y1="178" x2="100" y2="188" stroke="rgba(200,169,110,0.2)" stroke-width="0.7"/>
+          <line x1="12" y1="100" x2="22" y2="100" stroke="rgba(200,169,110,0.2)" stroke-width="0.7"/>
+          <line x1="178" y1="100" x2="188" y2="100" stroke="rgba(200,169,110,0.2)" stroke-width="0.7"/>
+        </svg>
+      </div>
+
+      <a href="https://instagram.com/yourbrand" target="_blank" rel="noopener noreferrer" class="ic-ig-cta">
+        <svg viewBox="0 0 24 24" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="#C8A96E" stroke="none"/></svg>
+        <span><span data-sq>DM na në Instagram</span><span data-en>DM us on Instagram</span></span>
+      </a>
+
+      <p class="ic-note">
+        <span data-sq>Nuk dërgojmë spam. Vetëm bizhuteri e vërtetë.</span>
+        <span data-en>No spam. Just real jewellery.</span>
+      </p>
+    </div>
+
   </div>
-  <div class="f-div"></div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     FOOTER
+══════════════════════════════════════════ -->
+<footer id="footer">
+  <!-- Ornamental footer top -->
+  <div style="height:1px;background:linear-gradient(to right,transparent,rgba(200,169,110,0.22),transparent);"></div>
+  <div style="display:flex;align-items:center;justify-content:center;padding:32px 0 0;">
+    <div style="display:flex;align-items:center;gap:16px;">
+      <div style="width:80px;height:1px;background:linear-gradient(to right,transparent,rgba(200,169,110,0.2));"></div>
+      <div style="width:5px;height:5px;background:rgba(200,169,110,0.35);transform:rotate(45deg);"></div>
+      <span style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:13px;color:rgba(200,169,110,0.3);letter-spacing:0.2em;">AURÈLE</span>
+      <div style="width:5px;height:5px;background:rgba(200,169,110,0.35);transform:rotate(45deg);"></div>
+      <div style="width:80px;height:1px;background:linear-gradient(to left,transparent,rgba(200,169,110,0.2));"></div>
+    </div>
+  </div>
+  <div class="lux-container">
+    <div class="footer-top">
+
+      <div class="f-brand-col">
+        <span class="f-logo-text">AU·RÈLE</span>
+        <p class="f-brand-desc">
+          <span data-sq>Bizhuteri fine e punuar me dorë. Shqipëri · Kosovë · Maqedonia e Veriut</span>
+          <span data-en>Fine jewellery, handcrafted. Albania · Kosovo · North Macedonia</span>
+        </p>
+        <div class="f-socials">
+          <a href="https://instagram.com/yourbrand" target="_blank" rel="noopener noreferrer" class="f-social-link" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="#C8A96E" stroke="none"/></svg>
+          </a>
+          <a href="https://tiktok.com/@yourbrand" target="_blank" rel="noopener noreferrer" class="f-social-link" aria-label="TikTok">
+            <svg viewBox="0 0 24 24" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <div>
+        <span class="f-col-head"><span data-sq>Navigoni</span><span data-en>Navigate</span></span>
+        <ul class="f-links">
+          <li><a href="#collection"><span data-sq>Koleksioni</span><span data-en>Collections</span></a></li>
+          <li><a href="#heritage"><span data-sq>Trashëgimia</span><span data-en>Heritage</span></a></li>
+          <li><a href="#story"><span data-sq>Historia</span><span data-en>Our Story</span></a></li>
+          <li><a href="#order"><span data-sq>Si të Porosisësh</span><span data-en>How to Order</span></a></li>
+        </ul>
+      </div>
+
+      <div>
+        <span class="f-col-head"><span data-sq>Na Gjeni</span><span data-en>Find Us</span></span>
+        <ul class="f-links">
+          <li><a href="https://instagram.com/yourbrand" target="_blank" rel="noopener noreferrer">Instagram @yourbrand</a></li>
+          <li><a href="https://tiktok.com/@yourbrand" target="_blank" rel="noopener noreferrer">TikTok @yourbrand</a></li>
+          <li><a href="mailto:hello@aurele.com">hello@aurele.com</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <span class="f-col-head"><span data-sq>Dërgimi</span><span data-en>Shipping</span></span>
+        <ul class="f-links">
+          <li><span class="highlight">🇦🇱 <span data-sq>Shqipëri</span><span data-en>Albania</span></span></li>
+          <li><span class="highlight">🇽🇰 <span data-sq>Kosovë</span><span data-en>Kosovo</span></span></li>
+          <li><span class="highlight">🇲🇰 <span data-sq>Maqedonia e Veriut</span><span data-en>North Macedonia</span></span></li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+  <div style="height:1px;background:rgba(181,201,183,0.08)"></div>
   <div class="lux-container">
     <div class="footer-bottom">
-      <span class="f-copy">© 2025 Aurèle. All rights reserved.</span>
-      <span class="f-copy">Made with love in the Balkans 🤍</span>
-      <div class="f-policy">
-        <a href="#">Privacy Policy</a>
-        <a href="#">Terms</a>
+      <span class="f-copy">
+        <span data-sq>© 2025 Aurèle. Të gjitha të drejtat e rezervuara.</span>
+        <span data-en>© 2025 Aurèle. All rights reserved.</span>
+      </span>
+      <div class="f-legal">
+        <a href="#"><span data-sq>Privatësia</span><span data-en>Privacy</span></a>
+        <a href="#"><span data-sq>Kushtet</span><span data-en>Terms</span></a>
       </div>
     </div>
   </div>
@@ -1601,46 +3143,110 @@
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script>
-  /* Nav scroll */
-  const nav = document.getElementById('nav');
-  window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 60), { passive: true });
+  'use strict';
 
-  /* Mobile menu */
+  /* ─── LANGUAGE SWITCHER ─────────────────── */
+  const html     = document.documentElement;
+  const langBtn  = document.getElementById('langBtn');
+  const langBtnM = document.getElementById('langBtnMob');
+
+  function setLang(lang) {
+    html.setAttribute('data-lang', lang);
+    html.setAttribute('lang', lang);
+    const label = lang === 'sq' ? 'EN' : 'SQ';
+    langBtn.textContent  = label;
+    langBtnM.textContent = label;
+  }
+
+  [langBtn, langBtnM].forEach(btn => {
+    btn.addEventListener('click', () => {
+      setLang(html.getAttribute('data-lang') === 'sq' ? 'en' : 'sq');
+    });
+  });
+
+  /* ─── NAV SCROLL ────────────────────────── */
+  const nav = document.getElementById('nav');
+  function handleNavScroll() {
+    nav.classList.toggle('scrolled', window.scrollY > 60);
+  }
+  window.addEventListener('scroll', handleNavScroll, { passive: true });
+  handleNavScroll();
+
+  /* ─── SCROLL SPY (active nav link) ──────── */
+  const sections   = ['collection','story','order','footer'];
+  const navLinks   = document.querySelectorAll('.nav-links a[data-section]');
+
+  function updateActiveLink() {
+    let current = '';
+    sections.forEach(id => {
+      const el = document.getElementById(id);
+      if (el && window.scrollY >= el.offsetTop - 120) current = id;
+    });
+    navLinks.forEach(a => {
+      a.classList.toggle('active', a.dataset.section === current);
+    });
+  }
+  window.addEventListener('scroll', updateActiveLink, { passive: true });
+  updateActiveLink();
+
+  /* ─── MOBILE MENU ───────────────────────── */
   const ham      = document.getElementById('ham');
   const mob      = document.getElementById('mob');
   const mobClose = document.getElementById('mobClose');
-  const openMob  = () => { mob.classList.add('open'); ham.classList.add('open'); document.body.style.overflow = 'hidden'; };
-  const closeMob = () => { mob.classList.remove('open'); ham.classList.remove('open'); document.body.style.overflow = ''; };
+
+  function openMob()  { mob.classList.add('open'); ham.classList.add('open'); document.body.style.overflow = 'hidden'; }
+  function closeMob() { mob.classList.remove('open'); ham.classList.remove('open'); document.body.style.overflow = ''; }
+
   ham.addEventListener('click', () => mob.classList.contains('open') ? closeMob() : openMob());
   mobClose.addEventListener('click', closeMob);
   document.querySelectorAll('.mob-lnk').forEach(l => l.addEventListener('click', closeMob));
 
-  /* Product filter */
+  /* ─── PRODUCT FILTER ────────────────────── */
   const pills = document.querySelectorAll('.f-pill');
   const cards = document.querySelectorAll('.prod-card');
+
   pills.forEach(pill => {
     pill.addEventListener('click', () => {
       pills.forEach(p => p.classList.remove('on'));
       pill.classList.add('on');
       const f = pill.dataset.f;
-      cards.forEach(c => c.classList.toggle('hide', f !== 'all' && c.dataset.cat !== f));
+      cards.forEach(c => {
+        const match = f === 'all' || c.dataset.cat === f;
+        c.classList.toggle('hide', !match);
+      });
+      // Reset scroll on mobile
+      const grid = document.getElementById('pgrid');
+      if (grid) grid.scrollLeft = 0;
     });
   });
 
-  /* Scroll reveal */
-  const ro = new IntersectionObserver(entries => {
-    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); ro.unobserve(e.target); } });
-  }, { threshold: 0.1 });
-  document.querySelectorAll('.reveal').forEach((el, i) => {
-    const sibs = Array.from(el.parentElement.querySelectorAll('.reveal'));
-    el.style.transitionDelay = Math.min(sibs.indexOf(el) * 0.1, 0.5) + 's';
-    ro.observe(el);
+  /* ─── SCROLL REVEAL ─────────────────────── */
+  const revealObs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('in');
+        revealObs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.08 });
+
+  document.querySelectorAll('.reveal, .reveal-left').forEach((el, i) => {
+    const sibs = Array.from(el.parentElement.querySelectorAll('.reveal, .reveal-left'));
+    el.style.transitionDelay = Math.min(sibs.indexOf(el) * 0.09, 0.45) + 's';
+    revealObs.observe(el);
   });
 
-  /* Back to top */
+  /* ─── BACK TO TOP ───────────────────────── */
   const btt = document.getElementById('btt');
   window.addEventListener('scroll', () => btt.classList.toggle('show', window.scrollY > 500), { passive: true });
   btt.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+  /* ─── HIDE EMPTY PRODUCT IMAGES ─────────── */
+  document.querySelectorAll('.prod-photo').forEach(img => {
+    if (!img.getAttribute('src')) img.style.display = 'none';
+    img.addEventListener('load', () => { img.style.display = 'block'; });
+    img.addEventListener('error', () => { img.style.display = 'none'; });
+  });
 </script>
 </body>
 </html>
