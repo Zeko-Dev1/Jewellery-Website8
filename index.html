@@ -1,10 +1,11 @@
 <!DOCTYPE html>
-<html lang="sq" data-lang="sq">
+<html lang="sq" data-lang="sq" translate="no">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AURÈLE — Bizhuteri Fine</title>
-  <meta name="description" content="Bizhuteri fine e punuar me dorë nga Ballkani. Dërgojmë në Shqipëri, Kosovë dhe Maqedoninë e Veriut.">
+  <title>Bizhuteria Fantazia — Bizhuteri Fine Shqiptare</title>
+  <meta name="google" content="notranslate">
+  <meta name="description" content="Bizhuteria Fantazia — bizhuteri fine e punuar me dorë, e frymëzuar nga tradita shqiptare. Dërgojmë në Shqipëri, Kosovë dhe Maqedoninë e Veriut.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600&family=DM+Sans:wght@200;300;400;500&display=swap" rel="stylesheet">
@@ -162,18 +163,43 @@
       justify-content: space-between;
     }
     .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      flex-shrink: 0;
+      transition: opacity 0.3s;
+    }
+    .nav-logo:hover { opacity: 0.8; }
+    .nav-logo-img {
+      height: 38px;
+      width: auto;
+      object-fit: contain;
+      display: block;
+    }
+    .nav-logo-text {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.05;
+    }
+    .nav-logo-top {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      font-size: 8px;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: rgba(122,158,126,0.75);
+    }
+    #nav.scrolled .nav-logo-top { color: var(--c-muted); }
+    .nav-logo-main {
       font-family: 'Cormorant Garamond', serif;
       font-weight: 400;
       font-style: italic;
-      font-size: 26px;
+      font-size: 22px;
       color: var(--c-pgold);
-      text-decoration: none;
-      letter-spacing: 0.1em;
-      flex-shrink: 0;
-      transition: color 0.3s;
+      letter-spacing: 0.06em;
     }
-    #nav.scrolled .nav-logo { color: var(--c-sage); }
-    .nav-logo .dot { color: var(--c-gold); }
+    #nav.scrolled .nav-logo-main { color: var(--c-sage); }
 
     .nav-links {
       display: flex;
@@ -1934,6 +1960,273 @@
       .ic-inner { grid-template-columns: 1fr; gap: 56px; }
       .ic-right { align-items: flex-start; }
     }
+
+    /* ─────────────────────────────────────────────────────
+       NEW ARRIVALS
+    ───────────────────────────────────────────────────── */
+    #new-arrivals {
+      padding: 112px 0;
+      background: var(--c-linen);
+      position: relative;
+      overflow: hidden;
+    }
+    .na-track {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 3px;
+      margin-top: 56px;
+    }
+    .na-card {
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+    }
+    .na-visual {
+      height: 460px;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+    .na-visual .prod-art {
+      transition: transform 0.8s var(--ease-out);
+      pointer-events: none;
+    }
+    .na-card:hover .prod-art { transform: scale(1.06); }
+    .na-new-pill {
+      position: absolute;
+      top: 16px; left: 16px;
+      z-index: 5;
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      font-size: 8px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--c-night);
+      background: var(--c-gold);
+      padding: 5px 12px;
+    }
+    .na-body {
+      padding: 20px 20px 24px;
+      background: var(--c-linen);
+      border-top: 1px solid rgba(181,201,183,0.35);
+    }
+    .na-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 400;
+      font-style: italic;
+      font-size: 20px;
+      color: var(--c-sage);
+      display: block;
+      margin-bottom: 4px;
+      letter-spacing: 0.02em;
+    }
+    .na-price {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 500;
+      font-size: 16px;
+      color: var(--c-gold);
+      display: block;
+    }
+    .na-hover-cta {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      background: rgba(28,43,30,0.92);
+      backdrop-filter: blur(4px);
+      padding: 16px;
+      text-align: center;
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 400;
+      font-size: 9px;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--c-pgold);
+      text-decoration: none;
+      transform: translateY(100%);
+      transition: transform 0.4s var(--ease-out);
+    }
+    .na-card:hover .na-hover-cta { transform: translateY(0); }
+    @media (max-width: 991px) {
+      .na-track {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+    @media (max-width: 575px) {
+      .na-track {
+        grid-template-columns: repeat(2, minmax(240px, 1fr));
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        gap: 2px;
+        padding-bottom: 4px;
+      }
+      .na-track::-webkit-scrollbar { display: none; }
+    }
+
+    /* ─────────────────────────────────────────────────────
+       PRELOADER
+    ───────────────────────────────────────────────────── */
+    #preloader {
+      position: fixed;
+      inset: 0;
+      z-index: 99999;
+      background: var(--c-night);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 0;
+      transition: opacity 0.8s ease, visibility 0.8s ease;
+    }
+    #preloader.pl-done { opacity: 0; visibility: hidden; pointer-events: none; }
+
+    /* Ornamental ring */
+    .pl-ring {
+      position: absolute;
+      width: min(340px, 72vw);
+      height: min(340px, 72vw);
+      border-radius: 50%;
+      border: 1px solid rgba(200,169,110,0.1);
+      animation: plRingSpin 12s linear infinite;
+    }
+    .pl-ring::before {
+      content: '';
+      position: absolute;
+      top: -3px; left: 50%;
+      transform: translateX(-50%);
+      width: 5px; height: 5px;
+      background: var(--c-gold);
+      border-radius: 50%;
+      box-shadow: 0 0 12px rgba(200,169,110,0.7);
+    }
+    .pl-ring2 {
+      position: absolute;
+      width: min(260px, 56vw);
+      height: min(260px, 56vw);
+      border-radius: 50%;
+      border: 1px solid rgba(200,169,110,0.05);
+      animation: plRingSpin 20s linear infinite reverse;
+    }
+    @keyframes plRingSpin { to { transform: rotate(360deg); } }
+
+    .pl-inner {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .pl-name-small {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 200;
+      font-size: 9px;
+      letter-spacing: 0.42em;
+      text-transform: uppercase;
+      color: rgba(122,158,126,0.6);
+      margin-bottom: 10px;
+      opacity: 0;
+      animation: plFadeUp 0.6s ease 0.1s forwards;
+    }
+    .pl-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-style: italic;
+      font-size: clamp(62px, 10vw, 100px);
+      color: var(--c-pgold);
+      letter-spacing: 0.12em;
+      line-height: 1;
+      opacity: 0;
+      animation: plFadeUp 0.7s ease 0.25s forwards;
+    }
+    .pl-line {
+      height: 1px;
+      width: 0;
+      background: linear-gradient(to right, transparent, var(--c-gold), transparent);
+      margin: 22px 0 18px;
+      animation: plLineGrow 0.9s cubic-bezier(0.4,0,0.2,1) 0.6s forwards;
+    }
+    .pl-sub {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 200;
+      font-size: 9px;
+      letter-spacing: 0.34em;
+      text-transform: uppercase;
+      color: rgba(122,158,126,0.45);
+      opacity: 0;
+      animation: plFadeUp 0.6s ease 1.0s forwards;
+    }
+    .pl-diamond {
+      width: 7px; height: 7px;
+      border: 1px solid rgba(200,169,110,0.5);
+      transform: rotate(45deg);
+      margin-top: 28px;
+      opacity: 0;
+      animation: plFadeUp 0.5s ease 1.2s forwards;
+    }
+    @keyframes plFadeUp {
+      from { opacity: 0; transform: translateY(8px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes plLineGrow { to { width: 180px; } }
+
+    /* ─────────────────────────────────────────────────────
+       PRODUCT CARD — PREMIUM OVERRIDES
+    ───────────────────────────────────────────────────── */
+    /* Taller visuals */
+    .prod-visual { height: 440px; }
+    /* No border-top on body — let the bg color transition suffice */
+    .prod-body { padding: 26px 24px 0; border-top: none; }
+    /* Stack name → price vertically */
+    .prod-row1 {
+      display: block;
+      margin-bottom: 0;
+      padding-bottom: 18px;
+      border-bottom: 1px solid rgba(181,201,183,0.18);
+    }
+    .prod-name { display: block; font-size: 23px; margin-bottom: 7px; }
+    .prod-price-wrap { display: block; }
+    /* Hide redundant category label */
+    .prod-cat { display: none; }
+    /* Button: no side/bottom borders — only top separator */
+    .prod-btn {
+      border-left: none;
+      border-right: none;
+      border-bottom: none;
+      border-top: 1px solid rgba(181,201,183,0.18);
+      padding: 15px 24px;
+    }
+    /* Gold bottom accent sweep on hover */
+    .prod-card::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 2px;
+      background: var(--c-gold);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.5s var(--ease-out);
+      z-index: 10;
+    }
+    .prod-card:hover::after { transform: scaleX(1); }
+    /* Gold shimmer sweep across visual */
+    @keyframes shimmerSweep {
+      from { left: -80%; }
+      to   { left: 140%; }
+    }
+    .prod-visual::before {
+      content: '';
+      position: absolute;
+      top: 0; bottom: 0;
+      left: -80%; width: 55%;
+      background: linear-gradient(to right, transparent, rgba(200,169,110,0.07), transparent);
+      transform: skewX(-15deg);
+      pointer-events: none;
+      z-index: 4;
+    }
+    .prod-card:hover .prod-visual::before {
+      animation: shimmerSweep 0.9s ease-out forwards;
+    }
   </style>
 </head>
 <body>
@@ -1941,6 +2234,19 @@
 <!-- ══════════════════════════════════════════
      ANNOUNCEMENT BAR
 ══════════════════════════════════════════ -->
+<!-- ══════ PRELOADER ══════ -->
+<div id="preloader" aria-hidden="true">
+  <div class="pl-ring"></div>
+  <div class="pl-ring2"></div>
+  <div class="pl-inner">
+    <span class="pl-name-small">Bizhuteria</span>
+    <span class="pl-logo">Fantazia</span>
+    <div class="pl-line"></div>
+    <span class="pl-sub">Fine Jewellery · Est. 2024</span>
+    <div class="pl-diamond"></div>
+  </div>
+</div>
+
 <div id="announce-bar">
   <p class="ann-text">
     <span data-sq>Dërgim falas për të gjitha porositë<span class="ann-sep">·</span>Kodi <strong>AURELE15</strong> — 15% zbritje në porosinë tuaj të parë</span>
@@ -1954,7 +2260,14 @@
 ══════════════════════════════════════════ -->
 <nav id="nav">
   <div class="nav-inner">
-    <a href="#" class="nav-logo">AU<span class="dot">·</span>RÈLE</a>
+    <a href="#" class="nav-logo">
+      <!-- Replace src with your logo file when ready -->
+      <img src="images/logo.png" alt="Bizhuteria Fantazia" class="nav-logo-img" onerror="this.style.display='none'">
+      <span class="nav-logo-text">
+        <span class="nav-logo-top">Bizhuteria</span>
+        <span class="nav-logo-main">Fantazia</span>
+      </span>
+    </a>
 
     <ul class="nav-links">
       <li><a href="#collection" data-section="collection"><span data-sq>Koleksioni</span><span data-en>Collections</span></a></li>
@@ -2113,6 +2426,262 @@
       <span class="stat-num">∞</span>
       <span class="stat-lbl"><span data-sq>Me Dashuri</span><span data-en>With Love</span></span>
     </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     NEW ARRIVALS
+══════════════════════════════════════════ -->
+<section id="new-arrivals">
+  <div class="lux-container">
+    <span class="sec-label reveal"><span data-sq>Pikërisht Arritën</span><span data-en>Just Arrived</span></span>
+    <h2 class="sec-h reveal"><span data-sq>Krijimet e Reja.</span><span data-en>New Pieces.</span></h2>
+    <p class="sec-sub reveal">
+      <span data-sq>Krijimet më të fundit — seleksionuar me kujdes dhe gati për t'u zbuluar.</span>
+      <span data-en>Our latest additions — carefully curated and ready to discover.</span>
+    </p>
+    <span class="gold-rule" style="margin:28px 0 0"></span>
+
+    <div class="na-track">
+
+      <!-- NA 1: Aurel Choker -->
+      <div class="na-card reveal">
+        <div class="na-new-pill"><span data-sq>E Re</span><span data-en>New</span></div>
+        <div class="na-visual bg-b">
+          <div class="prod-art">
+            <svg width="200" height="240" viewBox="0 0 240 280" fill="none">
+              <path d="M20 44 C50 26 100 16 120 15" stroke="rgba(90,60,20,0.6)" stroke-width="1" fill="none"/>
+              <path d="M120 15 C140 16 190 26 220 44" stroke="rgba(90,60,20,0.6)" stroke-width="1" fill="none"/>
+              <path d="M20 44 C50 26 100 16 120 15" stroke="rgba(90,60,20,0.3)" stroke-width="2.5" fill="none" stroke-dasharray="2.5 3.5"/>
+              <path d="M120 15 C140 16 190 26 220 44" stroke="rgba(90,60,20,0.3)" stroke-width="2.5" fill="none" stroke-dasharray="2.5 3.5"/>
+              <line x1="120" y1="15" x2="120" y2="82" stroke="rgba(90,60,20,0.5)" stroke-width="0.9"/>
+              <circle cx="120" cy="15" r="3" stroke="rgba(90,60,20,0.5)" stroke-width="0.8" fill="rgba(90,60,20,0.1)"/>
+              <path d="M120 82 L146 118 L120 162 L94 118 Z" stroke="rgba(90,60,20,0.72)" stroke-width="1.1" fill="rgba(90,60,20,0.06)"/>
+              <rect x="113" y="70" width="14" height="12" rx="3" stroke="rgba(90,60,20,0.45)" stroke-width="0.8" fill="none"/>
+              <circle cx="120" cy="118" r="10" stroke="rgba(90,60,20,0.45)" stroke-width="0.8" fill="rgba(90,60,20,0.1)"/>
+              <circle cx="114" cy="112" r="1.5" fill="rgba(140,100,40,0.65)"/>
+            </svg>
+          </div>
+        </div>
+        <div class="na-body">
+          <span class="na-name">Aurel Choker</span>
+          <span class="na-price">€58</span>
+        </div>
+        <a href="https://instagram.com/yourbrand" target="_blank" rel="noopener noreferrer" class="na-hover-cta">
+          <span data-sq>Porosit në Instagram</span><span data-en>Order on Instagram</span>
+        </a>
+      </div>
+
+      <!-- NA 2: Cèdre Hoops -->
+      <div class="na-card reveal">
+        <div class="na-new-pill"><span data-sq>E Re</span><span data-en>New</span></div>
+        <div class="na-visual bg-d">
+          <div class="prod-art">
+            <svg width="190" height="230" viewBox="0 0 220 260" fill="none">
+              <path d="M62 20 Q62 8 74 8 Q86 8 86 20 L86 36" stroke="rgba(90,60,20,0.7)" stroke-width="1.3" fill="none" stroke-linecap="round"/>
+              <line x1="86" y1="36" x2="86" y2="82" stroke="rgba(90,60,20,0.52)" stroke-width="0.9"/>
+              <circle cx="86" cy="36" r="2.8" stroke="rgba(90,60,20,0.48)" stroke-width="0.8" fill="rgba(90,60,20,0.1)"/>
+              <path d="M86 82 Q68 108 86 140 Q104 108 86 82" stroke="rgba(90,60,20,0.78)" stroke-width="1.1" fill="rgba(90,60,20,0.08)"/>
+              <path d="M158 20 Q158 8 146 8 Q134 8 134 20 L134 36" stroke="rgba(90,60,20,0.7)" stroke-width="1.3" fill="none" stroke-linecap="round"/>
+              <line x1="134" y1="36" x2="134" y2="82" stroke="rgba(90,60,20,0.52)" stroke-width="0.9"/>
+              <circle cx="134" cy="36" r="2.8" stroke="rgba(90,60,20,0.48)" stroke-width="0.8" fill="rgba(90,60,20,0.1)"/>
+              <path d="M134 82 Q116 108 134 140 Q152 108 134 82" stroke="rgba(90,60,20,0.78)" stroke-width="1.1" fill="rgba(90,60,20,0.08)"/>
+              <circle cx="78" cy="90" r="1.5" fill="rgba(140,100,40,0.65)"/>
+              <circle cx="126" cy="90" r="1.5" fill="rgba(140,100,40,0.65)"/>
+            </svg>
+          </div>
+        </div>
+        <div class="na-body">
+          <span class="na-name">Cèdre Hoops</span>
+          <span class="na-price">€33</span>
+        </div>
+        <a href="https://instagram.com/yourbrand" target="_blank" rel="noopener noreferrer" class="na-hover-cta">
+          <span data-sq>Porosit në Instagram</span><span data-en>Order on Instagram</span>
+        </a>
+      </div>
+
+      <!-- NA 3: Vigne Layering Chain -->
+      <div class="na-card reveal">
+        <div class="na-new-pill"><span data-sq>E Re</span><span data-en>New</span></div>
+        <div class="na-visual bg-b">
+          <div class="prod-art">
+            <svg width="200" height="240" viewBox="0 0 240 280" fill="none">
+              <path d="M20 44 C50 26 100 16 120 15" stroke="rgba(90,60,20,0.6)" stroke-width="1" fill="none"/>
+              <path d="M120 15 C140 16 190 26 220 44" stroke="rgba(90,60,20,0.6)" stroke-width="1" fill="none"/>
+              <path d="M20 44 C50 26 100 16 120 15" stroke="rgba(90,60,20,0.3)" stroke-width="2.5" fill="none" stroke-dasharray="2.5 3.5"/>
+              <path d="M120 15 C140 16 190 26 220 44" stroke="rgba(90,60,20,0.3)" stroke-width="2.5" fill="none" stroke-dasharray="2.5 3.5"/>
+              <line x1="120" y1="15" x2="120" y2="82" stroke="rgba(90,60,20,0.5)" stroke-width="0.9"/>
+              <path d="M120 82 L150 130 L120 178 L90 130 Z" stroke="rgba(90,60,20,0.6)" stroke-width="1.1" fill="rgba(90,60,20,0.05)"/>
+              <path d="M120 130 L150 130" stroke="rgba(90,60,20,0.25)" stroke-width="0.6"/>
+              <path d="M90 130 L120 82" stroke="rgba(90,60,20,0.18)" stroke-width="0.6"/>
+              <circle cx="120" cy="130" r="9" stroke="rgba(90,60,20,0.42)" stroke-width="0.8" fill="rgba(90,60,20,0.08)"/>
+              <circle cx="114" cy="123" r="1.5" fill="rgba(140,100,40,0.65)"/>
+            </svg>
+          </div>
+        </div>
+        <div class="na-body">
+          <span class="na-name">Vigne Layering Chain</span>
+          <span class="na-price">€72</span>
+        </div>
+        <a href="https://instagram.com/yourbrand" target="_blank" rel="noopener noreferrer" class="na-hover-cta">
+          <span data-sq>Porosit në Instagram</span><span data-en>Order on Instagram</span>
+        </a>
+      </div>
+
+      <!-- NA 4: Pluie Ring -->
+      <div class="na-card reveal">
+        <div class="na-new-pill"><span data-sq>E Re</span><span data-en>New</span></div>
+        <div class="na-visual bg-d">
+          <div class="prod-art">
+            <svg width="200" height="240" viewBox="0 0 280 320" fill="none">
+              <ellipse cx="140" cy="248" rx="96" ry="24" stroke="rgba(90,60,20,0.55)" stroke-width="1.2"/>
+              <ellipse cx="140" cy="248" rx="72" ry="18" stroke="rgba(90,60,20,0.2)" stroke-width="0.8"/>
+              <line x1="44" y1="248" x2="44" y2="188" stroke="rgba(90,60,20,0.55)" stroke-width="1.2"/>
+              <line x1="236" y1="248" x2="236" y2="188" stroke="rgba(90,60,20,0.55)" stroke-width="1.2"/>
+              <path d="M44 188 Q140 156 236 188" stroke="rgba(90,60,20,0.55)" stroke-width="1.2" fill="none"/>
+              <ellipse cx="140" cy="170" rx="48" ry="13" stroke="rgba(90,60,20,0.38)" stroke-width="1" fill="rgba(90,60,20,0.03)"/>
+              <path d="M100 165 L92 110" stroke="rgba(90,60,20,0.5)" stroke-width="1" stroke-linecap="round"/>
+              <path d="M180 165 L188 110" stroke="rgba(90,60,20,0.5)" stroke-width="1" stroke-linecap="round"/>
+              <circle cx="140" cy="74" r="38" stroke="rgba(90,60,20,0.65)" stroke-width="1.2" fill="rgba(90,60,20,0.05)"/>
+              <circle cx="140" cy="74" r="24" stroke="rgba(90,60,20,0.3)" stroke-width="0.7" fill="rgba(90,60,20,0.04)"/>
+              <circle cx="126" cy="60" r="2.2" fill="rgba(140,100,40,0.75)"/>
+            </svg>
+          </div>
+        </div>
+        <div class="na-body">
+          <span class="na-name">Pluie Ring</span>
+          <span class="na-price">€41</span>
+        </div>
+        <a href="https://instagram.com/yourbrand" target="_blank" rel="noopener noreferrer" class="na-hover-cta">
+          <span data-sq>Porosit në Instagram</span><span data-en>Order on Instagram</span>
+        </a>
+      </div>
+
+    </div><!-- /na-track -->
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     FLASH SALE / EXCLUSIVE DEALS
+══════════════════════════════════════════ -->
+<section id="flash-sale">
+  <div class="lux-container" style="position:relative;z-index:1">
+
+    <div class="sale-top-row reveal">
+      <div>
+        <span class="sec-label-light"><span data-sq>Ofertë Ekskluzive</span><span data-en>Exclusive Deals</span></span>
+        <h2 class="sale-h"><span data-sq>Shumë Speciale.</span><span data-en>Limited Offers.</span></h2>
+      </div>
+      <div class="countdown" id="cdWrap" aria-label="Countdown timer">
+        <div class="cd-unit"><span class="cd-num" id="cdH">23</span><span class="cd-lbl"><span data-sq>Orë</span><span data-en>Hrs</span></span></div>
+        <span class="cd-sep" aria-hidden="true">:</span>
+        <div class="cd-unit"><span class="cd-num" id="cdM">59</span><span class="cd-lbl"><span data-sq>Min</span><span data-en>Min</span></span></div>
+        <span class="cd-sep" aria-hidden="true">:</span>
+        <div class="cd-unit"><span class="cd-num" id="cdS">00</span><span class="cd-lbl"><span data-sq>Sek</span><span data-en>Sec</span></span></div>
+      </div>
+    </div>
+
+    <div class="sale-grid">
+
+      <!-- Sale 1: Mira Drop Earrings −15% -->
+      <div class="sale-card reveal">
+        <div class="sale-visual bg-d">
+          <span class="sale-pct">−15%</span>
+          <div class="prod-art">
+            <svg width="190" height="230" viewBox="0 0 220 260" fill="none">
+              <path d="M62 20 Q62 8 74 8 Q86 8 86 20 L86 36" stroke="rgba(90,60,20,0.7)" stroke-width="1.3" fill="none" stroke-linecap="round"/>
+              <line x1="86" y1="36" x2="86" y2="82" stroke="rgba(90,60,20,0.52)" stroke-width="0.9"/>
+              <circle cx="86" cy="36" r="2.8" stroke="rgba(90,60,20,0.48)" stroke-width="0.8" fill="rgba(90,60,20,0.1)"/>
+              <path d="M86 82 Q68 108 86 140 Q104 108 86 82" stroke="rgba(90,60,20,0.78)" stroke-width="1.1" fill="rgba(90,60,20,0.08)"/>
+              <line x1="86" y1="82" x2="86" y2="140" stroke="rgba(90,60,20,0.26)" stroke-width="0.6"/>
+              <path d="M158 20 Q158 8 146 8 Q134 8 134 20 L134 36" stroke="rgba(90,60,20,0.7)" stroke-width="1.3" fill="none" stroke-linecap="round"/>
+              <line x1="134" y1="36" x2="134" y2="82" stroke="rgba(90,60,20,0.52)" stroke-width="0.9"/>
+              <circle cx="134" cy="36" r="2.8" stroke="rgba(90,60,20,0.48)" stroke-width="0.8" fill="rgba(90,60,20,0.1)"/>
+              <path d="M134 82 Q116 108 134 140 Q152 108 134 82" stroke="rgba(90,60,20,0.78)" stroke-width="1.1" fill="rgba(90,60,20,0.08)"/>
+              <line x1="134" y1="82" x2="134" y2="140" stroke="rgba(90,60,20,0.26)" stroke-width="0.6"/>
+              <circle cx="78" cy="90" r="1.5" fill="rgba(140,100,40,0.65)"/>
+              <circle cx="126" cy="90" r="1.5" fill="rgba(140,100,40,0.65)"/>
+            </svg>
+          </div>
+        </div>
+        <div class="sale-body">
+          <span class="sale-name">Mira Drop Earrings</span>
+          <div class="sale-price-row">
+            <span class="sale-price-new">€26</span>
+            <span class="sale-price-was">€31</span>
+          </div>
+          <a href="https://instagram.com/yourbrand" target="_blank" rel="noopener noreferrer" class="sale-btn">
+            <span data-sq>Porosit në Instagram →</span><span data-en>Order on Instagram →</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Sale 2: Seren Ring −15% -->
+      <div class="sale-card reveal">
+        <div class="sale-visual bg-a">
+          <span class="sale-pct">−15%</span>
+          <div class="prod-art">
+            <svg width="200" height="240" viewBox="0 0 280 320" fill="none">
+              <ellipse cx="140" cy="248" rx="96" ry="24" stroke="rgba(200,169,110,0.55)" stroke-width="1.2"/>
+              <ellipse cx="140" cy="248" rx="72" ry="18" stroke="rgba(200,169,110,0.2)" stroke-width="0.8"/>
+              <line x1="44" y1="248" x2="44" y2="188" stroke="rgba(200,169,110,0.55)" stroke-width="1.2"/>
+              <line x1="236" y1="248" x2="236" y2="188" stroke="rgba(200,169,110,0.55)" stroke-width="1.2"/>
+              <path d="M44 188 Q140 156 236 188" stroke="rgba(200,169,110,0.55)" stroke-width="1.2" fill="none"/>
+              <ellipse cx="140" cy="170" rx="48" ry="13" stroke="rgba(200,169,110,0.38)" stroke-width="1" fill="rgba(200,169,110,0.03)"/>
+              <path d="M100 165 L92 110" stroke="rgba(200,169,110,0.5)" stroke-width="1" stroke-linecap="round"/>
+              <path d="M180 165 L188 110" stroke="rgba(200,169,110,0.5)" stroke-width="1" stroke-linecap="round"/>
+              <circle cx="140" cy="74" r="38" stroke="rgba(200,169,110,0.65)" stroke-width="1.2" fill="rgba(200,169,110,0.05)"/>
+              <circle cx="140" cy="74" r="24" stroke="rgba(200,169,110,0.3)" stroke-width="0.7" fill="rgba(200,169,110,0.04)"/>
+              <circle cx="126" cy="60" r="2.2" fill="rgba(232,213,163,0.75)"/>
+            </svg>
+          </div>
+        </div>
+        <div class="sale-body">
+          <span class="sale-name">Seren Ring</span>
+          <div class="sale-price-row">
+            <span class="sale-price-new">€38</span>
+            <span class="sale-price-was">€45</span>
+          </div>
+          <a href="https://instagram.com/yourbrand" target="_blank" rel="noopener noreferrer" class="sale-btn">
+            <span data-sq>Porosit në Instagram →</span><span data-en>Order on Instagram →</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Sale 3: Dune Collar −15% -->
+      <div class="sale-card reveal">
+        <div class="sale-visual bg-b">
+          <span class="sale-pct">−15%</span>
+          <div class="prod-art">
+            <svg width="200" height="240" viewBox="0 0 240 280" fill="none">
+              <path d="M20 44 C50 26 100 16 120 15" stroke="rgba(90,60,20,0.6)" stroke-width="1" fill="none"/>
+              <path d="M120 15 C140 16 190 26 220 44" stroke="rgba(90,60,20,0.6)" stroke-width="1" fill="none"/>
+              <path d="M20 44 C50 26 100 16 120 15" stroke="rgba(90,60,20,0.3)" stroke-width="2.5" fill="none" stroke-dasharray="2.5 3.5"/>
+              <path d="M120 15 C140 16 190 26 220 44" stroke="rgba(90,60,20,0.3)" stroke-width="2.5" fill="none" stroke-dasharray="2.5 3.5"/>
+              <line x1="120" y1="15" x2="120" y2="82" stroke="rgba(90,60,20,0.5)" stroke-width="0.9"/>
+              <circle cx="120" cy="15" r="3" stroke="rgba(90,60,20,0.5)" stroke-width="0.8" fill="rgba(90,60,20,0.1)"/>
+              <path d="M120 82 L146 118 L120 162 L94 118 Z" stroke="rgba(90,60,20,0.72)" stroke-width="1.1" fill="rgba(90,60,20,0.06)"/>
+              <rect x="113" y="70" width="14" height="12" rx="3" stroke="rgba(90,60,20,0.45)" stroke-width="0.8" fill="none"/>
+              <line x1="94" y1="118" x2="146" y2="118" stroke="rgba(90,60,20,0.28)" stroke-width="0.6"/>
+              <line x1="120" y1="82" x2="120" y2="162" stroke="rgba(90,60,20,0.28)" stroke-width="0.6"/>
+              <circle cx="120" cy="118" r="10" stroke="rgba(90,60,20,0.45)" stroke-width="0.8" fill="rgba(90,60,20,0.1)"/>
+              <circle cx="114" cy="112" r="1.5" fill="rgba(140,100,40,0.65)"/>
+            </svg>
+          </div>
+        </div>
+        <div class="sale-body">
+          <span class="sale-name">Dune Collar</span>
+          <div class="sale-price-row">
+            <span class="sale-price-new">€52</span>
+            <span class="sale-price-was">€61</span>
+          </div>
+          <a href="https://instagram.com/yourbrand" target="_blank" rel="noopener noreferrer" class="sale-btn">
+            <span data-sq>Porosit në Instagram →</span><span data-en>Order on Instagram →</span>
+          </a>
+        </div>
+      </div>
+
+    </div><!-- /sale-grid -->
   </div>
 </section>
 
@@ -2571,130 +3140,6 @@
 </section>
 
 <!-- ══════════════════════════════════════════
-     FLASH SALE / EXCLUSIVE DEALS
-══════════════════════════════════════════ -->
-<section id="flash-sale">
-  <div class="lux-container" style="position:relative;z-index:1">
-
-    <div class="sale-top-row reveal">
-      <div>
-        <span class="sec-label-light"><span data-sq>Ofertë Ekskluzive</span><span data-en>Exclusive Deals</span></span>
-        <h2 class="sale-h"><span data-sq>Shumë Speciale.</span><span data-en>Limited Offers.</span></h2>
-      </div>
-      <div class="countdown" id="cdWrap" aria-label="Countdown timer">
-        <div class="cd-unit"><span class="cd-num" id="cdH">23</span><span class="cd-lbl"><span data-sq>Orë</span><span data-en>Hrs</span></span></div>
-        <span class="cd-sep" aria-hidden="true">:</span>
-        <div class="cd-unit"><span class="cd-num" id="cdM">59</span><span class="cd-lbl"><span data-sq>Min</span><span data-en>Min</span></span></div>
-        <span class="cd-sep" aria-hidden="true">:</span>
-        <div class="cd-unit"><span class="cd-num" id="cdS">00</span><span class="cd-lbl"><span data-sq>Sek</span><span data-en>Sec</span></span></div>
-      </div>
-    </div>
-
-    <div class="sale-grid">
-
-      <!-- Sale 1: Mira Drop Earrings −15% -->
-      <div class="sale-card reveal">
-        <div class="sale-visual bg-d">
-          <span class="sale-pct">−15%</span>
-          <div class="prod-art">
-            <svg width="190" height="230" viewBox="0 0 220 260" fill="none">
-              <path d="M62 20 Q62 8 74 8 Q86 8 86 20 L86 36" stroke="rgba(90,60,20,0.7)" stroke-width="1.3" fill="none" stroke-linecap="round"/>
-              <line x1="86" y1="36" x2="86" y2="82" stroke="rgba(90,60,20,0.52)" stroke-width="0.9"/>
-              <circle cx="86" cy="36" r="2.8" stroke="rgba(90,60,20,0.48)" stroke-width="0.8" fill="rgba(90,60,20,0.1)"/>
-              <path d="M86 82 Q68 108 86 140 Q104 108 86 82" stroke="rgba(90,60,20,0.78)" stroke-width="1.1" fill="rgba(90,60,20,0.08)"/>
-              <line x1="86" y1="82" x2="86" y2="140" stroke="rgba(90,60,20,0.26)" stroke-width="0.6"/>
-              <path d="M158 20 Q158 8 146 8 Q134 8 134 20 L134 36" stroke="rgba(90,60,20,0.7)" stroke-width="1.3" fill="none" stroke-linecap="round"/>
-              <line x1="134" y1="36" x2="134" y2="82" stroke="rgba(90,60,20,0.52)" stroke-width="0.9"/>
-              <circle cx="134" cy="36" r="2.8" stroke="rgba(90,60,20,0.48)" stroke-width="0.8" fill="rgba(90,60,20,0.1)"/>
-              <path d="M134 82 Q116 108 134 140 Q152 108 134 82" stroke="rgba(90,60,20,0.78)" stroke-width="1.1" fill="rgba(90,60,20,0.08)"/>
-              <line x1="134" y1="82" x2="134" y2="140" stroke="rgba(90,60,20,0.26)" stroke-width="0.6"/>
-              <circle cx="78" cy="90" r="1.5" fill="rgba(140,100,40,0.65)"/>
-              <circle cx="126" cy="90" r="1.5" fill="rgba(140,100,40,0.65)"/>
-            </svg>
-          </div>
-        </div>
-        <div class="sale-body">
-          <span class="sale-name">Mira Drop Earrings</span>
-          <div class="sale-price-row">
-            <span class="sale-price-new">€26</span>
-            <span class="sale-price-was">€31</span>
-          </div>
-          <a href="https://instagram.com/yourbrand" target="_blank" rel="noopener noreferrer" class="sale-btn">
-            <span data-sq>Porosit në Instagram →</span><span data-en>Order on Instagram →</span>
-          </a>
-        </div>
-      </div>
-
-      <!-- Sale 2: Seren Ring −15% -->
-      <div class="sale-card reveal">
-        <div class="sale-visual bg-a">
-          <span class="sale-pct">−15%</span>
-          <div class="prod-art">
-            <svg width="200" height="240" viewBox="0 0 280 320" fill="none">
-              <ellipse cx="140" cy="248" rx="96" ry="24" stroke="rgba(200,169,110,0.55)" stroke-width="1.2"/>
-              <ellipse cx="140" cy="248" rx="72" ry="18" stroke="rgba(200,169,110,0.2)" stroke-width="0.8"/>
-              <line x1="44" y1="248" x2="44" y2="188" stroke="rgba(200,169,110,0.55)" stroke-width="1.2"/>
-              <line x1="236" y1="248" x2="236" y2="188" stroke="rgba(200,169,110,0.55)" stroke-width="1.2"/>
-              <path d="M44 188 Q140 156 236 188" stroke="rgba(200,169,110,0.55)" stroke-width="1.2" fill="none"/>
-              <ellipse cx="140" cy="170" rx="48" ry="13" stroke="rgba(200,169,110,0.38)" stroke-width="1" fill="rgba(200,169,110,0.03)"/>
-              <path d="M100 165 L92 110" stroke="rgba(200,169,110,0.5)" stroke-width="1" stroke-linecap="round"/>
-              <path d="M180 165 L188 110" stroke="rgba(200,169,110,0.5)" stroke-width="1" stroke-linecap="round"/>
-              <circle cx="140" cy="74" r="38" stroke="rgba(200,169,110,0.65)" stroke-width="1.2" fill="rgba(200,169,110,0.05)"/>
-              <circle cx="140" cy="74" r="24" stroke="rgba(200,169,110,0.3)" stroke-width="0.7" fill="rgba(200,169,110,0.04)"/>
-              <circle cx="126" cy="60" r="2.2" fill="rgba(232,213,163,0.75)"/>
-            </svg>
-          </div>
-        </div>
-        <div class="sale-body">
-          <span class="sale-name">Seren Ring</span>
-          <div class="sale-price-row">
-            <span class="sale-price-new">€38</span>
-            <span class="sale-price-was">€45</span>
-          </div>
-          <a href="https://instagram.com/yourbrand" target="_blank" rel="noopener noreferrer" class="sale-btn">
-            <span data-sq>Porosit në Instagram →</span><span data-en>Order on Instagram →</span>
-          </a>
-        </div>
-      </div>
-
-      <!-- Sale 3: Dune Collar −15% -->
-      <div class="sale-card reveal">
-        <div class="sale-visual bg-b">
-          <span class="sale-pct">−15%</span>
-          <div class="prod-art">
-            <svg width="200" height="240" viewBox="0 0 240 280" fill="none">
-              <path d="M20 44 C50 26 100 16 120 15" stroke="rgba(90,60,20,0.6)" stroke-width="1" fill="none"/>
-              <path d="M120 15 C140 16 190 26 220 44" stroke="rgba(90,60,20,0.6)" stroke-width="1" fill="none"/>
-              <path d="M20 44 C50 26 100 16 120 15" stroke="rgba(90,60,20,0.3)" stroke-width="2.5" fill="none" stroke-dasharray="2.5 3.5"/>
-              <path d="M120 15 C140 16 190 26 220 44" stroke="rgba(90,60,20,0.3)" stroke-width="2.5" fill="none" stroke-dasharray="2.5 3.5"/>
-              <line x1="120" y1="15" x2="120" y2="82" stroke="rgba(90,60,20,0.5)" stroke-width="0.9"/>
-              <circle cx="120" cy="15" r="3" stroke="rgba(90,60,20,0.5)" stroke-width="0.8" fill="rgba(90,60,20,0.1)"/>
-              <path d="M120 82 L146 118 L120 162 L94 118 Z" stroke="rgba(90,60,20,0.72)" stroke-width="1.1" fill="rgba(90,60,20,0.06)"/>
-              <rect x="113" y="70" width="14" height="12" rx="3" stroke="rgba(90,60,20,0.45)" stroke-width="0.8" fill="none"/>
-              <line x1="94" y1="118" x2="146" y2="118" stroke="rgba(90,60,20,0.28)" stroke-width="0.6"/>
-              <line x1="120" y1="82" x2="120" y2="162" stroke="rgba(90,60,20,0.28)" stroke-width="0.6"/>
-              <circle cx="120" cy="118" r="10" stroke="rgba(90,60,20,0.45)" stroke-width="0.8" fill="rgba(90,60,20,0.1)"/>
-              <circle cx="114" cy="112" r="1.5" fill="rgba(140,100,40,0.65)"/>
-            </svg>
-          </div>
-        </div>
-        <div class="sale-body">
-          <span class="sale-name">Dune Collar</span>
-          <div class="sale-price-row">
-            <span class="sale-price-new">€52</span>
-            <span class="sale-price-was">€61</span>
-          </div>
-          <a href="https://instagram.com/yourbrand" target="_blank" rel="noopener noreferrer" class="sale-btn">
-            <span data-sq>Porosit në Instagram →</span><span data-en>Order on Instagram →</span>
-          </a>
-        </div>
-      </div>
-
-    </div><!-- /sale-grid -->
-  </div>
-</section>
-
-<!-- ══════════════════════════════════════════
      QUOTE
 ══════════════════════════════════════════ -->
 <section id="quote">
@@ -2706,10 +3151,10 @@
       <div style="width:56px;height:1px;background:linear-gradient(to left,transparent,rgba(200,169,110,0.5));"></div>
     </div>
     <blockquote class="q-text">
-      <span data-sq>"Bizhuteri është pikëzimi i veshjes — tona janë presja që thotë, ka më shumë tek unë."</span>
-      <span data-en>"Jewellery is the punctuation of an outfit — ours is the comma that says, there is more to me."</span>
+      <span data-sq>"Ari i nuses nuk trashëgohet vetëm — ai bëhet histori."</span>
+      <span data-en>"A bride's gold is not simply inherited — it becomes history."</span>
     </blockquote>
-    <p class="q-attr">— Aurèle Studio</p>
+    <p class="q-attr">— Bizhuteria Fantazia</p>
     <!-- Ornamental divider bottom -->
     <div style="display:flex;align-items:center;justify-content:center;gap:14px;margin-top:8px;">
       <div style="width:56px;height:1px;background:linear-gradient(to right,transparent,rgba(200,169,110,0.5));"></div>
@@ -2726,19 +3171,19 @@
   <div class="heritage-inner">
     <div class="heritage-left reveal-left">
       <span class="hl-label"><span data-sq>Trashëgimia</span><span data-en>Heritage</span></span>
-      <h2 class="hl-h"><span data-sq>Ari i nuses</span><span data-en>The bride's gold</span></h2>
+      <h2 class="hl-h"><span data-sq>Ari i nuses shqiptare</span><span data-en>The Albanian bride's gold</span></h2>
       <span class="hl-sub">
-        <span data-sq>Tradita ballkanike e bizhuterisë në dasma</span>
-        <span data-en>Balkan jewellery tradition and ceremony</span>
+        <span data-sq>Tradita e vjetër e dasmës shqiptare dhe bizhuterisë</span>
+        <span data-en>The ancient Albanian wedding tradition and its jewellery</span>
       </span>
       <span class="gold-rule" style="margin-bottom:28px"></span>
       <p class="hl-body">
-        <span data-sq>Për shekuj, ari ka qenë pjesa qendrore e ceremonisë ballkanike. Nusja mbante unazën, nëna ia kalonte byzylykun vajzës — çdo copë kishte historinë e vet, transmeton brezi pas brezi.</span>
-        <span data-en>For centuries, gold has been at the heart of Balkan ceremony. The bride wore her ring, the mother passed her bracelet to her daughter — every piece carried its own story, passed from one generation to the next.</span>
+        <span data-sq>Çdo nuse shqiptare e di çfarë do të thotë të vishesh me ar. Ditën e dasmës, nëna ia vë gjerdanin vajzës me duart e veta — ai gjerdan që mund ta ketë mbajtur edhe gjyshja, edhe stërgjyshja. Byzylykët shënditen kur vallëzon nusja, unazat i mbajnë deri në pleqëri. Tek ne, ari nuk është luksë e ftohte — është dashuri që nuk mund të thuhet me fjalë.</span>
+        <span data-en>Every Albanian bride knows what it means to be dressed in gold. On her wedding day, her mother places the necklace around her neck with her own hands — a necklace her grandmother may have worn, and her great-grandmother before her. The bangles ring when the bride dances, the rings she carries to old age. In our tradition, gold is not cold luxury — it is love that cannot be spoken.</span>
       </p>
       <p class="hl-body">
-        <span data-sq>Ne e vazhdojmë këtë traditë me forma moderne dhe të qeta. Krijimet tona nuk janë thjesht zbukurime — ato janë kujtesa që mbarten afër zemrës.</span>
-        <span data-en>We carry this tradition forward through quiet, modern forms. Our pieces are not merely decoration — they are memories worn close to the heart.</span>
+        <span data-sq>Ne e mbajmë këtë traditë gjallë me forma të reja. Çdo copë e Bizhuteria Fantazia është krijuar me mendjen te ajo grua shqiptare — e reja apo e moshuar, nusja apo nëna — që e di se bizhuteri e mirë nuk harrohет kurrë. Vetëm kalohet.</span>
+        <span data-en>We keep this tradition alive through new forms. Every piece from Bizhuteria Fantazia is made with that Albanian woman in mind — young or old, bride or mother — who knows that a fine piece of jewellery is never forgotten. It is only passed on.</span>
       </p>
     </div>
     <div class="heritage-right reveal">
@@ -2908,22 +3353,22 @@
     <div class="story-right reveal">
       <span class="story-label"><span data-sq>Historia Jonë</span><span data-en>Our Story</span></span>
       <h2 class="story-h">
-        <span data-sq>Krijuar ngadalë,<br>me qëllim.</span>
-        <span data-en>Made slowly,<br>on purpose.</span>
+        <span data-sq>E bërë me zemër,<br>jo me makinë.</span>
+        <span data-en>Made with heart,<br>not machines.</span>
       </h2>
       <span class="gold-rule" style="margin-bottom:26px"></span>
       <p class="story-p">
-        <span data-sq>Aurèle lindi nga dëshira për të bërë bizhuteri që nuk ndjek trendet — vetëm instinktin. Çdo copë është zgjedhur me kujdes, dizenjuar për të zgjatur.</span>
-        <span data-en>Aurèle was born from a desire to make jewellery that follows no trend — only instinct. Every piece is chosen carefully, designed to last.</span>
+        <span data-sq>Bizhuteria Fantazia nisi nga një gjë shumë e thjeshtë: dëshira që secila grua shqiptare të gjejë copën e saj. Jo atë çfarë mbajnë të gjitha — atë që e ndien kur e provon për herë të parë dhe nuk do ta heqësh.</span>
+        <span data-en>Bizhuteria Fantazia started from something very simple: the wish that every Albanian woman finds her own piece. Not what everyone else wears — what she feels when she tries it on for the first time and doesn't want to take off.</span>
       </p>
       <p class="story-p">
-        <span data-sq>Besojmë në pak, mirë bërë. 16 modele, jo 160. Çdo model me qëllim, çdo copë një deklaratë e heshtur.</span>
-        <span data-en>We believe in less, made well. 16 designs, not 160. Each one intentional, each one a quiet statement.</span>
+        <span data-sq>Nuk kemi qindra produkte. Kemi 16, dhe secili ka arsyen e vet. Çdo model zgjidhet me kujdes — me mendjen te ato gra që e dinë çfarë duan, por nuk e gjejnë lehtë. Ne punojmë për to.</span>
+        <span data-en>We don't have hundreds of products. We have 16, and each one has its reason. Every design is chosen with care — with those women in mind who know what they want, but don't find it easily. We work for them.</span>
       </p>
       <div class="story-bq">
         <p>
-          <span data-sq>"Ne krijojmë bizhuteri për gruan që tashmë e di kush është."</span>
-          <span data-en>"We make jewellery for the woman who already knows who she is."</span>
+          <span data-sq>"Bizhuteri e mirë nuk kërkon vëmendje. E merr vetë."</span>
+          <span data-en>"Good jewellery doesn't ask for attention. It takes it."</span>
         </p>
       </div>
     </div>
@@ -2993,7 +3438,7 @@
      INNER CIRCLE
 ══════════════════════════════════════════ -->
 <section id="inner-circle">
-  <div class="ic-wm" aria-hidden="true">AURÈLE</div>
+  <div class="ic-wm" aria-hidden="true">FANTAZIA</div>
   <div class="ic-inner">
 
     <div class="reveal-left">
@@ -3069,7 +3514,7 @@
     <div style="display:flex;align-items:center;gap:16px;">
       <div style="width:80px;height:1px;background:linear-gradient(to right,transparent,rgba(200,169,110,0.2));"></div>
       <div style="width:5px;height:5px;background:rgba(200,169,110,0.35);transform:rotate(45deg);"></div>
-      <span style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:13px;color:rgba(200,169,110,0.3);letter-spacing:0.2em;">AURÈLE</span>
+      <span style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:13px;color:rgba(200,169,110,0.3);letter-spacing:0.2em;">Fantazia</span>
       <div style="width:5px;height:5px;background:rgba(200,169,110,0.35);transform:rotate(45deg);"></div>
       <div style="width:80px;height:1px;background:linear-gradient(to left,transparent,rgba(200,169,110,0.2));"></div>
     </div>
@@ -3078,10 +3523,13 @@
     <div class="footer-top">
 
       <div class="f-brand-col">
-        <span class="f-logo-text">AU·RÈLE</span>
+        <!-- Logo image for footer — replace src when ready -->
+        <img src="images/logo.png" alt="Bizhuteria Fantazia" style="height:44px;width:auto;object-fit:contain;margin-bottom:8px;display:block;" onerror="this.style.display='none'">
+        <span class="f-logo-text" style="font-family:'DM Sans',sans-serif;font-weight:300;font-size:9px;letter-spacing:0.28em;text-transform:uppercase;color:rgba(181,201,183,0.5);display:block;margin-bottom:2px;">Bizhuteria</span>
+        <span style="font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:400;font-size:28px;color:var(--c-pgold);letter-spacing:0.08em;display:block;margin-bottom:16px;">Fantazia</span>
         <p class="f-brand-desc">
-          <span data-sq>Bizhuteri fine e punuar me dorë. Shqipëri · Kosovë · Maqedonia e Veriut</span>
-          <span data-en>Fine jewellery, handcrafted. Albania · Kosovo · North Macedonia</span>
+          <span data-sq>Bizhuteri fine e punuar me dorë, e frymëzuar nga tradita shqiptare. Shqipëri · Kosovë · Maqedonia e Veriut</span>
+          <span data-en>Fine jewellery handcrafted with Albanian soul. Albania · Kosovo · North Macedonia</span>
         </p>
         <div class="f-socials">
           <a href="https://instagram.com/yourbrand" target="_blank" rel="noopener noreferrer" class="f-social-link" aria-label="Instagram">
@@ -3108,7 +3556,7 @@
         <ul class="f-links">
           <li><a href="https://instagram.com/yourbrand" target="_blank" rel="noopener noreferrer">Instagram @yourbrand</a></li>
           <li><a href="https://tiktok.com/@yourbrand" target="_blank" rel="noopener noreferrer">TikTok @yourbrand</a></li>
-          <li><a href="mailto:hello@aurele.com">hello@aurele.com</a></li>
+          <li><a href="mailto:info@bizhuteriafantazia.com">info@bizhuteriafantazia.com</a></li>
         </ul>
       </div>
 
@@ -3127,8 +3575,8 @@
   <div class="lux-container">
     <div class="footer-bottom">
       <span class="f-copy">
-        <span data-sq>© 2025 Aurèle. Të gjitha të drejtat e rezervuara.</span>
-        <span data-en>© 2025 Aurèle. All rights reserved.</span>
+        <span data-sq>© 2025 Bizhuteria Fantazia. Të gjitha të drejtat e rezervuara.</span>
+        <span data-en>© 2025 Bizhuteria Fantazia. All rights reserved.</span>
       </span>
       <div class="f-legal">
         <a href="#"><span data-sq>Privatësia</span><span data-en>Privacy</span></a>
@@ -3145,20 +3593,32 @@
 <script>
   'use strict';
 
+  /* ─── PRELOADER ─────────────────────────── */
+  (function () {
+    const pl = document.getElementById('preloader');
+    function hidePl() {
+      pl.classList.add('pl-done');
+      setTimeout(function () { if (pl.parentNode) pl.parentNode.removeChild(pl); }, 1100);
+    }
+    if (document.readyState === 'complete') {
+      setTimeout(hidePl, 2000);
+    } else {
+      window.addEventListener('load', function () { setTimeout(hidePl, 2000); });
+    }
+  })();
+
   /* ─── LANGUAGE SWITCHER ─────────────────── */
   const html     = document.documentElement;
   const langBtn  = document.getElementById('langBtn');
   const langBtnM = document.getElementById('langBtnMob');
-
   function setLang(lang) {
     html.setAttribute('data-lang', lang);
     html.setAttribute('lang', lang);
     const label = lang === 'sq' ? 'EN' : 'SQ';
-    langBtn.textContent  = label;
-    langBtnM.textContent = label;
+    if (langBtn)  langBtn.textContent  = label;
+    if (langBtnM) langBtnM.textContent = label;
   }
-
-  [langBtn, langBtnM].forEach(btn => {
+  [langBtn, langBtnM].filter(Boolean).forEach(btn => {
     btn.addEventListener('click', () => {
       setLang(html.getAttribute('data-lang') === 'sq' ? 'en' : 'sq');
     });
@@ -3173,7 +3633,7 @@
   handleNavScroll();
 
   /* ─── SCROLL SPY (active nav link) ──────── */
-  const sections   = ['collection','story','order','footer'];
+  const sections   = ['new-arrivals','collection','flash-sale','story','order','inner-circle','footer'];
   const navLinks   = document.querySelectorAll('.nav-links a[data-section]');
 
   function updateActiveLink() {
@@ -3235,6 +3695,37 @@
     el.style.transitionDelay = Math.min(sibs.indexOf(el) * 0.09, 0.45) + 's';
     revealObs.observe(el);
   });
+
+  /* ─── ANNOUNCEMENT BAR ─────────────────── */
+  const annBar   = document.getElementById('announce-bar');
+  const annClose = document.getElementById('ann-close');
+  annClose.addEventListener('click', () => {
+    annBar.classList.add('hidden');
+    document.body.classList.add('bar-gone');
+    setTimeout(() => { annBar.style.display = 'none'; }, 400);
+  });
+
+  /* ─── COUNTDOWN TIMER ───────────────────── */
+  (function () {
+    const end = new Date();
+    end.setHours(23, 59, 59, 999);
+    const hEl = document.getElementById('cdH');
+    const mEl = document.getElementById('cdM');
+    const sEl = document.getElementById('cdS');
+    function pad(n) { return String(n).padStart(2, '0'); }
+    function tick() {
+      const diff = end - Date.now();
+      if (diff <= 0) { if (hEl) hEl.textContent = '00'; if (mEl) mEl.textContent = '00'; if (sEl) sEl.textContent = '00'; return; }
+      const h = Math.floor(diff / 3600000);
+      const m = Math.floor((diff % 3600000) / 60000);
+      const s = Math.floor((diff % 60000) / 1000);
+      if (hEl) hEl.textContent = pad(h);
+      if (mEl) mEl.textContent = pad(m);
+      if (sEl) sEl.textContent = pad(s);
+    }
+    tick();
+    setInterval(tick, 1000);
+  })();
 
   /* ─── BACK TO TOP ───────────────────────── */
   const btt = document.getElementById('btt');
