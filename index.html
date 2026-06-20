@@ -725,7 +725,7 @@
       transition: opacity 0.3s ease, transform 0.3s ease;
       position: relative;
     }
-    .prod-card.hide { opacity: 0; pointer-events: none; transform: scale(0.97); }
+    .prod-card.hide { pointer-events: none; }
 
     /* Badge */
     .prod-badge {
@@ -1384,7 +1384,7 @@
       margin-bottom: 20px;
       display: block;
     }
-    .f-links { display: flex; flex-direction: column; gap: 11px; list-style: none; }
+    .f-links { display: flex; flex-direction: column; gap: 11px; list-style: none; padding: 0; margin: 0; }
     .f-links li a, .f-links li span {
       font-family: 'DM Sans', sans-serif;
       font-weight: 300;
@@ -1453,16 +1453,18 @@
 
     @media (max-width: 991px) {
       /* Nav */
-      .nav-links, .nav-socials { display: none; }
+      .nav-links { display: none; }
       .hamburger { display: flex; }
       #nav { height: 64px; }
       .nav-inner { padding: 0 24px; }
       .lang-btn { font-size: 9px; padding: 4px 10px; }
+      .nav-socials { display: flex; gap: 10px; }
+      .nav-social-link svg { width: 16px; height: 16px; }
 
       /* Hero */
       #hero { height: auto; min-height: 100svh; flex-direction: column; }
       .hero-wrap { flex-direction: column-reverse; }
-      .hero-right { flex: none; width: 100%; min-height: 50vw; max-height: 60vh; }
+      .hero-right { flex: none; width: 100%; min-height: 50vw; max-height: 60vh; padding-top: 32px; }
       .hero-left { flex: none; width: 100%; padding: 56px 24px 72px; }
       .hero-h1a, .hero-h1b { font-size: clamp(42px, 10vw, 72px); }
       .hero-art { width: 180px; }
@@ -1482,11 +1484,11 @@
       .prod-grid {
         display: flex;
         overflow-x: auto;
-        scroll-snap-type: x mandatory;
+        scroll-snap-type: x proximity;
+        overscroll-behavior-x: contain;
         -webkit-overflow-scrolling: touch;
         gap: 3px;
         padding-bottom: 12px;
-        /* hide scrollbar */
         scrollbar-width: none;
       }
       .prod-grid::-webkit-scrollbar { display: none; }
@@ -1526,7 +1528,8 @@
 
       /* Footer */
       .footer-top { grid-template-columns: 1fr 1fr; gap: 36px; padding: 56px 0 48px; }
-      .footer-bottom { flex-direction: column; gap: 12px; text-align: center; }
+      .footer-bottom { flex-direction: column; gap: 10px; text-align: center; }
+      .f-copy, .f-legal { justify-content: center; }
 
       /* Global */
       .lux-container { padding: 0 24px; }
@@ -1534,13 +1537,26 @@
     }
 
     @media (max-width: 575px) {
-      .prod-card {
-        flex: 0 0 calc(85vw);
-      }
-      .prod-card--featured { flex: 0 0 calc(85vw); }
+      .prod-card { flex: 0 0 82vw; }
+      .prod-card--featured { flex: 0 0 82vw; }
       .ig-grid { grid-template-columns: repeat(2,1fr); }
-      .footer-top { grid-template-columns: 1fr; gap: 32px; }
-      .f-brand-col { border-bottom: 1px solid rgba(181,201,183,0.1); padding-bottom: 32px; }
+      /* Footer — single column, all left-aligned */
+      .footer-top { grid-template-columns: 1fr; gap: 28px; padding: 44px 0 36px; }
+      .f-brand-col { border-bottom: 1px solid rgba(181,201,183,0.1); padding-bottom: 28px; }
+      .footer-bottom { gap: 8px; }
+      .f-links li a, .f-links li span { font-size: 12px; word-break: break-word; }
+    }
+
+    /* Disable hover animations on touch devices — prevents "card jump" on scroll */
+    @media (hover: none) {
+      .prod-card:hover .prod-art { transform: none; }
+      .prod-card:hover .prod-photo { transform: none; }
+      .prod-card:hover .prod-visual::after { opacity: 0; }
+      .prod-card:hover .prod-overlay { opacity: 0; }
+      .prod-card:hover .prod-visual::before { animation: none; }
+      .prod-card:hover::after { transform: scaleX(0); }
+      .na-card:hover .prod-art { transform: none; }
+      .sale-card:hover .prod-art { transform: none; }
     }
 
     /* Scroll indicator for product slider */
@@ -1796,7 +1812,7 @@
     }
     .sale-btn:hover { background: var(--c-gold); color: var(--c-night); }
     @media (max-width: 991px) {
-      .sale-grid { grid-template-columns: 1fr; gap: 3px; }
+      .sale-grid { grid-template-columns: 1fr; gap: 20px; }
       .sale-top-row { flex-direction: column; align-items: flex-start; }
     }
 
@@ -2054,14 +2070,20 @@
     }
     @media (max-width: 575px) {
       .na-track {
-        grid-template-columns: repeat(2, minmax(240px, 1fr));
+        display: flex;
         overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        overscroll-behavior-x: contain;
         -webkit-overflow-scrolling: touch;
         scrollbar-width: none;
-        gap: 2px;
-        padding-bottom: 4px;
+        gap: 3px;
+        padding-bottom: 8px;
       }
       .na-track::-webkit-scrollbar { display: none; }
+      .na-card {
+        flex: 0 0 82vw;
+        scroll-snap-align: start;
+      }
     }
 
     /* ─────────────────────────────────────────────────────
@@ -2227,6 +2249,56 @@
     .prod-card:hover .prod-visual::before {
       animation: shimmerSweep 0.9s ease-out forwards;
     }
+
+    /* ─────────────────────────────────────────────────────
+       FLOATING INSTAGRAM CTA
+    ───────────────────────────────────────────────────── */
+    #ig-float {
+      position: fixed;
+      bottom: 28px; left: 28px;
+      z-index: 900;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(28,43,30,0.92);
+      border: 1px solid rgba(200,169,110,0.28);
+      padding: 12px 20px 12px 14px;
+      text-decoration: none;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      opacity: 0;
+      transform: translateY(8px);
+      pointer-events: none;
+      transition: opacity 0.4s, transform 0.4s, background 0.35s, border-color 0.35s;
+    }
+    #ig-float.show { opacity: 1; transform: none; pointer-events: auto; }
+    #ig-float:hover { background: rgba(28,43,30,1); border-color: rgba(200,169,110,0.6); }
+    #ig-float svg { width: 18px; height: 18px; fill: none; stroke: var(--c-gold); flex-shrink: 0; }
+    .ig-float-text {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.1;
+    }
+    .ig-float-top {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 200;
+      font-size: 8px;
+      letter-spacing: 0.26em;
+      text-transform: uppercase;
+      color: rgba(122,158,126,0.65);
+    }
+    .ig-float-main {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 400;
+      font-size: 10px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--c-pgold);
+    }
+    @media (max-width: 575px) {
+      #ig-float { padding: 10px 16px 10px 12px; }
+      .ig-float-top { display: none; }
+    }
   </style>
 </head>
 <body>
@@ -2249,8 +2321,8 @@
 
 <div id="announce-bar">
   <p class="ann-text">
-    <span data-sq>Dërgim falas për të gjitha porositë<span class="ann-sep">·</span>Kodi <strong>AURELE15</strong> — 15% zbritje në porosinë tuaj të parë</span>
-    <span data-en>Free shipping on all orders<span class="ann-sep">·</span>Code <strong>AURELE15</strong> — 15% off your first order</span>
+    <span data-sq>Dërgim falas për të gjitha porositë<span class="ann-sep">·</span>Shqipëri · Kosovë · Maqedonia e Veriut</span>
+    <span data-en>Free shipping on all orders<span class="ann-sep">·</span>Albania · Kosovo · North Macedonia</span>
   </p>
   <button id="ann-close" aria-label="Close announcement">✕</button>
 </div>
@@ -2302,17 +2374,6 @@
     <a href="#order"      class="mob-lnk"><span data-sq>Porosit</span><span data-en>Order</span></a>
     <a href="#footer"     class="mob-lnk"><span data-sq>Kontakt</span><span data-en>Contact</span></a>
   </nav>
-  <div class="mob-socials">
-    <a href="https://instagram.com/yourbrand" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-      <svg viewBox="0 0 24 24" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="#C8A96E" stroke="none"/></svg>
-    </a>
-    <a href="https://tiktok.com/@yourbrand" target="_blank" rel="noopener noreferrer" aria-label="TikTok">
-      <svg viewBox="0 0 24 24" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"/></svg>
-    </a>
-  </div>
-  <div class="mob-lang">
-    <button class="lang-btn" id="langBtnMob" style="color:var(--c-pgold);border-color:rgba(200,169,110,0.4)">EN</button>
-  </div>
 </div>
 
 <!-- ══════════════════════════════════════════
@@ -2397,11 +2458,11 @@
 <div class="marquee-wrap" aria-hidden="true">
   <div class="marquee-track">
     <span data-sq>Shqipëri · Kosovë · Maqedonia e Veriut · Punuar me Dorë · Porosit në Instagram · Bizhuteri e Kufizuar · Dërgim i Shpejtë ·</span>
-    <span data-en style="display:none">Albania · Kosovo · North Macedonia · Handcrafted · Order via Instagram · Limited Jewellery · Fast Delivery ·</span>
+    <span data-en>Albania · Kosovo · North Macedonia · Handcrafted · Order via Instagram · Limited Jewellery · Fast Delivery ·</span>
     <span data-sq>Shqipëri · Kosovë · Maqedonia e Veriut · Punuar me Dorë · Porosit në Instagram · Bizhuteri e Kufizuar · Dërgim i Shpejtë ·</span>
-    <span data-en style="display:none">Albania · Kosovo · North Macedonia · Handcrafted · Order via Instagram · Limited Jewellery · Fast Delivery ·</span>
+    <span data-en>Albania · Kosovo · North Macedonia · Handcrafted · Order via Instagram · Limited Jewellery · Fast Delivery ·</span>
     <span data-sq>Shqipëri · Kosovë · Maqedonia e Veriut · Punuar me Dorë · Porosit në Instagram · Bizhuteri e Kufizuar · Dërgim i Shpejtë ·</span>
-    <span data-en style="display:none">Albania · Kosovo · North Macedonia · Handcrafted · Order via Instagram · Limited Jewellery · Fast Delivery ·</span>
+    <span data-en>Albania · Kosovo · North Macedonia · Handcrafted · Order via Instagram · Limited Jewellery · Fast Delivery ·</span>
   </div>
 </div>
 
@@ -3178,12 +3239,12 @@
       </span>
       <span class="gold-rule" style="margin-bottom:28px"></span>
       <p class="hl-body">
-        <span data-sq>Çdo nuse shqiptare e di çfarë do të thotë të vishesh me ar. Ditën e dasmës, nëna ia vë gjerdanin vajzës me duart e veta — ai gjerdan që mund ta ketë mbajtur edhe gjyshja, edhe stërgjyshja. Byzylykët shënditen kur vallëzon nusja, unazat i mbajnë deri në pleqëri. Tek ne, ari nuk është luksë e ftohte — është dashuri që nuk mund të thuhet me fjalë.</span>
-        <span data-en>Every Albanian bride knows what it means to be dressed in gold. On her wedding day, her mother places the necklace around her neck with her own hands — a necklace her grandmother may have worn, and her great-grandmother before her. The bangles ring when the bride dances, the rings she carries to old age. In our tradition, gold is not cold luxury — it is love that cannot be spoken.</span>
+        <span data-sq>Në mëngjesin e dasmës, nëna hap kutinë. Brenda — ari. Gjerdan, byzylyk, unazë. Shpesh të njëjtat që i janë dhënë edhe asaj, dikur. Ky moment nuk ka muzikë. Ka vetëm duar që dridhen pak dhe sy plot ujë. Asnjë fjalë. Sepse ari i mirë flet vetë — nga nëna te vajza, nga brez në brez, pa fund.</span>
+        <span data-en>On the morning of the wedding, the mother opens a box. Inside — gold. A necklace, a bracelet, a ring. Often the same pieces once given to her. This moment has no music. Only hands that tremble slightly and eyes full of tears. No words. Because good gold speaks for itself — from mother to daughter, generation to generation, without end.</span>
       </p>
       <p class="hl-body">
-        <span data-sq>Ne e mbajmë këtë traditë gjallë me forma të reja. Çdo copë e Bizhuteria Fantazia është krijuar me mendjen te ajo grua shqiptare — e reja apo e moshuar, nusja apo nëna — që e di se bizhuteri e mirë nuk harrohет kurrë. Vetëm kalohet.</span>
-        <span data-en>We keep this tradition alive through new forms. Every piece from Bizhuteria Fantazia is made with that Albanian woman in mind — young or old, bride or mother — who knows that a fine piece of jewellery is never forgotten. It is only passed on.</span>
+        <span data-sq>Bizhuteria Fantazia lindi nga respekti i thellë ndaj kësaj gjuhe heshtjeje. Çdo model është zgjedhur me kujdes, me mendjen te ato gra — nuse apo nëna, e re apo e moshuar — që e dinë vlerën e asaj që mbajnë. Qëllimi ynë: që atë ditë kur hapet kutia, të jetë diçka prej nesh brenda.</span>
+        <span data-en>Bizhuteria Fantazia was born from a deep respect for that language of silence. Every design is chosen with care, with those women in mind — bride or mother, young or old — who understand the value of what they wear. Our goal: that one day when the box is opened, there is something of ours inside.</span>
       </p>
     </div>
     <div class="heritage-right reveal">
@@ -3358,8 +3419,8 @@
       </h2>
       <span class="gold-rule" style="margin-bottom:26px"></span>
       <p class="story-p">
-        <span data-sq>Bizhuteria Fantazia nisi nga një gjë shumë e thjeshtë: dëshira që secila grua shqiptare të gjejë copën e saj. Jo atë çfarë mbajnë të gjitha — atë që e ndien kur e provon për herë të parë dhe nuk do ta heqësh.</span>
-        <span data-en>Bizhuteria Fantazia started from something very simple: the wish that every Albanian woman finds her own piece. Not what everyone else wears — what she feels when she tries it on for the first time and doesn't want to take off.</span>
+        <span data-sq>Bizhuteria Fantazia nisi nga një gjë shumë e thjeshtë: dëshira që secila grua shqiptare të gjejë bizhutinë e saj. Jo atë çfarë mbajnë të gjitha — atë që e ndien kur e provon për herë të parë dhe nuk do ta heqësh.</span>
+        <span data-en>Bizhuteria Fantazia started from something very simple: the wish that every Albanian woman finds her own jewellery. Not what everyone else wears — what she feels when she tries it on for the first time and doesn't want to take off.</span>
       </p>
       <p class="story-p">
         <span data-sq>Nuk kemi qindra produkte. Kemi 16, dhe secili ka arsyen e vet. Çdo model zgjidhet me kujdes — me mendjen te ato gra që e dinë çfarë duan, por nuk e gjejnë lehtë. Ne punojmë për to.</span>
@@ -3574,10 +3635,7 @@
   <div style="height:1px;background:rgba(181,201,183,0.08)"></div>
   <div class="lux-container">
     <div class="footer-bottom">
-      <span class="f-copy">
-        <span data-sq>© 2025 Bizhuteria Fantazia. Të gjitha të drejtat e rezervuara.</span>
-        <span data-en>© 2025 Bizhuteria Fantazia. All rights reserved.</span>
-      </span>
+      <span class="f-copy">© 2026 Bizhuteria Fantazia</span>
       <div class="f-legal">
         <a href="#"><span data-sq>Privatësia</span><span data-en>Privacy</span></a>
         <a href="#"><span data-sq>Kushtet</span><span data-en>Terms</span></a>
@@ -3588,6 +3646,19 @@
 
 <!-- Back to top -->
 <button id="btt" aria-label="Back to top">↑</button>
+
+<!-- Floating Instagram order CTA -->
+<a id="ig-float" href="https://instagram.com/yourbrand" target="_blank" rel="noopener noreferrer">
+  <svg viewBox="0 0 24 24" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="2" y="2" width="20" height="20" rx="5"/>
+    <circle cx="12" cy="12" r="4"/>
+    <circle cx="17.5" cy="6.5" r="1" fill="#C8A96E" stroke="none"/>
+  </svg>
+  <div class="ig-float-text">
+    <span class="ig-float-top"><span data-sq>Porosit tani</span><span data-en>Order now</span></span>
+    <span class="ig-float-main">Instagram DM</span>
+  </div>
+</a>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script>
@@ -3617,6 +3688,12 @@
     const label = lang === 'sq' ? 'EN' : 'SQ';
     if (langBtn)  langBtn.textContent  = label;
     if (langBtnM) langBtnM.textContent = label;
+    const track = document.querySelector('.marquee-track');
+    if (track) {
+      track.style.animation = 'none';
+      void track.offsetWidth;
+      track.style.animation = '';
+    }
   }
   [langBtn, langBtnM].filter(Boolean).forEach(btn => {
     btn.addEventListener('click', () => {
@@ -3731,6 +3808,10 @@
   const btt = document.getElementById('btt');
   window.addEventListener('scroll', () => btt.classList.toggle('show', window.scrollY > 500), { passive: true });
   btt.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+  /* ─── FLOATING IG BUTTON ─────────────────── */
+  const igFloat = document.getElementById('ig-float');
+  window.addEventListener('scroll', () => igFloat.classList.toggle('show', window.scrollY > 300), { passive: true });
 
   /* ─── HIDE EMPTY PRODUCT IMAGES ─────────── */
   document.querySelectorAll('.prod-photo').forEach(img => {
