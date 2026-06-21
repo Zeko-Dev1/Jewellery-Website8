@@ -1487,6 +1487,7 @@
         scroll-snap-type: x proximity;
         overscroll-behavior-x: contain;
         -webkit-overflow-scrolling: touch;
+        touch-action: pan-x;
         gap: 3px;
         padding-bottom: 12px;
         scrollbar-width: none;
@@ -2072,9 +2073,10 @@
       .na-track {
         display: flex;
         overflow-x: auto;
-        scroll-snap-type: x mandatory;
+        scroll-snap-type: x proximity;
         overscroll-behavior-x: contain;
         -webkit-overflow-scrolling: touch;
+        touch-action: pan-x;
         scrollbar-width: none;
         gap: 3px;
         padding-bottom: 8px;
