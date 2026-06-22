@@ -306,23 +306,28 @@
     .hamburger {
       display: none;
       flex-direction: column;
+      justify-content: center;
       gap: 5px;
       background: none;
       border: none;
       cursor: pointer;
-      padding: 4px;
+      padding: 6px 4px;
+      width: 36px;
+      height: 36px;
     }
     .hamburger span {
       display: block;
       width: 22px;
-      height: 1px;
+      height: 2px;
       background: var(--c-pgold);
-      transition: transform 0.3s, opacity 0.3s;
+      border-radius: 1px;
+      transition: transform 0.28s ease, opacity 0.2s ease;
+      transform-origin: center center;
     }
     #nav.scrolled .hamburger span { background: var(--c-sage); }
-    .hamburger.open span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
-    .hamburger.open span:nth-child(2) { opacity: 0; }
-    .hamburger.open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
     /* Mobile overlay */
     .mob-overlay {
@@ -1519,10 +1524,10 @@
       /* Hero */
       #hero { height: auto; min-height: 100svh; flex-direction: column; }
       .hero-wrap { flex-direction: column-reverse; }
-      .hero-right { flex: none; width: 100%; min-height: 50vw; max-height: 60vh; padding-top: 32px; }
+      .hero-right { flex: none; width: 100%; min-height: 50vw; max-height: 60vh; padding-top: 48px; }
       .hero-left { flex: none; width: 100%; padding: 56px 24px 72px; }
       .hero-h1a, .hero-h1b { font-size: clamp(42px, 10vw, 72px); }
-      .hero-art { width: 180px; }
+      .hero-art { width: 180px; margin-top: 24px; }
       .scroll-ind { left: 50%; }
 
       /* Stats */
@@ -1539,10 +1544,12 @@
       .prod-grid {
         display: flex;
         overflow-x: auto;
-        scroll-snap-type: x proximity;
+        overflow-y: hidden;
+        scroll-snap-type: x mandatory;
         overscroll-behavior-x: contain;
+        overscroll-behavior-y: none;
         -webkit-overflow-scrolling: touch;
-        touch-action: pan-x pan-y;
+        touch-action: pan-x;
         gap: 3px;
         padding-bottom: 12px;
         scrollbar-width: none;
@@ -1600,7 +1607,7 @@
       /* Footer — single column, all left-aligned */
       .footer-top { grid-template-columns: 1fr; gap: 28px; padding: 44px 0 36px; }
       .f-brand-col { border-bottom: 1px solid rgba(181,201,183,0.1); padding-bottom: 28px; margin-left: 0; }
-      .f-brand-row { left: 10px; top: -6px; }
+      .f-brand-row { left: 0px; top: -6px; }
       .footer-bottom { gap: 8px; }
       .f-links li a, .f-links li span { font-size: 12px; word-break: break-word; }
     }
@@ -1815,6 +1822,10 @@
     @media (max-width: 767px) {
       #announce-bar { padding: 0 44px; }
       .ann-sep { margin: 0 8px; }
+      .ann-text { font-size: 9px; letter-spacing: 0.10em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    }
+    @media (max-width: 480px) {
+      .ann-text { font-size: 8.5px; letter-spacing: 0.07em; }
     }
 
     /* ─────────────────────────────────────────────────────
@@ -2253,10 +2264,12 @@
       .na-track {
         display: flex;
         overflow-x: auto;
-        scroll-snap-type: x proximity;
+        overflow-y: hidden;
+        scroll-snap-type: x mandatory;
         overscroll-behavior-x: contain;
+        overscroll-behavior-y: none;
         -webkit-overflow-scrolling: touch;
-        touch-action: pan-x pan-y;
+        touch-action: pan-x;
         scrollbar-width: none;
         gap: 3px;
         padding-bottom: 8px;
@@ -4173,7 +4186,7 @@
   backdrop-filter:blur(12px);
   -webkit-backdrop-filter:blur(12px);
   padding:16px 40px;
-  display:flex;align-items:center;justify-content:space-between;gap:24px;
+  display:none;align-items:center;justify-content:space-between;gap:24px;
   font-family:'DM Sans',sans-serif;font-weight:300;
   transform:translateY(0);transition:transform 0.4s ease;
 ">
@@ -4198,8 +4211,9 @@
   </button>
 </div>
 <script>
-  if (localStorage.getItem('bf_cookie_ok')) {
-    document.getElementById('cookie-bar').style.display = 'none';
+  if (!localStorage.getItem('bf_cookie_ok')) {
+    var cb = document.getElementById('cookie-bar');
+    if (cb) { cb.style.display = 'flex'; }
   }
 </script>
 
