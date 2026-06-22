@@ -13,8 +13,35 @@
   <meta property="og:url" content="https://yourdomain.com/">
   <meta property="og:image" content="https://yourdomain.com/images/og-cover.jpg">
   <meta name="twitter:card" content="summary_large_image">
+  <!-- Canonical URL — replace with your real domain -->
+  <link rel="canonical" href="https://yourdomain.com/">
   <!-- Google Search Console — replace content value with your verification code -->
   <!-- <meta name="google-site-verification" content="YOUR_CODE_HERE"> -->
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "Bizhuteria Fantazia",
+    "description": "Bizhuteri fine e punuar me dorë, e frymëzuar nga tradita shqiptare. Fine handcrafted jewellery inspired by Albanian tradition.",
+    "url": "https://yourdomain.com/",
+    "logo": "https://yourdomain.com/images/Logo.png",
+    "image": "https://yourdomain.com/images/og-cover.jpg",
+    "sameAs": [
+      "https://instagram.com/yourbrand"
+    ],
+    "areaServed": [
+      { "@type": "Country", "name": "Albania" },
+      { "@type": "Country", "name": "Kosovo" },
+      { "@type": "Country", "name": "North Macedonia" }
+    ],
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "contactType": "customer service",
+      "availableLanguage": ["Albanian", "English"]
+    }
+  }
+  </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600&family=DM+Sans:wght@200;300;400;500&display=swap" rel="stylesheet">
@@ -2576,6 +2603,9 @@
     <a href="#story"      class="mob-lnk"><span data-sq>Historia</span><span data-en>Story</span></a>
     <a href="#footer"     class="mob-lnk"><span data-sq>Kontakt</span><span data-en>Contact</span></a>
   </nav>
+  <div class="mob-lang">
+    <button class="lang-btn" id="langBtnMob">EN</button>
+  </div>
 </div>
 
 <!-- ══════════════════════════════════════════
@@ -2587,8 +2617,10 @@
     <div class="hero-left">
       <p class="hero-eyebrow"><span data-sq>Bizhuteri Fine · Punuar me Dorë · Ballkani</span><span data-en>Fine Jewellery · Handcrafted · Balkans</span></p>
       <span class="hero-rule"></span>
-      <span class="hero-h1a"><span data-sq>Afër zemrës</span><span data-en>Worn close</span></span>
-      <span class="hero-h1b"><span data-sq>mbajtura gjithmonë.</span><span data-en>to the heart.</span></span>
+      <h1 style="margin:0;padding:0;font-weight:inherit;font-size:inherit;line-height:inherit;">
+        <span class="hero-h1a"><span data-sq>Afër zemrës</span><span data-en>Worn close</span></span>
+        <span class="hero-h1b"><span data-sq>mbajtura gjithmonë.</span><span data-en>to the heart.</span></span>
+      </h1>
       <p class="hero-sub">
         <span data-sq>Çdo copë është një ceremoni e heshtur. Krijuar me durim dhe dërguar me kujdes në Shqipëri, Kosovë dhe Maqedoninë e Veriut.</span>
         <span data-en>Each piece is a quiet ceremony. Created with patience and delivered with care across Albania, Kosovo, and North Macedonia.</span>
@@ -3990,10 +4022,10 @@
   /* ─── ANNOUNCEMENT BAR ─────────────────── */
   const annBar   = document.getElementById('announce-bar');
   const annClose = document.getElementById('ann-close');
-  annClose.addEventListener('click', () => {
-    annBar.classList.add('hidden');
+  if (annClose) annClose.addEventListener('click', () => {
+    if (annBar) annBar.classList.add('hidden');
     document.body.classList.add('bar-gone');
-    setTimeout(() => { annBar.style.display = 'none'; }, 400);
+    setTimeout(() => { if (annBar) annBar.style.display = 'none'; }, 400);
   });
 
   /* ─── COUNTDOWN TIMER ───────────────────── */
@@ -4004,9 +4036,16 @@
     const mEl = document.getElementById('cdM');
     const sEl = document.getElementById('cdS');
     function pad(n) { return String(n).padStart(2, '0'); }
+    let cdTimer;
     function tick() {
       const diff = end - Date.now();
-      if (diff <= 0) { if (hEl) hEl.textContent = '00'; if (mEl) mEl.textContent = '00'; if (sEl) sEl.textContent = '00'; return; }
+      if (diff <= 0) {
+        if (hEl) hEl.textContent = '00';
+        if (mEl) mEl.textContent = '00';
+        if (sEl) sEl.textContent = '00';
+        clearInterval(cdTimer);
+        return;
+      }
       const h = Math.floor(diff / 3600000);
       const m = Math.floor((diff % 3600000) / 60000);
       const s = Math.floor((diff % 60000) / 1000);
@@ -4015,17 +4054,21 @@
       if (sEl) sEl.textContent = pad(s);
     }
     tick();
-    setInterval(tick, 1000);
+    cdTimer = setInterval(tick, 1000);
   })();
 
   /* ─── BACK TO TOP ───────────────────────── */
   const btt = document.getElementById('btt');
-  window.addEventListener('scroll', () => btt.classList.toggle('show', window.scrollY > 500), { passive: true });
-  btt.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+  if (btt) {
+    window.addEventListener('scroll', () => btt.classList.toggle('show', window.scrollY > 500), { passive: true });
+    btt.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+  }
 
   /* ─── FLOATING IG BUTTON ─────────────────── */
   const igFloat = document.getElementById('ig-float');
-  window.addEventListener('scroll', () => igFloat.classList.toggle('show', window.scrollY > 300), { passive: true });
+  if (igFloat) {
+    window.addEventListener('scroll', () => igFloat.classList.toggle('show', window.scrollY > 300), { passive: true });
+  }
 
   /* ─── DEMO IMAGES — real Unsplash jewelry photos, swap for your own when ready ─ */
   (function () {
