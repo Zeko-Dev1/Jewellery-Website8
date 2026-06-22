@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="sq">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Politika e Privatësisë — Bizhuteria Fantazia</title>
+  <meta name="description" content="Politika e privatësisë së Bizhuteria Fantazia. Mësoni si i mbrojmë të dhënat tuaja personale.">
+  <meta name="robots" content="noindex, follow">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Sans:wght@200;300;400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --c-night: #0D1810;
+      --c-sage:  #1F3A26;
+      --c-mid:   #4A6B52;
+      --c-gold:  #C9A961;
+      --c-pgold: #EDDBA8;
+      --c-pale:  #DDD8C8;
+      --c-linen: #F4F0E6;
+      --c-text:  #2C3E2F;
+    }
+    body {
+      background: var(--c-linen);
+      color: var(--c-text);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      line-height: 1.8;
+      font-size: 15px;
+    }
+
+    /* ── Header ── */
+    .pg-header {
+      background: var(--c-night);
+      padding: 32px 56px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid rgba(201,169,97,0.15);
+    }
+    .pg-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+    .pg-brand img {
+      height: 40px;
+      width: auto;
+      object-fit: contain;
+    }
+    .pg-brand-text { display: flex; flex-direction: column; }
+    .pg-brand-top {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      font-size: 8px;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: rgba(181,201,183,0.5);
+    }
+    .pg-brand-main {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-weight: 400;
+      font-size: 22px;
+      color: var(--c-pgold);
+      letter-spacing: 0.06em;
+      line-height: 1;
+    }
+    .pg-back {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(201,169,97,0.6);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(201,169,97,0.2);
+      padding-bottom: 1px;
+      transition: color 0.3s, border-color 0.3s;
+    }
+    .pg-back:hover { color: var(--c-pgold); border-color: var(--c-gold); }
+
+    /* ── Hero band ── */
+    .pg-hero {
+      background: var(--c-sage);
+      padding: 64px 56px 56px;
+      border-bottom: 1px solid rgba(201,169,97,0.12);
+    }
+    .pg-label {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      font-size: 9px;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: rgba(201,169,97,0.55);
+      display: block;
+      margin-bottom: 12px;
+    }
+    .pg-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-size: clamp(36px, 5vw, 60px);
+      color: var(--c-pgold);
+      letter-spacing: -0.01em;
+      line-height: 1.05;
+      margin-bottom: 16px;
+    }
+    .pg-updated {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 200;
+      font-size: 11px;
+      color: rgba(181,201,183,0.45);
+      letter-spacing: 0.12em;
+    }
+
+    /* ── Content ── */
+    .pg-content {
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 72px 56px 96px;
+    }
+    .pg-section { margin-bottom: 52px; }
+    .pg-section h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 400;
+      font-style: italic;
+      font-size: 26px;
+      color: var(--c-text);
+      margin-bottom: 16px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid rgba(201,169,97,0.2);
+    }
+    .pg-section p { margin-bottom: 14px; color: rgba(44,62,47,0.85); }
+    .pg-section ul {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 14px 0;
+    }
+    .pg-section ul li {
+      padding: 6px 0 6px 20px;
+      position: relative;
+      color: rgba(44,62,47,0.85);
+    }
+    .pg-section ul li::before {
+      content: '—';
+      position: absolute;
+      left: 0;
+      color: var(--c-gold);
+      font-size: 12px;
+    }
+    .pg-contact-box {
+      background: var(--c-night);
+      border: 1px solid rgba(201,169,97,0.15);
+      padding: 28px 32px;
+      margin-top: 24px;
+    }
+    .pg-contact-box p { color: rgba(181,201,183,0.65); margin-bottom: 8px; }
+    .pg-contact-box a { color: var(--c-pgold); text-decoration: none; }
+    .pg-contact-box a:hover { text-decoration: underline; }
+
+    /* ── Footer ── */
+    .pg-footer {
+      background: var(--c-night);
+      padding: 28px 56px;
+      border-top: 1px solid rgba(201,169,97,0.1);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .pg-footer span {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      font-size: 11px;
+      color: rgba(122,158,126,0.4);
+    }
+    .pg-footer-links { display: flex; gap: 20px; }
+    .pg-footer-links a {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      font-size: 11px;
+      color: rgba(122,158,126,0.4);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+    .pg-footer-links a:hover { color: var(--c-mid); }
+
+    @media (max-width: 767px) {
+      .pg-header { padding: 24px 24px; }
+      .pg-hero { padding: 48px 24px 40px; }
+      .pg-content { padding: 48px 24px 64px; }
+      .pg-footer { padding: 24px; flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="pg-header">
+    <a href="index.html" class="pg-brand">
+      <img src="images/Logo.png" alt="Bizhuteria Fantazia" onerror="this.style.display='none'">
+      <div class="pg-brand-text">
+        <span class="pg-brand-top">Bizhuteria</span>
+        <span class="pg-brand-main">Fantazia</span>
+      </div>
+    </a>
+    <a href="index.html" class="pg-back">← Kthehu / Back</a>
+  </header>
+
+  <div class="pg-hero">
+    <span class="pg-label">Dokument Ligjor · Legal Document</span>
+    <h1 class="pg-title">Politika e Privatësisë<br><em style="font-size:0.65em;opacity:0.7;">Privacy Policy</em></h1>
+    <span class="pg-updated">Përditësuar · Updated: Qershor 2026 / June 2026</span>
+  </div>
+
+  <main class="pg-content">
+
+    <div class="pg-section">
+      <h2>1. Kush jemi / Who we are</h2>
+      <p>Bizhuteria Fantazia është një biznes bizhuterish i bazuar në Maqedoni, që ofron produkte në Shqipëri, Kosovë dhe Maqedoninë e Veriut. Porositë pranohen nëpërmjet Instagram Direct Message.</p>
+      <p><em>Bizhuteria Fantazia is a jewellery business based in Albania, offering products across Albania, Kosovo, and North Macedonia. Orders are accepted via Instagram Direct Message.</em></p>
+    </div>
+
+    <div class="pg-section">
+      <h2>2. Të dhënat që mbledhim / Data we collect</h2>
+      <p>Kur bëni një porosi nëpërmjet Instagram DM, mbledhim:</p>
+      <ul>
+        <li>Emrin dhe mbiemrin tuaj</li>
+        <li>Numrin e telefonit për konfirmim dhe dërgim</li>
+        <li>Adresën e dërgimit</li>
+        <li>Detajet e porosisë</li>
+      </ul>
+      <p><em>When placing an order via Instagram DM, we collect your name, phone number, shipping address, and order details. We do not collect payment card data directly — payments are arranged separately.</em></p>
+      <p>Ky faqe interneti nuk përdor cookies gjurmimi dhe nuk ka Google Analytics të aktivizuar.</p>
+      <p><em>This website does not use tracking cookies and has no analytics enabled.</em></p>
+    </div>
+
+    <div class="pg-section">
+      <h2>3. Si i përdorim të dhënat / How we use your data</h2>
+      <ul>
+        <li>Përpunimin dhe konfirmimin e porosisë suaj</li>
+        <li>Organizimin e dërgimit</li>
+        <li>Komunikimin me ju nëse ka problem me porosinë</li>
+      </ul>
+      <p><em>We use your data only to process your order, arrange delivery, and contact you if there is an issue. We do not use your data for marketing without your explicit consent.</em></p>
+    </div>
+
+    <div class="pg-section">
+      <h2>4. Ndarja me palë të treta / Third-party sharing</h2>
+      <p>Nuk shesim, nuk japim me qira dhe nuk ndajmë të dhënat tuaja personale me palë të treta, me përjashtim të:</p>
+      <ul>
+        <li>Shërbimeve të dërgimit (vetëm emri dhe adresa)</li>
+        <li>Detyrimeve ligjore nëse kërkohet nga autoritetet</li>
+      </ul>
+      <p><em>We do not sell or share your personal data. Exceptions: delivery services (name and address only) and legal obligations if required by authorities.</em></p>
+    </div>
+
+    <div class="pg-section">
+      <h2>5. Ruajtja e të dhënave / Data retention</h2>
+      <p>Të dhënat e porosisë ruhen për periudhën e nevojshme për të përfunduar transaksionin dhe për 12 muaj pas kësaj për qëllime kontabiliteti dhe trajtimi të ankesave.</p>
+      <p><em>Order data is kept for the duration of the transaction and for 12 months afterwards for accounting and dispute purposes, after which it is deleted.</em></p>
+    </div>
+
+    <div class="pg-section">
+      <h2>6. Të drejtat tuaja / Your rights</h2>
+      <p>Keni të drejtë të kërkoni:</p>
+      <ul>
+        <li>Qasje në të dhënat tuaja që mbajmë</li>
+        <li>Korrigjimin e të dhënave të pasakta</li>
+        <li>Fshirjen e të dhënave tuaja (nëse nuk ka detyrim ligjor për t'i mbajtur)</li>
+      </ul>
+      <p><em>You have the right to request access to, correction of, or deletion of your personal data. Contact us using the details below.</em></p>
+    </div>
+
+    <div class="pg-section">
+      <h2>7. Ndryshime / Changes</h2>
+      <p>Mund të përditësojmë këtë politikë herë pas here. Data e përditësimit shfaqet në krye të faqes. Ndryshimet hyjnë në fuqi menjëherë pas publikimit.</p>
+      <p><em>We may update this policy occasionally. The updated date is shown at the top of this page. Changes take effect immediately upon publication.</em></p>
+    </div>
+
+    <div class="pg-section">
+      <h2>8. Na kontaktoni / Contact us</h2>
+      <div class="pg-contact-box">
+        <p>Bizhuteria Fantazia</p>
+        <p>Instagram: <a href="https://instagram.com/yourbrand" target="_blank" rel="noopener">@yourbrand</a></p>
+        <p>Email: <a href="mailto:contact@yourdomain.com">contact@yourdomain.com</a></p>
+        <p style="margin-top:8px;font-size:13px;">Për çdo pyetje rreth privatësisë suaj, kontaktoni ne direkt.<br><em>For any privacy-related questions, contact us directly.</em></p>
+      </div>
+    </div>
+
+  </main>
+
+  <footer class="pg-footer">
+    <span>© 2026 Bizhuteria Fantazia</span>
+    <div class="pg-footer-links">
+      <a href="privacy.html">Privatësia</a>
+      <a href="terms.html">Kushtet</a>
+      <a href="index.html">Kthehu</a>
+    </div>
+  </footer>
+
+</body>
+</html>
