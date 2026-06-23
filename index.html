@@ -823,10 +823,12 @@
       align-items: center;
       justify-content: center;
       z-index: 1;
-      transition: transform 0.7s var(--ease-out);
     }
-    .prod-card:hover .prod-art { transform: scale(1.04); }
-    .prod-card:hover .prod-photo { transform: scale(1.05); }
+    @media (hover: hover) {
+      .prod-art { transition: transform 0.7s var(--ease-out); }
+      .prod-card:hover .prod-art { transform: scale(1.04); }
+      .prod-card:hover .prod-photo { transform: scale(1.05); }
+    }
     /* Hover overlay */
     .prod-visual::after {
       content: '';
@@ -858,8 +860,10 @@
       border-bottom: 1px solid rgba(232,213,163,0.4);
       padding-bottom: 3px;
     }
-    .prod-card:hover .prod-visual::after { opacity: 1; }
-    .prod-card:hover .prod-overlay { opacity: 1; }
+    @media (hover: hover) {
+      .prod-card:hover .prod-visual::after { opacity: 1; }
+      .prod-card:hover .prod-overlay { opacity: 1; }
+    }
 
     /* Card body */
     .prod-body {
@@ -1607,16 +1611,10 @@
       .f-links li a, .f-links li span { font-size: 12px; word-break: break-word; }
     }
 
-    /* Disable hover animations on touch devices — prevents "card jump" on scroll */
+    /* On touch devices, strip ALL card transitions so nothing moves when finger scrolls */
     @media (hover: none) {
-      .prod-card:hover .prod-art { transform: none; }
-      .prod-card:hover .prod-photo { transform: none; }
-      .prod-card:hover .prod-visual::after { opacity: 0; }
-      .prod-card:hover .prod-overlay { opacity: 0; }
-      .prod-card:hover .prod-visual::before { animation: none; }
-      .prod-card:hover::after { transform: scaleX(0); }
-      .na-card:hover .prod-art { transform: none; }
-      .sale-card:hover .prod-art { transform: none; }
+      .prod-card { transition: none !important; }
+      .prod-art  { transition: none !important; }
     }
 
     /* Scroll indicator for product slider */
@@ -1934,8 +1932,11 @@
       overflow: hidden;
     }
     .sale-visual img.prod-photo { z-index: 0; }
-    .sale-visual .prod-art { position: relative; z-index: 1; transition: transform 0.7s var(--ease-out); }
-    .sale-card:hover .prod-art { transform: scale(1.04); }
+    .sale-visual .prod-art { position: relative; z-index: 1; }
+    @media (hover: hover) {
+      .sale-visual .prod-art { transition: transform 0.7s var(--ease-out); }
+      .sale-card:hover .prod-art { transform: scale(1.04); }
+    }
     .sale-pct {
       position: absolute;
       top: 16px; right: 16px;
@@ -2196,10 +2197,12 @@
       overflow: hidden;
     }
     .na-visual .prod-art {
-      transition: transform 0.8s var(--ease-out);
       pointer-events: none;
     }
-    .na-card:hover .prod-art { transform: scale(1.06); }
+    @media (hover: hover) {
+      .na-visual .prod-art { transition: transform 0.8s var(--ease-out); }
+      .na-card:hover .prod-art { transform: scale(1.06); }
+    }
     .na-new-pill {
       position: absolute;
       top: 16px; left: 16px;
@@ -2422,7 +2425,9 @@
       transition: transform 0.5s var(--ease-out);
       z-index: 10;
     }
-    .prod-card:hover::after { transform: scaleX(1); }
+    @media (hover: hover) {
+      .prod-card:hover::after { transform: scaleX(1); }
+    }
     /* Gold shimmer sweep across visual */
     @keyframes shimmerSweep {
       from { left: -80%; }
@@ -2438,8 +2443,10 @@
       pointer-events: none;
       z-index: 4;
     }
-    .prod-card:hover .prod-visual::before {
-      animation: shimmerSweep 0.9s ease-out forwards;
+    @media (hover: hover) {
+      .prod-card:hover .prod-visual::before {
+        animation: shimmerSweep 0.9s ease-out forwards;
+      }
     }
 
     /* ─────────────────────────────────────────────────────
@@ -4190,53 +4197,72 @@
         return cards[0].offsetWidth + 3;
       }
 
+      var rafId = null;
+
+      function cardLeft(idx) {
+        var pos = 0;
+        for (var i = 0; i < idx; i++) pos += cards[i].offsetWidth + 3;
+        return pos;
+      }
+
       function snapTo(idx) {
         idx = Math.max(0, Math.min(cards.length - 1, idx));
         currentIdx = idx;
-        var target = 0;
-        for (var i = 0; i < idx; i++) target += cards[i].offsetWidth + 3;
-        smoothScroll(el, target);
+        smoothScroll(el, cardLeft(idx));
       }
 
       function smoothScroll(container, to) {
+        if (rafId) cancelAnimationFrame(rafId);
         var from = container.scrollLeft;
         var diff = to - from;
+        if (Math.abs(diff) < 0.5) { container.scrollLeft = to; return; }
         var start = null;
+        var dur = 380;
         function step(ts) {
           if (!start) start = ts;
-          var p = Math.min((ts - start) / 260, 1);
-          var ease = p < 0.5 ? 2 * p * p : -1 + (4 - 2 * p) * p;
+          var t = Math.min((ts - start) / dur, 1);
+          var ease = 1 - Math.pow(1 - t, 4); /* ease-out quart — snappy start, soft landing */
           container.scrollLeft = from + diff * ease;
-          if (p < 1) requestAnimationFrame(step);
+          if (t < 1) rafId = requestAnimationFrame(step);
+          else container.scrollLeft = to;
         }
-        requestAnimationFrame(step);
+        rafId = requestAnimationFrame(step);
       }
 
       el.addEventListener('touchstart', function (e) {
+        if (rafId) { cancelAnimationFrame(rafId); rafId = null; }
         x0 = e.touches[0].clientX;
         y0 = e.touches[0].clientY;
         sl0 = el.scrollLeft;
         axis = null;
         var cw = cards[0].offsetWidth + 3;
-        currentIdx = Math.round(el.scrollLeft / cw);
+        currentIdx = Math.max(0, Math.min(cards.length - 1, Math.round(el.scrollLeft / cw)));
       }, { passive: true });
 
       el.addEventListener('touchmove', function (e) {
         var dx = e.touches[0].clientX - x0;
         var dy = e.touches[0].clientY - y0;
         if (axis === null) {
-          axis = Math.abs(dx) > Math.abs(dy) + 4 ? 'x' : 'y';
+          if (Math.abs(dx) > Math.abs(dy) + 5) axis = 'x';
+          else if (Math.abs(dy) > Math.abs(dx) + 5) axis = 'y';
+          else return;
         }
         if (axis === 'x') {
           e.preventDefault();
-          el.scrollLeft = sl0 - dx;
+          var raw = sl0 - dx;
+          var max = el.scrollWidth - el.offsetWidth;
+          /* rubber-band resistance at both edges */
+          if (raw < 0)   raw = raw * 0.25;
+          if (raw > max) raw = max + (raw - max) * 0.25;
+          el.scrollLeft = raw;
         }
       }, { passive: false });
 
       el.addEventListener('touchend', function (e) {
         if (axis !== 'x') return;
         var dx = e.changedTouches[0].clientX - x0;
-        var threshold = 35;
+        var vel = dx / Math.max(1, e.timeStamp - (e.timeStamp - 1)); /* pixels/ms approx */
+        var threshold = 30;
         var nextIdx = currentIdx;
         if (dx < -threshold) nextIdx = currentIdx + 1;
         else if (dx > threshold) nextIdx = currentIdx - 1;
