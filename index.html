@@ -1549,11 +1549,20 @@
         display: flex;
         overflow-x: auto;
         scroll-snap-type: x mandatory;
+        overscroll-behavior-x: contain;
         -webkit-overflow-scrolling: touch;
-        touch-action: pan-x pan-y;
+        touch-action: pan-x;
         gap: 3px;
         padding-bottom: 12px;
         scrollbar-width: none;
+      }
+      /* Pre-reveal all slider cards — they start hidden (translateY 32px) which
+         causes a vertical jump when cards snap into view horizontally */
+      .prod-grid .reveal,
+      .prod-grid .reveal-left {
+        opacity: 1 !important;
+        transform: none !important;
+        transition: none !important;
       }
       .prod-grid::-webkit-scrollbar { display: none; }
       .prod-card {
@@ -2271,11 +2280,19 @@
         display: flex;
         overflow-x: auto;
         scroll-snap-type: x mandatory;
+        overscroll-behavior-x: contain;
         -webkit-overflow-scrolling: touch;
-        touch-action: pan-x pan-y;
+        touch-action: pan-x;
         scrollbar-width: none;
         gap: 3px;
         padding-bottom: 8px;
+      }
+      /* Same pre-reveal fix for new-arrivals slider cards */
+      .na-track .reveal,
+      .na-track .reveal-left {
+        opacity: 1 !important;
+        transform: none !important;
+        transition: none !important;
       }
       .na-track::-webkit-scrollbar { display: none; }
       .na-card {
@@ -4031,6 +4048,13 @@
   }, { threshold: 0.08 });
 
   document.querySelectorAll('.reveal, .reveal-left').forEach((el, i) => {
+    /* Cards inside horizontal sliders must never animate vertically —
+       the translateY reveal pops mid-swipe and looks like a jump */
+    if (el.closest('.prod-grid, .na-track')) {
+      el.classList.add('in');
+      el.style.transitionDelay = '0s';
+      return;
+    }
     const sibs = Array.from(el.parentElement.querySelectorAll('.reveal, .reveal-left'));
     el.style.transitionDelay = Math.min(sibs.indexOf(el) * 0.09, 0.45) + 's';
     revealObs.observe(el);
