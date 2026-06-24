@@ -1547,10 +1547,9 @@
       /* Products — HORIZONTAL SCROLL on tablet (2 wide) + mobile (1 wide) */
       .prod-grid {
         display: flex;
-        overflow-x: auto;
+        overflow-x: scroll;
         scroll-snap-type: x mandatory;
         overscroll-behavior-x: contain;
-        -webkit-overflow-scrolling: touch;
         touch-action: pan-x;
         gap: 3px;
         padding-bottom: 12px;
@@ -2278,10 +2277,9 @@
     @media (max-width: 575px) {
       .na-track {
         display: flex;
-        overflow-x: auto;
+        overflow-x: scroll;
         scroll-snap-type: x mandatory;
         overscroll-behavior-x: contain;
-        -webkit-overflow-scrolling: touch;
         touch-action: pan-x;
         scrollbar-width: none;
         gap: 3px;
