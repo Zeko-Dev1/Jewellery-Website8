@@ -13,6 +13,7 @@
   <meta property="og:url" content="https://yourdomain.com/">
   <meta property="og:image" content="https://yourdomain.com/images/og-cover.jpg">
   <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="index.css">
   <!-- Canonical URL — replace with your real domain -->
   <link rel="canonical" href="https://yourdomain.com/">
   <!-- Google Search Console — replace content value with your verification code -->
@@ -46,2524 +47,6 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600&family=DM+Sans:wght@200;300;400;500&display=swap" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-
-  <style>
-    /* ─────────────────────────────────────────────────────
-       VARIABLES
-    ───────────────────────────────────────────────────── */
-    :root {
-      --c-night:  #0D1810;
-      --c-sage:   #1F3A26;
-      --c-mid:    #4A6B52;
-      --c-pale:   #DDD8C8;
-      --c-linen:  #F4F0E6;
-      --c-gold:   #C9A961;
-      --c-pgold:  #EDDBA8;
-      --c-bronze: #9C7A3F;
-      --c-text:   #14241A;
-      --c-muted:  #46594A;
-      --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
-      --bar-h: 44px;
-    }
-
-    /* ─────────────────────────────────────────────────────
-       RESET & BASE
-    ───────────────────────────────────────────────────── */
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; font-size: 16px; }
-    body {
-      background: var(--c-linen);
-      color: var(--c-text);
-      overflow-x: hidden;
-      font-family: 'DM Sans', sans-serif;
-      font-weight: 300;
-      line-height: 1.6;
-      -webkit-font-smoothing: antialiased;
-    }
-
-    /* Offset anchor scroll so fixed navbar never covers section tops */
-    section[id], footer[id] {
-      scroll-margin-top: calc(var(--bar-h) + 80px + 12px);
-    }
-
-    /* Grain texture overlay */
-    body::after {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23g)' opacity='0.035'/%3E%3C/svg%3E");
-      pointer-events: none;
-      z-index: 9999;
-      opacity: 1;
-    }
-
-    /* Page enter */
-    @keyframes pageIn { from { opacity: 0; } to { opacity: 1; } }
-    body { animation: pageIn 0.6s ease forwards; }
-
-    /* Language toggle */
-    [data-en] { display: none; }
-    html[data-lang="en"] [data-sq] { display: none; }
-    html[data-lang="en"] [data-en] { display: revert; }
-
-    /* Utility */
-    .gold-rule {
-      display: block;
-      width: 48px;
-      height: 1px;
-      background: var(--c-gold);
-    }
-    .lux-container {
-      max-width: 1280px;
-      margin: 0 auto;
-      padding: 0 56px;
-    }
-
-    /* Reveal animation */
-    .reveal {
-      opacity: 0;
-      transform: translateY(32px);
-      transition: opacity 0.8s var(--ease-out), transform 0.8s var(--ease-out);
-    }
-    .reveal.in { opacity: 1; transform: none; }
-    .reveal-left {
-      opacity: 0;
-      transform: translateX(-32px);
-      transition: opacity 0.9s var(--ease-out), transform 0.9s var(--ease-out);
-    }
-    .reveal-left.in { opacity: 1; transform: none; }
-
-    /* ─────────────────────────────────────────────────────
-       BUTTONS
-    ───────────────────────────────────────────────────── */
-    .btn-ol {
-      display: inline-block;
-      border: 1px solid var(--c-gold);
-      color: var(--c-sage);
-      background: transparent;
-      padding: 15px 48px;
-      letter-spacing: 0.18em;
-      font-size: 11px;
-      font-family: 'DM Sans', sans-serif;
-      font-weight: 500;
-      text-transform: uppercase;
-      text-decoration: none;
-      border-radius: 0;
-      cursor: pointer;
-      transition: background 0.4s, color 0.4s;
-    }
-    .btn-ol:hover { background: var(--c-gold); color: var(--c-night); }
-    .btn-ol.dark { color: var(--c-pgold); border-color: rgba(200,169,110,0.7); }
-    .btn-ol.dark:hover { background: var(--c-gold); color: var(--c-night); border-color: var(--c-gold); }
-
-    .btn-solid {
-      display: inline-block;
-      background: var(--c-sage);
-      color: var(--c-pgold);
-      padding: 15px 48px;
-      letter-spacing: 0.18em;
-      font-size: 11px;
-      font-family: 'DM Sans', sans-serif;
-      font-weight: 500;
-      text-transform: uppercase;
-      text-decoration: none;
-      border: none;
-      border-radius: 0;
-      cursor: pointer;
-      transition: background 0.4s;
-    }
-    .btn-solid:hover { background: var(--c-night); color: var(--c-pgold); }
-
-    /* ─────────────────────────────────────────────────────
-       NAVBAR
-    ───────────────────────────────────────────────────── */
-    #nav {
-      position: fixed;
-      top: var(--bar-h); left: 0; right: 0;
-      z-index: 1000;
-      height: 80px;
-      transition: background 0.5s, border-color 0.5s, box-shadow 0.5s, top 0.4s;
-      display: flex;
-      align-items: center;
-    }
-    #nav.scrolled {
-      background: rgba(240,235,224,0.96);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border-bottom: 1px solid rgba(181,201,183,0.5);
-      box-shadow: 0 2px 32px rgba(28,43,30,0.06);
-    }
-    .nav-inner {
-      max-width: 1280px;
-      margin: 0 auto;
-      padding: 0 56px;
-      width: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-    .nav-logo {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      text-decoration: none;
-      flex-shrink: 0;
-      transition: opacity 0.3s;
-    }
-    .nav-logo:hover { opacity: 0.8; }
-    .nav-logo-img {
-      height: 44px;
-      width: auto;
-      object-fit: contain;
-      display: block;
-    }
-    .nav-logo-text {
-      display: flex;
-      flex-direction: column;
-      line-height: 1.05;
-    }
-    .nav-logo-top {
-      font-family: 'DM Sans', sans-serif;
-      font-weight: 300;
-      font-size: 8px;
-      letter-spacing: 0.3em;
-      text-transform: uppercase;
-      color: rgba(122,158,126,0.75);
-    }
-    #nav.scrolled .nav-logo-top { color: var(--c-muted); }
-    .nav-logo-main {
-      font-family: 'Cormorant Garamond', serif;
-      font-weight: 400;
-      font-style: italic;
-      font-size: 22px;
-      color: var(--c-pgold);
-      letter-spacing: 0.06em;
-    }
-    #nav.scrolled .nav-logo-main { color: var(--c-sage); }
-    #nav.scrolled .nav-logo-img { filter: saturate(1.8) brightness(0.62); transition: filter 0.5s; }
-
-    .nav-links {
-      display: flex;
-      gap: 36px;
-      list-style: none;
-      margin: 0;
-      padding: 0;
-    }
-    .nav-links a {
-      font-family: 'DM Sans', sans-serif;
-      font-weight: 400;
-      font-size: 11px;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: rgba(232,213,163,0.7);
-      text-decoration: none;
-      transition: color 0.3s;
-      position: relative;
-      padding-bottom: 2px;
-    }
-    #nav.scrolled .nav-links a { color: var(--c-muted); }
-    .nav-links a::after {
-      content: '';
-      position: absolute;
-      bottom: -2px; left: 0;
-      width: 0; height: 1px;
-      background: var(--c-gold);
-      transition: width 0.3s;
-    }
-    .nav-links a:hover { color: var(--c-gold); }
-    .nav-links a:hover::after { width: 100%; }
-    .nav-links a.active { color: var(--c-gold); }
-    #nav.scrolled .nav-links a.active { color: var(--c-gold); }
-    .nav-links a.active::after { width: 100%; }
-
-    .nav-right { display: flex; align-items: center; gap: 16px; }
-
-    /* Language toggle */
-    .lang-btn {
-      font-family: 'DM Sans', sans-serif;
-      font-weight: 500;
-      font-size: 10px;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: rgba(232,213,163,0.6);
-      background: none;
-      border: 1px solid rgba(200,169,110,0.3);
-      padding: 5px 12px;
-      border-radius: 0;
-      cursor: pointer;
-      transition: color 0.3s, border-color 0.3s;
-    }
-    #nav.scrolled .lang-btn { color: var(--c-muted); border-color: rgba(92,122,96,0.3); }
-    .lang-btn:hover { color: var(--c-gold); border-color: var(--c-gold); }
-
-    /* Social icons in nav */
-    .nav-socials { display: flex; align-items: center; gap: 12px; }
-    .nav-social-link { display: flex; align-items: center; text-decoration: none; opacity: 0.75; transition: opacity 0.3s; }
-    .nav-social-link:hover { opacity: 1; }
-    .nav-social-link svg { width: 18px; height: 18px; fill: none; stroke: var(--c-gold); }
-
-    /* Hamburger */
-    .hamburger {
-      display: none;
-      flex-direction: column;
-      justify-content: center;
-      gap: 5px;
-      background: none;
-      border: none;
-      cursor: pointer;
-      padding: 6px 4px;
-      width: 36px;
-      height: 36px;
-    }
-    .hamburger span {
-      display: block;
-      width: 22px;
-      height: 2px;
-      background: var(--c-pgold);
-      border-radius: 1px;
-      transition: transform 0.28s ease, opacity 0.2s ease;
-      transform-origin: center center;
-    }
-    #nav.scrolled .hamburger span { background: var(--c-sage); }
-    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
-    .hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
-    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
-
-    /* Mobile overlay */
-    .mob-overlay {
-      position: fixed;
-      inset: 0;
-      background: var(--c-night);
-      z-index: 999;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      transform: translateX(100%);
-      transition: transform 0.5s cubic-bezier(0.76,0,0.24,1);
-    }
-    .mob-overlay.open { transform: translateX(0); }
-    .mob-nav {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 28px;
-      margin-bottom: 48px;
-    }
-    .mob-nav a {
-      font-family: 'Cormorant Garamond', serif;
-      font-weight: 300;
-      font-style: italic;
-      font-size: 44px;
-      color: var(--c-pgold);
-      text-decoration: none;
-      transition: color 0.3s;
-      line-height: 1;
-    }
-    .mob-nav a:hover { color: var(--c-gold); }
-    .mob-socials { display: flex; gap: 24px; margin-top: 16px; }
-    .mob-socials a { display: flex; align-items: center; text-decoration: none; opacity: 0.6; transition: opacity 0.3s; }
-    .mob-socials a:hover { opacity: 1; }
-    .mob-socials svg { width: 22px; height: 22px; fill: none; stroke: var(--c-gold); }
-    .mob-lang { margin-top: 32px; }
-    .mob-close {
-      position: absolute;
-      top: 28px; right: 36px;
-      background: none;
-      border: none;
-      font-family: 'DM Sans', sans-serif;
-      font-size: 11px;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: rgba(181,201,183,0.5);
-      cursor: pointer;
-      transition: color 0.3s;
-    }
-    .mob-close:hover { color: var(--c-pale); }
-
-    /* ─────────────────────────────────────────────────────
-       HERO
-    ───────────────────────────────────────────────────── */
-    #hero {
-      height: 100vh;
-      min-height: 700px;
-      background: var(--c-night);
-      display: flex;
-      overflow: hidden;
-      position: relative;
-    }
-    .hero-wrap {
-      display: flex;
-      width: 100%;
-      align-items: stretch;
-    }
-    .hero-left {
-      flex: 0 0 54%;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      padding: 100px 56px 80px calc(max((100vw - 1280px) / 2, 0px) + 56px);
-    }
-    .hero-eyebrow {
-      font-family: 'DM Sans', sans-serif;
-      font-weight: 300;
-      font-size: 10px;
-      letter-spacing: 0.26em;
-      text-transform: uppercase;
-      color: rgba(122,158,126,0.8);
-      margin-bottom: 0;
-    }
-    .hero-rule {
-      display: block;
-      width: 48px; height: 1px;
-      background: var(--c-gold);
-      margin: 22px 0;
-    }
-    .hero-h1a {
-      font-family: 'Cormorant Garamond', serif;
-      font-weight: 300;
-      font-style: italic;
-      font-size: clamp(72px, 9vw, 118px);
-      color: var(--c-pgold);
-      line-height: 0.85;
-      display: block;
-      letter-spacing: 0.02em;
-    }
-    .hero-h1b {
-      font-family: 'Cormorant Garamond', serif;
-      font-weight: 500;
-      font-style: italic;
-      font-size: clamp(72px, 9vw, 118px);
-      color: var(--c-gold);
-      line-height: 1.0;
-      display: block;
-      letter-spacing: 0.02em;
-    }
-    .hero-sub {
-      font-family: 'DM Sans', sans-serif;
-      font-weight: 300;
-      font-size: 14px;
-      color: rgba(181,201,183,0.75);
-      line-height: 1.95;
-      max-width: 400px;
-      margin-top: 24px;
-    }
-    .hero-cta { margin-top: 44px; display: flex; flex-direction: column; align-items: flex-start; gap: 0; }
-
-    /* Hero right art panel */
-    .hero-right {
-      flex: 0 0 46%;
-      background: var(--c-night);
-      position: relative;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-    }
-    /* Fine grid overlay */
-    .hero-right::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background-image:
-        linear-gradient(rgba(200,169,110,0.035) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(200,169,110,0.035) 1px, transparent 1px);
-      background-size: 72px 72px;
-      pointer-events: none;
-    }
-    /* Left separator line */
-    .hero-right::after {
-      content: '';
-      position: absolute;
-      left: 0; top: 10%; bottom: 10%;
-      width: 1px;
-      background: linear-gradient(to bottom, transparent, rgba(200,169,110,0.18), transparent);
-      pointer-events: none;
-    }
-    /* Slow-rotating outer orbit ring */
-    @keyframes orbitSpin    { to { transform: rotate(360deg);  } }
-    @keyframes orbitSpinRev { to { transform: rotate(-360deg); } }
-
-    .hero-art {
-      position: relative;
-      width: min(380px, 80%);
-      aspect-ratio: 1;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .ha-orbit1 {
-      position: absolute;
-      inset: 0;
-      border-radius: 50%;
-      border: 1px solid rgba(200,169,110,0.14);
-      animation: orbitSpin 70s linear infinite;
-    }
-    .ha-orbit1::before {
-      content: '';
-      position: absolute;
-      top: -3px; left: 50%;
-      transform: translateX(-50%);
-      width: 5px; height: 5px;
-      background: var(--c-gold);
-      border-radius: 50%;
-      box-shadow: 0 0 10px rgba(200,169,110,0.6);
-    }
-    .ha-orbit2 {
-      position: absolute;
-      inset: 14%;
-      border-radius: 50%;
-      border: 1px solid rgba(200,169,110,0.08);
-      animation: orbitSpinRev 90s linear infinite;
-    }
-    .ha-orbit2::before {
-      content: '';
-      position: absolute;
-      bottom: -2px; left: 50%;
-      transform: translateX(-50%);
-      width: 3px; height: 3px;
-      background: rgba(200,169,110,0.5);
-      border-radius: 50%;
-    }
-    .ha-ring-svg {
-      position: relative;
-      z-index: 1;
-      width: 72%;
-      height: 72%;
-    }
-    .hero-art-label {
-      position: absolute;
-      bottom: -44px; left: 0; right: 0;
-      text-align: center;
-      font-family: 'DM Sans', sans-serif;
-      font-weight: 200;
-      font-size: 9px;
-      letter-spacing: 0.3em;
-      color: rgba(122,158,126,0.5);
-      text-transform: uppercase;
-    }
-
-    /* Scroll indicator */
-    .scroll-ind {
-      position: absolute;
-      bottom: 36px; left: 27%;
-      transform: translateX(-50%);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 4px;
-      opacity: 0.45;
-      animation: scrollAnim 2.2s ease-in-out infinite;
-      pointer-events: none;
-    }
-    .scroll-ind .sl { width: 1px; height: 36px; background: var(--c-gold); }
-    .scroll-ind .sa { width: 0; height: 0; border-left: 3px solid transparent; border-right: 3px solid transparent; border-top: 5px solid var(--c-gold); }
-    @keyframes scrollAnim {
-      0%,100% { transform: translateX(-50%) translateY(0); }
-      60% { transform: translateX(-50%) translateY(7px); }
-    }
-
-    /* ─────────────────────────────────────────────────────
-       MARQUEE
-    ───────────────────────────────────────────────────── */
-    .marquee-wrap {
-      background: var(--c-gold);
-      height: 44px;
-      overflow: hidden;
-      display: flex;
-      align-items: center;
-    }
-    .marquee-track {
-      display: flex;
-      white-space: nowrap;
-      animation: marquee 45s linear infinite;
-    }
-    .marquee-track span {
-      font-family: 'DM Sans', sans-serif;
-      font-weight: 400;
-      font-size: 10px;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: var(--c-night);
-      padding: 0 18px;
-      opacity: 0.85;
-    }
-    @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-33.333%); } }
-
-    /* ─────────────────────────────────────────────────────
-       STATS
-    ───────────────────────────────────────────────────── */
-    #stats { background: var(--c-linen); padding: 72px 0; }
-    .stats-grid {
-      max-width: 1280px;
-      margin: 0 auto;
-      padding: 0 56px;
-      display: grid;
-      grid-template-columns: repeat(4,1fr);
-    }
-    .stat-item {
-      text-align: center;
-      padding: 40px 24px;
-      border-right: 1px solid rgba(181,201,183,0.5);
-      position: relative;
-    }
-    .stat-item:last-child { border-right: none; }
-    .stat-num {
-      font-family: 'Cormorant Garamond', serif;
-      font-weight: 400;
-      font-size: 68px;
-      color: var(--c-sage);
-      display: block;
-      line-height: 1;
-      letter-spacing: -0.01em;
-    }
-    .stat-lbl {
-      font-family: 'DM Sans', sans-serif;
-      font-weight: 200;
-      font-size: 9px;
-      letter-spacing: 0.28em;
-      text-transform: uppercase;
-      color: var(--c-muted);
-      display: block;
-      margin-top: 14px;
-    }
-
-    /* ─────────────────────────────────────────────────────
-       EDITORIAL SPLIT
-    ───────────────────────────────────────────────────── */
-    .editorial-split {
-      display: grid;
-      grid-template-columns: 58fr 42fr;
-      min-height: 520px;
-    }
-    .ed-col {
-      padding: 80px;
-      position: relative;
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
-      min-height: 520px;
-    }
-    .ed-col.sage { background: var(--c-sage); }
-    .ed-col.pale { background: #1A2B1E; }
-    .ed-wm {
-      font-family: 'Cormorant Garamond', serif;
-      font-weight: 900;
-      font-style: italic;
-      font-size: 160px;
-      color: rgba(240,235,224,0.06);
-      position: absolute;
-      top: -16px; right: -20px;
-      line-height: 1;
-      pointer-events: none;
-      user-select: none;
-    }
-    .ed-eyebrow {
-      font-family: 'DM Sans', sans-serif;
-      font-weight: 300;
-      font-size: 10px;
-      letter-spacing: 0.24em;
-      text-transform: uppercase;
-      margin-bottom: 14px;
-      display: block;
-    }
-    .ed-h {
-      font-family: 'Cormorant Garamond', serif;
-      font-weight: 400;
-      font-style: italic;
-      font-size: 52px;
-      line-height: 1.05;
-      margin-bottom: 20px;
-    }
-    .ed-body {
-      font-family: 'DM Sans', sans-serif;
-      font-weight: 300;
-      font-size: 14px;
-      line-height: 1.9;
-      margin-bottom: 24px;
-    }
-    .ed-link {
-      font-family: 'DM Sans', sans-serif;
-      font-weight: 500;
-      font-size: 11px;
-      letter-spacing: 0.12em;
-      text-decoration: none;
-      border-bottom: 1px solid currentColor;
-      padding-bottom: 1px;
-      opacity: 0.8;
-      transition: opacity 0.3s;
-      display: inline-block;
-    }
-    .ed-link:hover { opacity: 1; }
-
-    /* ─────────────────────────────────────────────────────
-       PRODUCT SECTION
-    ───────────────────────────────────────────────────── */
-    #collection { background: var(--c-linen); }
-
-    .sec-label {
-      font-family: 'DM Sans', sans-serif;
-      font-weight: 300;
-      font-size: 10px;
-      letter-spacing: 0.26em;
-      text-transform: uppercase;
-      color: var(--c-mid);
-      display: block;
-      margin-bottom: 14px;
-    }
-    .sec-h {
-      font-family: 'Cormorant Garamond', serif;
-      font-weight: 400;
-      font-size: clamp(40px, 5vw, 60px);
-      color: var(--c-sage);
-      line-height: 1.05;
-    }
-    .sec-sub {
-      font-family: 'DM Sans', sans-serif;
-      font-weight: 300;
-      font-size: 14px;
-      color: var(--c-muted);
-      line-height: 1.9;
-      max-width: 460px;
-      margin-top: 14px;
-    }
-
-    /* Filter bar */
-    .filter-bar {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-      margin: 48px 0 56px;
-    }
-    .f-pill {
-      font-family: 'DM Sans', sans-serif;
-      font-weight: 400;
-      font-size: 10px;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      background: transparent;
-      border: 1px solid rgba(181,201,183,0.6);
-      color: var(--c-muted);
-      padding: 9px 22px;
-      border-radius: 0;
-      cursor: pointer;
-      transition: all 0.3s;
-    }
-    .f-pill:hover { border-color: var(--c-gold); color: var(--c-gold); }
-    .f-pill.on { background: var(--c-sage); color: var(--c-pgold); border-color: var(--c-sage); }
-
-    /* Product grid — 3 cols desktop, editorial feel */
-    .prod-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 3px;
-    }
-    /* First product: double wide (featured) */
-    .prod-card--featured {
-      grid-column: span 2;
-    }
-    .prod-card--featured .prod-visual { height: 580px; }
-
-    .prod-card {
-      background: var(--c-linen);
-      overflow: hidden;
-      transition: opacity 0.3s ease, transform 0.3s ease;
-      position: relative;
-    }
-    .prod-card.hide { pointer-events: none; }
-
-    /* Badge */
-    .prod-badge {
-      position: absolute;
-      top: 16px; left: 16px;
-      z-index: 2;
-      font-family: 'DM Sans', sans-serif;
-      font-weight: 500;
-      font-size: 9px;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      padding: 5px 12px;
-      border-radius: 0;
-    }
-    .badge-new { background: var(--c-sage); color: var(--c-pgold); }
-    .badge-best { background: var(--c-gold); color: var(--c-night); }
-    .badge-sale { background: var(--c-bronze); color: var(--c-pgold); }
-
-    /* Product visual (image area) */
-    .prod-visual {
-      height: 420px;
-      position: relative;
-      overflow: hidden;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .prod-photo {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center;
-      display: block;
-      position: absolute;
-      inset: 0;
-      transition: transform 0.7s var(--ease-out);
-      z-index: 2;
-    }
-    /* Placeholder background */
-    .prod-visual.bg-a { background: #263829; }
-    .prod-visual.bg-b { background: #D9CCBA; }
-    .prod-visual.bg-c { background: #192a1b; }
-    .prod-visual.bg-d { background: #E8D5A3; }
-    /* Jewelry illustration placeholder */
-    .prod-art {
-      position: absolute;
-      inset: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 1;
-    }
-    @media (hover: hover) {
-      .prod-art { transition: transform 0.7s var(--ease-out); }
-      .prod-card:hover .prod-art { transform: scale(1.04); }
-      .prod-card:hover .prod-photo { transform: scale(1.05); }
-    }
-    /* Hover overlay */
-    .prod-visual::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: rgba(28,43,30,0.6);
-      opacity: 0;
-      transition: opacity 0.4s;
-      z-index: 3;
-    }
-    .prod-overlay {
-      position: absolute;
-      inset: 0;
-      display: flex;
-      align-items: flex-end;
-      justify-content: center;
-      padding-bottom: 28px;
-      z-index: 4;
-      opacity: 0;
-      transition: opacity 0.4s;
-    }
-    .prod-overlay span {
-      font-family: 'DM Sans', sans-serif;
-      font-weight: 400;
-      font-size: 10px;
-      letter-spacing: 0.26em;
-      text-transform: uppercase;
-      color: var(--c-pgold);
-      border-bottom: 1px solid rgba(232,213,163,0.4);
-      padding-bottom: 3px;
-    }
-    @media (hover: hover) {
-      .prod-card:hover .prod-visual::after { opacity: 1; }
-      .prod-card:hover .prod-overlay { opacity: 1; }
-    }
-
-    /* Card body */
-    .prod-body {
-      padding: 22px 20px 24px;
-      border-top: 1px solid rgba(181,201,183,0.2);
-      background: var(--c-linen);
-    }
-    .prod-row1 { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 5px; }
-    .prod-name {
-      font-family: 'Cormorant Garamond', serif;
-      font-weight: 400;
-      font-style: italic;
-      font-size: 22px;
-      color: var(--c-sage);
-      letter-spacing: 0.02em;
-    }
-    .prod-price-wrap { display: flex; align-items: baseline; gap: 8px; }
-    .prod-price {
-      font-family: 'Cormorant Garamond', serif;
-      font-weight: 500;
-      font-size: 18px;
-      color: var(--c-gold);
-    }
-    .prod-price-old {
-      font-family: 'DM Sans', sans-serif;
-      font-weight: 300;
-      font-size: 12px;
-      color: rgba(92,122,96,0.45);
-      text-decoration: line-through;
-    }
-    .prod-cat {
-      font-family: 'DM Sans', sans-serif;
-      font-weight: 300;
-      font-size: 9px;
-      text-transform: uppercase;
-      letter-spacing: 0.22em;
-      color: var(--c-muted);
-      display: block;
-      margin-bottom: 18px;
-    }
-    .prod-btn {
-      display: block;
-      width: 100%;
-      background: transparent;
-      color: var(--c-sage);
-      font-family: 'DM Sans', sans-serif;
-      font-weight: 400;
-      font-size: 9px;
-      text-transform: uppercase;
-      letter-spacing: 0.24em;
-      padding: 13px;
-      text-align: center;
-      text-decoration: none;
-      border: 1px solid rgba(61,92,66,0.3);
-      border-radius: 0;
-      transition: background 0.35s, color 0.35s, border-color 0.35s;
-    }
-    .prod-btn:hover { background: var(--c-sage); color: var(--c-pgold); border-color: var(--c-sage); }
-
-    /* ─────────────────────────────────────────────────────
-       QUOTE
-    ───────────────────────────────────────────────────── */
-    #quote {
-      background: var(--c-night);
-      min-height: 56vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 80px 56px;
-      position: relative;
-      overflow: hidden;
-    }
-    #quote::before {
-      content: '"';
-      position: absolute;
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 400px;
-      color: rgba(200,169,110,0.04);
-      top: -60px; left: -20px;
-      line-height: 1;
-      pointer-events: none;
-      font-style: italic;
-    }
-    .quote-wrap {
-      text-align: center;
-      max-width: 680px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      position: relative;
-      z-index: 1;
-    }
-    .q-rule { display: block; width: 48px; height: 1px; background: var(--c-gold); }
-    .q-text {
-      font-family: 'Cormorant Garamond', serif;
-      font-weight: 300;
-      font-style: italic;
-      font-size: clamp(28px, 4vw, 48px);
-      color: var(--c-pgold);
-      line-height: 1.45;
-      margin: 36px 0 28px;
-      letter-spacing: 0.01em;
-    }
-    .q-attr {
-      font-family: 'DM Sans', sans-serif;
-      font-weight: 200;
-      font-size: 10px;
-      letter-spacing: 0.3em;
-      text-transform: uppercase;
-      color: rgba(122,158,126,0.55);
-      margin-bottom: 28px;
-    }
-
-    /* ─────────────────────────────────────────────────────
-       HERITAGE
-    ───────────────────────────────────────────────────── */
-    #heritage {
-      background: var(--c-night);
-      padding: 112px 0;
-      position: relative;
-      overflow: hidden;
-    }
-    #heritage::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(ellipse at 70% 50%, rgba(61,92,66,0.15), transparent 70%);
-      pointer-events: none;
-    }
-    .heritage-inner {
-      max-width: 1280px;
-      margin: 0 auto;
-      padding: 0 56px;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 96px;
-      align-items: center;
-      position: relative;
-      z-index: 1;
-    }
-    .heritage-left .hl-label {
-      font-family: 'DM Sans', sans-serif;
-      font-weight: 300;
-      font-size: 10px;
-      letter-spacing: 0.26em;
-      text-transform: uppercase;
-      color: var(--c-mid);
-      display: block;
-      margin-bottom: 20px;
-    }
-    .hl-h {
-      font-family: 'Cormorant Garamond', serif;
-      font-weight: 400;
-      font-style: italic;
-      font-size: clamp(36px, 4vw, 56px);
-      color: var(--c-pgold);
-      line-height: 1.1;
-      margin-bottom: 8px;
-    }
-    .hl-sub {
-      font-family: 'DM Sans', sans-serif;
-      font-weight: 300;
-      font-size: 12px;
-      letter-spacing: 0.1em;
-      color: var(--c-mid);
-      margin-bottom: 32px;
-      display: block;
-    }
-    .hl-body {
-      font-family: 'DM Sans', sans-serif;
-      font-weight: 300;
-      font-size: 14px;
-      color: rgba(181,201,183,0.75);
-      line-height: 2;
-      margin-bottom: 16px;
-    }
-    /* Heritage visual: 3 decorative cards */
-    .heritage-right {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      grid-template-rows: 1fr 1fr;
-      gap: 3px;
-      aspect-ratio: 1 / 1.05;
-    }
-    .her-card {
-      background: var(--c-sage);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-      position: relative;
-    }
-    .her-card:first-child { grid-row: span 2; background: rgba(61,92,66,0.6); }
-    .her-card:nth-child(2) { background: rgba(140,109,63,0.3); }
-    .her-card:nth-child(3) { background: rgba(61,92,66,0.4); }
-    .her-card img {
-      position: absolute;
-      inset: 0;
-      width: 100%; height: 100%;
-      object-fit: cover;
-      display: block;
-      opacity: 0.45;
-    }
-    .her-card-placeholder {
-      position: absolute;
-      inset: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    /* ─────────────────────────────────────────────────────
-       HOW TO ORDER
-    ───────────────────────────────────────────────────── */
-    #order { background: var(--c-sage); }
-    .order-label {
-      font-family: 'DM Sans', sans-serif;
-      font-weight: 300;
-      font-size: 10px;
-      letter-spacing: 0.26em;
-      text-transform: uppercase;
-      color: var(--c-mid);
-      display: block;
-      margin-bottom: 16px;
-    }
-    .order-h {
-      font-family: 'Cormorant Garamond', serif;
-      font-weight: 400;
-      font-size: clamp(40px, 5vw, 60px);
-      color: var(--c-pgold);
-      line-height: 1.05;
-      margin-bottom: 24px;
-    }
-    .steps {
-      display: grid;
-      grid-template-columns: repeat(3,1fr);
-      gap: 0;
-      margin-top: 72px;
-      position: relative;
-    }
-    /* Connecting line between step circles */
-    .steps::before {
-      content: '';
-      position: absolute;
-      top: 27px;
-      left: calc(16.67% + 10px);
-      right: calc(16.67% + 10px);
-      height: 1px;
-      background: linear-gradient(to right, rgba(200,169,110,0.25), rgba(200,169,110,0.1), rgba(200,169,110,0.25));
-    }
-    .step { position: relative; padding: 0 48px 0 0; }
-    .step:last-child { padding-right: 0; }
-    .step-n-wrap {
-      display: flex;
-      align-items: center;
-      gap: 18px;
-      margin-bottom: 28px;
-    }
-    .step-n-circle {
-      width: 54px; height: 54px;
-      border: 1px solid rgba(200,169,110,0.35);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-      background: rgba(28,43,30,0.3);
-    }
-    .step-n {
-      font-family: 'Cormorant Garamond', serif;
-      font-weight: 400;
-      font-style: italic;
-      font-size: 26px;
-      color: var(--c-gold);
-      line-height: 1;
-    }
-    .step-h {
-      font-family: 'Cormorant Garamond', serif;
-      font-weight: 400;
-      font-size: 26px;
-      color: var(--c-pgold);
-      margin-bottom: 14px;
-    }
-    .step-t {
-      font-family: 'DM Sans', sans-serif;
-      font-weight: 300;
-      font-size: 13px;
-      color: rgba(181,201,183,0.75);
-      line-height: 2;
-    }
-    .order-cta { text-align: center; margin-top: 64px; }
-
-    /* ─────────────────────────────────────────────────────
-       SHIPPING
-    ───────────────────────────────────────────────────── */
-    #shipping { background: var(--c-night); }
-    .ship-h {
-      font-family: 'Cormorant Garamond', serif;
-      font-weight: 400;
-      font-size: clamp(36px, 4.5vw, 56px);
-      color: var(--c-pgold);
-      margin-bottom: 12px;
-    }
-    .ship-sub {
-      font-family: 'DM Sans', sans-serif;
-      font-weight: 300;
-      font-size: 14px;
-      color: rgba(181,201,183,0.65);
-      margin-bottom: 56px;
-      max-width: 480px;
-    }
-    .country-grid { display: grid; grid-template-columns: repeat(3,1fr); }
-    .c-card {
-      background: rgba(31,58,38,0.45);
-      padding: 64px 48px;
-      text-align: center;
-      border-right: 1px solid rgba(200,169,110,0.12);
-      transition: background 0.35s;
-      position: relative;
-      overflow: hidden;
-    }
-    .c-card::after {
-      content: '';
-      position: absolute;
-      bottom: 0; left: 0; right: 0;
-      height: 2px;
-      background: var(--c-gold);
-      transform: scaleX(0);
-      transition: transform 0.4s var(--ease-out);
-    }
-    .c-card:last-child { border-right: none; }
-    .c-card:hover { background: rgba(31,58,38,0.75); }
-    .c-card:hover::after { transform: scaleX(1); }
-    .c-flag { font-size: 44px; line-height: 1; display: block; }
-    .c-name {
-      font-family: 'Cormorant Garamond', serif;
-      font-weight: 400;
-      font-style: italic;
-      font-size: 32px;
-      color: var(--c-pgold);
-      margin-top: 20px;
-      display: block;
-    }
-    .c-detail {
-      font-family: 'DM Sans', sans-serif;
-      font-weight: 300;
-      font-size: 11px;
-      letter-spacing: 0.1em;
-      color: rgba(181,201,183,0.6);
-      margin-top: 12px;
-      display: block;
-    }
-
-    /* ─────────────────────────────────────────────────────
-       STORY
-    ───────────────────────────────────────────────────── */
-    #story { background: var(--c-linen); }
-    .story-split {
-      display: grid;
-      grid-template-columns: 38fr 62fr;
-      min-height: 580px;
-    }
-    .story-left {
-      background: var(--c-sage);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-      overflow: hidden;
-      min-height: 480px;
-    }
-    .story-left img {
-      position: absolute;
-      inset: 0;
-      width: 100%; height: 100%;
-      object-fit: cover;
-      display: block;
-      opacity: 0.22;
-    }
-    .story-wm {
-      font-family: 'Cormorant Garamond', serif;
-      font-weight: 900;
-      font-style: italic;
-      font-size: 280px;
-      color: rgba(200,169,110,0.06);
-      position: absolute;
-      line-height: 1;
-      user-select: none;
-      letter-spacing: -0.05em;
-    }
-    .story-art {
-      position: relative;
-      z-index: 1;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .story-right {
-      background: var(--c-linen);
-      padding: 88px 80px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-    }
-    .story-label {
-      font-family: 'DM Sans', sans-serif;
-      font-weight: 300;
-      font-size: 10px;
-      letter-spacing: 0.26em;
-      text-transform: uppercase;
-      color: var(--c-mid);
-      margin-bottom: 16px;
-      display: block;
-    }
-    .story-h {
-      font-family: 'Cormorant Garamond', serif;
-      font-weight: 400;
-      font-style: italic;
-      font-size: clamp(32px, 3.5vw, 46px);
-      color: var(--c-sage);
-      line-height: 1.1;
-      margin-bottom: 24px;
-    }
-    .story-p {
-      font-family: 'DM Sans', sans-serif;
-      font-weight: 300;
-      font-size: 14px;
-      color: var(--c-text);
-      line-height: 1.95;
-      margin-bottom: 18px;
-    }
-    .story-bq {
-      border-left: 2px solid var(--c-gold);
-      padding-left: 22px;
-      margin: 28px 0;
-    }
-    .story-bq p {
-      font-family: 'Cormorant Garamond', serif;
-      font-weight: 300;
-      font-style: italic;
-      font-size: 20px;
-      color: var(--c-sage);
-      line-height: 1.55;
-    }
-
-    /* ─────────────────────────────────────────────────────
-       INSTAGRAM WALL
-    ───────────────────────────────────────────────────── */
-    #instagram { background: var(--c-night); }
-    .ig-label {
-      font-family: 'DM Sans', sans-serif;
-      font-weight: 300;
-      font-size: 10px;
-      letter-spacing: 0.26em;
-      text-transform: uppercase;
-      color: var(--c-mid);
-      display: block;
-      margin-bottom: 14px;
-    }
-    .ig-h {
-      font-family: 'Cormorant Garamond', serif;
-      font-weight: 400;
-      font-style: italic;
-      font-size: clamp(36px, 4.5vw, 52px);
-      color: var(--c-pgold);
-      line-height: 1.05;
-      margin-bottom: 12px;
-    }
-    .ig-handle {
-      font-family: 'DM Sans', sans-serif;
-      font-weight: 300;
-      font-size: 13px;
-      color: rgba(122,158,126,0.7);
-      text-decoration: none;
-      letter-spacing: 0.05em;
-      display: block;
-      transition: color 0.3s;
-    }
-    .ig-handle:hover { color: var(--c-gold); }
-    .ig-grid {
-      display: grid;
-      grid-template-columns: repeat(3,1fr);
-      gap: 3px;
-      margin-top: 48px;
-    }
-    .ig-cell {
-      aspect-ratio: 1;
-      position: relative;
-      overflow: hidden;
-      display: block;
-      text-decoration: none;
-    }
-    .ig-inner {
-      width: 100%; height: 100%;
-      display: flex; align-items: center; justify-content: center;
-      transition: transform 0.5s var(--ease-out);
-    }
-    .ig-inner img { width: 100%; height: 100%; object-fit: cover; display: block; }
-    .ig-cell:hover .ig-inner { transform: scale(1.06); }
-    .ig-cell::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: rgba(28,43,30,0.75);
-      opacity: 0;
-      transition: opacity 0.4s;
-    }
-    .ig-overlay {
-      position: absolute;
-      inset: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 1;
-      opacity: 0;
-      transition: opacity 0.4s;
-    }
-    .ig-overlay span {
-      font-family: 'DM Sans', sans-serif;
-      font-weight: 500;
-      font-size: 10px;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--c-pgold);
-    }
-    .ig-cell:hover::after { opacity: 1; }
-    .ig-cell:hover .ig-overlay { opacity: 1; }
-    .ig-c1 .ig-inner { background: var(--c-sage); }
-    .ig-c2 .ig-inner { background: #2a3c2c; }
-    .ig-c3 .ig-inner { background: var(--c-pale); }
-    .ig-c4 .ig-inner { background: var(--c-bronze); }
-    .ig-c5 .ig-inner { background: rgba(61,92,66,0.7); }
-    .ig-c6 .ig-inner { background: #22351f; }
-    .ig-cta { text-align: center; margin-top: 48px; }
-
-    /* ─────────────────────────────────────────────────────
-       FOOTER
-    ───────────────────────────────────────────────────── */
-    #footer { background: var(--c-night); }
-
-    .footer-top {
-      padding: 26px 0 52px;
-      display: grid;
-      grid-template-columns: 1.4fr 1fr 1fr 1fr;
-      gap: 48px;
-      border-bottom: 1px solid rgba(181,201,183,0.1);
-    }
-    .f-brand-col { margin-left: 0; }
-    .f-brand-row { display: flex; align-items: center; gap: 3px; margin-bottom: 14px; position: relative; left: -18px; top: -10px; }
-    .f-logo-text {
-      font-family: 'Cormorant Garamond', serif;
-      font-weight: 400;
-      font-style: italic;
-      font-size: 30px;
-      color: var(--c-pgold);
-      display: block;
-      margin-bottom: 14px;
-      letter-spacing: 0.08em;
-    }
-    .f-brand-desc {
-      font-family: 'DM Sans', sans-serif;
-      font-weight: 300;
-      font-size: 12px;
-      color: rgba(122,158,126,0.6);
-      line-height: 1.8;
-      max-width: 200px;
-      margin-bottom: 24px;
-    }
-    .f-socials { display: flex; gap: 14px; align-items: center; }
-    .f-social-link { display: flex; align-items: center; text-decoration: none; opacity: 0.5; transition: opacity 0.3s; }
-    .f-social-link:hover { opacity: 1; }
-    .f-social-link svg { width: 18px; height: 18px; fill: none; stroke: var(--c-gold); }
-
-    .f-col-head {
-      font-family: 'DM Sans', sans-serif;
-      font-weight: 500;
-      font-size: 10px;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--c-gold);
-      margin-bottom: 20px;
-      display: block;
-    }
-    .f-links { display: flex; flex-direction: column; gap: 11px; list-style: none; padding: 0; margin: 0; }
-    .f-links li a, .f-links li span {
-      font-family: 'DM Sans', sans-serif;
-      font-weight: 300;
-      font-size: 13px;
-      color: rgba(181,201,183,0.55);
-      text-decoration: none;
-      transition: color 0.3s;
-      letter-spacing: 0.01em;
-    }
-    .f-links li a:hover { color: var(--c-pgold); }
-    .f-links li .highlight { color: var(--c-mid); }
-
-    .footer-bottom {
-      padding: 20px 0;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-    .f-copy {
-      font-family: 'DM Sans', sans-serif;
-      font-weight: 300;
-      font-size: 11px;
-      color: rgba(122,158,126,0.4);
-    }
-    .f-legal { display: flex; gap: 20px; }
-    .f-legal a {
-      font-family: 'DM Sans', sans-serif;
-      font-weight: 300;
-      font-size: 11px;
-      color: rgba(122,158,126,0.4);
-      text-decoration: none;
-      transition: color 0.3s;
-    }
-    .f-legal a:hover { color: var(--c-mid); }
-
-    /* ─────────────────────────────────────────────────────
-       BACK TO TOP
-    ───────────────────────────────────────────────────── */
-    #btt {
-      position: fixed;
-      bottom: 28px; right: 28px;
-      width: 42px; height: 42px;
-      background: rgba(61,92,66,0.9);
-      color: var(--c-pgold);
-      border: 1px solid rgba(200,169,110,0.2);
-      border-radius: 0;
-      cursor: pointer;
-      font-size: 14px;
-      display: flex; align-items: center; justify-content: center;
-      opacity: 0; pointer-events: none;
-      transition: opacity 0.3s, background 0.3s;
-      z-index: 900;
-      font-family: 'DM Sans', sans-serif;
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
-    }
-    #btt.show { opacity: 1; pointer-events: auto; }
-    #btt:hover { background: var(--c-night); }
-
-    /* ─────────────────────────────────────────────────────
-       RESPONSIVE
-    ───────────────────────────────────────────────────── */
-    @media (max-width: 1199px) {
-      .hero-left { padding-left: 56px; }
-      .footer-top { grid-template-columns: 1fr 1fr; gap: 40px; }
-    }
-
-    @media (max-width: 991px) {
-      /* Nav */
-      .nav-links { display: none; }
-      .hamburger { display: flex; }
-      #nav { height: 64px; }
-      .nav-inner { padding: 0 24px; }
-      .lang-btn { font-size: 9px; padding: 4px 10px; }
-      .nav-socials { display: flex; gap: 10px; }
-      .nav-social-link svg { width: 16px; height: 16px; }
-
-      /* Hero */
-      #hero { height: auto; min-height: 100svh; flex-direction: column; }
-      .hero-wrap { flex-direction: column-reverse; }
-      .hero-right { flex: none; width: 100%; min-height: 50vw; max-height: 60vh; padding-top: 48px; }
-      .hero-left { flex: none; width: 100%; padding: 56px 24px 72px; }
-      .hero-h1a, .hero-h1b { font-size: clamp(42px, 10vw, 72px); }
-      .hero-art { width: 180px; margin-top: 24px; }
-      .scroll-ind { left: 50%; }
-
-      /* Stats */
-      .stats-grid { grid-template-columns: repeat(2,1fr); padding: 0 24px; }
-      .stat-item:nth-child(2) { border-right: none; }
-      .stat-item { border-bottom: 1px solid rgba(181,201,183,0.4); }
-      .stat-item:nth-child(3),.stat-item:nth-child(4) { border-bottom: none; }
-
-      /* Editorial */
-      .editorial-split { grid-template-columns: 1fr; }
-      .ed-col { min-height: 360px; padding: 52px 40px; }
-
-      /* Products — HORIZONTAL SCROLL on tablet (2 wide) + mobile (1 wide) */
-      .prod-grid {
-        display: flex;
-        overflow-x: scroll;
-        scroll-snap-type: x mandatory;
-        overscroll-behavior-x: contain;
-        touch-action: pan-x pan-y;
-        gap: 3px;
-        padding-bottom: 12px;
-        scrollbar-width: none;
-      }
-      /* Pre-reveal all slider cards — they start hidden (translateY 32px) which
-         causes a vertical jump when cards snap into view horizontally */
-      .prod-grid .reveal,
-      .prod-grid .reveal-left {
-        opacity: 1 !important;
-        transform: none !important;
-        transition: none !important;
-      }
-      .prod-grid::-webkit-scrollbar { display: none; }
-      .prod-card {
-        flex: 0 0 calc(50% - 2px);
-        scroll-snap-align: start;
-        scroll-snap-stop: always;
-      }
-      .prod-card--featured {
-        flex: 0 0 calc(50% - 2px);
-        scroll-snap-align: start;
-        scroll-snap-stop: always;
-      }
-      .prod-card--featured .prod-visual { height: 420px; }
-
-      /* Quote */
-      #quote { padding: 64px 24px; }
-      #quote::before { font-size: 200px; }
-
-      /* Heritage */
-      .heritage-inner { grid-template-columns: 1fr; gap: 48px; }
-      .heritage-right { max-width: 400px; }
-
-      /* Order */
-      .steps { grid-template-columns: 1fr; gap: 40px; }
-      .order-h { font-size: 38px; }
-
-      /* Shipping */
-      .country-grid { grid-template-columns: 1fr; }
-      .c-card { border-right: none; border-bottom: 1px solid rgba(181,201,183,0.3); }
-      .c-card:last-child { border-bottom: none; }
-
-      /* Story */
-      .story-split { grid-template-columns: 1fr; }
-      .story-left { min-height: 280px; }
-      .story-right { padding: 52px 32px; }
-
-      /* Instagram */
-      .ig-h { font-size: 36px; }
-
-      /* Footer */
-      .footer-top { grid-template-columns: 1fr 1fr; gap: 36px; padding: 26px 0 44px; }
-      .footer-bottom { flex-direction: column; gap: 10px; text-align: center; }
-      .f-copy, .f-legal { justify-content: center; }
-
-      /* Global */
-      .lux-container { padding: 0 24px; }
-      .section-pad { padding: 72px 0; }
-    }
-
-    @media (max-width: 575px) {
-      .prod-card { flex: 0 0 82vw; scroll-snap-align: start; scroll-snap-stop: always; }
-      .prod-card--featured { flex: 0 0 82vw; scroll-snap-align: start; scroll-snap-stop: always; }
-      .ig-grid { grid-template-columns: repeat(2,1fr); }
-      /* Footer — single column, all left-aligned */
-      .footer-top { grid-template-columns: 1fr; gap: 28px; padding: 44px 0 36px; }
-      .f-brand-col { border-bottom: 1px solid rgba(181,201,183,0.1); padding-bottom: 28px; margin-left: 0; }
-      .f-brand-row { left: 0px; top: -6px; }
-      .footer-bottom { gap: 8px; }
-      .f-links li a, .f-links li span { font-size: 12px; word-break: break-word; }
-    }
-
-    /* On touch devices, strip ALL card transitions so nothing moves when finger scrolls */
-    @media (hover: none) {
-      .prod-card { transition: none !important; }
-      .prod-art  { transition: none !important; }
-    }
-
-    /* Scroll indicator for product slider */
-    .slider-hint {
-      display: none;
-      font-family: 'DM Sans', sans-serif;
-      font-weight: 300;
-      font-size: 10px;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: var(--c-muted);
-      margin-top: 14px;
-      align-items: center;
-      gap: 8px;
-    }
-    .slider-hint::after { content: '→'; color: var(--c-gold); }
-    @media (max-width: 991px) { .slider-hint { display: flex; } }
-
-    /* ─────────────────────────────────────────────────────
-       BUG FIXES
-    ───────────────────────────────────────────────────── */
-    /* Badge must sit above hover overlay */
-    .prod-badge { z-index: 5; }
-    /* SVG art must not capture mouse events */
-    .prod-art { pointer-events: none; }
-    /* Hide connecting line when steps collapse to single col */
-    @media (max-width: 991px) { .steps::before { display: none; } }
-    /* Hidden filter cards: collapse fully so grid has no gaps */
-    .prod-card.hide { display: none; }
-
-    /* ─────────────────────────────────────────────────────
-       PRODUCT CARD — HOVER DEPTH (Part 4.2)
-    ───────────────────────────────────────────────────── */
-    .prod-card {
-      transition: opacity 0.3s ease, transform 0.35s var(--ease-out), box-shadow 0.35s ease;
-    }
-    @media (hover: hover) {
-      .prod-card:hover {
-        transform: translateY(-4px);
-        box-shadow: 0 24px 48px rgba(0,0,0,0.22);
-        z-index: 2;
-      }
-    }
-
-    /* ─────────────────────────────────────────────────────
-       SKELETON SHIMMER — product images (Part 4.4)
-    ───────────────────────────────────────────────────── */
-    @keyframes prodShimmer {
-      0%   { background-position: -200% 0; }
-      100% { background-position:  200% 0; }
-    }
-    .prod-visual.img-loading,
-    .sale-visual.img-loading,
-    .na-visual.img-loading {
-      background: linear-gradient(90deg,
-        var(--c-pale) 25%,
-        rgba(200,169,110,0.1) 50%,
-        var(--c-pale) 75%);
-      background-size: 200% 100%;
-      animation: prodShimmer 1.6s ease-in-out infinite;
-    }
-    .prod-photo {
-      opacity: 0;
-      transition: opacity 0.5s ease;
-    }
-    .prod-photo.img-ready {
-      opacity: 1;
-    }
-
-    /* ─────────────────────────────────────────────────────
-       SECTION DIVIDERS — gold seam lines (Part 4.7)
-    ───────────────────────────────────────────────────── */
-    #stats           { border-top: 1px solid rgba(200,169,110,0.14); }
-    #flash-sale      { border-top: 1px solid rgba(200,169,110,0.10); }
-    #quote           { border-top: 1px solid rgba(200,169,110,0.10); }
-    #order           { border-top: 1px solid rgba(200,169,110,0.18); }
-    #shipping        { border-top: 1px solid rgba(200,169,110,0.14); }
-    #instagram       { border-top: 1px solid rgba(200,169,110,0.10); }
-    #inner-circle    { border-top: 1px solid rgba(200,169,110,0.14); }
-
-    /* ─────────────────────────────────────────────────────
-       TYPOGRAPHY SCALE — unified clamp() rhythm (Part 4.5)
-    ───────────────────────────────────────────────────── */
-    /* Primary section headings */
-    .sec-h, .sale-h, .order-h, .ic-h {
-      font-size: clamp(38px, 5vw, 64px);
-    }
-    /* Secondary / content headings */
-    .ship-h, .ig-h, .hl-h, .story-h {
-      font-size: clamp(34px, 4.5vw, 54px);
-    }
-    /* Editorial panel heading */
-    .ed-h {
-      font-size: clamp(34px, 4vw, 52px);
-    }
-    /* Step headings (h3) */
-    .step-h {
-      font-size: clamp(20px, 2.2vw, 26px);
-    }
-
-    /* ─────────────────────────────────────────────────────
-       CUSTOM CURSOR — gold ring follower (Part 4.3)
-    ───────────────────────────────────────────────────── */
-    @media (hover: hover) and (pointer: fine) {
-      body { cursor: none; }
-      #cursor-ring {
-        position: fixed;
-        width: 26px;
-        height: 26px;
-        border: 1.5px solid var(--c-gold);
-        border-radius: 50%;
-        pointer-events: none;
-        z-index: 99998;
-        top: 0; left: 0;
-        transform: translate(-50%, -50%);
-        transition: width 0.22s var(--ease-out),
-                    height 0.22s var(--ease-out),
-                    border-color 0.22s ease,
-                    opacity 0.3s ease;
-        opacity: 0;
-        will-change: transform;
-      }
-      #cursor-ring.cursor-visible { opacity: 1; }
-      #cursor-ring.cursor-hover {
-        width: 40px;
-        height: 40px;
-        border-color: rgba(201,169,97,0.6);
-      }
-    }
-
-    /* ─────────────────────────────────────────────────────
-       MICRO-INTERACTIONS — focus-visible ring (Part 4.6)
-    ───────────────────────────────────────────────────── */
-    a:focus-visible, button:focus-visible {
-      outline: 2px solid var(--c-gold);
-      outline-offset: 3px;
-    }
-
-    /* ─────────────────────────────────────────────────────
-       SPACING — more breathing room (Part 4.8)
-    ───────────────────────────────────────────────────── */
-    .section-pad { padding: 128px 0; }
-    @media (max-width: 991px) { .section-pad { padding: 88px 0; } }
-
-    /* ─────────────────────────────────────────────────────
-       ANNOUNCEMENT BAR
-    ───────────────────────────────────────────────────── */
-    #announce-bar {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      height: var(--bar-h);
-      background: var(--c-night);
-      border-bottom: 1px solid rgba(200,169,110,0.18);
-      z-index: 1001;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 0 56px;
-      transition: transform 0.4s var(--ease-out);
-    }
-    #announce-bar.hidden { transform: translateY(-100%); }
-    .ann-text {
-      font-family: 'DM Sans', sans-serif;
-      font-weight: 300;
-      font-size: 11px;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: rgba(232,213,163,0.75);
-      text-align: center;
-      position: absolute;
-      left: 0;
-      right: 0;
-      top: 50%;
-      transform: translateY(-50%);
-      padding: 0 48px;
-      pointer-events: none;
-    }
-    .ann-text strong {
-      font-weight: 500;
-      color: var(--c-gold);
-      letter-spacing: 0.12em;
-    }
-    .ann-sep { margin: 0 16px; opacity: 0.3; }
-    #ann-close {
-      position: absolute;
-      right: 24px;
-      background: none;
-      border: none;
-      color: rgba(181,201,183,0.4);
-      cursor: pointer;
-      font-size: 14px;
-      line-height: 1;
-      padding: 4px 8px;
-      transition: color 0.3s;
-    }
-    #ann-close:hover { color: var(--c-gold); }
-    body.bar-gone { --bar-h: 0px; }
-    @media (max-width: 767px) {
-      #announce-bar { padding: 0 44px; }
-      .ann-sep { margin: 0 8px; }
-      .ann-text { font-size: 9.5px; letter-spacing: 0.12em; white-space: nowrap; overflow: hidden; }
-    }
-    @media (max-width: 520px) {
-      .ann-text { font-size: 9px; letter-spacing: 0.08em; }
-    }
-    @media (max-width: 430px) {
-      .ann-locs { display: none; }
-      .ann-text { font-size: 9px; letter-spacing: 0.14em; }
-    }
-
-    /* ─────────────────────────────────────────────────────
-       FLASH SALE / EXCLUSIVE DEALS
-    ───────────────────────────────────────────────────── */
-    #flash-sale {
-      background: var(--c-night);
-      padding: 112px 0;
-      position: relative;
-      overflow: hidden;
-    }
-    #flash-sale::before {
-      content: 'SALE';
-      position: absolute;
-      font-family: 'Cormorant Garamond', serif;
-      font-weight: 900;
-      font-style: italic;
-      font-size: clamp(180px, 22vw, 320px);
-      color: rgba(200,169,110,0.035);
-      top: 50%; left: 50%;
-      transform: translate(-50%, -50%);
-      white-space: nowrap;
-      pointer-events: none;
-      letter-spacing: -0.04em;
-      line-height: 1;
-    }
-    .sale-top-row {
-      display: flex;
-      align-items: flex-end;
-      justify-content: space-between;
-      gap: 32px;
-      flex-wrap: wrap;
-      margin-bottom: 64px;
-    }
-    .sec-label-light {
-      font-family: 'DM Sans', sans-serif;
-      font-weight: 300;
-      font-size: 10px;
-      letter-spacing: 0.26em;
-      text-transform: uppercase;
-      color: var(--c-mid);
-      display: block;
-      margin-bottom: 14px;
-    }
-    .sale-h {
-      font-family: 'Cormorant Garamond', serif;
-      font-weight: 400;
-      font-style: italic;
-      font-size: clamp(40px, 5vw, 64px);
-      color: var(--c-pgold);
-      line-height: 1.0;
-    }
-    /* Countdown */
-    .countdown {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      padding-bottom: 6px;
-    }
-    .cd-unit { display: flex; flex-direction: column; align-items: center; }
-    .cd-num {
-      font-family: 'Cormorant Garamond', serif;
-      font-weight: 300;
-      font-style: italic;
-      font-size: clamp(36px, 5vw, 56px);
-      color: var(--c-gold);
-      line-height: 1;
-      min-width: 52px;
-      text-align: center;
-    }
-    .cd-lbl {
-      font-family: 'DM Sans', sans-serif;
-      font-weight: 200;
-      font-size: 8px;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: rgba(122,158,126,0.5);
-      margin-top: 4px;
-    }
-    .cd-sep {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 32px;
-      color: rgba(200,169,110,0.3);
-      align-self: flex-start;
-      margin-top: 4px;
-      line-height: 1;
-    }
-    /* Sale grid — 3 cols */
-    .sale-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 3px;
-    }
-    .sale-card {
-      background: rgba(61,92,66,0.1);
-      border: 1px solid rgba(200,169,110,0.08);
-      overflow: hidden;
-      transition: border-color 0.35s;
-    }
-    .sale-card:hover { border-color: rgba(200,169,110,0.25); }
-    .sale-visual {
-      height: 380px;
-      position: relative;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-    }
-    .sale-visual img.prod-photo { z-index: 0; }
-    .sale-visual .prod-art { position: relative; z-index: 1; }
-    @media (hover: hover) {
-      .sale-visual .prod-art { transition: transform 0.7s var(--ease-out); }
-      .sale-card:hover .prod-art { transform: scale(1.04); }
-    }
-    .sale-pct {
-      position: absolute;
-      top: 16px; right: 16px;
-      z-index: 5;
-      font-family: 'Cormorant Garamond', serif;
-      font-weight: 500;
-      font-style: italic;
-      font-size: 28px;
-      color: var(--c-pgold);
-      line-height: 1;
-    }
-    .sale-pct::after {
-      content: '';
-      display: block;
-      height: 1px;
-      background: rgba(200,169,110,0.3);
-      margin-top: 4px;
-    }
-    .sale-body {
-      padding: 24px 24px 28px;
-      border-top: 1px solid rgba(200,169,110,0.08);
-    }
-    .sale-name {
-      font-family: 'Cormorant Garamond', serif;
-      font-weight: 400;
-      font-style: italic;
-      font-size: 22px;
-      color: var(--c-pgold);
-      display: block;
-      margin-bottom: 10px;
-    }
-    .sale-price-row {
-      display: flex;
-      align-items: baseline;
-      gap: 10px;
-      margin-bottom: 20px;
-    }
-    .sale-price-new {
-      font-family: 'Cormorant Garamond', serif;
-      font-weight: 500;
-      font-size: 22px;
-      color: var(--c-gold);
-    }
-    .sale-price-was {
-      font-family: 'DM Sans', sans-serif;
-      font-weight: 300;
-      font-size: 13px;
-      color: rgba(122,158,126,0.4);
-      text-decoration: line-through;
-    }
-    .sale-btn {
-      display: block;
-      text-align: center;
-      padding: 13px;
-      font-family: 'DM Sans', sans-serif;
-      font-weight: 400;
-      font-size: 9px;
-      letter-spacing: 0.24em;
-      text-transform: uppercase;
-      color: var(--c-gold);
-      text-decoration: none;
-      border: 1px solid rgba(200,169,110,0.25);
-      transition: background 0.35s, color 0.35s;
-    }
-    .sale-btn:hover { background: var(--c-gold); color: var(--c-night); }
-    @media (max-width: 991px) {
-      .sale-grid { grid-template-columns: 1fr; gap: 20px; }
-      .sale-top-row { flex-direction: column; align-items: flex-start; }
-    }
-
-    /* ─────────────────────────────────────────────────────
-       INNER CIRCLE (newsletter / exclusive access)
-    ───────────────────────────────────────────────────── */
-    #inner-circle {
-      background: var(--c-sage);
-      padding: 112px 0;
-      position: relative;
-      overflow: hidden;
-    }
-    #inner-circle::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(ellipse at 30% 50%, rgba(200,169,110,0.08), transparent 65%);
-      pointer-events: none;
-    }
-    .ic-wm {
-      position: absolute;
-      font-family: 'Cormorant Garamond', serif;
-      font-weight: 900;
-      font-style: italic;
-      font-size: clamp(120px, 16vw, 220px);
-      color: rgba(28,43,30,0.2);
-      top: 50%; right: -2%;
-      transform: translateY(-50%);
-      letter-spacing: -0.03em;
-      pointer-events: none;
-      user-select: none;
-      line-height: 1;
-    }
-    .ic-inner {
-      max-width: 1280px;
-      margin: 0 auto;
-      padding: 0 56px;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 96px;
-      align-items: center;
-      position: relative;
-      z-index: 1;
-    }
-    .ic-label {
-      font-family: 'DM Sans', sans-serif;
-      font-weight: 300;
-      font-size: 10px;
-      letter-spacing: 0.26em;
-      text-transform: uppercase;
-      color: rgba(181,201,183,0.6);
-      display: block;
-      margin-bottom: 18px;
-    }
-    .ic-h {
-      font-family: 'Cormorant Garamond', serif;
-      font-weight: 400;
-      font-style: italic;
-      font-size: clamp(40px, 5vw, 64px);
-      color: var(--c-pgold);
-      line-height: 1.05;
-      margin-bottom: 24px;
-    }
-    .ic-p {
-      font-family: 'DM Sans', sans-serif;
-      font-weight: 300;
-      font-size: 14px;
-      color: rgba(181,201,183,0.8);
-      line-height: 2;
-      max-width: 420px;
-    }
-    .ic-perks {
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-      margin-top: 36px;
-    }
-    .ic-perk {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-    }
-    .ic-perk-dot {
-      width: 5px; height: 5px;
-      background: var(--c-gold);
-      transform: rotate(45deg);
-      flex-shrink: 0;
-    }
-    .ic-perk-text {
-      font-family: 'DM Sans', sans-serif;
-      font-weight: 300;
-      font-size: 13px;
-      color: rgba(181,201,183,0.75);
-      letter-spacing: 0.03em;
-    }
-    /* Right side */
-    .ic-right {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 32px;
-    }
-    .ic-art-wrap {
-      width: 200px;
-      height: 200px;
-      position: relative;
-    }
-    .ic-art-ring {
-      position: absolute;
-      inset: 0;
-      border-radius: 50%;
-      border: 1px solid rgba(200,169,110,0.18);
-      animation: orbitSpin 60s linear infinite;
-    }
-    .ic-art-ring::before {
-      content: '';
-      position: absolute;
-      top: -3px; left: 50%;
-      transform: translateX(-50%);
-      width: 5px; height: 5px;
-      background: var(--c-gold);
-      border-radius: 50%;
-      box-shadow: 0 0 8px rgba(200,169,110,0.5);
-    }
-    .ic-art-ring2 {
-      position: absolute;
-      inset: 20%;
-      border-radius: 50%;
-      border: 1px solid rgba(200,169,110,0.08);
-      animation: orbitSpinRev 80s linear infinite;
-    }
-    .ic-ig-cta {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      background: rgba(28,43,30,0.5);
-      border: 1px solid rgba(200,169,110,0.22);
-      padding: 18px 36px;
-      text-decoration: none;
-      transition: background 0.35s, border-color 0.35s;
-    }
-    .ic-ig-cta:hover { background: rgba(28,43,30,0.85); border-color: rgba(200,169,110,0.5); }
-    .ic-ig-cta svg { width: 20px; height: 20px; fill: none; stroke: var(--c-gold); }
-    .ic-ig-cta span {
-      font-family: 'DM Sans', sans-serif;
-      font-weight: 400;
-      font-size: 10px;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: var(--c-pgold);
-    }
-    .ic-note {
-      font-family: 'DM Sans', sans-serif;
-      font-weight: 200;
-      font-size: 11px;
-      letter-spacing: 0.06em;
-      color: rgba(181,201,183,0.45);
-      text-align: center;
-    }
-    @media (max-width: 991px) {
-      .ic-inner { grid-template-columns: 1fr; gap: 56px; }
-      .ic-right { align-items: flex-start; }
-    }
-
-    /* ─────────────────────────────────────────────────────
-       NEW ARRIVALS
-    ───────────────────────────────────────────────────── */
-    #new-arrivals {
-      padding: 112px 0;
-      background: var(--c-linen);
-      position: relative;
-      overflow: hidden;
-    }
-    .na-track {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 3px;
-      margin-top: 56px;
-    }
-    .na-card {
-      position: relative;
-      overflow: hidden;
-      cursor: pointer;
-    }
-    .na-visual {
-      height: 460px;
-      position: relative;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-    }
-    .na-visual .prod-art {
-      pointer-events: none;
-    }
-    @media (hover: hover) {
-      .na-visual .prod-art { transition: transform 0.8s var(--ease-out); }
-      .na-card:hover .prod-art { transform: scale(1.06); }
-    }
-    .na-new-pill {
-      position: absolute;
-      top: 16px; left: 16px;
-      z-index: 5;
-      font-family: 'DM Sans', sans-serif;
-      font-weight: 300;
-      font-size: 8px;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: var(--c-night);
-      background: var(--c-gold);
-      padding: 5px 12px;
-    }
-    .na-body {
-      padding: 20px 20px 24px;
-      background: var(--c-linen);
-      border-top: 1px solid rgba(181,201,183,0.35);
-    }
-    .na-name {
-      font-family: 'Cormorant Garamond', serif;
-      font-weight: 400;
-      font-style: italic;
-      font-size: 20px;
-      color: var(--c-sage);
-      display: block;
-      margin-bottom: 4px;
-      letter-spacing: 0.02em;
-    }
-    .na-price {
-      font-family: 'Cormorant Garamond', serif;
-      font-weight: 500;
-      font-size: 16px;
-      color: var(--c-gold);
-      display: block;
-    }
-    .na-hover-cta {
-      position: absolute;
-      bottom: 0; left: 0; right: 0;
-      background: rgba(28,43,30,0.92);
-      backdrop-filter: blur(4px);
-      -webkit-backdrop-filter: blur(4px);
-      padding: 16px;
-      text-align: center;
-      font-family: 'DM Sans', sans-serif;
-      font-weight: 400;
-      font-size: 9px;
-      letter-spacing: 0.24em;
-      text-transform: uppercase;
-      color: var(--c-pgold);
-      text-decoration: none;
-      transform: translateY(100%);
-      transition: transform 0.4s var(--ease-out);
-    }
-    .na-card:hover .na-hover-cta { transform: translateY(0); }
-    @media (max-width: 991px) {
-      .na-track {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
-    @media (max-width: 575px) {
-      .na-track {
-        display: flex;
-        overflow-x: scroll;
-        scroll-snap-type: x mandatory;
-        overscroll-behavior-x: contain;
-        touch-action: pan-x pan-y;
-        scrollbar-width: none;
-        gap: 3px;
-        padding-bottom: 8px;
-      }
-      /* Same pre-reveal fix for new-arrivals slider cards */
-      .na-track .reveal,
-      .na-track .reveal-left {
-        opacity: 1 !important;
-        transform: none !important;
-        transition: none !important;
-      }
-      .na-track::-webkit-scrollbar { display: none; }
-      .na-card {
-        flex: 0 0 82vw;
-        scroll-snap-align: start;
-        scroll-snap-stop: always;
-      }
-    }
-
-    /* ─────────────────────────────────────────────────────
-       PRELOADER
-    ───────────────────────────────────────────────────── */
-    #preloader {
-      position: fixed;
-      inset: 0;
-      z-index: 99999;
-      background: var(--c-night);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-direction: column;
-      gap: 0;
-      transition: opacity 0.8s ease, visibility 0.8s ease;
-    }
-    #preloader.pl-done { opacity: 0; visibility: hidden; pointer-events: none; }
-
-    /* Ornamental ring */
-    .pl-ring {
-      position: absolute;
-      width: min(340px, 72vw);
-      height: min(340px, 72vw);
-      border-radius: 50%;
-      border: 1px solid rgba(200,169,110,0.1);
-      animation: plRingSpin 12s linear infinite;
-    }
-    .pl-ring::before {
-      content: '';
-      position: absolute;
-      top: -3px; left: 50%;
-      transform: translateX(-50%);
-      width: 5px; height: 5px;
-      background: var(--c-gold);
-      border-radius: 50%;
-      box-shadow: 0 0 12px rgba(200,169,110,0.7);
-    }
-    .pl-ring2 {
-      position: absolute;
-      width: min(260px, 56vw);
-      height: min(260px, 56vw);
-      border-radius: 50%;
-      border: 1px solid rgba(200,169,110,0.05);
-      animation: plRingSpin 20s linear infinite reverse;
-    }
-    @keyframes plRingSpin { to { transform: rotate(360deg); } }
-
-    .pl-inner {
-      position: relative;
-      z-index: 1;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-    .pl-name-small {
-      font-family: 'DM Sans', sans-serif;
-      font-weight: 200;
-      font-size: 9px;
-      letter-spacing: 0.42em;
-      text-transform: uppercase;
-      color: rgba(122,158,126,0.6);
-      margin-bottom: 10px;
-      opacity: 0;
-      animation: plFadeUp 0.6s ease 0.1s forwards;
-    }
-    .pl-logo {
-      font-family: 'Cormorant Garamond', serif;
-      font-weight: 300;
-      font-style: italic;
-      font-size: clamp(62px, 10vw, 100px);
-      color: var(--c-pgold);
-      letter-spacing: 0.12em;
-      line-height: 1;
-      opacity: 0;
-      animation: plFadeUp 0.7s ease 0.25s forwards;
-    }
-    .pl-line {
-      height: 1px;
-      width: 0;
-      background: linear-gradient(to right, transparent, var(--c-gold), transparent);
-      margin: 22px 0 18px;
-      animation: plLineGrow 0.9s cubic-bezier(0.4,0,0.2,1) 0.6s forwards;
-    }
-    .pl-sub {
-      font-family: 'DM Sans', sans-serif;
-      font-weight: 200;
-      font-size: 9px;
-      letter-spacing: 0.34em;
-      text-transform: uppercase;
-      color: rgba(122,158,126,0.45);
-      opacity: 0;
-      animation: plFadeUp 0.6s ease 1.0s forwards;
-    }
-    .pl-diamond {
-      width: 7px; height: 7px;
-      border: 1px solid rgba(200,169,110,0.5);
-      transform: rotate(45deg);
-      margin-top: 28px;
-      opacity: 0;
-      animation: plFadeUp 0.5s ease 1.2s forwards;
-    }
-    @keyframes plFadeUp {
-      from { opacity: 0; transform: translateY(8px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-    @keyframes plLineGrow { to { width: 180px; } }
-
-    /* ─────────────────────────────────────────────────────
-       PRODUCT CARD — PREMIUM OVERRIDES
-    ───────────────────────────────────────────────────── */
-    /* Taller visuals */
-    .prod-visual { height: 440px; }
-    /* No border-top on body — let the bg color transition suffice */
-    .prod-body { padding: 26px 24px 0; border-top: none; }
-    /* Stack name → price vertically */
-    .prod-row1 {
-      display: block;
-      margin-bottom: 0;
-      padding-bottom: 18px;
-      border-bottom: 1px solid rgba(181,201,183,0.18);
-    }
-    .prod-name { display: block; font-size: 23px; margin-bottom: 7px; }
-    .prod-price-wrap { display: block; }
-    /* Hide redundant category label */
-    .prod-cat { display: none; }
-    /* Button: no side/bottom borders — only top separator */
-    .prod-btn {
-      border-left: none;
-      border-right: none;
-      border-bottom: none;
-      border-top: 1px solid rgba(181,201,183,0.18);
-      padding: 15px 24px;
-    }
-    /* Gold bottom accent sweep on hover */
-    .prod-card::after {
-      content: '';
-      position: absolute;
-      bottom: 0; left: 0; right: 0;
-      height: 2px;
-      background: var(--c-gold);
-      transform: scaleX(0);
-      transform-origin: left;
-      transition: transform 0.5s var(--ease-out);
-      z-index: 10;
-    }
-    @media (hover: hover) {
-      .prod-card:hover::after { transform: scaleX(1); }
-    }
-    /* Gold shimmer sweep across visual */
-    @keyframes shimmerSweep {
-      from { left: -80%; }
-      to   { left: 140%; }
-    }
-    .prod-visual::before {
-      content: '';
-      position: absolute;
-      top: 0; bottom: 0;
-      left: -80%; width: 55%;
-      background: linear-gradient(to right, transparent, rgba(200,169,110,0.07), transparent);
-      transform: skewX(-15deg);
-      pointer-events: none;
-      z-index: 4;
-    }
-    @media (hover: hover) {
-      .prod-card:hover .prod-visual::before {
-        animation: shimmerSweep 0.9s ease-out forwards;
-      }
-    }
-
-    /* ─────────────────────────────────────────────────────
-       FLOATING INSTAGRAM CTA
-    ───────────────────────────────────────────────────── */
-    #ig-float {
-      position: fixed;
-      bottom: 28px; left: 28px;
-      z-index: 900;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      background: rgba(28,43,30,0.92);
-      border: 1px solid rgba(200,169,110,0.28);
-      padding: 12px 20px 12px 14px;
-      text-decoration: none;
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      opacity: 0;
-      transform: translateY(8px);
-      pointer-events: none;
-      transition: opacity 0.4s, transform 0.4s, background 0.35s, border-color 0.35s;
-    }
-    #ig-float.show { opacity: 1; transform: none; pointer-events: auto; }
-    #ig-float:hover { background: rgba(28,43,30,1); border-color: rgba(200,169,110,0.6); }
-    #ig-float svg { width: 18px; height: 18px; fill: none; stroke: var(--c-gold); flex-shrink: 0; }
-    .ig-float-text {
-      display: flex;
-      flex-direction: column;
-      line-height: 1.1;
-    }
-    .ig-float-top {
-      font-family: 'DM Sans', sans-serif;
-      font-weight: 200;
-      font-size: 8px;
-      letter-spacing: 0.26em;
-      text-transform: uppercase;
-      color: rgba(122,158,126,0.65);
-    }
-    .ig-float-main {
-      font-family: 'DM Sans', sans-serif;
-      font-weight: 400;
-      font-size: 10px;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: var(--c-pgold);
-    }
-    @media (max-width: 575px) {
-      #ig-float { padding: 10px 16px 10px 12px; }
-      .ig-float-top { display: none; }
-    }
-
-    /* ─────────────────────────────────────────────────────
-       PREMIUM — SIGNATURE DETAILS
-    ───────────────────────────────────────────────────── */
-
-
-    /* Hero right panel — editorial watermark */
-    .hero-wm {
-      position: absolute;
-      font-family: 'Cormorant Garamond', serif;
-      font-weight: 700;
-      font-style: italic;
-      font-size: clamp(68px, 9.5vw, 144px);
-      color: rgba(200,169,110,0.038);
-      letter-spacing: -0.02em;
-      pointer-events: none;
-      user-select: none;
-      white-space: nowrap;
-      line-height: 1;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      z-index: 0;
-    }
-
-
-    /* Catalog piece numbers — rendered once JS sets data-piece */
-    #pgrid .prod-body::before {
-      content: 'No.' attr(data-piece);
-      display: block;
-      font-family: 'DM Sans', sans-serif;
-      font-weight: 200;
-      font-size: 8px;
-      letter-spacing: 0.32em;
-      color: rgba(200,169,110,0.33);
-      padding-top: 4px;
-      margin-bottom: 10px;
-    }
-
-    /* Announce bar diamond separator refinement */
-    .ann-sep {
-      font-size: 7px;
-      vertical-align: middle;
-      position: relative;
-      top: -0.5px;
-    }
-  </style>
 </head>
 <body>
 
@@ -2666,50 +149,110 @@
 
     <div class="hero-right">
       <span class="hero-wm" aria-hidden="true">FANTAZIA</span>
+      <div class="hero-glow" aria-hidden="true"></div>
+      <img src="images/IMG_6818.jpg" alt="Bizhuteria Fantazia" class="hero-img" loading="eager">
+      <div class="ha-sweep" aria-hidden="true"></div>
       <div class="hero-art">
         <div class="ha-orbit1"></div>
         <div class="ha-orbit2"></div>
-        <!-- Elaborate ring illustration -->
-        <svg class="ha-ring-svg" viewBox="0 0 320 360" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <!-- Band outer bottom ellipse -->
-          <ellipse cx="160" cy="296" rx="108" ry="27" stroke="rgba(200,169,110,0.52)" stroke-width="1.3"/>
-          <!-- Band inner ellipse -->
-          <ellipse cx="160" cy="296" rx="80" ry="20" stroke="rgba(200,169,110,0.2)" stroke-width="0.8"/>
-          <!-- Band walls -->
-          <line x1="52"  y1="296" x2="52"  y2="226" stroke="rgba(200,169,110,0.52)" stroke-width="1.3"/>
-          <line x1="268" y1="296" x2="268" y2="226" stroke="rgba(200,169,110,0.52)" stroke-width="1.3"/>
-          <line x1="80"  y1="296" x2="80"  y2="232" stroke="rgba(200,169,110,0.18)" stroke-width="0.8"/>
-          <line x1="240" y1="296" x2="240" y2="232" stroke="rgba(200,169,110,0.18)" stroke-width="0.8"/>
-          <!-- Band top curve -->
-          <path d="M52 226 Q160 192 268 226" stroke="rgba(200,169,110,0.52)" stroke-width="1.3" fill="none"/>
-          <path d="M80 232 Q160 204 240 232" stroke="rgba(200,169,110,0.18)" stroke-width="0.8" fill="none"/>
-          <!-- Setting base collar -->
-          <ellipse cx="160" cy="206" rx="54" ry="14" stroke="rgba(200,169,110,0.4)" stroke-width="1" fill="rgba(200,169,110,0.03)"/>
-          <!-- 4 prongs -->
-          <path d="M116 202 L106 144" stroke="rgba(200,169,110,0.5)" stroke-width="1.1" stroke-linecap="round"/>
-          <path d="M204 202 L214 144" stroke="rgba(200,169,110,0.5)" stroke-width="1.1" stroke-linecap="round"/>
-          <path d="M140 198 L136 142" stroke="rgba(200,169,110,0.32)" stroke-width="0.8" stroke-linecap="round"/>
-          <path d="M180 198 L184 142" stroke="rgba(200,169,110,0.32)" stroke-width="0.8" stroke-linecap="round"/>
-          <!-- Emerald-cut gemstone outer girdle -->
-          <polygon points="106,100 112,78 208,78 214,100 214,142 208,164 112,164 106,142" stroke="rgba(200,169,110,0.68)" stroke-width="1.3" fill="rgba(200,169,110,0.04)"/>
-          <!-- Table facet -->
-          <polygon points="118,96 124,80 196,80 202,96 202,146 196,162 124,162 118,146" stroke="rgba(200,169,110,0.26)" stroke-width="0.8" fill="rgba(200,169,110,0.03)"/>
-          <!-- Inner step -->
-          <rect x="134" y="98" width="52" height="44" stroke="rgba(200,169,110,0.2)" stroke-width="0.7" fill="rgba(200,169,110,0.03)"/>
-          <!-- Crown corner facets -->
-          <line x1="106" y1="100" x2="118" y2="96"  stroke="rgba(200,169,110,0.2)" stroke-width="0.6"/>
-          <line x1="214" y1="100" x2="202" y2="96"  stroke="rgba(200,169,110,0.2)" stroke-width="0.6"/>
-          <line x1="214" y1="142" x2="202" y2="146" stroke="rgba(200,169,110,0.2)" stroke-width="0.6"/>
-          <line x1="106" y1="142" x2="118" y2="146" stroke="rgba(200,169,110,0.2)" stroke-width="0.6"/>
-          <!-- Sparkle highlight -->
-          <circle cx="143" cy="90" r="2.5" fill="rgba(232,213,163,0.8)"/>
-          <circle cx="151" cy="86" r="1.2" fill="rgba(232,213,163,0.45)"/>
+        <!-- Premium 5-peak crown illustration -->
+        <svg class="ha-ring-svg" viewBox="0 0 380 420" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Ambient glow rings -->
+          <circle cx="190" cy="220" r="168" stroke="rgba(200,169,110,0.045)" stroke-width="0.9"/>
+          <circle cx="190" cy="220" r="128" stroke="rgba(200,169,110,0.032)" stroke-width="0.7"/>
+          <!-- ── CROWN BASE BAND ── -->
+          <path d="M 26 340 Q 190 322 354 340 L 354 378 Q 190 396 26 378 Z"
+                fill="rgba(200,169,110,0.042)" stroke="rgba(200,169,110,0.64)" stroke-width="1.4" stroke-linejoin="round"/>
+          <path d="M 52 344 Q 190 328 328 344" stroke="rgba(200,169,110,0.22)" stroke-width="0.7" fill="none"/>
+          <path d="M 52 374 Q 190 390 328 374" stroke="rgba(200,169,110,0.22)" stroke-width="0.7" fill="none"/>
+          <!-- Band ornamental diamonds -->
+          <polygon points="190,349 196,359 190,369 184,359" fill="rgba(200,169,110,0.08)" stroke="rgba(200,169,110,0.38)" stroke-width="0.8"/>
+          <polygon points="128,354 133,361 128,368 123,361" fill="rgba(200,169,110,0.06)" stroke="rgba(200,169,110,0.28)" stroke-width="0.7"/>
+          <polygon points="252,354 257,361 252,368 247,361" fill="rgba(200,169,110,0.06)" stroke="rgba(200,169,110,0.28)" stroke-width="0.7"/>
+          <polygon points="72,358 76,363 72,368 68,363"     fill="rgba(200,169,110,0.05)" stroke="rgba(200,169,110,0.22)" stroke-width="0.6"/>
+          <polygon points="308,358 312,363 308,368 304,363" fill="rgba(200,169,110,0.05)" stroke="rgba(200,169,110,0.22)" stroke-width="0.6"/>
+          <!-- Band round gem settings -->
+          <circle cx="44"  cy="359" r="7.5" stroke="rgba(200,169,110,0.52)" stroke-width="1"   fill="rgba(200,169,110,0.045)"/>
+          <circle cx="44"  cy="359" r="3.8" stroke="rgba(200,169,110,0.2)"  stroke-width="0.6" fill="rgba(200,169,110,0.03)"/>
+          <circle cx="100" cy="352" r="6"   stroke="rgba(200,169,110,0.46)" stroke-width="0.9" fill="rgba(200,169,110,0.04)"/>
+          <circle cx="100" cy="352" r="2.8" stroke="rgba(200,169,110,0.18)" stroke-width="0.5" fill="rgba(200,169,110,0.03)"/>
+          <circle cx="155" cy="347" r="6"   stroke="rgba(200,169,110,0.46)" stroke-width="0.9" fill="rgba(200,169,110,0.04)"/>
+          <circle cx="190" cy="345" r="9"   stroke="rgba(200,169,110,0.6)"  stroke-width="1.1" fill="rgba(200,169,110,0.055)"/>
+          <circle cx="190" cy="345" r="4.8" stroke="rgba(200,169,110,0.24)" stroke-width="0.7" fill="rgba(200,169,110,0.03)"/>
+          <circle cx="225" cy="347" r="6"   stroke="rgba(200,169,110,0.46)" stroke-width="0.9" fill="rgba(200,169,110,0.04)"/>
+          <circle cx="280" cy="352" r="6"   stroke="rgba(200,169,110,0.46)" stroke-width="0.9" fill="rgba(200,169,110,0.04)"/>
+          <circle cx="280" cy="352" r="2.8" stroke="rgba(200,169,110,0.18)" stroke-width="0.5" fill="rgba(200,169,110,0.03)"/>
+          <circle cx="336" cy="359" r="7.5" stroke="rgba(200,169,110,0.52)" stroke-width="1"   fill="rgba(200,169,110,0.045)"/>
+          <circle cx="336" cy="359" r="3.8" stroke="rgba(200,169,110,0.2)"  stroke-width="0.6" fill="rgba(200,169,110,0.03)"/>
+          <!-- ── ARCH SPIRES ── -->
+          <path d="M 36 340 Q 22 280 38 218"  stroke="rgba(200,169,110,0.5)"  stroke-width="1.2"  fill="none" stroke-linecap="round"/>
+          <path d="M 50 338 Q 36 280 52 225"   stroke="rgba(200,169,110,0.17)" stroke-width="0.7"  fill="none" stroke-linecap="round"/>
+          <path d="M 96 332 Q 74 234 88 140"   stroke="rgba(200,169,110,0.65)" stroke-width="1.35" fill="none" stroke-linecap="round"/>
+          <path d="M 110 330 Q 88 236 102 147" stroke="rgba(200,169,110,0.2)"  stroke-width="0.7"  fill="none" stroke-linecap="round"/>
+          <path d="M 190 320 L 190 60"  stroke="rgba(200,169,110,0.74)" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+          <path d="M 178 322 L 178 80"  stroke="rgba(200,169,110,0.2)"  stroke-width="0.7" fill="none"/>
+          <path d="M 202 322 L 202 80"  stroke="rgba(200,169,110,0.2)"  stroke-width="0.7" fill="none"/>
+          <path d="M 284 332 Q 306 234 292 140" stroke="rgba(200,169,110,0.65)" stroke-width="1.35" fill="none" stroke-linecap="round"/>
+          <path d="M 270 330 Q 292 236 278 147" stroke="rgba(200,169,110,0.2)"  stroke-width="0.7"  fill="none" stroke-linecap="round"/>
+          <path d="M 344 340 Q 358 280 342 218" stroke="rgba(200,169,110,0.5)"  stroke-width="1.2"  fill="none" stroke-linecap="round"/>
+          <path d="M 330 338 Q 344 280 328 225" stroke="rgba(200,169,110,0.17)" stroke-width="0.7"  fill="none" stroke-linecap="round"/>
+          <!-- Horizontal cross connectors -->
+          <path d="M 88 178 Q 138 162 190 165 Q 242 162 292 178" stroke="rgba(200,169,110,0.14)" stroke-width="0.7" fill="none"/>
+          <path d="M 38 265 Q 90 248 190 252 Q 290 248 342 265"  stroke="rgba(200,169,110,0.11)" stroke-width="0.6" fill="none"/>
+          <!-- ── PEAK GEM SETTINGS ── -->
+          <circle cx="38"  cy="212" r="12"  stroke="rgba(200,169,110,0.6)"  stroke-width="1.1" fill="rgba(200,169,110,0.05)"/>
+          <circle cx="38"  cy="212" r="6.5" stroke="rgba(200,169,110,0.24)" stroke-width="0.7" fill="rgba(200,169,110,0.03)"/>
+          <circle cx="38"  cy="212" r="2.5" fill="rgba(200,169,110,0.07)"/>
+          <circle cx="88"  cy="133" r="17"  stroke="rgba(200,169,110,0.68)" stroke-width="1.3" fill="rgba(200,169,110,0.055)"/>
+          <circle cx="88"  cy="133" r="9.5" stroke="rgba(200,169,110,0.28)" stroke-width="0.8" fill="rgba(200,169,110,0.04)"/>
+          <circle cx="88"  cy="133" r="3.8" stroke="rgba(200,169,110,0.14)" stroke-width="0.6" fill="rgba(200,169,110,0.04)"/>
+          <circle cx="190" cy="50"  r="24"  stroke="rgba(200,169,110,0.82)" stroke-width="1.6" fill="rgba(200,169,110,0.065)"/>
+          <circle cx="190" cy="50"  r="15"  stroke="rgba(200,169,110,0.36)" stroke-width="0.9" fill="rgba(200,169,110,0.04)"/>
+          <circle cx="190" cy="50"  r="7.5" stroke="rgba(200,169,110,0.18)" stroke-width="0.7" fill="rgba(200,169,110,0.05)"/>
+          <circle cx="292" cy="133" r="17"  stroke="rgba(200,169,110,0.68)" stroke-width="1.3" fill="rgba(200,169,110,0.055)"/>
+          <circle cx="292" cy="133" r="9.5" stroke="rgba(200,169,110,0.28)" stroke-width="0.8" fill="rgba(200,169,110,0.04)"/>
+          <circle cx="292" cy="133" r="3.8" stroke="rgba(200,169,110,0.14)" stroke-width="0.6" fill="rgba(200,169,110,0.04)"/>
+          <circle cx="342" cy="212" r="12"  stroke="rgba(200,169,110,0.6)"  stroke-width="1.1" fill="rgba(200,169,110,0.05)"/>
+          <circle cx="342" cy="212" r="6.5" stroke="rgba(200,169,110,0.24)" stroke-width="0.7" fill="rgba(200,169,110,0.03)"/>
+          <circle cx="342" cy="212" r="2.5" fill="rgba(200,169,110,0.07)"/>
+          <!-- Sparkle highlights -->
+          <circle cx="181" cy="41"  r="3.5" fill="rgba(245,232,195,0.94)"/>
+          <circle cx="173" cy="46"  r="1.8" fill="rgba(245,232,195,0.5)"/>
+          <circle cx="80"  cy="124" r="2.2" fill="rgba(245,232,195,0.72)"/>
+          <circle cx="284" cy="124" r="2.2" fill="rgba(245,232,195,0.72)"/>
+          <circle cx="32"  cy="205" r="1.5" fill="rgba(245,232,195,0.55)"/>
+          <circle cx="336" cy="205" r="1.5" fill="rgba(245,232,195,0.55)"/>
           <!-- Blueprint guide lines -->
-          <line x1="6"   y1="121" x2="48"  y2="121" stroke="rgba(200,169,110,0.1)" stroke-width="0.5" stroke-dasharray="2 4"/>
-          <line x1="272" y1="121" x2="314" y2="121" stroke="rgba(200,169,110,0.1)" stroke-width="0.5" stroke-dasharray="2 4"/>
-          <line x1="160" y1="6"   x2="160" y2="64"  stroke="rgba(200,169,110,0.1)" stroke-width="0.5" stroke-dasharray="2 4"/>
+          <line x1="2"   y1="50"  x2="24"  y2="50"  stroke="rgba(200,169,110,0.1)" stroke-width="0.5" stroke-dasharray="2 4"/>
+          <line x1="356" y1="50"  x2="378" y2="50"  stroke="rgba(200,169,110,0.1)" stroke-width="0.5" stroke-dasharray="2 4"/>
+          <line x1="190" y1="2"   x2="190" y2="26"  stroke="rgba(200,169,110,0.1)" stroke-width="0.5" stroke-dasharray="2 4"/>
+          <line x1="2"   y1="359" x2="24"  y2="359" stroke="rgba(200,169,110,0.08)" stroke-width="0.5" stroke-dasharray="2 4"/>
+          <line x1="356" y1="359" x2="378" y2="359" stroke="rgba(200,169,110,0.08)" stroke-width="0.5" stroke-dasharray="2 4"/>
         </svg>
-        <p class="hero-art-label">Est. 2024 · Balkans</p>
+      </div>
+      <!-- Premium frame overlay — always visible above photo -->
+      <div class="hero-frame" aria-hidden="true">
+        <!-- dark layers first so text paints on top -->
+        <div class="hf-radial"></div>
+        <div class="hf-vig-top"></div>
+        <div class="hf-vig"></div>
+        <!-- frame lines, corners & mid-diamonds -->
+        <div class="hf-inner"></div>
+        <span class="hf-mid hf-mt"></span>
+        <span class="hf-mid hf-mb"></span>
+        <span class="hf-c hf-tl"></span>
+        <span class="hf-c hf-tr"></span>
+        <span class="hf-c hf-bl"></span>
+        <span class="hf-c hf-br"></span>
+        <!-- text on top -->
+        <p class="hf-brand">Bizhuteria Fantazia</p>
+        <span class="hf-brand-rule"></span>
+        <span class="hf-vtxt">Koleksioni · 2024</span>
+        <div class="hf-badge">
+          <span class="hf-bline"></span>
+          <p class="hf-lbl">Est. 2024 · Balkans</p>
+          <span class="hf-bline"></span>
+        </div>
       </div>
     </div>
 
@@ -2739,7 +282,7 @@
 <section id="stats">
   <div class="stats-grid">
     <div class="stat-item reveal">
-      <span class="stat-num">16+</span>
+      <span class="stat-num">20+</span>
       <span class="stat-lbl"><span data-sq>Krijime Unike</span><span data-en>Unique Pieces</span></span>
     </div>
     <div class="stat-item reveal">
@@ -2776,7 +319,7 @@
       <div class="na-card reveal">
         <div class="na-new-pill"><span data-sq>E Re</span><span data-en>New</span></div>
         <div class="na-visual bg-b">
-          <img src="https://images.unsplash.com/photo-1611591437281-460bfbe1220a?auto=format&fit=crop&w=600&h=800&q=80" alt="Aurel Choker" class="prod-photo" loading="lazy">
+          <img src="" alt="Aurel Choker" class="prod-photo" loading="lazy">
           <div class="prod-art">
             <svg width="200" height="240" viewBox="0 0 240 280" fill="none">
               <path d="M20 44 C50 26 100 16 120 15" stroke="rgba(90,60,20,0.6)" stroke-width="1" fill="none"/>
@@ -2805,7 +348,7 @@
       <div class="na-card reveal">
         <div class="na-new-pill"><span data-sq>E Re</span><span data-en>New</span></div>
         <div class="na-visual bg-d">
-          <img src="https://images.unsplash.com/photo-1617038260897-41a1f14a8ca0?auto=format&fit=crop&w=600&h=800&q=80" alt="Cèdre Hoops" class="prod-photo" loading="lazy">
+          <img src="" alt="Cèdre Hoops" class="prod-photo" loading="lazy">
           <div class="prod-art">
             <svg width="190" height="230" viewBox="0 0 220 260" fill="none">
               <path d="M62 20 Q62 8 74 8 Q86 8 86 20 L86 36" stroke="rgba(90,60,20,0.7)" stroke-width="1.3" fill="none" stroke-linecap="round"/>
@@ -2834,7 +377,7 @@
       <div class="na-card reveal">
         <div class="na-new-pill"><span data-sq>E Re</span><span data-en>New</span></div>
         <div class="na-visual bg-b">
-          <img src="https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=600&h=800&q=80" alt="Vigne Layering Chain" class="prod-photo" loading="lazy">
+          <img src="" alt="Vigne Layering Chain" class="prod-photo" loading="lazy">
           <div class="prod-art">
             <svg width="200" height="240" viewBox="0 0 240 280" fill="none">
               <path d="M20 44 C50 26 100 16 120 15" stroke="rgba(90,60,20,0.6)" stroke-width="1" fill="none"/>
@@ -2863,7 +406,7 @@
       <div class="na-card reveal">
         <div class="na-new-pill"><span data-sq>E Re</span><span data-en>New</span></div>
         <div class="na-visual bg-d">
-          <img src="images/products/neck.webp" alt="Pluie Ring" class="prod-photo" loading="lazy">
+          <img src="" alt="Pluie Ring" class="prod-photo" loading="lazy">
           <div class="prod-art">
             <svg width="200" height="240" viewBox="0 0 280 320" fill="none">
               <ellipse cx="140" cy="248" rx="96" ry="24" stroke="rgba(90,60,20,0.55)" stroke-width="1.2"/>
@@ -2918,7 +461,7 @@
       <!-- Sale 1: Mira Drop Earrings −15% -->
       <div class="sale-card reveal">
         <div class="sale-visual bg-d">
-          <img src="https://images.unsplash.com/photo-1617038260897-41a1f14a8ca0?auto=format&fit=crop&w=600&h=800&q=80" alt="Mira Drop Earrings" class="prod-photo" loading="lazy">
+          <img src="" alt="Mira Drop Earrings" class="prod-photo" loading="lazy">
           <span class="sale-pct">−15%</span>
           <div class="prod-art">
             <svg width="190" height="230" viewBox="0 0 220 260" fill="none">
@@ -2952,7 +495,7 @@
       <!-- Sale 2: Seren Ring −15% -->
       <div class="sale-card reveal">
         <div class="sale-visual bg-a">
-          <img src="images/products/neck.webp" alt="Seren Ring" class="prod-photo" loading="lazy">
+          <img src="" alt="Seren Ring" class="prod-photo" loading="lazy">
           <span class="sale-pct">−15%</span>
           <div class="prod-art">
             <svg width="200" height="240" viewBox="0 0 280 320" fill="none">
@@ -2985,7 +528,7 @@
       <!-- Sale 3: Dune Collar −15% -->
       <div class="sale-card reveal">
         <div class="sale-visual bg-b">
-          <img src="images/products/neck1.webp" alt="Dune Collar" class="prod-photo" loading="lazy">
+          <img src="" alt="Dune Collar" class="prod-photo" loading="lazy">
           <span class="sale-pct">−15%</span>
           <div class="prod-art">
             <svg width="200" height="240" viewBox="0 0 240 280" fill="none">
@@ -3059,23 +602,27 @@
     <span class="sec-label reveal"><span data-sq>Koleksioni</span><span data-en>The Collection</span></span>
     <h2 class="sec-h reveal"><span data-sq>Të Gjitha Krijimet</span><span data-en>All Pieces</span></h2>
     <p class="sec-sub reveal">
-      <span data-sq>16 krijime bizhuterisë. Porosit çdo copë nëpërmjet Instagram.</span>
-      <span data-en>16 jewellery pieces. Order any piece through Instagram.</span>
+      <span data-sq>20 krijime bizhuterisë. Porosit çdo copë nëpërmjet Instagram.</span>
+      <span data-en>20 jewellery pieces. Order any piece through Instagram.</span>
     </p>
     <span class="gold-rule" style="margin:28px 0 0"></span>
 
     <div class="filter-bar">
       <button class="f-pill on" data-f="all"><span data-sq>Të Gjitha</span><span data-en>All</span></button>
-      <button class="f-pill" data-f="rings"><span data-sq>Unaza</span><span data-en>Rings</span></button>
-      <button class="f-pill" data-f="necklaces"><span data-sq>Gerdane</span><span data-en>Necklaces</span></button>
+      <button class="f-pill" data-f="crowns"><span data-sq>Kurorë</span><span data-en>Crowns</span></button>
+      <button class="f-pill" data-f="necklaces"><span data-sq>Gjerdan</span><span data-en>Necklaces</span></button>
+      <button class="f-pill" data-f="brooches"><span data-sq>Qistek</span><span data-en>Brooches</span></button>
       <button class="f-pill" data-f="bracelets"><span data-sq>Byzylykë</span><span data-en>Bracelets</span></button>
+      <button class="f-pill" data-f="watches"><span data-sq>Orë</span><span data-en>Watches</span></button>
+      <button class="f-pill" data-f="hallka"><span data-sq>Hallka</span><span data-en>Hoops</span></button>
+      <button class="f-pill" data-f="rings"><span data-sq>Unaza</span><span data-en>Rings</span></button>
       <button class="f-pill" data-f="earrings"><span data-sq>Vathë</span><span data-en>Earrings</span></button>
     </div>
 
     <div class="prod-grid" id="pgrid">
 
-      <!-- 1 — Featured, rings -->
-      <div class="prod-card prod-card--featured reveal" data-cat="rings">
+      <!-- 1 — Featured, crowns -->
+      <div class="prod-card prod-card--featured reveal" data-cat="crowns">
         <span class="prod-badge badge-best"><span data-sq>Bestseller</span><span data-en>Bestseller</span></span>
         <div class="prod-visual bg-a">
           <div class="prod-art">
@@ -3106,15 +653,15 @@
               <circle cx="126" cy="60" r="2.2" fill="rgba(232,213,163,0.75)"/>
             </svg>
           </div>
-          <img src="images/products/neck.webp" alt="Selène Ring" class="prod-photo" loading="lazy">
+          <img src="images/IMG_6818.jpg" alt="Kurorë Selène" class="prod-photo" loading="lazy">
           <div class="prod-overlay"><span><span data-sq>Porosit në Instagram</span><span data-en>Order via Instagram</span></span></div>
         </div>
         <div class="prod-body">
           <div class="prod-row1">
-            <span class="prod-name">Selène Ring</span>
+            <span class="prod-name">Kurorë Selène</span>
             <div class="prod-price-wrap"><span class="prod-price">€42</span></div>
           </div>
-          <span class="prod-cat"><span data-sq>Unazë</span><span data-en>Ring</span></span>
+          <span class="prod-cat"><span data-sq>Kurorë</span><span data-en>Crown</span></span>
           <a href="https://instagram.com/yourbrand" target="_blank" rel="noopener noreferrer" class="prod-btn">
             <span data-sq>Porosit në Instagram</span><span data-en>Order on Instagram</span>
           </a>
@@ -3141,7 +688,7 @@
               <circle cx="114" cy="112" r="1.5" fill="rgba(140,100,40,0.65)"/>
             </svg>
           </div>
-          <img src="images/products/aurel-choker.jpg" alt="Aurel Choker" class="prod-photo" loading="lazy">
+          <img src="" alt="Aurel Choker" class="prod-photo" loading="lazy">
           <div class="prod-overlay"><span><span data-sq>Porosit në Instagram</span><span data-en>Order via Instagram</span></span></div>
         </div>
         <div class="prod-body">
@@ -3173,7 +720,7 @@
               <circle cx="214" cy="84"  r="3" fill="rgba(200,169,110,0.22)"/>
             </svg>
           </div>
-          <img src="images/products/arc-de-bangle.jpg" alt="Arc De Bangle" class="prod-photo" loading="lazy">
+          <img src="" alt="Arc De Bangle" class="prod-photo" loading="lazy">
           <div class="prod-overlay"><span><span data-sq>Porosit në Instagram</span><span data-en>Order via Instagram</span></span></div>
         </div>
         <div class="prod-body">
@@ -3210,7 +757,7 @@
               <circle cx="126" cy="90" r="1.5" fill="rgba(140,100,40,0.65)"/>
             </svg>
           </div>
-          <img src="images/products/neck.webp" alt="Mira Drop Earrings" class="prod-photo" loading="lazy">
+          <img src="" alt="Mira Drop Earrings" class="prod-photo" loading="lazy">
           <div class="prod-overlay"><span><span data-sq>Porosit në Instagram</span><span data-en>Order via Instagram</span></span></div>
         </div>
         <div class="prod-body">
@@ -3231,7 +778,7 @@
           <div class="prod-art">
             <svg width="200" height="240" viewBox="0 0 280 320" fill="none"><ellipse cx="140" cy="248" rx="96" ry="24" stroke="rgba(200,169,110,0.55)" stroke-width="1.2"/><ellipse cx="140" cy="248" rx="72" ry="18" stroke="rgba(200,169,110,0.2)" stroke-width="0.8"/><line x1="44" y1="248" x2="44" y2="188" stroke="rgba(200,169,110,0.55)" stroke-width="1.2"/><line x1="236" y1="248" x2="236" y2="188" stroke="rgba(200,169,110,0.55)" stroke-width="1.2"/><path d="M44 188 Q140 156 236 188" stroke="rgba(200,169,110,0.55)" stroke-width="1.2" fill="none"/><ellipse cx="140" cy="170" rx="48" ry="13" stroke="rgba(200,169,110,0.38)" stroke-width="1" fill="rgba(200,169,110,0.03)"/><path d="M100 165 L92 110" stroke="rgba(200,169,110,0.5)" stroke-width="1" stroke-linecap="round"/><path d="M180 165 L188 110" stroke="rgba(200,169,110,0.5)" stroke-width="1" stroke-linecap="round"/><circle cx="140" cy="74" r="38" stroke="rgba(200,169,110,0.65)" stroke-width="1.2" fill="rgba(200,169,110,0.05)"/><circle cx="140" cy="74" r="24" stroke="rgba(200,169,110,0.3)" stroke-width="0.7" fill="rgba(200,169,110,0.04)"/><circle cx="126" cy="60" r="2.2" fill="rgba(232,213,163,0.75)"/></svg>
           </div>
-          <img src="images/products/lune-stacking-ring.jpg" alt="Lune Stacking Ring" class="prod-photo" loading="lazy">
+          <img src="" alt="Lune Stacking Ring" class="prod-photo" loading="lazy">
           <div class="prod-overlay"><span><span data-sq>Porosit në Instagram</span><span data-en>Order via Instagram</span></span></div>
         </div>
         <div class="prod-body">
@@ -3252,7 +799,7 @@
           <div class="prod-art">
             <svg width="200" height="240" viewBox="0 0 240 280" fill="none"><path d="M20 44 C50 26 100 16 120 15" stroke="rgba(90,60,20,0.6)" stroke-width="1" fill="none"/><path d="M120 15 C140 16 190 26 220 44" stroke="rgba(90,60,20,0.6)" stroke-width="1" fill="none"/><path d="M20 44 C50 26 100 16 120 15" stroke="rgba(90,60,20,0.3)" stroke-width="2.5" fill="none" stroke-dasharray="2.5 3.5"/><path d="M120 15 C140 16 190 26 220 44" stroke="rgba(90,60,20,0.3)" stroke-width="2.5" fill="none" stroke-dasharray="2.5 3.5"/><line x1="120" y1="15" x2="120" y2="82" stroke="rgba(90,60,20,0.5)" stroke-width="0.9"/><circle cx="120" cy="15" r="3" stroke="rgba(90,60,20,0.5)" stroke-width="0.8" fill="rgba(90,60,20,0.1)"/><path d="M120 82 L146 118 L120 162 L94 118 Z" stroke="rgba(90,60,20,0.72)" stroke-width="1.1" fill="rgba(90,60,20,0.06)"/><rect x="113" y="70" width="14" height="12" rx="3" stroke="rgba(90,60,20,0.45)" stroke-width="0.8" fill="none"/><line x1="94" y1="118" x2="146" y2="118" stroke="rgba(90,60,20,0.28)" stroke-width="0.6"/><line x1="120" y1="82" x2="120" y2="162" stroke="rgba(90,60,20,0.28)" stroke-width="0.6"/><circle cx="120" cy="118" r="10" stroke="rgba(90,60,20,0.45)" stroke-width="0.8" fill="rgba(90,60,20,0.1)"/><circle cx="114" cy="112" r="1.5" fill="rgba(140,100,40,0.65)"/></svg>
           </div>
-          <img src="images/products/neck1.webp" alt="Forêt Pendant" class="prod-photo" loading="lazy">
+          <img src="" alt="Forêt Pendant" class="prod-photo" loading="lazy">
           <div class="prod-overlay"><span><span data-sq>Porosit në Instagram</span><span data-en>Order via Instagram</span></span></div>
         </div>
         <div class="prod-body">
@@ -3274,7 +821,7 @@
           <div class="prod-art">
             <svg width="200" height="180" viewBox="0 0 260 210" fill="none"><path d="M44 72 Q44 18 130 18 Q216 18 216 72 Q216 152 130 152 Q78 152 58 122" stroke="rgba(200,169,110,0.58)" stroke-width="1.5" fill="none" stroke-linecap="round"/><path d="M62 78 Q62 36 130 36 Q198 36 198 78 Q198 136 130 136 Q86 136 70 112" stroke="rgba(200,169,110,0.22)" stroke-width="0.9" fill="none" stroke-linecap="round"/><path d="M70 34 Q130 26 190 34" stroke="rgba(200,169,110,0.16)" stroke-width="0.7" fill="none"/><path d="M52 84 Q130 80 208 84" stroke="rgba(200,169,110,0.16)" stroke-width="0.7" fill="none"/><path d="M52 104 Q130 108 208 104" stroke="rgba(200,169,110,0.16)" stroke-width="0.7" fill="none"/><circle cx="214" cy="84" r="8" stroke="rgba(200,169,110,0.42)" stroke-width="0.9" fill="rgba(200,169,110,0.05)"/><circle cx="214" cy="84" r="3" fill="rgba(200,169,110,0.22)"/></svg>
           </div>
-          <img src="images/products/neck.webp" alt="Olive Cuff" class="prod-photo" loading="lazy">
+          <img src="" alt="Olive Cuff" class="prod-photo" loading="lazy">
           <div class="prod-overlay"><span><span data-sq>Porosit në Instagram</span><span data-en>Order via Instagram</span></span></div>
         </div>
         <div class="prod-body">
@@ -3295,7 +842,7 @@
           <div class="prod-art">
             <svg width="190" height="230" viewBox="0 0 220 260" fill="none"><path d="M62 20 Q62 8 74 8 Q86 8 86 20 L86 36" stroke="rgba(90,60,20,0.7)" stroke-width="1.3" fill="none" stroke-linecap="round"/><line x1="86" y1="36" x2="86" y2="82" stroke="rgba(90,60,20,0.52)" stroke-width="0.9"/><circle cx="86" cy="36" r="2.8" stroke="rgba(90,60,20,0.48)" stroke-width="0.8" fill="rgba(90,60,20,0.1)"/><path d="M86 82 Q68 108 86 140 Q104 108 86 82" stroke="rgba(90,60,20,0.78)" stroke-width="1.1" fill="rgba(90,60,20,0.08)"/><line x1="86" y1="82" x2="86" y2="140" stroke="rgba(90,60,20,0.26)" stroke-width="0.6"/><path d="M158 20 Q158 8 146 8 Q134 8 134 20 L134 36" stroke="rgba(90,60,20,0.7)" stroke-width="1.3" fill="none" stroke-linecap="round"/><line x1="134" y1="36" x2="134" y2="82" stroke="rgba(90,60,20,0.52)" stroke-width="0.9"/><circle cx="134" cy="36" r="2.8" stroke="rgba(90,60,20,0.48)" stroke-width="0.8" fill="rgba(90,60,20,0.1)"/><path d="M134 82 Q116 108 134 140 Q152 108 134 82" stroke="rgba(90,60,20,0.78)" stroke-width="1.1" fill="rgba(90,60,20,0.08)"/><line x1="134" y1="82" x2="134" y2="140" stroke="rgba(90,60,20,0.26)" stroke-width="0.6"/><circle cx="78" cy="90" r="1.5" fill="rgba(140,100,40,0.65)"/><circle cx="126" cy="90" r="1.5" fill="rgba(140,100,40,0.65)"/></svg>
           </div>
-          <img src="images/products/neck1.webp" alt="Étoile Studs" class="prod-photo" loading="lazy">
+          <img src="" alt="Étoile Studs" class="prod-photo" loading="lazy">
           <div class="prod-overlay"><span><span data-sq>Porosit në Instagram</span><span data-en>Order via Instagram</span></span></div>
         </div>
         <div class="prod-body">
@@ -3315,7 +862,7 @@
         <span class="prod-badge badge-sale">−15%</span>
         <div class="prod-visual bg-a">
           <div class="prod-art"><svg width="200" height="240" viewBox="0 0 280 320" fill="none"><ellipse cx="140" cy="248" rx="96" ry="24" stroke="rgba(200,169,110,0.55)" stroke-width="1.2"/><ellipse cx="140" cy="248" rx="72" ry="18" stroke="rgba(200,169,110,0.2)" stroke-width="0.8"/><line x1="44" y1="248" x2="44" y2="188" stroke="rgba(200,169,110,0.55)" stroke-width="1.2"/><line x1="236" y1="248" x2="236" y2="188" stroke="rgba(200,169,110,0.55)" stroke-width="1.2"/><path d="M44 188 Q140 156 236 188" stroke="rgba(200,169,110,0.55)" stroke-width="1.2" fill="none"/><ellipse cx="140" cy="170" rx="48" ry="13" stroke="rgba(200,169,110,0.38)" stroke-width="1" fill="rgba(200,169,110,0.03)"/><path d="M100 165 L92 110" stroke="rgba(200,169,110,0.5)" stroke-width="1" stroke-linecap="round"/><path d="M180 165 L188 110" stroke="rgba(200,169,110,0.5)" stroke-width="1" stroke-linecap="round"/><circle cx="140" cy="74" r="38" stroke="rgba(200,169,110,0.65)" stroke-width="1.2" fill="rgba(200,169,110,0.05)"/><circle cx="140" cy="74" r="24" stroke="rgba(200,169,110,0.3)" stroke-width="0.7" fill="rgba(200,169,110,0.04)"/><circle cx="126" cy="60" r="2.2" fill="rgba(232,213,163,0.75)"/></svg></div>
-          <img src="images/products/neck.webp" alt="Seren Ring" class="prod-photo" loading="lazy">
+          <img src="" alt="Seren Ring" class="prod-photo" loading="lazy">
           <div class="prod-overlay"><span><span data-sq>Porosit në Instagram</span><span data-en>Order via Instagram</span></span></div>
         </div>
         <div class="prod-body">
@@ -3334,7 +881,7 @@
       <div class="prod-card reveal" data-cat="necklaces">
         <div class="prod-visual bg-b">
           <div class="prod-art"><svg width="200" height="240" viewBox="0 0 240 280" fill="none"><path d="M20 44 C50 26 100 16 120 15" stroke="rgba(90,60,20,0.6)" stroke-width="1" fill="none"/><path d="M120 15 C140 16 190 26 220 44" stroke="rgba(90,60,20,0.6)" stroke-width="1" fill="none"/><path d="M20 44 C50 26 100 16 120 15" stroke="rgba(90,60,20,0.3)" stroke-width="2.5" fill="none" stroke-dasharray="2.5 3.5"/><path d="M120 15 C140 16 190 26 220 44" stroke="rgba(90,60,20,0.3)" stroke-width="2.5" fill="none" stroke-dasharray="2.5 3.5"/><line x1="120" y1="15" x2="120" y2="82" stroke="rgba(90,60,20,0.5)" stroke-width="0.9"/><circle cx="120" cy="15" r="3" stroke="rgba(90,60,20,0.5)" stroke-width="0.8" fill="rgba(90,60,20,0.1)"/><path d="M120 82 L146 118 L120 162 L94 118 Z" stroke="rgba(90,60,20,0.72)" stroke-width="1.1" fill="rgba(90,60,20,0.06)"/><rect x="113" y="70" width="14" height="12" rx="3" stroke="rgba(90,60,20,0.45)" stroke-width="0.8" fill="none"/><line x1="94" y1="118" x2="146" y2="118" stroke="rgba(90,60,20,0.28)" stroke-width="0.6"/><line x1="120" y1="82" x2="120" y2="162" stroke="rgba(90,60,20,0.28)" stroke-width="0.6"/><circle cx="120" cy="118" r="10" stroke="rgba(90,60,20,0.45)" stroke-width="0.8" fill="rgba(90,60,20,0.1)"/><circle cx="114" cy="112" r="1.5" fill="rgba(140,100,40,0.65)"/></svg></div>
-          <img src="images/products/vigne-layering-chain.jpg" alt="Vigne Layering Chain" class="prod-photo" loading="lazy">
+          <img src="" alt="Vigne Layering Chain" class="prod-photo" loading="lazy">
           <div class="prod-overlay"><span><span data-sq>Porosit në Instagram</span><span data-en>Order via Instagram</span></span></div>
         </div>
         <div class="prod-body">
@@ -3353,7 +900,7 @@
       <div class="prod-card reveal" data-cat="bracelets">
         <div class="prod-visual bg-c">
           <div class="prod-art"><svg width="200" height="180" viewBox="0 0 260 210" fill="none"><path d="M44 72 Q44 18 130 18 Q216 18 216 72 Q216 152 130 152 Q78 152 58 122" stroke="rgba(200,169,110,0.58)" stroke-width="1.5" fill="none" stroke-linecap="round"/><path d="M62 78 Q62 36 130 36 Q198 36 198 78 Q198 136 130 136 Q86 136 70 112" stroke="rgba(200,169,110,0.22)" stroke-width="0.9" fill="none" stroke-linecap="round"/><path d="M70 34 Q130 26 190 34" stroke="rgba(200,169,110,0.16)" stroke-width="0.7" fill="none"/><path d="M52 84 Q130 80 208 84" stroke="rgba(200,169,110,0.16)" stroke-width="0.7" fill="none"/><path d="M52 104 Q130 108 208 104" stroke="rgba(200,169,110,0.16)" stroke-width="0.7" fill="none"/><circle cx="214" cy="84" r="8" stroke="rgba(200,169,110,0.42)" stroke-width="0.9" fill="rgba(200,169,110,0.05)"/><circle cx="214" cy="84" r="3" fill="rgba(200,169,110,0.22)"/></svg></div>
-          <img src="images/products/neck.webp" alt="Brume Bangle" class="prod-photo" loading="lazy">
+          <img src="" alt="Brume Bangle" class="prod-photo" loading="lazy">
           <div class="prod-overlay"><span><span data-sq>Porosit në Instagram</span><span data-en>Order via Instagram</span></span></div>
         </div>
         <div class="prod-body">
@@ -3368,12 +915,12 @@
         </div>
       </div>
 
-      <!-- 12 — earrings -->
-      <div class="prod-card reveal" data-cat="earrings">
+      <!-- 12 — hallka -->
+      <div class="prod-card reveal" data-cat="hallka">
         <span class="prod-badge badge-new"><span data-sq>E Re</span><span data-en>New</span></span>
         <div class="prod-visual bg-d">
           <div class="prod-art"><svg width="190" height="230" viewBox="0 0 220 260" fill="none"><path d="M62 20 Q62 8 74 8 Q86 8 86 20 L86 36" stroke="rgba(90,60,20,0.7)" stroke-width="1.3" fill="none" stroke-linecap="round"/><line x1="86" y1="36" x2="86" y2="82" stroke="rgba(90,60,20,0.52)" stroke-width="0.9"/><circle cx="86" cy="36" r="2.8" stroke="rgba(90,60,20,0.48)" stroke-width="0.8" fill="rgba(90,60,20,0.1)"/><path d="M86 82 Q68 108 86 140 Q104 108 86 82" stroke="rgba(90,60,20,0.78)" stroke-width="1.1" fill="rgba(90,60,20,0.08)"/><line x1="86" y1="82" x2="86" y2="140" stroke="rgba(90,60,20,0.26)" stroke-width="0.6"/><path d="M158 20 Q158 8 146 8 Q134 8 134 20 L134 36" stroke="rgba(90,60,20,0.7)" stroke-width="1.3" fill="none" stroke-linecap="round"/><line x1="134" y1="36" x2="134" y2="82" stroke="rgba(90,60,20,0.52)" stroke-width="0.9"/><circle cx="134" cy="36" r="2.8" stroke="rgba(90,60,20,0.48)" stroke-width="0.8" fill="rgba(90,60,20,0.1)"/><path d="M134 82 Q116 108 134 140 Q152 108 134 82" stroke="rgba(90,60,20,0.78)" stroke-width="1.1" fill="rgba(90,60,20,0.08)"/><line x1="134" y1="82" x2="134" y2="140" stroke="rgba(90,60,20,0.26)" stroke-width="0.6"/><circle cx="78" cy="90" r="1.5" fill="rgba(140,100,40,0.65)"/><circle cx="126" cy="90" r="1.5" fill="rgba(140,100,40,0.65)"/></svg></div>
-          <img src="images/products/cedre-hoops.jpg" alt="Cèdre Hoops" class="prod-photo" loading="lazy">
+          <img src="" alt="Cèdre Hoops" class="prod-photo" loading="lazy">
           <div class="prod-overlay"><span><span data-sq>Porosit në Instagram</span><span data-en>Order via Instagram</span></span></div>
         </div>
         <div class="prod-body">
@@ -3392,7 +939,7 @@
       <div class="prod-card reveal" data-cat="rings">
         <div class="prod-visual bg-a">
           <div class="prod-art"><svg width="200" height="240" viewBox="0 0 280 320" fill="none"><ellipse cx="140" cy="248" rx="96" ry="24" stroke="rgba(200,169,110,0.55)" stroke-width="1.2"/><ellipse cx="140" cy="248" rx="72" ry="18" stroke="rgba(200,169,110,0.2)" stroke-width="0.8"/><line x1="44" y1="248" x2="44" y2="188" stroke="rgba(200,169,110,0.55)" stroke-width="1.2"/><line x1="236" y1="248" x2="236" y2="188" stroke="rgba(200,169,110,0.55)" stroke-width="1.2"/><path d="M44 188 Q140 156 236 188" stroke="rgba(200,169,110,0.55)" stroke-width="1.2" fill="none"/><ellipse cx="140" cy="170" rx="48" ry="13" stroke="rgba(200,169,110,0.38)" stroke-width="1" fill="rgba(200,169,110,0.03)"/><path d="M100 165 L92 110" stroke="rgba(200,169,110,0.5)" stroke-width="1" stroke-linecap="round"/><path d="M180 165 L188 110" stroke="rgba(200,169,110,0.5)" stroke-width="1" stroke-linecap="round"/><circle cx="140" cy="74" r="38" stroke="rgba(200,169,110,0.65)" stroke-width="1.2" fill="rgba(200,169,110,0.05)"/><circle cx="140" cy="74" r="24" stroke="rgba(200,169,110,0.3)" stroke-width="0.7" fill="rgba(200,169,110,0.04)"/><circle cx="126" cy="60" r="2.2" fill="rgba(232,213,163,0.75)"/></svg></div>
-          <img src="images/products/neck1.webp" alt="Rive Ring" class="prod-photo" loading="lazy">
+          <img src="" alt="Rive Ring" class="prod-photo" loading="lazy">
           <div class="prod-overlay"><span><span data-sq>Porosit në Instagram</span><span data-en>Order via Instagram</span></span></div>
         </div>
         <div class="prod-body">
@@ -3412,7 +959,7 @@
         <span class="prod-badge badge-sale">−15%</span>
         <div class="prod-visual bg-b">
           <div class="prod-art"><svg width="200" height="240" viewBox="0 0 240 280" fill="none"><path d="M20 44 C50 26 100 16 120 15" stroke="rgba(90,60,20,0.6)" stroke-width="1" fill="none"/><path d="M120 15 C140 16 190 26 220 44" stroke="rgba(90,60,20,0.6)" stroke-width="1" fill="none"/><path d="M20 44 C50 26 100 16 120 15" stroke="rgba(90,60,20,0.3)" stroke-width="2.5" fill="none" stroke-dasharray="2.5 3.5"/><path d="M120 15 C140 16 190 26 220 44" stroke="rgba(90,60,20,0.3)" stroke-width="2.5" fill="none" stroke-dasharray="2.5 3.5"/><line x1="120" y1="15" x2="120" y2="82" stroke="rgba(90,60,20,0.5)" stroke-width="0.9"/><circle cx="120" cy="15" r="3" stroke="rgba(90,60,20,0.5)" stroke-width="0.8" fill="rgba(90,60,20,0.1)"/><path d="M120 82 L146 118 L120 162 L94 118 Z" stroke="rgba(90,60,20,0.72)" stroke-width="1.1" fill="rgba(90,60,20,0.06)"/><rect x="113" y="70" width="14" height="12" rx="3" stroke="rgba(90,60,20,0.45)" stroke-width="0.8" fill="none"/><line x1="94" y1="118" x2="146" y2="118" stroke="rgba(90,60,20,0.28)" stroke-width="0.6"/><line x1="120" y1="82" x2="120" y2="162" stroke="rgba(90,60,20,0.28)" stroke-width="0.6"/><circle cx="120" cy="118" r="10" stroke="rgba(90,60,20,0.45)" stroke-width="0.8" fill="rgba(90,60,20,0.1)"/><circle cx="114" cy="112" r="1.5" fill="rgba(140,100,40,0.65)"/></svg></div>
-          <img src="images/products/neck.webp" alt="Dune Collar" class="prod-photo" loading="lazy">
+          <img src="" alt="Dune Collar" class="prod-photo" loading="lazy">
           <div class="prod-overlay"><span><span data-sq>Porosit në Instagram</span><span data-en>Order via Instagram</span></span></div>
         </div>
         <div class="prod-body">
@@ -3431,7 +978,7 @@
       <div class="prod-card reveal" data-cat="bracelets">
         <div class="prod-visual bg-c">
           <div class="prod-art"><svg width="200" height="180" viewBox="0 0 260 210" fill="none"><path d="M44 72 Q44 18 130 18 Q216 18 216 72 Q216 152 130 152 Q78 152 58 122" stroke="rgba(200,169,110,0.58)" stroke-width="1.5" fill="none" stroke-linecap="round"/><path d="M62 78 Q62 36 130 36 Q198 36 198 78 Q198 136 130 136 Q86 136 70 112" stroke="rgba(200,169,110,0.22)" stroke-width="0.9" fill="none" stroke-linecap="round"/><path d="M70 34 Q130 26 190 34" stroke="rgba(200,169,110,0.16)" stroke-width="0.7" fill="none"/><path d="M52 84 Q130 80 208 84" stroke="rgba(200,169,110,0.16)" stroke-width="0.7" fill="none"/><path d="M52 104 Q130 108 208 104" stroke="rgba(200,169,110,0.16)" stroke-width="0.7" fill="none"/><circle cx="214" cy="84" r="8" stroke="rgba(200,169,110,0.42)" stroke-width="0.9" fill="rgba(200,169,110,0.05)"/><circle cx="214" cy="84" r="3" fill="rgba(200,169,110,0.22)"/></svg></div>
-          <img src="images/products/neck1.webp" alt="Roseau Bracelet" class="prod-photo" loading="lazy">
+          <img src="" alt="Roseau Bracelet" class="prod-photo" loading="lazy">
           <div class="prod-overlay"><span><span data-sq>Porosit në Instagram</span><span data-en>Order via Instagram</span></span></div>
         </div>
         <div class="prod-body">
@@ -3450,7 +997,7 @@
       <div class="prod-card reveal" data-cat="rings">
         <div class="prod-visual bg-d">
           <div class="prod-art"><svg width="200" height="240" viewBox="0 0 280 320" fill="none"><ellipse cx="140" cy="248" rx="96" ry="24" stroke="rgba(90,60,20,0.55)" stroke-width="1.2"/><ellipse cx="140" cy="248" rx="72" ry="18" stroke="rgba(90,60,20,0.2)" stroke-width="0.8"/><line x1="44" y1="248" x2="44" y2="188" stroke="rgba(90,60,20,0.55)" stroke-width="1.2"/><line x1="236" y1="248" x2="236" y2="188" stroke="rgba(90,60,20,0.55)" stroke-width="1.2"/><path d="M44 188 Q140 156 236 188" stroke="rgba(90,60,20,0.55)" stroke-width="1.2" fill="none"/><ellipse cx="140" cy="170" rx="48" ry="13" stroke="rgba(90,60,20,0.38)" stroke-width="1" fill="rgba(90,60,20,0.03)"/><path d="M100 165 L92 110" stroke="rgba(90,60,20,0.5)" stroke-width="1" stroke-linecap="round"/><path d="M180 165 L188 110" stroke="rgba(90,60,20,0.5)" stroke-width="1" stroke-linecap="round"/><circle cx="140" cy="74" r="38" stroke="rgba(90,60,20,0.65)" stroke-width="1.2" fill="rgba(90,60,20,0.05)"/><circle cx="140" cy="74" r="24" stroke="rgba(90,60,20,0.3)" stroke-width="0.7" fill="rgba(90,60,20,0.04)"/><circle cx="126" cy="60" r="2.2" fill="rgba(140,100,40,0.75)"/></svg></div>
-          <img src="images/products/neck.webp" alt="Pluie Ring" class="prod-photo" loading="lazy">
+          <img src="" alt="Pluie Ring" class="prod-photo" loading="lazy">
           <div class="prod-overlay"><span><span data-sq>Porosit në Instagram</span><span data-en>Order via Instagram</span></span></div>
         </div>
         <div class="prod-body">
@@ -3459,6 +1006,330 @@
             <div class="prod-price-wrap"><span class="prod-price">€41</span></div>
           </div>
           <span class="prod-cat"><span data-sq>Unazë</span><span data-en>Ring</span></span>
+          <a href="https://instagram.com/yourbrand" target="_blank" rel="noopener noreferrer" class="prod-btn">
+            <span data-sq>Porosit në Instagram</span><span data-en>Order on Instagram</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- 17 — crowns -->
+      <div class="prod-card reveal" data-cat="crowns">
+        <span class="prod-badge badge-new"><span data-sq>E Re</span><span data-en>New</span></span>
+        <div class="prod-visual bg-a">
+          <div class="prod-art">
+            <svg width="200" height="180" viewBox="0 0 240 210" fill="none">
+              <path d="M20 170 L20 110 L60 60 L120 105 L180 45 L220 110 L220 170 Z" stroke="rgba(200,169,110,0.65)" stroke-width="1.4" fill="rgba(200,169,110,0.04)" stroke-linejoin="round"/>
+              <rect x="20" y="150" width="200" height="22" rx="3" stroke="rgba(200,169,110,0.38)" stroke-width="1" fill="rgba(200,169,110,0.05)"/>
+              <circle cx="120" cy="55" r="10" stroke="rgba(200,169,110,0.72)" stroke-width="1.2" fill="rgba(200,169,110,0.07)"/>
+              <circle cx="60" cy="72" r="6" stroke="rgba(200,169,110,0.6)" stroke-width="1" fill="rgba(200,169,110,0.06)"/>
+              <circle cx="180" cy="57" r="6" stroke="rgba(200,169,110,0.6)" stroke-width="1" fill="rgba(200,169,110,0.06)"/>
+              <circle cx="112" cy="49" r="2" fill="rgba(232,213,163,0.82)"/>
+              <line x1="70" y1="150" x2="70" y2="170" stroke="rgba(200,169,110,0.18)" stroke-width="0.6"/>
+              <line x1="120" y1="150" x2="120" y2="170" stroke="rgba(200,169,110,0.18)" stroke-width="0.6"/>
+              <line x1="170" y1="150" x2="170" y2="170" stroke="rgba(200,169,110,0.18)" stroke-width="0.6"/>
+            </svg>
+          </div>
+          <img src="images/IMG_6817.jpg" alt="Kurorë Ari" class="prod-photo" loading="lazy">
+          <div class="prod-overlay"><span><span data-sq>Porosit në Instagram</span><span data-en>Order via Instagram</span></span></div>
+        </div>
+        <div class="prod-body">
+          <div class="prod-row1">
+            <span class="prod-name">Kurorë Ari</span>
+            <div class="prod-price-wrap"><span class="prod-price">€89</span></div>
+          </div>
+          <span class="prod-cat"><span data-sq>Kurorë</span><span data-en>Crown</span></span>
+          <a href="https://instagram.com/yourbrand" target="_blank" rel="noopener noreferrer" class="prod-btn">
+            <span data-sq>Porosit në Instagram</span><span data-en>Order on Instagram</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- 18 — watches -->
+      <div class="prod-card reveal" data-cat="watches">
+        <div class="prod-visual bg-c">
+          <div class="prod-art">
+            <svg width="200" height="220" viewBox="0 0 240 260" fill="none">
+              <rect x="100" y="18" width="40" height="48" rx="8" stroke="rgba(200,169,110,0.38)" stroke-width="1" fill="rgba(200,169,110,0.03)"/>
+              <rect x="68" y="64" width="104" height="104" rx="22" stroke="rgba(200,169,110,0.65)" stroke-width="1.5" fill="rgba(200,169,110,0.04)"/>
+              <rect x="80" y="76" width="80" height="80" rx="14" stroke="rgba(200,169,110,0.24)" stroke-width="0.8" fill="rgba(200,169,110,0.02)"/>
+              <line x1="120" y1="84" x2="120" y2="92" stroke="rgba(200,169,110,0.62)" stroke-width="1.3"/>
+              <line x1="120" y1="140" x2="120" y2="148" stroke="rgba(200,169,110,0.62)" stroke-width="1.3"/>
+              <line x1="76" y1="116" x2="84" y2="116" stroke="rgba(200,169,110,0.62)" stroke-width="1.3"/>
+              <line x1="156" y1="116" x2="164" y2="116" stroke="rgba(200,169,110,0.62)" stroke-width="1.3"/>
+              <line x1="120" y1="116" x2="120" y2="96" stroke="rgba(200,169,110,0.72)" stroke-width="1.2" stroke-linecap="round"/>
+              <line x1="120" y1="116" x2="138" y2="116" stroke="rgba(200,169,110,0.52)" stroke-width="1" stroke-linecap="round"/>
+              <circle cx="120" cy="116" r="2.5" fill="rgba(200,169,110,0.72)"/>
+              <rect x="168" y="110" width="12" height="14" rx="3" stroke="rgba(200,169,110,0.38)" stroke-width="0.8" fill="none"/>
+              <rect x="100" y="166" width="40" height="48" rx="8" stroke="rgba(200,169,110,0.38)" stroke-width="1" fill="rgba(200,169,110,0.03)"/>
+              <circle cx="111" cy="97" r="1.5" fill="rgba(232,213,163,0.65)"/>
+            </svg>
+          </div>
+          <img src="" alt="Orë Elegante" class="prod-photo" loading="lazy">
+          <div class="prod-overlay"><span><span data-sq>Porosit në Instagram</span><span data-en>Order via Instagram</span></span></div>
+        </div>
+        <div class="prod-body">
+          <div class="prod-row1">
+            <span class="prod-name">Orë Elegante</span>
+            <div class="prod-price-wrap"><span class="prod-price">€95</span></div>
+          </div>
+          <span class="prod-cat"><span data-sq>Orë</span><span data-en>Watch</span></span>
+          <a href="https://instagram.com/yourbrand" target="_blank" rel="noopener noreferrer" class="prod-btn">
+            <span data-sq>Porosit në Instagram</span><span data-en>Order on Instagram</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- 19 — crowns (tiara) -->
+      <div class="prod-card reveal" data-cat="crowns">
+        <span class="prod-badge badge-new"><span data-sq>E Re</span><span data-en>New</span></span>
+        <div class="prod-visual bg-b">
+          <div class="prod-art">
+            <svg width="220" height="170" viewBox="0 0 260 195" fill="none">
+              <path d="M20 175 Q20 70 130 28 Q240 70 240 175" stroke="rgba(90,60,20,0.62)" stroke-width="1.4" fill="rgba(90,60,20,0.03)"/>
+              <path d="M42 175 Q42 90 130 52 Q218 90 218 175" stroke="rgba(90,60,20,0.2)" stroke-width="0.8" fill="none"/>
+              <line x1="130" y1="28" x2="130" y2="14" stroke="rgba(90,60,20,0.55)" stroke-width="1" stroke-linecap="round"/>
+              <line x1="86" y1="42" x2="80" y2="29" stroke="rgba(90,60,20,0.45)" stroke-width="0.9" stroke-linecap="round"/>
+              <line x1="174" y1="42" x2="180" y2="29" stroke="rgba(90,60,20,0.45)" stroke-width="0.9" stroke-linecap="round"/>
+              <line x1="50" y1="78" x2="44" y2="68" stroke="rgba(90,60,20,0.35)" stroke-width="0.8" stroke-linecap="round"/>
+              <line x1="210" y1="78" x2="216" y2="68" stroke="rgba(90,60,20,0.35)" stroke-width="0.8" stroke-linecap="round"/>
+              <circle cx="130" cy="12" r="7" stroke="rgba(90,60,20,0.7)" stroke-width="1.2" fill="rgba(90,60,20,0.07)"/>
+              <circle cx="79" cy="27" r="5" stroke="rgba(90,60,20,0.6)" stroke-width="1" fill="rgba(90,60,20,0.06)"/>
+              <circle cx="181" cy="27" r="5" stroke="rgba(90,60,20,0.6)" stroke-width="1" fill="rgba(90,60,20,0.06)"/>
+              <circle cx="43" cy="66" r="3.5" stroke="rgba(90,60,20,0.5)" stroke-width="0.8" fill="rgba(90,60,20,0.05)"/>
+              <circle cx="217" cy="66" r="3.5" stroke="rgba(90,60,20,0.5)" stroke-width="0.8" fill="rgba(90,60,20,0.05)"/>
+              <rect x="20" y="163" width="220" height="16" rx="4" stroke="rgba(90,60,20,0.38)" stroke-width="1" fill="rgba(90,60,20,0.04)"/>
+              <circle cx="124" cy="8" r="1.8" fill="rgba(140,100,40,0.8)"/>
+            </svg>
+          </div>
+          <img src="images/IMG_6818.jpg" alt="Tura Nusërie" class="prod-photo" loading="lazy">
+          <div class="prod-overlay"><span><span data-sq>Porosit në Instagram</span><span data-en>Order via Instagram</span></span></div>
+        </div>
+        <div class="prod-body">
+          <div class="prod-row1">
+            <span class="prod-name">Tura Nusërie</span>
+            <div class="prod-price-wrap"><span class="prod-price">€78</span></div>
+          </div>
+          <span class="prod-cat"><span data-sq>Kurorë</span><span data-en>Crown</span></span>
+          <a href="https://instagram.com/yourbrand" target="_blank" rel="noopener noreferrer" class="prod-btn">
+            <span data-sq>Porosit në Instagram</span><span data-en>Order on Instagram</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- 20 — crowns -->
+      <div class="prod-card reveal" data-cat="crowns">
+        <span class="prod-badge badge-new"><span data-sq>E Re</span><span data-en>New</span></span>
+        <div class="prod-visual bg-a">
+          <div class="prod-art">
+            <svg width="200" height="180" viewBox="0 0 240 210" fill="none">
+              <path d="M22 168 L22 115 L55 68 L120 102 L185 52 L218 115 L218 168 Z" stroke="rgba(200,169,110,0.65)" stroke-width="1.4" fill="rgba(200,169,110,0.04)" stroke-linejoin="round"/>
+              <rect x="22" y="148" width="196" height="22" rx="2" stroke="rgba(200,169,110,0.38)" stroke-width="1" fill="rgba(200,169,110,0.05)"/>
+              <circle cx="120" cy="60" r="11" stroke="rgba(200,169,110,0.72)" stroke-width="1.2" fill="rgba(200,169,110,0.07)"/>
+              <circle cx="57" cy="76" r="7" stroke="rgba(200,169,110,0.6)" stroke-width="1" fill="rgba(200,169,110,0.06)"/>
+              <circle cx="183" cy="60" r="7" stroke="rgba(200,169,110,0.6)" stroke-width="1" fill="rgba(200,169,110,0.06)"/>
+              <circle cx="112" cy="54" r="2.2" fill="rgba(235,213,165,0.85)"/>
+              <line x1="68" y1="148" x2="68" y2="168" stroke="rgba(200,169,110,0.18)" stroke-width="0.6"/>
+              <line x1="120" y1="148" x2="120" y2="168" stroke="rgba(200,169,110,0.18)" stroke-width="0.6"/>
+              <line x1="172" y1="148" x2="172" y2="168" stroke="rgba(200,169,110,0.18)" stroke-width="0.6"/>
+            </svg>
+          </div>
+          <img src="images/IMG_6819.jpg" alt="Kurorë Imperiale" class="prod-photo" loading="lazy">
+          <div class="prod-overlay"><span><span data-sq>Porosit në Instagram</span><span data-en>Order via Instagram</span></span></div>
+        </div>
+        <div class="prod-body">
+          <div class="prod-row1">
+            <span class="prod-name">Kurorë Imperiale</span>
+            <div class="prod-price-wrap"><span class="prod-price">€82</span></div>
+          </div>
+          <span class="prod-cat"><span data-sq>Kurorë</span><span data-en>Crown</span></span>
+          <a href="https://instagram.com/yourbrand" target="_blank" rel="noopener noreferrer" class="prod-btn">
+            <span data-sq>Porosit në Instagram</span><span data-en>Order on Instagram</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- 21 — crowns -->
+      <div class="prod-card reveal" data-cat="crowns">
+        <div class="prod-visual bg-c">
+          <div class="prod-art">
+            <svg width="200" height="180" viewBox="0 0 240 210" fill="none">
+              <path d="M22 168 Q22 110 60 66 Q90 40 120 52 Q150 40 180 66 Q218 110 218 168 Z" stroke="rgba(200,169,110,0.65)" stroke-width="1.4" fill="rgba(200,169,110,0.04)"/>
+              <rect x="22" y="148" width="196" height="22" rx="2" stroke="rgba(200,169,110,0.38)" stroke-width="1" fill="rgba(200,169,110,0.05)"/>
+              <circle cx="120" cy="50" r="12" stroke="rgba(200,169,110,0.72)" stroke-width="1.2" fill="rgba(200,169,110,0.07)"/>
+              <circle cx="60" cy="70" r="6" stroke="rgba(200,169,110,0.6)" stroke-width="1" fill="rgba(200,169,110,0.06)"/>
+              <circle cx="180" cy="70" r="6" stroke="rgba(200,169,110,0.6)" stroke-width="1" fill="rgba(200,169,110,0.06)"/>
+              <circle cx="112" cy="44" r="2.2" fill="rgba(235,213,165,0.85)"/>
+              <path d="M60 148 Q90 136 120 132 Q150 136 180 148" stroke="rgba(200,169,110,0.14)" stroke-width="0.7" fill="none"/>
+            </svg>
+          </div>
+          <img src="images/IMG_6820.jpg" alt="Kurorë Elara" class="prod-photo" loading="lazy">
+          <div class="prod-overlay"><span><span data-sq>Porosit në Instagram</span><span data-en>Order via Instagram</span></span></div>
+        </div>
+        <div class="prod-body">
+          <div class="prod-row1">
+            <span class="prod-name">Kurorë Elara</span>
+            <div class="prod-price-wrap"><span class="prod-price">€75</span></div>
+          </div>
+          <span class="prod-cat"><span data-sq>Kurorë</span><span data-en>Crown</span></span>
+          <a href="https://instagram.com/yourbrand" target="_blank" rel="noopener noreferrer" class="prod-btn">
+            <span data-sq>Porosit në Instagram</span><span data-en>Order on Instagram</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- 22 — crowns -->
+      <div class="prod-card reveal" data-cat="crowns">
+        <span class="prod-badge badge-best"><span data-sq>Bestseller</span><span data-en>Bestseller</span></span>
+        <div class="prod-visual bg-a">
+          <div class="prod-art">
+            <svg width="200" height="180" viewBox="0 0 240 210" fill="none">
+              <path d="M22 168 L22 118 L78 65 L120 92 L162 65 L218 118 L218 168 Z" stroke="rgba(200,169,110,0.65)" stroke-width="1.4" fill="rgba(200,169,110,0.04)" stroke-linejoin="round"/>
+              <rect x="22" y="148" width="196" height="22" rx="2" stroke="rgba(200,169,110,0.38)" stroke-width="1" fill="rgba(200,169,110,0.05)"/>
+              <circle cx="120" cy="68" r="12" stroke="rgba(200,169,110,0.72)" stroke-width="1.2" fill="rgba(200,169,110,0.07)"/>
+              <circle cx="78" cy="68" r="7" stroke="rgba(200,169,110,0.6)" stroke-width="1" fill="rgba(200,169,110,0.06)"/>
+              <circle cx="162" cy="68" r="7" stroke="rgba(200,169,110,0.6)" stroke-width="1" fill="rgba(200,169,110,0.06)"/>
+              <circle cx="112" cy="62" r="2.2" fill="rgba(235,213,165,0.85)"/>
+              <line x1="78" y1="148" x2="78" y2="168" stroke="rgba(200,169,110,0.18)" stroke-width="0.6"/>
+              <line x1="120" y1="148" x2="120" y2="168" stroke="rgba(200,169,110,0.18)" stroke-width="0.6"/>
+              <line x1="162" y1="148" x2="162" y2="168" stroke="rgba(200,169,110,0.18)" stroke-width="0.6"/>
+            </svg>
+          </div>
+          <img src="images/IMG_6822.jpg" alt="Tura Argjendte" class="prod-photo" loading="lazy">
+          <div class="prod-overlay"><span><span data-sq>Porosit në Instagram</span><span data-en>Order via Instagram</span></span></div>
+        </div>
+        <div class="prod-body">
+          <div class="prod-row1">
+            <span class="prod-name">Tura Argjendte</span>
+            <div class="prod-price-wrap"><span class="prod-price">€68</span></div>
+          </div>
+          <span class="prod-cat"><span data-sq>Kurorë</span><span data-en>Crown</span></span>
+          <a href="https://instagram.com/yourbrand" target="_blank" rel="noopener noreferrer" class="prod-btn">
+            <span data-sq>Porosit në Instagram</span><span data-en>Order on Instagram</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- 23 — crowns -->
+      <div class="prod-card reveal" data-cat="crowns">
+        <div class="prod-visual bg-c">
+          <div class="prod-art">
+            <svg width="200" height="180" viewBox="0 0 240 210" fill="none">
+              <path d="M22 168 L22 112 L62 60 L120 98 L178 60 L218 112 L218 168 Z" stroke="rgba(200,169,110,0.65)" stroke-width="1.4" fill="rgba(200,169,110,0.04)" stroke-linejoin="round"/>
+              <rect x="22" y="146" width="196" height="24" rx="2" stroke="rgba(200,169,110,0.38)" stroke-width="1" fill="rgba(200,169,110,0.05)"/>
+              <line x1="55" y1="152" x2="55" y2="168" stroke="rgba(200,169,110,0.2)" stroke-width="0.7"/>
+              <line x1="90" y1="148" x2="90" y2="168" stroke="rgba(200,169,110,0.2)" stroke-width="0.7"/>
+              <line x1="120" y1="146" x2="120" y2="168" stroke="rgba(200,169,110,0.2)" stroke-width="0.7"/>
+              <line x1="150" y1="148" x2="150" y2="168" stroke="rgba(200,169,110,0.2)" stroke-width="0.7"/>
+              <line x1="185" y1="152" x2="185" y2="168" stroke="rgba(200,169,110,0.2)" stroke-width="0.7"/>
+              <circle cx="120" cy="57" r="11" stroke="rgba(200,169,110,0.72)" stroke-width="1.2" fill="rgba(200,169,110,0.07)"/>
+              <circle cx="63" cy="67" r="7" stroke="rgba(200,169,110,0.6)" stroke-width="1" fill="rgba(200,169,110,0.06)"/>
+              <circle cx="177" cy="67" r="7" stroke="rgba(200,169,110,0.6)" stroke-width="1" fill="rgba(200,169,110,0.06)"/>
+              <circle cx="112" cy="50" r="2.2" fill="rgba(235,213,165,0.85)"/>
+            </svg>
+          </div>
+          <img src="images/IMG_6823.jpg" alt="Kurorë Lumia" class="prod-photo" loading="lazy">
+          <div class="prod-overlay"><span><span data-sq>Porosit në Instagram</span><span data-en>Order via Instagram</span></span></div>
+        </div>
+        <div class="prod-body">
+          <div class="prod-row1">
+            <span class="prod-name">Kurorë Lumia</span>
+            <div class="prod-price-wrap"><span class="prod-price">€95</span></div>
+          </div>
+          <span class="prod-cat"><span data-sq>Kurorë</span><span data-en>Crown</span></span>
+          <a href="https://instagram.com/yourbrand" target="_blank" rel="noopener noreferrer" class="prod-btn">
+            <span data-sq>Porosit në Instagram</span><span data-en>Order on Instagram</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- 24 — crowns -->
+      <div class="prod-card reveal" data-cat="crowns">
+        <div class="prod-visual bg-a">
+          <div class="prod-art">
+            <svg width="200" height="180" viewBox="0 0 240 210" fill="none">
+              <path d="M22 168 Q22 78 120 30 Q218 78 218 168" stroke="rgba(200,169,110,0.65)" stroke-width="1.4" fill="rgba(200,169,110,0.04)"/>
+              <path d="M44 168 Q44 96 120 52 Q196 96 196 168" stroke="rgba(200,169,110,0.2)" stroke-width="0.8" fill="none"/>
+              <rect x="22" y="152" width="196" height="18" rx="2" stroke="rgba(200,169,110,0.38)" stroke-width="1" fill="rgba(200,169,110,0.05)"/>
+              <circle cx="120" cy="30" r="9" stroke="rgba(200,169,110,0.72)" stroke-width="1.2" fill="rgba(200,169,110,0.07)"/>
+              <circle cx="78" cy="52" r="6" stroke="rgba(200,169,110,0.6)" stroke-width="1" fill="rgba(200,169,110,0.06)"/>
+              <circle cx="162" cy="52" r="6" stroke="rgba(200,169,110,0.6)" stroke-width="1" fill="rgba(200,169,110,0.06)"/>
+              <circle cx="112" cy="24" r="2.2" fill="rgba(235,213,165,0.85)"/>
+              <line x1="120" y1="30" x2="120" y2="18" stroke="rgba(200,169,110,0.5)" stroke-width="1" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <img src="images/IMG_6824.jpg" alt="Tura Filigran" class="prod-photo" loading="lazy">
+          <div class="prod-overlay"><span><span data-sq>Porosit në Instagram</span><span data-en>Order via Instagram</span></span></div>
+        </div>
+        <div class="prod-body">
+          <div class="prod-row1">
+            <span class="prod-name">Tura Filigran</span>
+            <div class="prod-price-wrap"><span class="prod-price">€79</span></div>
+          </div>
+          <span class="prod-cat"><span data-sq>Kurorë</span><span data-en>Crown</span></span>
+          <a href="https://instagram.com/yourbrand" target="_blank" rel="noopener noreferrer" class="prod-btn">
+            <span data-sq>Porosit në Instagram</span><span data-en>Order on Instagram</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- 25 — crowns -->
+      <div class="prod-card reveal" data-cat="crowns">
+        <span class="prod-badge badge-new"><span data-sq>E Re</span><span data-en>New</span></span>
+        <div class="prod-visual bg-c">
+          <div class="prod-art">
+            <svg width="200" height="180" viewBox="0 0 240 210" fill="none">
+              <path d="M22 168 L22 118 L52 80 L88 112 L120 46 L152 112 L188 80 L218 118 L218 168 Z" stroke="rgba(200,169,110,0.65)" stroke-width="1.4" fill="rgba(200,169,110,0.04)" stroke-linejoin="round"/>
+              <rect x="22" y="148" width="196" height="22" rx="2" stroke="rgba(200,169,110,0.38)" stroke-width="1" fill="rgba(200,169,110,0.05)"/>
+              <circle cx="120" cy="46" r="12" stroke="rgba(200,169,110,0.72)" stroke-width="1.2" fill="rgba(200,169,110,0.07)"/>
+              <circle cx="52" cy="80" r="6" stroke="rgba(200,169,110,0.6)" stroke-width="1" fill="rgba(200,169,110,0.06)"/>
+              <circle cx="188" cy="80" r="6" stroke="rgba(200,169,110,0.6)" stroke-width="1" fill="rgba(200,169,110,0.06)"/>
+              <circle cx="112" cy="40" r="2.2" fill="rgba(235,213,165,0.85)"/>
+              <line x1="88" y1="148" x2="88" y2="168" stroke="rgba(200,169,110,0.18)" stroke-width="0.6"/>
+              <line x1="120" y1="148" x2="120" y2="168" stroke="rgba(200,169,110,0.18)" stroke-width="0.6"/>
+              <line x1="152" y1="148" x2="152" y2="168" stroke="rgba(200,169,110,0.18)" stroke-width="0.6"/>
+            </svg>
+          </div>
+          <img src="images/IMG_6825.jpg" alt="Kurorë Pasha" class="prod-photo" loading="lazy">
+          <div class="prod-overlay"><span><span data-sq>Porosit në Instagram</span><span data-en>Order via Instagram</span></span></div>
+        </div>
+        <div class="prod-body">
+          <div class="prod-row1">
+            <span class="prod-name">Kurorë Pasha</span>
+            <div class="prod-price-wrap"><span class="prod-price">€88</span></div>
+          </div>
+          <span class="prod-cat"><span data-sq>Kurorë</span><span data-en>Crown</span></span>
+          <a href="https://instagram.com/yourbrand" target="_blank" rel="noopener noreferrer" class="prod-btn">
+            <span data-sq>Porosit në Instagram</span><span data-en>Order on Instagram</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- 26 — brooches -->
+      <div class="prod-card reveal" data-cat="brooches">
+        <div class="prod-visual bg-d">
+          <div class="prod-art">
+            <svg width="200" height="200" viewBox="0 0 240 240" fill="none">
+              <ellipse cx="120" cy="72" rx="22" ry="42" stroke="rgba(90,60,20,0.65)" stroke-width="1.2" fill="rgba(90,60,20,0.05)" transform="rotate(0 120 120)"/>
+              <ellipse cx="120" cy="72" rx="22" ry="42" stroke="rgba(90,60,20,0.65)" stroke-width="1.2" fill="rgba(90,60,20,0.05)" transform="rotate(60 120 120)"/>
+              <ellipse cx="120" cy="72" rx="22" ry="42" stroke="rgba(90,60,20,0.65)" stroke-width="1.2" fill="rgba(90,60,20,0.05)" transform="rotate(120 120 120)"/>
+              <ellipse cx="120" cy="72" rx="22" ry="42" stroke="rgba(90,60,20,0.65)" stroke-width="1.2" fill="rgba(90,60,20,0.05)" transform="rotate(180 120 120)"/>
+              <ellipse cx="120" cy="72" rx="22" ry="42" stroke="rgba(90,60,20,0.65)" stroke-width="1.2" fill="rgba(90,60,20,0.05)" transform="rotate(240 120 120)"/>
+              <ellipse cx="120" cy="72" rx="22" ry="42" stroke="rgba(90,60,20,0.65)" stroke-width="1.2" fill="rgba(90,60,20,0.05)" transform="rotate(300 120 120)"/>
+              <circle cx="120" cy="120" r="24" stroke="rgba(90,60,20,0.7)" stroke-width="1.3" fill="rgba(90,60,20,0.06)"/>
+              <circle cx="120" cy="120" r="13" stroke="rgba(90,60,20,0.38)" stroke-width="0.8" fill="rgba(90,60,20,0.04)"/>
+              <line x1="138" y1="138" x2="160" y2="160" stroke="rgba(90,60,20,0.38)" stroke-width="1.1" stroke-linecap="round"/>
+              <circle cx="113" cy="113" r="2" fill="rgba(140,100,40,0.72)"/>
+            </svg>
+          </div>
+          <img src="" alt="Qistek Lule" class="prod-photo" loading="lazy">
+          <div class="prod-overlay"><span><span data-sq>Porosit në Instagram</span><span data-en>Order via Instagram</span></span></div>
+        </div>
+        <div class="prod-body">
+          <div class="prod-row1">
+            <span class="prod-name">Qistek Lule</span>
+            <div class="prod-price-wrap"><span class="prod-price">€35</span></div>
+          </div>
+          <span class="prod-cat"><span data-sq>Qistek</span><span data-en>Brooch</span></span>
           <a href="https://instagram.com/yourbrand" target="_blank" rel="noopener noreferrer" class="prod-btn">
             <span data-sq>Porosit në Instagram</span><span data-en>Order on Instagram</span>
           </a>
@@ -3524,7 +1395,7 @@
     <div class="heritage-right reveal">
       <!-- Tall left: ring illustration -->
       <div class="her-card" style="background:rgba(45,68,48,0.6);">
-        <img src="images/products/neck.webp" alt="" loading="lazy">
+        <img src="" alt="" loading="lazy">
         <div class="her-card-placeholder">
           <svg width="120" height="160" viewBox="0 0 180 240" fill="none">
             <ellipse cx="90" cy="188" rx="72" ry="18" stroke="rgba(200,169,110,0.45)" stroke-width="1"/>
@@ -3542,7 +1413,7 @@
       </div>
       <!-- Top right: necklace -->
       <div class="her-card" style="background:rgba(110,83,48,0.22);">
-        <img src="images/products/neck1.webp" alt="" loading="lazy">
+        <img src="" alt="" loading="lazy">
         <div class="her-card-placeholder">
           <svg width="100" height="90" viewBox="0 0 160 130" fill="none">
             <path d="M16 38 C46 22 78 16 80 15 C82 16 114 22 144 38" stroke="rgba(200,169,110,0.42)" stroke-width="1" fill="none"/>
@@ -3556,7 +1427,7 @@
       </div>
       <!-- Bottom right: earrings -->
       <div class="her-card" style="background:rgba(45,68,48,0.35);">
-        <img src="images/products/neck.webp" alt="" loading="lazy">
+        <img src="" alt="" loading="lazy">
         <div class="her-card-placeholder">
           <svg width="100" height="90" viewBox="0 0 160 130" fill="none">
             <path d="M46 14 Q46 6 54 6 Q62 6 62 14 L62 26" stroke="rgba(200,169,110,0.55)" stroke-width="1.1" fill="none" stroke-linecap="round"/>
@@ -3658,7 +1529,7 @@
 <section id="story">
   <div class="story-split">
     <div class="story-left">
-      <img src="https://images.unsplash.com/photo-1596944924591-28c7b24e0b31?auto=format&fit=crop&w=800&h=900&q=80" alt="" loading="lazy">
+      <img src="" alt="" loading="lazy">
       <span class="story-wm">A</span>
       <div class="story-art">
         <!-- Premium layered jewelry art -->
@@ -3701,8 +1572,8 @@
         <span data-en>Bizhuteria Fantazia started from something very simple: the wish that every Albanian woman finds her own jewellery. Not what everyone else wears — what she feels when she tries it on for the first time and doesn't want to take off.</span>
       </p>
       <p class="story-p">
-        <span data-sq>Nuk kemi qindra produkte. Kemi 16, dhe secili ka arsyen e vet. Çdo model zgjidhet me kujdes — me mendjen te ato gra që e dinë çfarë duan, por nuk e gjejnë lehtë. Ne punojmë për to.</span>
-        <span data-en>We don't have hundreds of products. We have 16, and each one has its reason. Every design is chosen with care — with those women in mind who know what they want, but don't find it easily. We work for them.</span>
+        <span data-sq>Nuk kemi qindra produkte. Kemi 20, dhe secili ka arsyen e vet. Çdo model zgjidhet me kujdes — me mendjen te ato gra që e dinë çfarë duan, por nuk e gjejnë lehtë. Ne punojmë për to.</span>
+        <span data-en>We don't have hundreds of products. We have 20, and each one has its reason. Every design is chosen with care — with those women in mind who know what they want, but don't find it easily. We work for them.</span>
       </p>
       <div class="story-bq">
         <p>
@@ -3728,27 +1599,27 @@
 
     <div class="ig-grid">
       <a href="https://instagram.com/yourbrand" target="_blank" rel="noopener noreferrer" class="ig-cell ig-c1">
-        <div class="ig-inner"><img src="images/products/neck.webp" alt="Instagram post" loading="lazy"></div>
+        <div class="ig-inner"><img src="" alt="Instagram post" loading="lazy"></div>
         <div class="ig-overlay"><span><span data-sq>Shiko</span><span data-en>View</span></span></div>
       </a>
       <a href="https://instagram.com/yourbrand" target="_blank" rel="noopener noreferrer" class="ig-cell ig-c2">
-        <div class="ig-inner"><img src="images/products/neck1.webp" alt="Instagram post" loading="lazy"></div>
+        <div class="ig-inner"><img src="" alt="Instagram post" loading="lazy"></div>
         <div class="ig-overlay"><span><span data-sq>Shiko</span><span data-en>View</span></span></div>
       </a>
       <a href="https://instagram.com/yourbrand" target="_blank" rel="noopener noreferrer" class="ig-cell ig-c3">
-        <div class="ig-inner"><img src="https://images.unsplash.com/photo-1617038260897-41a1f14a8ca0?auto=format&fit=crop&w=600&h=600&q=80" alt="Instagram post" loading="lazy"></div>
+        <div class="ig-inner"><img src="" alt="Instagram post" loading="lazy"></div>
         <div class="ig-overlay"><span><span data-sq>Shiko</span><span data-en>View</span></span></div>
       </a>
       <a href="https://instagram.com/yourbrand" target="_blank" rel="noopener noreferrer" class="ig-cell ig-c4">
-        <div class="ig-inner"><img src="images/products/neck.webp" alt="Instagram post" loading="lazy"></div>
+        <div class="ig-inner"><img src="" alt="Instagram post" loading="lazy"></div>
         <div class="ig-overlay"><span><span data-sq>Shiko</span><span data-en>View</span></span></div>
       </a>
       <a href="https://instagram.com/yourbrand" target="_blank" rel="noopener noreferrer" class="ig-cell ig-c5">
-        <div class="ig-inner"><img src="https://images.unsplash.com/photo-1611591437281-460bfbe1220a?auto=format&fit=crop&w=600&h=600&q=80" alt="Instagram post" loading="lazy"></div>
+        <div class="ig-inner"><img src="" alt="Instagram post" loading="lazy"></div>
         <div class="ig-overlay"><span><span data-sq>Shiko</span><span data-en>View</span></span></div>
       </a>
       <a href="https://instagram.com/yourbrand" target="_blank" rel="noopener noreferrer" class="ig-cell ig-c6">
-        <div class="ig-inner"><img src="images/products/neck1.webp" alt="Instagram post" loading="lazy"></div>
+        <div class="ig-inner"><img src="" alt="Instagram post" loading="lazy"></div>
         <div class="ig-overlay"><span><span data-sq>Shiko</span><span data-en>View</span></span></div>
       </a>
     </div>
@@ -3931,312 +1802,20 @@
   </div>
 </a>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-<script>
-  'use strict';
-
-  /* ─── PRELOADER ─────────────────────────── */
-  (function () {
-    const pl = document.getElementById('preloader');
-    function hidePl() {
-      pl.classList.add('pl-done');
-      setTimeout(function () { if (pl.parentNode) pl.parentNode.removeChild(pl); }, 1100);
-    }
-    if (document.readyState === 'complete') {
-      setTimeout(hidePl, 2000);
-    } else {
-      window.addEventListener('load', function () { setTimeout(hidePl, 2000); });
-    }
-  })();
-
-  /* ─── LANGUAGE SWITCHER ─────────────────── */
-  const html     = document.documentElement;
-  const langBtn  = document.getElementById('langBtn');
-  const langBtnM = document.getElementById('langBtnMob');
-  function setLang(lang) {
-    html.setAttribute('data-lang', lang);
-    html.setAttribute('lang', lang);
-    const label = lang === 'sq' ? 'EN' : 'SQ';
-    if (langBtn)  langBtn.textContent  = label;
-    if (langBtnM) langBtnM.textContent = label;
-    const track = document.querySelector('.marquee-track');
-    if (track) {
-      track.style.animation = 'none';
-      void track.offsetWidth;
-      track.style.animation = '';
-    }
-  }
-  [langBtn, langBtnM].filter(Boolean).forEach(btn => {
-    btn.addEventListener('click', () => {
-      setLang(html.getAttribute('data-lang') === 'sq' ? 'en' : 'sq');
-    });
-  });
-
-  /* ─── NAV SCROLL ────────────────────────── */
-  const nav = document.getElementById('nav');
-  function handleNavScroll() {
-    nav.classList.toggle('scrolled', window.scrollY > 60);
-  }
-  window.addEventListener('scroll', handleNavScroll, { passive: true });
-  handleNavScroll();
-
-  /* ─── SCROLL SPY (active nav link) ──────── */
-  const navLinks = document.querySelectorAll('.nav-links a[data-section]');
-  /* Only sections that have a nav link, in exact DOM order */
-  const spyIds = ['collection', 'order', 'story', 'footer'];
-
-  function updateActiveLink() {
-    const navEl = document.getElementById('nav');
-    const navBottom = navEl ? navEl.getBoundingClientRect().bottom : 124;
-    const scrollMid = window.scrollY + navBottom + 20;
-    let active = '';
-    spyIds.forEach(function(id) {
-      const el = document.getElementById(id);
-      if (el && el.offsetTop <= scrollMid) active = id;
-    });
-    /* Footer can't be fully scrolled to — activate when near page bottom */
-    const docH = document.documentElement.scrollHeight;
-    if (window.scrollY + window.innerHeight >= docH - 80) active = 'footer';
-    navLinks.forEach(function(a) {
-      a.classList.toggle('active', a.dataset.section === active);
-    });
-  }
-  window.addEventListener('scroll', updateActiveLink, { passive: true });
-  updateActiveLink();
-
-  /* ─── MOBILE MENU ───────────────────────── */
-  const ham      = document.getElementById('ham');
-  const mob      = document.getElementById('mob');
-  const mobClose = document.getElementById('mobClose');
-
-  function openMob()  { mob.classList.add('open'); ham.classList.add('open'); document.body.style.overflow = 'hidden'; }
-  function closeMob() { mob.classList.remove('open'); ham.classList.remove('open'); document.body.style.overflow = ''; }
-
-  ham.addEventListener('click', () => mob.classList.contains('open') ? closeMob() : openMob());
-  mobClose.addEventListener('click', closeMob);
-  document.querySelectorAll('.mob-lnk').forEach(l => l.addEventListener('click', closeMob));
-
-  /* ─── PRODUCT FILTER ────────────────────── */
-  const pills = document.querySelectorAll('.f-pill');
-  const cards = document.querySelectorAll('.prod-card');
-
-  pills.forEach(pill => {
-    pill.addEventListener('click', () => {
-      pills.forEach(p => p.classList.remove('on'));
-      pill.classList.add('on');
-      const f = pill.dataset.f;
-      cards.forEach(c => {
-        const match = f === 'all' || c.dataset.cat === f;
-        c.classList.toggle('hide', !match);
-      });
-      // Reset scroll on mobile
-      const grid = document.getElementById('pgrid');
-      if (grid) grid.scrollLeft = 0;
-    });
-  });
-
-  /* ─── SCROLL REVEAL ─────────────────────── */
-  const revealObs = new IntersectionObserver(entries => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        e.target.classList.add('in');
-        revealObs.unobserve(e.target);
-      }
-    });
-  }, { threshold: 0.08 });
-
-  document.querySelectorAll('.reveal, .reveal-left').forEach((el, i) => {
-    /* Cards inside horizontal sliders must never animate vertically —
-       the translateY reveal pops mid-swipe and looks like a jump */
-    if (el.closest('.prod-grid, .na-track')) {
-      el.classList.add('in');
-      el.style.transitionDelay = '0s';
-      return;
-    }
-    const sibs = Array.from(el.parentElement.querySelectorAll('.reveal, .reveal-left'));
-    el.style.transitionDelay = Math.min(sibs.indexOf(el) * 0.09, 0.45) + 's';
-    revealObs.observe(el);
-  });
-
-  /* ─── ANNOUNCEMENT BAR ─────────────────── */
-  const annBar   = document.getElementById('announce-bar');
-  const annClose = document.getElementById('ann-close');
-  if (annClose) annClose.addEventListener('click', () => {
-    if (annBar) annBar.classList.add('hidden');
-    document.body.classList.add('bar-gone');
-    setTimeout(() => { if (annBar) annBar.style.display = 'none'; }, 400);
-  });
-
-  /* ─── COUNTDOWN TIMER ───────────────────── */
-  (function () {
-    const end = new Date();
-    end.setHours(23, 59, 59, 999);
-    const hEl = document.getElementById('cdH');
-    const mEl = document.getElementById('cdM');
-    const sEl = document.getElementById('cdS');
-    function pad(n) { return String(n).padStart(2, '0'); }
-    let cdTimer;
-    function tick() {
-      const diff = end - Date.now();
-      if (diff <= 0) {
-        if (hEl) hEl.textContent = '00';
-        if (mEl) mEl.textContent = '00';
-        if (sEl) sEl.textContent = '00';
-        clearInterval(cdTimer);
-        return;
-      }
-      const h = Math.floor(diff / 3600000);
-      const m = Math.floor((diff % 3600000) / 60000);
-      const s = Math.floor((diff % 60000) / 1000);
-      if (hEl) hEl.textContent = pad(h);
-      if (mEl) mEl.textContent = pad(m);
-      if (sEl) sEl.textContent = pad(s);
-    }
-    tick();
-    cdTimer = setInterval(tick, 1000);
-  })();
-
-  /* ─── BACK TO TOP ───────────────────────── */
-  const btt = document.getElementById('btt');
-  if (btt) {
-    window.addEventListener('scroll', () => btt.classList.toggle('show', window.scrollY > 500), { passive: true });
-    btt.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
-  }
-
-  /* ─── FLOATING IG BUTTON ─────────────────── */
-  const igFloat = document.getElementById('ig-float');
-  if (igFloat) {
-    window.addEventListener('scroll', () => igFloat.classList.toggle('show', window.scrollY > 300), { passive: true });
-  }
-
-  /* ─── DEMO IMAGES — real Unsplash jewelry photos, swap for your own when ready ─ */
-  (function () {
-    var u = 'https://images.unsplash.com/photo-';
-    var q = '?auto=format&fit=crop&w=600&h=800&q=80';
-    var map = {
-      'selene-ring.jpg':          u+'1515562166786-ca2a48748af1'+q,
-      'aurel-choker.jpg':         u+'1611591437281-460bfbe1220a'+q,
-      'arc-de-bangle.jpg':        u+'1605100804763-247f67b3557e'+q,
-      'mira-drop-earrings.jpg':   u+'1617038260897-41a1f14a8ca0'+q,
-      'lune-stacking-ring.jpg':   u+'1535632066927-ab7c9ab60908'+q,
-      'foret-pendant.jpg':        u+'1583937443989-f1b5ad2a56a3'+q,
-      'olive-cuff.jpg':           u+'1603566541830-78c87d8c0c6e'+q,
-      'etoile-studs.jpg':         u+'1568944518082-cc3d5ac3d499'+q,
-      'seren-ring.jpg':           u+'1573408301185-9519f94f5b7b'+q,
-      'vigne-layering-chain.jpg': u+'1599643478518-a784e5dc4c8f'+q,
-      'brume-bangle.jpg':         u+'1596944924591-28c7b24e0b31'+q,
-      'cedre-hoops.jpg':          u+'1618160702438-9b02ab6515c9'+q,
-      'rive-ring.jpg':            u+'1632202775861-e2f15a30dabc'+q,
-      'dune-collar.jpg':          u+'1521119989659-a83eee488004'+q,
-      'roseau-bracelet.jpg':      u+'1602752250015-52934a9ad0e5'+q,
-      'pluie-ring.jpg':           u+'1586336153270-d8e4aa5b2438'+q
-    };
-    document.querySelectorAll('img.prod-photo[src*="images/products/"]').forEach(function (img) {
-      var name = img.getAttribute('src').split('/').pop();
-      if (map[name]) img.setAttribute('src', map[name]);
-    });
-  })();
-
-  /* ─── PRODUCT IMAGE SHIMMER + FADE-IN ──────── */
-  document.querySelectorAll('.prod-photo').forEach(function (img) {
-    const visual = img.closest('.prod-visual, .na-visual, .sale-visual');
-    if (!img.getAttribute('src') || img.getAttribute('src') === '') {
-      img.style.display = 'none';
-      return;
-    }
-    if (visual) visual.classList.add('img-loading');
-    img.addEventListener('load', function () {
-      if (visual) visual.classList.remove('img-loading');
-      img.classList.add('img-ready');
-    });
-    img.addEventListener('error', function () {
-      if (visual) visual.classList.remove('img-loading');
-      img.style.display = 'none';
-    });
-  });
-
-  /* ─── HERO PARALLAX ─────────────────────────── */
-  (function () {
-    const heroArt = document.querySelector('.hero-art');
-    if (!heroArt) return;
-    const mq = window.matchMedia('(max-width: 991px)');
-    var ticking = false;
-    function onScroll() {
-      if (mq.matches) { heroArt.style.transform = ''; return; }
-      if (!ticking) {
-        requestAnimationFrame(function () {
-          heroArt.style.transform = 'translateY(' + (window.scrollY * 0.3) + 'px)';
-          ticking = false;
-        });
-        ticking = true;
-      }
-    }
-    window.addEventListener('scroll', onScroll, { passive: true });
-  })();
-
-  /* ─── CUSTOM CURSOR ──────────────────────────── */
-  (function () {
-    if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
-    var ring = document.getElementById('cursor-ring');
-    if (!ring) return;
-    var cx = -100, cy = -100;
-    document.addEventListener('mousemove', function (e) {
-      cx = e.clientX; cy = e.clientY;
-      ring.style.left = cx + 'px';
-      ring.style.top  = cy + 'px';
-      ring.classList.add('cursor-visible');
-    });
-    document.addEventListener('mouseleave', function () {
-      ring.classList.remove('cursor-visible');
-    });
-    var interactEls = document.querySelectorAll(
-      'a, button, .prod-card, .na-card, .sale-card, .f-pill, .ig-cell, .c-card'
-    );
-    interactEls.forEach(function (el) {
-      el.addEventListener('mouseenter', function () { ring.classList.add('cursor-hover'); });
-      el.addEventListener('mouseleave', function () { ring.classList.remove('cursor-hover'); });
-    });
-  })();
-
-  /* ─── CATALOG PIECE NUMBERS ──────────────────────── */
-  document.querySelectorAll('#pgrid .prod-card').forEach(function(card, i) {
-    card.dataset.piece = String(i + 1).padStart(2, '0');
-  });
-
-</script>
-
-<!-- ── COOKIE CONSENT BANNER ── -->
-<div id="cookie-bar" style="
-  position:fixed;bottom:0;left:0;right:0;z-index:9999;
-  background:rgba(13,24,16,0.97);
-  border-top:1px solid rgba(201,169,97,0.18);
-  backdrop-filter:blur(12px);
-  -webkit-backdrop-filter:blur(12px);
-  padding:16px 40px;
-  display:none;align-items:center;justify-content:space-between;gap:24px;
-  font-family:'DM Sans',sans-serif;font-weight:300;
-  transform:translateY(0);transition:transform 0.4s ease;
-">
+<!-- Cookie Consent Banner -->
+<div id="cookie-bar" style="position:fixed;bottom:0;left:0;right:0;z-index:9999;background:rgba(13,24,16,0.97);border-top:1px solid rgba(201,169,97,0.18);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);padding:16px 40px;display:none;align-items:center;justify-content:space-between;gap:24px;font-family:'DM Sans',sans-serif;font-weight:300;transform:translateY(0);transition:transform 0.4s ease;">
   <p style="font-size:12px;color:rgba(181,201,183,0.65);line-height:1.7;margin:0;max-width:680px;">
     Kjo faqe përdor vetëm cookies thelbësore për funksionimin e duhur. Nuk përdorim cookies gjurmimi.
     <em style="opacity:0.7;"> · This site uses only essential cookies. No tracking.</em>
     <a href="privacy.html" style="color:rgba(201,169,97,0.7);margin-left:8px;text-decoration:none;border-bottom:1px solid rgba(201,169,97,0.25);">Privatësia / Privacy</a>
   </p>
-  <button onclick="
-    document.getElementById('cookie-bar').style.transform='translateY(110%)';
-    localStorage.setItem('bf_cookie_ok','1');
-  " style="
-    flex-shrink:0;
-    font-family:'DM Sans',sans-serif;font-weight:300;font-size:10px;
-    letter-spacing:0.22em;text-transform:uppercase;
-    background:none;border:1px solid rgba(201,169,97,0.4);
-    color:rgba(201,169,97,0.85);padding:10px 22px;cursor:pointer;
-    transition:border-color 0.3s,color 0.3s;white-space:nowrap;
-  " onmouseover="this.style.borderColor='#C9A961';this.style.color='#EDDBA8';"
-     onmouseout="this.style.borderColor='rgba(201,169,97,0.4)';this.style.color='rgba(201,169,97,0.85)';">
+  <button onclick="document.getElementById('cookie-bar').style.transform='translateY(110%)';localStorage.setItem('bf_cookie_ok','1');" style="flex-shrink:0;font-family:'DM Sans',sans-serif;font-weight:300;font-size:10px;letter-spacing:0.22em;text-transform:uppercase;background:none;border:1px solid rgba(201,169,97,0.4);color:rgba(201,169,97,0.85);padding:10px 22px;cursor:pointer;transition:border-color 0.3s,color 0.3s;white-space:nowrap;" onmouseover="this.style.borderColor='#C9A961';this.style.color='#EDDBA8';" onmouseout="this.style.borderColor='rgba(201,169,97,0.4)';this.style.color='rgba(201,169,97,0.85)';">
     Kuptoj / OK
   </button>
 </div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="script.js"></script>
 <script>
   if (!localStorage.getItem('bf_cookie_ok')) {
     var cb = document.getElementById('cookie-bar');
