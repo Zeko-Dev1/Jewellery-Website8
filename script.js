@@ -89,7 +89,7 @@
       pill.classList.add('on');
       const f = pill.dataset.f;
       cards.forEach(c => {
-        const match = f === 'all' || c.dataset.cat === f;
+        const match = f === 'all' || (c.dataset.cat || '').split(' ').includes(f);
         c.classList.toggle('hide', !match);
       });
       const grid = document.getElementById('pgrid');

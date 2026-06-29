@@ -2996,3 +2996,332 @@
     .sec-h, .sale-h, .order-h, .ig-h, .ship-h, .hl-h, .story-h, .ic-h {
       letter-spacing: 0.005em;
     }
+
+    /* ═══════════════════════════════════════════════════════════
+       PREMIUM UPGRADE — PHASE 2: EDITORIAL DEPTH & FINISH
+    ═══════════════════════════════════════════════════════════ */
+
+    /* ── New Arrivals: asymmetric editorial layout on desktop ── */
+    @media (min-width: 992px) {
+      .na-track {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto auto;
+      }
+      .na-card:first-child {
+        grid-column: 1;
+        grid-row: 1 / 3;
+        display: flex;
+        flex-direction: column;
+      }
+      .na-card:first-child .na-visual {
+        flex: 1;
+        height: auto;
+        min-height: 480px;
+      }
+      .na-card:nth-child(2) { grid-column: 2; grid-row: 1; }
+      .na-card:nth-child(3) { grid-column: 2; grid-row: 2; }
+      .na-card:nth-child(4) { display: none; }
+    }
+
+    /* ── Editorial Split: position for pseudo + diagonal gold line ── */
+    .editorial-split { position: relative; }
+    .editorial-split::before {
+      content: '';
+      position: absolute;
+      left: calc(58% - 0.5px);
+      top: 0; bottom: 0;
+      width: 1px;
+      background: linear-gradient(
+        to bottom,
+        transparent 0%,
+        rgba(200,169,110,0.42) 15%,
+        rgba(200,169,110,0.64) 50%,
+        rgba(200,169,110,0.42) 85%,
+        transparent 100%
+      );
+      transform: rotate(3deg);
+      transform-origin: center center;
+      z-index: 10;
+      pointer-events: none;
+    }
+    @media (max-width: 991px) {
+      .editorial-split::before { display: none; }
+    }
+
+    /* ── Heritage: richer gradient card backgrounds ── */
+    .her-card:first-child {
+      background: linear-gradient(158deg, #152417 0%, #233626 100%) !important;
+    }
+    .her-card:nth-child(2) {
+      background: linear-gradient(148deg, #4C3018 0%, #6B4726 100%) !important;
+    }
+    .her-card:nth-child(3) {
+      background: linear-gradient(148deg, #162519 0%, #243626 100%) !important;
+    }
+
+    /* ── Heritage SVG illustrations: slightly larger ── */
+    .her-card-placeholder svg {
+      transform: scale(1.14);
+      transform-origin: center center;
+    }
+
+    /* ── Footer: brand name watermark ── */
+    #footer { position: relative; overflow: hidden; }
+    .footer-top    { position: relative; z-index: 1; }
+    .footer-bottom { position: relative; z-index: 1; }
+    #footer::before {
+      content: 'Fantazia';
+      position: absolute;
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-style: italic;
+      font-size: clamp(80px, 13vw, 190px);
+      color: rgba(200,169,110,0.03);
+      bottom: 10px;
+      right: -8px;
+      pointer-events: none;
+      user-select: none;
+      letter-spacing: 0.08em;
+      line-height: 1;
+      z-index: 0;
+      white-space: nowrap;
+    }
+
+    /* ── Quote: stronger atmospheric backdrop quotation mark ── */
+    #quote::before {
+      font-size: 520px;
+      color: rgba(200,169,110,0.052);
+      top: -90px;
+      left: -50px;
+    }
+
+    /* ── Marquee: soft edge-fade for premium feel ── */
+    .marquee-wrap {
+      -webkit-mask-image: linear-gradient(
+        to right,
+        transparent 0%,
+        black 7%,
+        black 93%,
+        transparent 100%
+      );
+      mask-image: linear-gradient(
+        to right,
+        transparent 0%,
+        black 7%,
+        black 93%,
+        transparent 100%
+      );
+    }
+
+    /* ── Story split: gold divider between visual and text panels ── */
+    .story-split { position: relative; }
+    .story-split::before {
+      content: '';
+      position: absolute;
+      left: 38%;
+      top: 0; bottom: 0;
+      width: 1px;
+      background: linear-gradient(
+        to bottom,
+        transparent 0%,
+        rgba(200,169,110,0.3) 15%,
+        rgba(200,169,110,0.5) 50%,
+        rgba(200,169,110,0.3) 85%,
+        transparent 100%
+      );
+      z-index: 10;
+      pointer-events: none;
+    }
+    @media (max-width: 991px) {
+      .story-split::before { display: none; }
+    }
+
+    /* ── Story SVG art: fill more of the panel ── */
+    .story-art svg {
+      width: min(340px, 76%);
+      height: auto;
+    }
+
+    /* ── Story blockquote: more commanding weight ── */
+    .story-bq { margin: 40px 0; padding-left: 28px; }
+    .story-bq p { font-size: 22px; line-height: 1.6; }
+
+    /* ── Shipping cards: more breathing room on desktop ── */
+    @media (min-width: 992px) {
+      .c-card { padding: 80px 56px; }
+      .c-flag { font-size: 50px; }
+    }
+
+    /* ── Section seam accents: thin gold top borders ── */
+    #stats      { border-top: 1px solid rgba(200,169,110,0.13); border-bottom: 1px solid rgba(200,169,110,0.13); }
+    #flash-sale { border-top: 1px solid rgba(200,169,110,0.10); }
+    #order      { border-top: 1px solid rgba(200,169,110,0.08); }
+
+    /* ── New Arrivals: more refined card body ── */
+    .na-body { padding: 22px 26px 30px; }
+
+    /* ── Gold rules: generous, consistent width ── */
+    .gold-rule { width: 72px; }
+    .q-rule    { width: 72px; }
+
+    /* ── Filter pills: tighter, more editorial spacing ── */
+    .f-pill { letter-spacing: 0.22em; font-size: 9.5px; }
+
+    /* ── Tablet new arrivals: 2-col for clean look ── */
+    @media (min-width: 768px) and (max-width: 991px) {
+      .na-track { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    /* ═══════════════════════════════════════════════════════════
+       PREMIUM UPGRADE — PHASE 3: LAYOUT & MOBILE
+    ═══════════════════════════════════════════════════════════ */
+
+    /* ── New Arrivals: revert to 4-column row per user request ── */
+    @media (min-width: 992px) {
+      .na-track {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        grid-template-rows: auto;
+        gap: 3px;
+      }
+      .na-card:first-child {
+        grid-column: auto;
+        grid-row: auto;
+        display: block;
+      }
+      .na-card:first-child .na-visual {
+        flex: unset;
+        height: 560px;
+        min-height: unset;
+      }
+      .na-card:nth-child(2) { grid-column: auto; grid-row: auto; }
+      .na-card:nth-child(3) { grid-column: auto; grid-row: auto; }
+      .na-card:nth-child(4) { display: block; }
+    }
+
+    /* ── Filter bar: horizontal scroll on mobile instead of wrapping ── */
+    @media (max-width: 991px) {
+      .filter-bar {
+        overflow-x: auto;
+        flex-wrap: nowrap;
+        scrollbar-width: none;
+        -webkit-overflow-scrolling: touch;
+        padding-bottom: 10px;
+        margin-bottom: 8px;
+        gap: 5px;
+      }
+      .filter-bar::-webkit-scrollbar { display: none; }
+      .f-pill { flex-shrink: 0; }
+    }
+
+    /* ── Bestseller pill: gold accent to distinguish it ── */
+    .f-pill[data-f="bestseller"] {
+      border-color: rgba(200,169,110,0.5);
+      color: var(--c-gold);
+    }
+    .f-pill[data-f="bestseller"]:hover {
+      background: rgba(200,169,110,0.08);
+      border-color: var(--c-gold);
+      color: var(--c-gold);
+    }
+    .f-pill[data-f="bestseller"].on {
+      background: var(--c-gold);
+      color: var(--c-night);
+      border-color: var(--c-gold);
+    }
+
+    /* ── Product section: phone refinements ── */
+    @media (max-width: 575px) {
+      #collection .sec-h  { font-size: clamp(28px, 9vw, 42px); }
+      #collection .sec-sub { font-size: 12px; line-height: 1.85; }
+      .filter-bar { gap: 4px; }
+      .f-pill { padding: 8px 16px; font-size: 9px; }
+      .na-visual { height: 300px; }
+    }
+
+    /* ── New Arrivals tablet: uniform card height ── */
+    @media (min-width: 576px) and (max-width: 991px) {
+      .na-visual { height: 340px; }
+    }
+
+    /* ── Mobile: flash sale cards stack naturally ── */
+    @media (max-width: 575px) {
+      .sale-grid { grid-template-columns: 1fr; }
+      .sale-visual { height: 360px; }
+      .sale-body { padding: 22px 20px 26px; }
+      .sale-name { font-size: 20px; }
+    }
+
+    /* ── Mobile: heritage section tighten ── */
+    @media (max-width: 575px) {
+      #heritage  { padding: 72px 0; }
+      .hl-h      { font-size: clamp(28px, 9vw, 42px); }
+      .hl-body   { font-size: 13px; }
+    }
+
+    /* ── Mobile: quote section ── */
+    @media (max-width: 575px) {
+      #quote { padding: 72px 24px; }
+      #quote::before { font-size: 160px; top: -20px; left: -10px; }
+      .q-text { font-size: clamp(26px, 8vw, 40px); }
+    }
+
+    /* ── Mobile: inner circle ── */
+    @media (max-width: 575px) {
+      #inner-circle { padding: 72px 0; }
+      .ic-h { font-size: clamp(28px, 9vw, 42px); }
+      .ic-art-wrap { width: 180px; height: 180px; }
+    }
+
+    /* ── Mobile: story section ── */
+    @media (max-width: 575px) {
+      .story-left { min-height: 240px; }
+      .story-right { padding: 44px 24px; }
+      .story-h { font-size: clamp(26px, 8vw, 38px); }
+      .story-bq p { font-size: 18px; }
+    }
+
+    /* ── Mobile: shipping section ── */
+    @media (max-width: 575px) {
+      #shipping { padding: 72px 0; }
+      .c-card { padding: 44px 32px; }
+      .c-flag { font-size: 40px; }
+    }
+
+    /* ── Mobile: instagram section ── */
+    @media (max-width: 575px) {
+      #instagram { padding: 72px 0 56px; }
+      .ig-h { font-size: clamp(28px, 9vw, 40px); }
+    }
+
+    /* ── Mobile: order section ── */
+    @media (max-width: 575px) {
+      #order { padding: 72px 0; }
+      .step-n-circle { width: 50px; height: 50px; }
+      .step-n { font-size: 24px; }
+      .step-h { font-size: clamp(18px, 5vw, 24px); }
+    }
+
+    /* ── Mobile: footer ── */
+    @media (max-width: 575px) {
+      .footer-top { padding: 44px 0 36px; }
+    }
+
+    /* ── Product featured card: first + big, explicit desktop ── */
+    @media (min-width: 992px) {
+      #pgrid .prod-card--featured {
+        grid-column: 1 / span 2 !important;
+        grid-row: 1 !important;
+      }
+      #pgrid .prod-card--featured .prod-visual {
+        height: 660px !important;
+      }
+    }
+
+    /* ── Product slider: slightly taller card images on mobile ── */
+    @media (max-width: 991px) {
+      .prod-visual { height: 300px !important; }
+    }
+    @media (max-width: 575px) {
+      .prod-visual { height: 280px !important; }
+    }
