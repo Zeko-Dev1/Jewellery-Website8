@@ -51,6 +51,16 @@
     @keyframes pageIn { from { opacity: 0; } to { opacity: 1; } }
     body { animation: pageIn 0.6s ease forwards; }
 
+    /* Brand-gold text selection */
+    ::selection { background: var(--c-gold); color: var(--c-night); }
+
+    /* Slim brand scrollbar */
+    html { scrollbar-width: thin; scrollbar-color: rgba(122,138,110,0.55) var(--c-linen); }
+    body::-webkit-scrollbar { width: 10px; }
+    body::-webkit-scrollbar-track { background: var(--c-linen); }
+    body::-webkit-scrollbar-thumb { background: rgba(74,107,82,0.5); border-radius: 0; }
+    body::-webkit-scrollbar-thumb:hover { background: var(--c-sage); }
+
     /* Language toggle */
     [data-en] { display: none; }
     html[data-lang="en"] [data-sq] { display: none; }
@@ -2511,6 +2521,11 @@
       transition: transform 0.4s var(--ease-out);
     }
     .na-card:hover .na-hover-cta { transform: translateY(0); }
+    /* Touch devices have no hover — keep the order CTA visible so
+       New Arrivals stay orderable on phones and tablets */
+    @media (hover: none) {
+      .na-hover-cta { transform: translateY(0); }
+    }
     @media (max-width: 991px) {
       .na-track {
         grid-template-columns: repeat(2, 1fr);
@@ -2784,6 +2799,9 @@
       z-index: 0;
     }
 
+    /* Brand name block — mobile only */
+    .hbn { display: none; }
+
 
     /* Catalog piece numbers — rendered once JS sets data-piece */
     #pgrid .prod-body::before {
@@ -2827,7 +2845,7 @@
     ───────────────────────────────────────────────────── */
     @media (prefers-reduced-motion: reduce) {
       .hero-eyebrow, .hero-rule, .hero-h1a, .hero-h1b,
-      .hero-sub, .hero-cta, .hero-shipping-note {
+      .hero-sub, .hero-cta, .hero-shipping-note, .hbn {
         animation: none !important;
         opacity: 1 !important;
         transform: none !important;
@@ -3234,8 +3252,20 @@
     @media (max-width: 575px) {
       #collection .sec-h  { font-size: clamp(28px, 9vw, 42px); }
       #collection .sec-sub { font-size: 12px; line-height: 1.85; }
-      .filter-bar { gap: 4px; }
-      .f-pill { padding: 8px 16px; font-size: 9px; }
+      .filter-bar { gap: 6px; padding-bottom: 12px; margin-bottom: 4px; }
+      .f-pill {
+        padding: 9px 18px;
+        font-size: 8.5px;
+        letter-spacing: 0.2em;
+        border-color: rgba(181,201,183,0.45);
+        border-radius: 1px;
+      }
+      .f-pill.on {
+        background: var(--c-sage);
+        color: var(--c-pgold);
+        border-color: var(--c-sage);
+        box-shadow: 0 2px 8px rgba(31,58,38,0.28);
+      }
       .na-visual { height: 300px; }
     }
 
@@ -3324,4 +3354,206 @@
     }
     @media (max-width: 575px) {
       .prod-visual { height: 280px !important; }
+    }
+
+    /* ══════════════════════════════════════════════════════════════
+       HERO PREMIUM UPGRADE — Editorial split phone, full-screen all
+       ══════════════════════════════════════════════════════════════ */
+
+    /*
+      PHONE LAYOUT — ULTRA PREMIUM:
+        hero-right (crown photo) → top 60%, photo stays clean, only a tight
+                                   20% fade at the very base of the image
+        hero-left  (dark panel)  → bottom 46%, diagonal cut, LEFT-aligned
+        Hierarchy: pre-mark accent → BIZHUTERIA / FANTAZIA → rule → tagline → CTA
+    */
+    @media (max-width: 575px) {
+      #hero { height: 100vh; height: 100svh; min-height: 620px; }
+      .hero-wrap { aspect-ratio: unset !important; height: 100% !important; min-height: 0 !important; }
+
+      /* Photo: full bleed */
+      .hero-right {
+        top: 0 !important; bottom: 0 !important;
+        left: 0 !important; right: 0 !important;
+        width: 100% !important; height: 100% !important;
+        clip-path: none !important;
+      }
+      .hero-img {
+        object-position: 50% 0% !important;
+        filter: contrast(1.06) saturate(1.05) brightness(0.88) !important;
+      }
+      /* Subtle top vignette — frames the crown, status bar stays readable.
+         mix-blend-mode must reset to normal: the base ::before uses screen
+         blending (noise texture), which erases dark gradients entirely */
+      .hero-right::before {
+        display: block !important; content: '' !important;
+        position: absolute;
+        top: 0; left: 0; right: 0; height: 22%;
+        background: linear-gradient(to bottom, rgba(13,24,16,0.52) 0%, transparent 100%);
+        mix-blend-mode: normal !important;
+        z-index: 2; pointer-events: none;
+      }
+      /* Rich bottom fade — content zone is clearly dark and readable */
+      .hero-right::after {
+        display: block !important; content: '' !important;
+        position: absolute;
+        bottom: 0; left: 0; right: 0; height: 62%;
+        background: linear-gradient(
+          to top,
+          rgba(13,24,16,0.98) 0%,
+          rgba(13,24,16,0.94) 14%,
+          rgba(13,24,16,0.80) 30%,
+          rgba(13,24,16,0.52) 50%,
+          rgba(13,24,16,0.18) 72%,
+          transparent 100%
+        );
+        z-index: 3; pointer-events: none;
+      }
+      .hero-frame { display: none !important; }
+
+      /* All content together at the bottom — centred, no tricks */
+      .hero-left {
+        top: auto !important; bottom: 0 !important;
+        left: 0 !important; right: 0 !important;
+        height: auto !important; min-height: 0 !important;
+        overflow: visible !important;
+        display: flex !important; flex-direction: column !important;
+        justify-content: flex-start !important;
+        align-items: center !important;
+        text-align: center !important;
+        padding: 0 24px 52px !important;
+        background: transparent !important;
+        clip-path: none !important;
+        z-index: 4 !important;
+      }
+      .hero-left::before { display: none !important; }
+      .hero-left::after  { display: none !important; }
+
+      /* Brand name block — enters first, leading the choreography */
+      .hbn {
+        display: flex !important; flex-direction: column !important;
+        align-items: center !important; gap: 0 !important;
+        margin-bottom: 0 !important;
+        animation: heroSlideUp 0.8s var(--ease-out) 0.15s both;
+      }
+      .hbn::before { display: none !important; }
+      /* BIZHUTERIA — delicate whisper above */
+      .hbn-1 {
+        font-family: 'Cormorant Garamond', serif !important;
+        font-size: 12px !important; font-weight: 300 !important;
+        font-style: normal !important; letter-spacing: 0.42em !important;
+        line-height: 1.2 !important; color: rgba(237,219,168,0.52) !important;
+        text-align: center !important;
+      }
+      /* FANTAZIA — the monument; clamp keeps it inside 320px screens */
+      .hbn-2 {
+        font-family: 'Cormorant Garamond', serif !important;
+        font-size: clamp(46px, 16vw, 60px) !important; font-weight: 700 !important;
+        font-style: italic !important; letter-spacing: 0.02em !important;
+        line-height: 1 !important; color: var(--c-gold) !important;
+        text-align: center !important;
+      }
+
+      /* Eyebrow hidden — removes visual noise */
+      .hero-eyebrow { display: none !important; }
+
+      /* Rule: short centred gold line */
+      .hero-rule {
+        display: block !important;
+        width: 36px !important; height: 1px !important;
+        background: rgba(200,169,110,0.48) !important;
+        border: none !important; margin: 20px auto 20px !important;
+      }
+
+      /* Tagline — centred, both lines visible */
+      .hero-h1a {
+        display: block !important;
+        font-family: 'Cormorant Garamond', serif !important;
+        font-size: 21px !important; font-style: italic !important;
+        font-weight: 400 !important; line-height: 1.32 !important;
+        letter-spacing: 0.01em !important; text-align: center !important;
+        color: rgba(237,219,168,0.92) !important;
+      }
+      .hero-h1b {
+        display: block !important;
+        font-family: 'Cormorant Garamond', serif !important;
+        font-size: 18px !important; font-style: italic !important;
+        font-weight: 400 !important; line-height: 1.32 !important;
+        letter-spacing: 0.01em !important; text-align: center !important;
+        color: rgba(237,219,168,0.65) !important;
+      }
+
+      .hero-sub { display: none !important; }
+      .hero-cta {
+        margin-top: 28px !important;
+        align-items: center !important;
+        justify-content: center !important;
+        width: 100% !important;
+      }
+      .hero-cta .btn-ol {
+        padding: 14px 46px !important; min-width: 0 !important;
+        font-size: 9px !important; letter-spacing: 0.30em !important;
+        border-color: rgba(200,169,110,0.40) !important;
+        color: rgba(237,219,168,0.86) !important;
+      }
+      .hero-shipping-note { display: none !important; }
+      .hero-wm { display: none !important; }
+    }
+
+    /* ── Tablet (576px–991px): Full-screen, gradient overlay ── */
+    @media (min-width: 576px) and (max-width: 991px) {
+      #hero {
+        height: 100vh;
+        height: 100svh;
+        min-height: 600px;
+      }
+      .hero-wrap {
+        aspect-ratio: unset !important;
+        height: 100%;
+      }
+      .hero-img { object-position: 50% 12% !important; }
+      .hero-left {
+        padding: 0 44px 68px !important;
+        background: linear-gradient(
+          to top,
+          rgba(13,24,16,0.97) 0%,
+          rgba(13,24,16,0.86) 18%,
+          rgba(13,24,16,0.46) 38%,
+          rgba(13,24,16,0.10) 56%,
+          transparent 70%
+        ) !important;
+      }
+      .hero-left::after {
+        display: block !important;
+        content: '';
+        position: absolute;
+        left: 22px; top: 15%; bottom: 36%; width: 1px;
+        background: linear-gradient(to bottom,
+          transparent, rgba(200,169,110,0.40) 35%,
+          rgba(200,169,110,0.40) 65%, transparent);
+      }
+      .hero-left::before { display: none !important; }
+      .hero-frame { display: none !important; }
+      .hero-h1a, .hero-h1b { font-size: clamp(50px, 9vw, 78px) !important; }
+      .hero-eyebrow {
+        color: rgba(200,169,110,0.76) !important;
+        letter-spacing: 0.30em !important;
+      }
+      .hero-rule { width: 56px !important; margin: 20px 0 !important; }
+      .hero-sub { font-size: 13px !important; color: rgba(237,219,168,0.64) !important; }
+      .hero-cta { margin-top: 28px !important; }
+      .hero-shipping-note {
+        display: flex !important;
+        font-size: 9px !important;
+        color: rgba(255,248,230,0.34) !important;
+      }
+      .hero-wm { display: none !important; }
+    }
+
+    /* ── Desktop: Finishing touches ── */
+    @media (min-width: 992px) {
+      .ha-orbit1 { border-color: rgba(200,169,110,0.20) !important; }
+      .hero-eyebrow { color: rgba(200,169,110,0.62) !important; }
+      .hero-h1a { text-shadow: 0 0 100px rgba(200,169,110,0.22) !important; }
+      .hero-h1b { text-shadow: 0 0 80px rgba(200,169,110,0.28) !important; }
     }

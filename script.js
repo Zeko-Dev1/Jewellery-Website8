@@ -78,6 +78,7 @@
   ham.addEventListener('click', () => mob.classList.contains('open') ? closeMob() : openMob());
   mobClose.addEventListener('click', closeMob);
   document.querySelectorAll('.mob-lnk').forEach(l => l.addEventListener('click', closeMob));
+  document.addEventListener('keydown', e => { if (e.key === 'Escape' && mob.classList.contains('open')) closeMob(); });
 
   /* ─── PRODUCT FILTER ────────────────────── */
   const pills = document.querySelectorAll('.f-pill');
@@ -251,15 +252,21 @@
     if (!grid) return;
     const catOrder = ['crowns', 'necklaces', 'brooches', 'bracelets', 'watches', 'hallka', 'rings', 'earrings'];
     const sortedCards = Array.from(grid.querySelectorAll('.prod-card'));
+    /* Multi-category cards ("crowns bestseller") sort by their first category,
+       so the featured crown stays first in the mobile slider */
     sortedCards.sort(function(a, b) {
-      const ai = catOrder.indexOf(a.dataset.cat);
-      const bi = catOrder.indexOf(b.dataset.cat);
+      const ai = catOrder.indexOf((a.dataset.cat || '').split(' ')[0]);
+      const bi = catOrder.indexOf((b.dataset.cat || '').split(' ')[0]);
       return (ai === -1 ? 999 : ai) - (bi === -1 ? 999 : bi);
     });
     sortedCards.forEach(function(card) { grid.appendChild(card); });
   })();
 
   /* ─── CATALOG PIECE NUMBERS ──────────────────────── */
+  /* data-piece goes on .prod-body — the CSS ::before reads attr() from there */
   document.querySelectorAll('#pgrid .prod-card').forEach(function(card, i) {
-    card.dataset.piece = String(i + 1).padStart(2, '0');
+    const n = String(i + 1).padStart(2, '0');
+    card.dataset.piece = n;
+    const body = card.querySelector('.prod-body');
+    if (body) body.dataset.piece = n;
   });
