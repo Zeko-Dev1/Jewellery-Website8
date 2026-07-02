@@ -8,14 +8,21 @@
   <meta name="description" content="Bizhuteria Fantazia — bizhuteri fine e punuar me dorë, e frymëzuar nga tradita shqiptare. Dërgojmë në Shqipëri, Kosovë dhe Maqedoninë e Veriut.">
   <!-- Open Graph -->
   <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Bizhuteria Fantazia">
+  <meta property="og:locale" content="sq_AL">
   <meta property="og:title" content="Bizhuteria Fantazia — Bizhuteri Fine Shqiptare">
   <meta property="og:description" content="Bizhuteri fine e punuar me dorë, e frymëzuar nga tradita shqiptare. Porosit nëpërmjet Instagram.">
   <meta property="og:url" content="https://yourdomain.com/">
-  <meta property="og:image" content="https://yourdomain.com/images/IMG_6818.jpg">
+  <meta property="og:image" content="https://yourdomain.com/images/opt/hero-1600.jpg">
+  <meta property="og:image:alt" content="Kurorë e punuar me dorë — Bizhuteria Fantazia">
   <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Bizhuteria Fantazia — Bizhuteri Fine Shqiptare">
+  <meta name="twitter:description" content="Bizhuteri fine e punuar me dorë. Dërgim falas në Shqipëri, Kosovë dhe Maqedoninë e Veriut.">
   <meta name="theme-color" content="#0D1810">
-  <link rel="icon" type="image/png" href="images/Logo.png">
-  <link rel="apple-touch-icon" href="images/Logo.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="images/opt/favicon-96.png">
+  <link rel="apple-touch-icon" href="images/opt/logo-240.png">
+  <!-- Preload the hero image — it is the LCP element -->
+  <link rel="preload" as="image" href="images/opt/hero-900.jpg" imagesrcset="images/opt/hero-900.jpg 900w, images/opt/hero-1600.jpg 1600w" imagesizes="(max-width: 991px) 100vw, 48vw" fetchpriority="high">
   <link rel="stylesheet" href="index.css">
   <!-- Canonical URL — replace with your real domain -->
   <link rel="canonical" href="https://yourdomain.com/">
@@ -25,14 +32,16 @@
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "LocalBusiness",
+    "@type": "JewelryStore",
     "name": "Bizhuteria Fantazia",
     "description": "Bizhuteri fine e punuar me dorë, e frymëzuar nga tradita shqiptare. Fine handcrafted jewellery inspired by Albanian tradition.",
     "url": "https://yourdomain.com/",
-    "logo": "https://yourdomain.com/images/Logo.png",
-    "image": "https://yourdomain.com/images/og-cover.jpg",
+    "logo": "https://yourdomain.com/images/opt/logo-240.png",
+    "image": "https://yourdomain.com/images/opt/hero-1600.jpg",
+    "email": "info@bizhuteriafantazia.com",
     "sameAs": [
-      "https://instagram.com/yourbrand"
+      "https://instagram.com/yourbrand",
+      "https://tiktok.com/@yourbrand"
     ],
     "areaServed": [
       { "@type": "Country", "name": "Albania" },
@@ -49,7 +58,13 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600&family=DM+Sans:wght@200;300;400;500&display=swap" rel="stylesheet">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <noscript>
+    <style>
+      /* JS-disabled fallback: never leave images invisible or preloader stuck */
+      #preloader { display: none !important; }
+      .prod-photo, .hero-img { opacity: 1 !important; }
+    </style>
+  </noscript>
 </head>
 <body>
 
@@ -84,7 +99,7 @@
   <div class="nav-inner">
     <a href="#" class="nav-logo">
       <!-- Replace src with your logo file when ready -->
-      <img src="images/Logo.png" alt="Bizhuteria Fantazia" class="nav-logo-img" onerror="this.style.display='none'">
+      <img src="images/opt/logo-240.png" alt="Bizhuteria Fantazia" class="nav-logo-img" width="66" height="44" onerror="this.style.display='none'">
       <span class="nav-logo-text">
         <span class="nav-logo-top">Bizhuteria</span>
         <span class="nav-logo-main">Fantazia</span>
@@ -108,7 +123,7 @@
           <svg viewBox="0 0 24 24" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"/></svg>
         </a>
       </div>
-      <button class="hamburger" id="ham" aria-label="Menu">
+      <button class="hamburger" id="ham" aria-label="Menu" aria-expanded="false" aria-controls="mob">
         <span></span><span></span><span></span>
       </button>
     </div>
@@ -151,6 +166,9 @@
         <a href="#collection" class="btn-ol dark">
           <span data-sq>Zbulo Koleksionin</span><span data-en>Explore the Collection</span>
         </a>
+        <a href="#order" class="hero-link2">
+          <span data-sq>Si funksionon →</span><span data-en>How it works →</span>
+        </a>
       </div>
       <div class="hero-shipping-note">
         <span class="hsn-dot" aria-hidden="true"></span>
@@ -164,7 +182,12 @@
     <div class="hero-right">
       <span class="hero-wm" aria-hidden="true">FANTAZIA</span>
       <div class="hero-glow" aria-hidden="true"></div>
-      <img src="images/IMG_6818.jpg" alt="Bizhuteria Fantazia" class="hero-img" loading="eager">
+      <img src="images/opt/hero-1600.jpg"
+           srcset="images/opt/hero-900.jpg 900w, images/opt/hero-1600.jpg 1600w"
+           sizes="(max-width: 991px) 100vw, 48vw"
+           alt="Kurorë bizhuterie e punuar me dorë — Bizhuteria Fantazia"
+           class="hero-img" loading="eager" fetchpriority="high" decoding="async"
+           width="1600" height="2133">
       <div class="ha-sweep" aria-hidden="true"></div>
       <div class="hero-art">
         <div class="ha-orbit1"></div>
@@ -669,7 +692,7 @@
               <circle cx="126" cy="60" r="2.2" fill="rgba(232,213,163,0.75)"/>
             </svg>
           </div>
-          <img src="images/IMG_6818.jpg" alt="Kurorë Selène" class="prod-photo" loading="lazy">
+          <img src="images/opt/IMG_6818-900.jpg" alt="Kurorë Selène" class="prod-photo" loading="lazy" decoding="async">
           <div class="prod-overlay"><span><span data-sq>Porosit në Instagram</span><span data-en>Order via Instagram</span></span></div>
         </div>
         <div class="prod-body">
@@ -1045,7 +1068,7 @@
               <line x1="170" y1="150" x2="170" y2="170" stroke="rgba(200,169,110,0.18)" stroke-width="0.6"/>
             </svg>
           </div>
-          <img src="images/IMG_6817.jpg" alt="Kurorë Ari" class="prod-photo" loading="lazy">
+          <img src="images/opt/IMG_6817-900.jpg" alt="Kurorë Ari" class="prod-photo" loading="lazy" decoding="async">
           <div class="prod-overlay"><span><span data-sq>Porosit në Instagram</span><span data-en>Order via Instagram</span></span></div>
         </div>
         <div class="prod-body">
@@ -1117,7 +1140,7 @@
               <circle cx="124" cy="8" r="1.8" fill="rgba(140,100,40,0.8)"/>
             </svg>
           </div>
-          <img src="images/IMG_6818.jpg" alt="Tura Nusërie" class="prod-photo" loading="lazy">
+          <img src="images/opt/IMG_6818-900.jpg" alt="Tura Nusërie" class="prod-photo" loading="lazy" decoding="async">
           <div class="prod-overlay"><span><span data-sq>Porosit në Instagram</span><span data-en>Order via Instagram</span></span></div>
         </div>
         <div class="prod-body">
@@ -1149,7 +1172,7 @@
               <line x1="172" y1="148" x2="172" y2="168" stroke="rgba(200,169,110,0.18)" stroke-width="0.6"/>
             </svg>
           </div>
-          <img src="images/IMG_6819.jpg" alt="Kurorë Imperiale" class="prod-photo" loading="lazy">
+          <img src="images/opt/IMG_6819-900.jpg" alt="Kurorë Imperiale" class="prod-photo" loading="lazy" decoding="async">
           <div class="prod-overlay"><span><span data-sq>Porosit në Instagram</span><span data-en>Order via Instagram</span></span></div>
         </div>
         <div class="prod-body">
@@ -1178,7 +1201,7 @@
               <path d="M60 148 Q90 136 120 132 Q150 136 180 148" stroke="rgba(200,169,110,0.14)" stroke-width="0.7" fill="none"/>
             </svg>
           </div>
-          <img src="images/IMG_6820.jpg" alt="Kurorë Elara" class="prod-photo" loading="lazy">
+          <img src="images/opt/IMG_6820-900.jpg" alt="Kurorë Elara" class="prod-photo" loading="lazy" decoding="async">
           <div class="prod-overlay"><span><span data-sq>Porosit në Instagram</span><span data-en>Order via Instagram</span></span></div>
         </div>
         <div class="prod-body">
@@ -1210,7 +1233,7 @@
               <line x1="162" y1="148" x2="162" y2="168" stroke="rgba(200,169,110,0.18)" stroke-width="0.6"/>
             </svg>
           </div>
-          <img src="images/IMG_6822.jpg" alt="Tura Argjendte" class="prod-photo" loading="lazy">
+          <img src="images/opt/IMG_6822-900.jpg" alt="Tura Argjendte" class="prod-photo" loading="lazy" decoding="async">
           <div class="prod-overlay"><span><span data-sq>Porosit në Instagram</span><span data-en>Order via Instagram</span></span></div>
         </div>
         <div class="prod-body">
@@ -1243,7 +1266,7 @@
               <circle cx="112" cy="50" r="2.2" fill="rgba(235,213,165,0.85)"/>
             </svg>
           </div>
-          <img src="images/IMG_6823.jpg" alt="Kurorë Lumia" class="prod-photo" loading="lazy">
+          <img src="images/opt/IMG_6823-900.jpg" alt="Kurorë Lumia" class="prod-photo" loading="lazy" decoding="async">
           <div class="prod-overlay"><span><span data-sq>Porosit në Instagram</span><span data-en>Order via Instagram</span></span></div>
         </div>
         <div class="prod-body">
@@ -1273,7 +1296,7 @@
               <line x1="120" y1="30" x2="120" y2="18" stroke="rgba(200,169,110,0.5)" stroke-width="1" stroke-linecap="round"/>
             </svg>
           </div>
-          <img src="images/IMG_6824.jpg" alt="Tura Filigran" class="prod-photo" loading="lazy">
+          <img src="images/opt/IMG_6824-900.jpg" alt="Tura Filigran" class="prod-photo" loading="lazy" decoding="async">
           <div class="prod-overlay"><span><span data-sq>Porosit në Instagram</span><span data-en>Order via Instagram</span></span></div>
         </div>
         <div class="prod-body">
@@ -1305,7 +1328,7 @@
               <line x1="152" y1="148" x2="152" y2="168" stroke="rgba(200,169,110,0.18)" stroke-width="0.6"/>
             </svg>
           </div>
-          <img src="images/IMG_6825.jpg" alt="Kurorë Pasha" class="prod-photo" loading="lazy">
+          <img src="images/opt/IMG_6825-900.jpg" alt="Kurorë Pasha" class="prod-photo" loading="lazy" decoding="async">
           <div class="prod-overlay"><span><span data-sq>Porosit në Instagram</span><span data-en>Order via Instagram</span></span></div>
         </div>
         <div class="prod-body">
@@ -1651,11 +1674,6 @@
       </div>
 
     </div><!-- /prod-grid -->
-
-    <p class="slider-hint">
-      <span data-sq>Rrëshqit për të parë më shumë</span>
-      <span data-en>Swipe to see more</span>
-    </p>
   </div>
 </section>
 
@@ -1821,17 +1839,17 @@
       <div class="c-card reveal">
         <span class="c-flag">🇦🇱</span>
         <span class="c-name"><span data-sq>Shqipëri</span><span data-en>Albania</span></span>
-        <span class="c-detail"><span data-sq>Dorëzim standard 3–7 ditë</span><span data-en>Standard delivery 3–7 days</span></span>
+        <span class="c-detail"><span data-sq>Dorëzim 2–4 ditë pune</span><span data-en>Delivery in 2–4 working days</span></span>
       </div>
       <div class="c-card reveal">
         <span class="c-flag">🇽🇰</span>
         <span class="c-name"><span data-sq>Kosovë</span><span data-en>Kosovo</span></span>
-        <span class="c-detail"><span data-sq>Dorëzim standard 3–7 ditë</span><span data-en>Standard delivery 3–7 days</span></span>
+        <span class="c-detail"><span data-sq>Dorëzim 3–6 ditë pune</span><span data-en>Delivery in 3–6 working days</span></span>
       </div>
       <div class="c-card reveal">
         <span class="c-flag">🇲🇰</span>
         <span class="c-name"><span data-sq>Maqedonia e Veriut</span><span data-en>North Macedonia</span></span>
-        <span class="c-detail"><span data-sq>Dorëzim standard 3–7 ditë</span><span data-en>Standard delivery 3–7 days</span></span>
+        <span class="c-detail"><span data-sq>Dorëzim 4–7 ditë pune</span><span data-en>Delivery in 4–7 working days</span></span>
       </div>
     </div>
   </div>
@@ -2035,7 +2053,7 @@
 
       <div class="f-brand-col">
         <div class="f-brand-row">
-          <img src="images/Logo.png" alt="Bizhuteria Fantazia" style="height:50px;width:auto;object-fit:contain;flex-shrink:0;margin-right:-8px;" onerror="this.style.display='none'">
+          <img src="images/opt/logo-240.png" alt="Bizhuteria Fantazia" style="height:50px;width:auto;object-fit:contain;flex-shrink:0;margin-right:-8px;" onerror="this.style.display='none'">
           <div>
             <span style="font-family:'DM Sans',sans-serif;font-weight:300;font-size:9px;letter-spacing:0.28em;text-transform:uppercase;color:rgba(181,201,183,0.5);display:block;margin-bottom:2px;">Bizhuteria</span>
             <span style="font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:400;font-size:28px;color:var(--c-pgold);letter-spacing:0.08em;display:block;line-height:1;">Fantazia</span>
@@ -2128,7 +2146,6 @@
   </button>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script src="script.js"></script>
 <script>
   if (!localStorage.getItem('bf_cookie_ok')) {

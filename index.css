@@ -20,7 +20,7 @@
        RESET & BASE
     ───────────────────────────────────────────────────── */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; font-size: 16px; }
+    html { scroll-behavior: smooth; font-size: 16px; overflow-x: hidden; }
     body {
       background: var(--c-linen);
       color: var(--c-text);
@@ -54,12 +54,13 @@
     /* Brand-gold text selection */
     ::selection { background: var(--c-gold); color: var(--c-night); }
 
-    /* Slim brand scrollbar */
+    /* Slim brand scrollbar — html + body so the document scrollbar is styled
+       regardless of which element WebKit treats as the scroller */
     html { scrollbar-width: thin; scrollbar-color: rgba(122,138,110,0.55) var(--c-linen); }
-    body::-webkit-scrollbar { width: 10px; }
-    body::-webkit-scrollbar-track { background: var(--c-linen); }
-    body::-webkit-scrollbar-thumb { background: rgba(74,107,82,0.5); border-radius: 0; }
-    body::-webkit-scrollbar-thumb:hover { background: var(--c-sage); }
+    html::-webkit-scrollbar, body::-webkit-scrollbar { width: 10px; }
+    html::-webkit-scrollbar-track, body::-webkit-scrollbar-track { background: var(--c-linen); }
+    html::-webkit-scrollbar-thumb, body::-webkit-scrollbar-thumb { background: rgba(74,107,82,0.5); border-radius: 0; }
+    html::-webkit-scrollbar-thumb:hover, body::-webkit-scrollbar-thumb:hover { background: var(--c-sage); }
 
     /* Language toggle */
     [data-en] { display: none; }
@@ -456,12 +457,26 @@
       font-family: 'DM Sans', sans-serif;
       font-weight: 300;
       font-size: 14px;
-      color: rgba(237,219,168,0.52);
+      color: rgba(237,219,168,0.66);
       line-height: 1.95;
       max-width: 400px;
       margin-top: 24px;
     }
-    .hero-cta { margin-top: 44px; display: flex; flex-direction: column; align-items: flex-start; gap: 0; }
+    .hero-cta { margin-top: 44px; display: flex; align-items: center; gap: 32px; flex-wrap: wrap; }
+    /* Quiet secondary CTA beside the main button */
+    .hero-link2 {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 400;
+      font-size: 10px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: rgba(237,219,168,0.5);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(200,169,110,0.25);
+      padding-bottom: 3px;
+      transition: color 0.3s, border-color 0.3s;
+    }
+    .hero-link2:hover { color: var(--c-pgold); border-color: var(--c-gold); }
 
     /* Shipping note beneath CTA */
     .hero-shipping-note {
@@ -1789,39 +1804,23 @@
       .editorial-split { grid-template-columns: 1fr; }
       .ed-col { min-height: 360px; padding: 52px 40px; }
 
-      /* Products — HORIZONTAL SCROLL on tablet (2 wide) + mobile (1 wide) */
+      /* Products — 2-column editorial grid on tablet & mobile.
+         (Replaces the old 34-card horizontal slider — a grid is far easier
+         to browse and matches the desktop editorial look.) */
       .prod-grid {
-        display: flex;
-        overflow-x: scroll;
-        scroll-snap-type: x mandatory;
-        overscroll-behavior-x: contain;
-        touch-action: pan-x pan-y;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
         gap: 3px;
-        padding-bottom: 12px;
-        scrollbar-width: none;
       }
-      /* Pre-reveal all slider cards — they start hidden (translateY 32px) which
-         causes a vertical jump when cards snap into view horizontally */
+      /* Cards render immediately — no reveal delay inside the big grid */
       .prod-grid .reveal,
       .prod-grid .reveal-left {
         opacity: 1 !important;
         transform: none !important;
         transition: none !important;
       }
-      .prod-grid::-webkit-scrollbar { display: none; }
-      .prod-card {
-        flex: 0 0 calc(50% - 2px);
-        scroll-snap-align: start;
-        scroll-snap-stop: always;
-      }
-      .prod-card--featured {
-        flex: 0 0 calc(50% - 2px);
-        scroll-snap-align: start;
-        scroll-snap-stop: always;
-      }
-      /* Equal image heights on all cards at this breakpoint */
-      .prod-visual { height: 260px; }
-      .prod-card--featured .prod-visual { height: 260px; }
+      /* Featured card spans the full row for hierarchy */
+      .prod-card--featured { grid-column: 1 / -1; }
 
       /* Quote */
       #quote { padding: 64px 24px; }
@@ -1859,11 +1858,9 @@
     }
 
     @media (max-width: 575px) {
-      .prod-card { flex: 0 0 82vw; scroll-snap-align: start; scroll-snap-stop: always; }
-      .prod-card--featured { flex: 0 0 82vw; scroll-snap-align: start; scroll-snap-stop: always; }
-      /* Uniform card image heights on phone */
-      .prod-visual,
-      .prod-card--featured .prod-visual { height: 240px; }
+      /* Phone: 2-col grid stays; tighten the card chrome so it breathes */
+      .prod-body { padding: 16px 14px 0; }
+      .prod-row1 { padding-bottom: 12px; }
       .ig-grid { grid-template-columns: repeat(2,1fr); }
       /* Footer — single column, all left-aligned */
       .footer-top { grid-template-columns: 1fr; gap: 28px; padding: 44px 0 36px; }
@@ -1879,21 +1876,6 @@
       .prod-art  { transition: none !important; }
     }
 
-    /* Scroll indicator for product slider */
-    .slider-hint {
-      display: none;
-      font-family: 'DM Sans', sans-serif;
-      font-weight: 300;
-      font-size: 10px;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: var(--c-muted);
-      margin-top: 14px;
-      align-items: center;
-      gap: 8px;
-    }
-    .slider-hint::after { content: '→'; color: var(--c-gold); }
-    @media (max-width: 991px) { .slider-hint { display: flex; } }
 
     /* ─────────────────────────────────────────────────────
        BUG FIXES
@@ -2521,10 +2503,10 @@
       transition: transform 0.4s var(--ease-out);
     }
     .na-card:hover .na-hover-cta { transform: translateY(0); }
-    /* Touch devices have no hover — keep the order CTA visible so
-       New Arrivals stay orderable on phones and tablets */
+    /* Touch devices have no hover — show the order CTA as a static bar
+       below the card body so it never covers the product name */
     @media (hover: none) {
-      .na-hover-cta { transform: translateY(0); }
+      .na-hover-cta { position: static; transform: none; }
     }
     @media (max-width: 991px) {
       .na-track {
@@ -2838,6 +2820,15 @@
         width: 100%;
         text-align: center;
       }
+    }
+
+    /* ─────────────────────────────────────────────────────
+       LEGACY BROWSER FALLBACKS (no aspect-ratio: iOS ≤14 etc.)
+    ───────────────────────────────────────────────────── */
+    @supports not (aspect-ratio: 1 / 1) {
+      .heritage-right { height: 520px; }
+      .ig-cell { height: 240px; }
+      .hero-art { height: 440px; }
     }
 
     /* ─────────────────────────────────────────────────────
@@ -3348,12 +3339,18 @@
       }
     }
 
-    /* ── Product slider: slightly taller card images on mobile ── */
+    /* ── Product grid image heights on tablet & phone ── */
     @media (max-width: 991px) {
-      .prod-visual { height: 300px !important; }
+      .prod-visual { height: 330px !important; }
+      .prod-card--featured .prod-visual { height: 420px !important; }
     }
     @media (max-width: 575px) {
-      .prod-visual { height: 280px !important; }
+      .prod-visual { height: 230px !important; }
+      .prod-card--featured .prod-visual { height: 330px !important; }
+      /* Card typography scaled for half-width cards */
+      .prod-name { font-size: 17px; margin-bottom: 4px; }
+      #pgrid .prod-body::before { margin-bottom: 6px; letter-spacing: 0.26em; }
+      .prod-btn { padding: 12px 8px; font-size: 7.5px; letter-spacing: 0.2em; }
     }
 
     /* ══════════════════════════════════════════════════════════════
@@ -3497,6 +3494,7 @@
         color: rgba(237,219,168,0.86) !important;
       }
       .hero-shipping-note { display: none !important; }
+      .hero-link2 { display: none !important; }
       .hero-wm { display: none !important; }
     }
 

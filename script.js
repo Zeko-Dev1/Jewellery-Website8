@@ -8,9 +8,11 @@
       setTimeout(function () { if (pl.parentNode) pl.parentNode.removeChild(pl); }, 1100);
     }
     if (document.readyState === 'complete') {
-      setTimeout(hidePl, 2000);
+      setTimeout(hidePl, 900);
     } else {
-      window.addEventListener('load', function () { setTimeout(hidePl, 2000); });
+      window.addEventListener('load', function () { setTimeout(hidePl, 900); });
+      /* Safety net: never trap the visitor behind the preloader */
+      setTimeout(hidePl, 4000);
     }
   })();
 
@@ -72,8 +74,8 @@
   const mob      = document.getElementById('mob');
   const mobClose = document.getElementById('mobClose');
 
-  function openMob()  { mob.classList.add('open'); ham.classList.add('open'); document.body.style.overflow = 'hidden'; }
-  function closeMob() { mob.classList.remove('open'); ham.classList.remove('open'); document.body.style.overflow = ''; }
+  function openMob()  { mob.classList.add('open'); ham.classList.add('open'); ham.setAttribute('aria-expanded', 'true');  document.body.style.overflow = 'hidden'; }
+  function closeMob() { mob.classList.remove('open'); ham.classList.remove('open'); ham.setAttribute('aria-expanded', 'false'); document.body.style.overflow = ''; }
 
   ham.addEventListener('click', () => mob.classList.contains('open') ? closeMob() : openMob());
   mobClose.addEventListener('click', closeMob);
@@ -130,6 +132,9 @@
 
   /* ─── COUNTDOWN TIMER ───────────────────── */
   (function () {
+    const wrap = document.getElementById('cdWrap');
+    /* The countdown is hidden by CSS — don't burn a 1s interval for nothing */
+    if (!wrap || getComputedStyle(wrap).display === 'none') return;
     const end = new Date();
     end.setHours(23, 59, 59, 999);
     const hEl = document.getElementById('cdH');
