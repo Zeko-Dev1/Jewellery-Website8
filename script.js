@@ -16,28 +16,57 @@
     }
   })();
 
-  /* ─── LANGUAGE SWITCHER ─────────────────── */
+  /* ─── LANGUAGE SWITCHER (SQ → EN → MK cycle) ─── */
   const html     = document.documentElement;
   const langBtn  = document.getElementById('langBtn');
   const langBtnM = document.getElementById('langBtnMob');
+  const LANGS    = ['sq', 'en', 'mk'];
+  /* Text lives in <span data-sq>/<span data-en>/<span data-mk> triplets,
+     shown/hidden by CSS via html[data-lang]. Strings that live in
+     attributes (title, aria-labels) can't use spans, so they're swapped
+     here — keep these maps in sync if those attributes change. */
+  const TITLES = {
+    sq: 'Bizhuteria Fantazia — Bizhuteri Fine Shqiptare',
+    en: 'Bizhuteria Fantazia — Fine Albanian Jewellery',
+    mk: 'Bizhuteria Fantazia — Фин албански накит'
+  };
+  const ARIA = {
+    '#ann-close': { sq: 'Mbyll njoftimin', en: 'Close announcement', mk: 'Затвори го известувањето' },
+    '#ham':       { sq: 'Menyja',          en: 'Menu',               mk: 'Мени' },
+    '#btt':       { sq: 'Kthehu lart',     en: 'Back to top',        mk: 'Врати се горе' }
+  };
   function setLang(lang) {
+    if (LANGS.indexOf(lang) === -1) lang = 'sq';
     html.setAttribute('data-lang', lang);
     html.setAttribute('lang', lang);
-    const label = lang === 'sq' ? 'EN' : 'SQ';
+    /* the pill shows the NEXT language in the cycle */
+    const label = LANGS[(LANGS.indexOf(lang) + 1) % LANGS.length].toUpperCase();
     if (langBtn)  langBtn.textContent  = label;
     if (langBtnM) langBtnM.textContent = label;
+    document.title = TITLES[lang];
+    Object.keys(ARIA).forEach(function (sel) {
+      const el = document.querySelector(sel);
+      if (el) el.setAttribute('aria-label', ARIA[sel][lang]);
+    });
     const track = document.querySelector('.marquee-track');
     if (track) {
       track.style.animation = 'none';
       void track.offsetWidth;
       track.style.animation = '';
     }
+    try { localStorage.setItem('bf_lang', lang); } catch (err) { /* private mode */ }
   }
   [langBtn, langBtnM].filter(Boolean).forEach(btn => {
     btn.addEventListener('click', () => {
-      setLang(html.getAttribute('data-lang') === 'sq' ? 'en' : 'sq');
+      const cur = html.getAttribute('data-lang') || 'sq';
+      setLang(LANGS[(LANGS.indexOf(cur) + 1) % LANGS.length]);
     });
   });
+  /* Remember the visitor's language across visits */
+  try {
+    var savedLang = localStorage.getItem('bf_lang');
+    if (savedLang && savedLang !== 'sq' && LANGS.indexOf(savedLang) !== -1) setLang(savedLang);
+  } catch (err) { /* private mode */ }
 
   /* ─── NAV SCROLL ────────────────────────── */
   const nav = document.getElementById('nav');
@@ -66,7 +95,13 @@
       a.classList.toggle('active', a.dataset.section === active);
     });
   }
-  window.addEventListener('scroll', updateActiveLink, { passive: true });
+  var spyTicking = false;
+  window.addEventListener('scroll', function () {
+    if (!spyTicking) {
+      requestAnimationFrame(function () { updateActiveLink(); spyTicking = false; });
+      spyTicking = true;
+    }
+  }, { passive: true });
   updateActiveLink();
 
   /* ─── MOBILE MENU ───────────────────────── */
@@ -82,21 +117,34 @@
   document.querySelectorAll('.mob-lnk').forEach(l => l.addEventListener('click', closeMob));
   document.addEventListener('keydown', e => { if (e.key === 'Escape' && mob.classList.contains('open')) closeMob(); });
 
-  /* ─── PRODUCT FILTER ────────────────────── */
+  /* ─── PRODUCT FILTER ──────────────────────
+     "All" is a curated preview (a few per category, marked data-preview="1"
+     in the HTML) — not the entire 55-piece catalog. Clicking a specific
+     category pill reveals every piece in that category. */
   const pills = document.querySelectorAll('.f-pill');
   const cards = document.querySelectorAll('.prod-card');
+
+  function applyFilter(f) {
+    cards.forEach(c => {
+      const match = f === 'all'
+        ? c.dataset.preview === '1'
+        : (c.dataset.cat || '').split(' ').includes(f);
+      c.classList.toggle('hide', !match);
+    });
+  }
+  applyFilter('all'); /* initial state on page load */
 
   pills.forEach(pill => {
     pill.addEventListener('click', () => {
       pills.forEach(p => p.classList.remove('on'));
       pill.classList.add('on');
-      const f = pill.dataset.f;
-      cards.forEach(c => {
-        const match = f === 'all' || (c.dataset.cat || '').split(' ').includes(f);
-        c.classList.toggle('hide', !match);
-      });
+      applyFilter(pill.dataset.f);
       const grid = document.getElementById('pgrid');
-      if (grid) grid.scrollLeft = 0;
+      if (grid) {
+        grid.classList.remove('filter-fade');
+        void grid.offsetWidth; /* restart the fade animation */
+        grid.classList.add('filter-fade');
+      }
     });
   });
 
@@ -197,11 +245,19 @@
       img.style.display = 'none';
       return;
     }
-    if (visual) visual.classList.add('img-loading');
-    img.addEventListener('load', function () {
+    function markReady() {
       if (visual) visual.classList.remove('img-loading');
       img.classList.add('img-ready');
-    });
+    }
+    /* Cached / already-decoded images fire 'load' before this listener
+       attaches — same complete-check the hero uses, or they'd stay
+       invisible at opacity 0. */
+    if (img.complete && img.naturalWidth > 0) {
+      markReady();
+      return;
+    }
+    if (visual) visual.classList.add('img-loading');
+    img.addEventListener('load', markReady);
     img.addEventListener('error', function () {
       if (visual) visual.classList.remove('img-loading');
       img.style.display = 'none';
@@ -251,21 +307,8 @@
     });
   })();
 
-  /* ─── SORT PRODUCT GRID BY CATEGORY ──────────────────────── */
-  (function() {
-    const grid = document.getElementById('pgrid');
-    if (!grid) return;
-    const catOrder = ['crowns', 'necklaces', 'brooches', 'bracelets', 'watches', 'hallka', 'rings', 'earrings'];
-    const sortedCards = Array.from(grid.querySelectorAll('.prod-card'));
-    /* Multi-category cards ("crowns bestseller") sort by their first category,
-       so the featured crown stays first in the mobile slider */
-    sortedCards.sort(function(a, b) {
-      const ai = catOrder.indexOf((a.dataset.cat || '').split(' ')[0]);
-      const bi = catOrder.indexOf((b.dataset.cat || '').split(' ')[0]);
-      return (ai === -1 ? 999 : ai) - (bi === -1 ? 999 : bi);
-    });
-    sortedCards.forEach(function(card) { grid.appendChild(card); });
-  })();
+  /* The "All" view keeps the interleaved order the cards are written in
+     (a mix of categories, not blocked by type) — no re-sort on load. */
 
   /* ─── CATALOG PIECE NUMBERS ──────────────────────── */
   /* data-piece goes on .prod-body — the CSS ::before reads attr() from there */
@@ -275,3 +318,65 @@
     const body = card.querySelector('.prod-body');
     if (body) body.dataset.piece = n;
   });
+
+  /* ─── PAUSE OFF-SCREEN ANIMATIONS (perf) ─────────── */
+  /* Infinite animations (orbits, marquee, glow) stop consuming GPU/CPU
+     while their section is scrolled out of view */
+  (function () {
+    if (!('IntersectionObserver' in window)) return;
+    var zones = document.querySelectorAll('#hero, .marquee-wrap, #inner-circle');
+    if (!zones.length) return;
+    var obs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        entry.target.classList.toggle('anim-off', !entry.isIntersecting);
+      });
+    }, { rootMargin: '80px' });
+    zones.forEach(function (z) { obs.observe(z); });
+  })();
+
+  /* ─── SCROLL PROGRESS LINE ──────────────────────── */
+  (function () {
+    var bar = document.getElementById('scroll-progress');
+    if (!bar) return;
+    var ticking = false;
+    function update() {
+      var max = document.documentElement.scrollHeight - window.innerHeight;
+      bar.style.width = (max > 0 ? (window.scrollY / max) * 100 : 0) + '%';
+      ticking = false;
+    }
+    window.addEventListener('scroll', function () {
+      if (!ticking) { requestAnimationFrame(update); ticking = true; }
+    }, { passive: true });
+    update();
+  })();
+
+  /* ─── STATS COUNT-UP ──────────────────────── */
+  /* Numbers count up once when the stats row scrolls into view.
+     Non-numeric stats ("∞") are left untouched. */
+  (function () {
+    var nums = document.querySelectorAll('.stat-num');
+    if (!nums.length || !('IntersectionObserver' in window)) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    var obs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        obs.unobserve(entry.target);
+        var el = entry.target;
+        var m = /^(\d+)(.*)$/.exec(el.textContent.trim());
+        if (!m) return;
+        var target = parseInt(m[1], 10);
+        var suffix = m[2];
+        var t0 = null;
+        var dur = 1400;
+        function stepFn(ts) {
+          if (t0 === null) t0 = ts;
+          var p = Math.min((ts - t0) / dur, 1);
+          var eased = 1 - Math.pow(1 - p, 3);
+          el.textContent = Math.round(target * eased) + suffix;
+          if (p < 1) requestAnimationFrame(stepFn);
+        }
+        requestAnimationFrame(stepFn);
+      });
+    }, { threshold: 0.5 });
+    nums.forEach(function (n) { obs.observe(n); });
+  })();

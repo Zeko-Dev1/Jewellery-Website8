@@ -62,10 +62,14 @@
     html::-webkit-scrollbar-thumb, body::-webkit-scrollbar-thumb { background: rgba(74,107,82,0.5); border-radius: 0; }
     html::-webkit-scrollbar-thumb:hover, body::-webkit-scrollbar-thumb:hover { background: var(--c-sage); }
 
-    /* Language toggle */
-    [data-en] { display: none; }
+    /* Language toggle — SQ (default) / EN / MK. Every visible string
+       lives in sibling <span data-sq>/<span data-en>/<span data-mk>
+       triplets; only the active language's span is shown. */
+    [data-en], [data-mk] { display: none; }
     html[data-lang="en"] [data-sq] { display: none; }
     html[data-lang="en"] [data-en] { display: revert; }
+    html[data-lang="mk"] [data-sq] { display: none; }
+    html[data-lang="mk"] [data-mk] { display: revert; }
 
     /* Utility */
     .gold-rule {
@@ -334,11 +338,6 @@
       line-height: 1;
     }
     .mob-nav a:hover { color: var(--c-gold); }
-    .mob-socials { display: flex; gap: 24px; margin-top: 16px; }
-    .mob-socials a { display: flex; align-items: center; text-decoration: none; opacity: 0.6; transition: opacity 0.3s; }
-    .mob-socials a:hover { opacity: 1; }
-    .mob-socials svg { width: 22px; height: 22px; fill: none; stroke: var(--c-gold); }
-    .mob-lang { margin-top: 32px; }
     .mob-close {
       position: absolute;
       top: 28px; right: 36px;
@@ -672,18 +671,6 @@
       height: 86%;
       animation: crownFloat 8s ease-in-out infinite;
     }
-    .hero-art-label {
-      position: absolute;
-      bottom: -44px; left: 0; right: 0;
-      text-align: center;
-      font-family: 'DM Sans', sans-serif;
-      font-weight: 200;
-      font-size: 9px;
-      letter-spacing: 0.3em;
-      color: rgba(122,158,126,0.5);
-      text-transform: uppercase;
-    }
-
     /* ─────────────────────────────────────────────────────
        HERO PANEL — atmospheric effects
     ───────────────────────────────────────────────────── */
@@ -978,7 +965,7 @@
     .prod-card--featured {
       grid-column: span 2;
     }
-    .prod-card--featured .prod-visual { height: 580px; }
+    .prod-card--featured .prod-visual { aspect-ratio: 3 / 2; }
 
     .prod-card {
       background: var(--c-linen);
@@ -1005,25 +992,44 @@
     .badge-best { background: var(--c-gold); color: var(--c-night); }
     .badge-sale { background: var(--c-bronze); color: var(--c-pgold); }
 
-    /* Product visual (image area) */
+    /* Product visual (image area) — uniform square box at EVERY breakpoint;
+       the photo NEVER gets cropped: the sharp photo is contain-fit (whole
+       product always visible, letterboxed if needed) and any empty space
+       around it shows .prod-photo-bg, a heavily blurred copy of the same
+       photo — the card's own background image. The box itself stays
+       transparent, never a solid color. */
     .prod-visual {
-      height: 420px;
+      aspect-ratio: 1 / 1;
       position: relative;
       overflow: hidden;
-      display: flex;
-      align-items: center;
-      justify-content: center;
     }
     .prod-photo {
       width: 100%;
       height: 100%;
-      object-fit: cover;
+      object-fit: contain;
       object-position: center;
       display: block;
       position: absolute;
       inset: 0;
+      /* Subtle anti-shine — these are flash-lit crystal close-ups and read
+         as too glossy straight from camera. Slight dim + gentle contrast
+         lift + tiny desaturation tames the glare without going dull/dark. */
+      filter: brightness(0.94) contrast(1.03) saturate(0.97);
       transition: transform 0.7s var(--ease-out);
       z-index: 2;
+    }
+    /* Blurred fill layer behind the sharp photo (same image file — the browser
+       downloads it once). Scale hides the soft edges the blur creates. */
+    .prod-photo-bg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transform: scale(1.18);
+      filter: blur(26px) brightness(0.90) saturate(1.02);
+      z-index: 1;
+      pointer-events: none;
     }
     /* Hide image elements with no src set (placeholder state) */
     img[src=""] { opacity: 0; pointer-events: none; }
@@ -1033,11 +1039,12 @@
     .sale-price-row,
     .sale-pct,
     .prod-badge.badge-sale { display: none !important; }
-    /* Placeholder background */
-    .prod-visual.bg-a { background: #263829; }
-    .prod-visual.bg-b { background: #D9CCBA; }
-    .prod-visual.bg-c { background: #192a1b; }
-    .prod-visual.bg-d { background: #E8D5A3; }
+    /* Visual boxes stay transparent — the blurred photo copy
+       (.prod-photo-bg) is the only backdrop, never a solid color. */
+    .prod-visual.bg-a, .na-visual.bg-a, .sale-visual.bg-a,
+    .prod-visual.bg-b, .na-visual.bg-b, .sale-visual.bg-b,
+    .prod-visual.bg-c, .na-visual.bg-c, .sale-visual.bg-c,
+    .prod-visual.bg-d, .na-visual.bg-d, .sale-visual.bg-d { background: transparent; }
     /* Jewelry illustration placeholder */
     .prod-art {
       position: absolute;
@@ -1179,7 +1186,6 @@
       position: relative;
       z-index: 1;
     }
-    .q-rule { display: block; width: 48px; height: 1px; background: var(--c-gold); }
     .q-text {
       font-family: 'Cormorant Garamond', serif;
       font-weight: 300;
@@ -1636,16 +1642,6 @@
     }
     .f-brand-col { margin-left: 0; }
     .f-brand-row { display: flex; align-items: center; gap: 3px; margin-bottom: 14px; position: relative; left: -18px; top: -10px; }
-    .f-logo-text {
-      font-family: 'Cormorant Garamond', serif;
-      font-weight: 400;
-      font-style: italic;
-      font-size: 30px;
-      color: var(--c-pgold);
-      display: block;
-      margin-bottom: 14px;
-      letter-spacing: 0.08em;
-    }
     .f-brand-desc {
       font-family: 'DM Sans', sans-serif;
       font-weight: 300;
@@ -1693,14 +1689,14 @@
       font-family: 'DM Sans', sans-serif;
       font-weight: 300;
       font-size: 11px;
-      color: rgba(122,158,126,0.4);
+      color: rgba(122,158,126,0.55);
     }
     .f-legal { display: flex; gap: 20px; }
     .f-legal a {
       font-family: 'DM Sans', sans-serif;
       font-weight: 300;
       font-size: 11px;
-      color: rgba(122,158,126,0.4);
+      color: rgba(122,158,126,0.55);
       text-decoration: none;
       transition: color 0.3s;
     }
@@ -2062,6 +2058,8 @@
       #announce-bar { padding: 0 44px; }
       .ann-sep { margin: 0 8px; }
       .ann-text { font-size: 9.5px; letter-spacing: 0.12em; white-space: nowrap; overflow: hidden; }
+      /* Country list clips mid-word below ~640px — drop it, keep the message */
+      .ann-locs { display: none; }
     }
     @media (max-width: 520px) {
       .ann-text { font-size: 9px; letter-spacing: 0.08em; }
@@ -2169,15 +2167,16 @@
       transition: border-color 0.35s;
     }
     .sale-card:hover { border-color: rgba(200,169,110,0.25); }
+    /* Uniform box — photo is contain-fit with a blurred fill behind it
+       (see .prod-photo/.prod-photo-bg), so the tall Komplet shots show whole.
+       2:3 matches the Komplet photos' own shape (0.63-0.67). */
     .sale-visual {
-      height: 380px;
+      aspect-ratio: 2 / 3;
       position: relative;
-      display: flex;
-      align-items: center;
-      justify-content: center;
       overflow: hidden;
     }
-    .sale-visual img.prod-photo { z-index: 0; }
+    /* Photo sits above the placeholder line-art, same as product cards */
+    .sale-visual img.prod-photo { z-index: 2; }
     .sale-visual .prod-art { position: relative; z-index: 1; }
     @media (hover: hover) {
       .sale-visual .prod-art { transition: transform 0.7s var(--ease-out); }
@@ -2213,6 +2212,30 @@
       color: var(--c-pgold);
       display: block;
       margin-bottom: 10px;
+    }
+    /* Special-edition intro line (replaces the old countdown) */
+    .sale-sub {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-weight: 400;
+      font-size: 18px;
+      line-height: 1.65;
+      color: rgba(232,213,163,0.6);
+      max-width: 380px;
+      text-align: right;
+      margin: 0;
+    }
+    /* What each bridal set contains */
+    .set-items {
+      display: block;
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      font-size: 9px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      line-height: 2;
+      color: rgba(122,158,126,0.75);
+      margin-bottom: 20px;
     }
     .sale-price-row {
       display: flex;
@@ -2251,6 +2274,7 @@
     @media (max-width: 991px) {
       .sale-grid { grid-template-columns: 1fr; gap: 20px; }
       .sale-top-row { flex-direction: column; align-items: flex-start; }
+      .sale-sub { text-align: left; max-width: 100%; }
     }
 
     /* ─────────────────────────────────────────────────────
@@ -2434,12 +2458,11 @@
       overflow: hidden;
       cursor: pointer;
     }
+    /* Uniform box — photo contain-fit over its own blurred fill layer.
+       21:20 ≈ the shape of all four bestseller photos (1.05-1.16). */
     .na-visual {
-      height: 460px;
+      aspect-ratio: 21 / 20;
       position: relative;
-      display: flex;
-      align-items: center;
-      justify-content: center;
       overflow: hidden;
     }
     .na-visual .prod-art {
@@ -2648,8 +2671,6 @@
     /* ─────────────────────────────────────────────────────
        PRODUCT CARD — PREMIUM OVERRIDES
     ───────────────────────────────────────────────────── */
-    /* Taller visuals */
-    .prod-visual { height: 440px; }
     /* No border-top on body — let the bg color transition suffice */
     .prod-body { padding: 26px 24px 0; border-top: none; }
     /* Stack name → price vertically */
@@ -2897,13 +2918,6 @@
     .sec-label, .sec-label-light, .order-label, .story-label,
     .ig-label, .heritage-left .hl-label, .ic-label { letter-spacing: 0.36em; }
 
-    /* ── Taller product visuals for editorial presence ── */
-    @media (min-width: 992px) {
-      .prod-visual { height: 520px; }
-      .prod-card--featured .prod-visual { height: 660px; }
-      .na-visual { height: 560px; }
-      .sale-visual { height: 460px; }
-    }
 
     /* ── Body copy: luxury leading throughout ── */
     .hero-sub, .ed-body, .hl-body, .step-t,
@@ -2981,7 +2995,6 @@
 
     /* ── Gold rules: slightly wider ── */
     .gold-rule { width: 64px; }
-    .q-rule    { width: 64px; }
 
     /* ── Instagram placeholder cells: gradient backgrounds ── */
     .ig-c1 .ig-inner { background: linear-gradient(135deg, #1A3020 0%, #2D4A35 100%); }
@@ -3023,9 +3036,8 @@
         flex-direction: column;
       }
       .na-card:first-child .na-visual {
-        flex: 1;
-        height: auto;
-        min-height: 480px;
+        display: flex;
+        align-items: center;
       }
       .na-card:nth-child(2) { grid-column: 2; grid-row: 1; }
       .na-card:nth-child(3) { grid-column: 2; grid-row: 2; }
@@ -3171,7 +3183,6 @@
 
     /* ── Gold rules: generous, consistent width ── */
     .gold-rule { width: 72px; }
-    .q-rule    { width: 72px; }
 
     /* ── Filter pills: tighter, more editorial spacing ── */
     .f-pill { letter-spacing: 0.22em; font-size: 9.5px; }
@@ -3200,8 +3211,7 @@
       }
       .na-card:first-child .na-visual {
         flex: unset;
-        height: 560px;
-        min-height: unset;
+        display: block;
       }
       .na-card:nth-child(2) { grid-column: auto; grid-row: auto; }
       .na-card:nth-child(3) { grid-column: auto; grid-row: auto; }
@@ -3257,18 +3267,11 @@
         border-color: var(--c-sage);
         box-shadow: 0 2px 8px rgba(31,58,38,0.28);
       }
-      .na-visual { height: 300px; }
-    }
-
-    /* ── New Arrivals tablet: uniform card height ── */
-    @media (min-width: 576px) and (max-width: 991px) {
-      .na-visual { height: 340px; }
     }
 
     /* ── Mobile: flash sale cards stack naturally ── */
     @media (max-width: 575px) {
       .sale-grid { grid-template-columns: 1fr; }
-      .sale-visual { height: 360px; }
       .sale-body { padding: 22px 20px 26px; }
       .sale-name { font-size: 20px; }
     }
@@ -3334,23 +3337,24 @@
         grid-column: 1 / span 2 !important;
         grid-row: 1 !important;
       }
-      #pgrid .prod-card--featured .prod-visual {
-        height: 660px !important;
-      }
     }
 
-    /* ── Product grid image heights on tablet & phone ── */
+    /* ── Card boxes keep the SAME aspect ratio at every breakpoint
+          (square products, 3:2 featured, 21:20 arrivals, 2:3 sets) —
+          photos are contain-fit over a blurred self-background, so no
+          box shape ever crops the product. Heights follow the grid
+          column width automatically. ── */
     @media (max-width: 991px) {
-      .prod-visual { height: 330px !important; }
-      .prod-card--featured .prod-visual { height: 420px !important; }
+      /* Sale cards stack to one column here — cap their width so the
+         2:3 visual doesn't blow up to full viewport width. */
+      .sale-card { width: 100%; max-width: 480px; margin: 0 auto; }
     }
+
     @media (max-width: 575px) {
-      .prod-visual { height: 230px !important; }
-      .prod-card--featured .prod-visual { height: 330px !important; }
       /* Card typography scaled for half-width cards */
       .prod-name { font-size: 17px; margin-bottom: 4px; }
       #pgrid .prod-body::before { margin-bottom: 6px; letter-spacing: 0.26em; }
-      .prod-btn { padding: 12px 8px; font-size: 7.5px; letter-spacing: 0.2em; }
+      .prod-btn { padding: 12px 8px; font-size: 8px; letter-spacing: 0.18em; }
     }
 
     /* ══════════════════════════════════════════════════════════════
@@ -3376,7 +3380,11 @@
         clip-path: none !important;
       }
       .hero-img {
-        object-position: 50% 0% !important;
+        /* This <picture> source is the canvas-extended photo (see hero-mobile.jpg) —
+           its own shape is already taller/narrower than any real phone, so cover
+           now only ever crops into the added background padding, never the crown. */
+        object-fit: cover !important;
+        object-position: 50% 40% !important;
         filter: contrast(1.06) saturate(1.05) brightness(0.88) !important;
       }
       /* Subtle top vignette — frames the crown, status bar stays readable.
@@ -3509,7 +3517,8 @@
         aspect-ratio: unset !important;
         height: 100%;
       }
-      .hero-img { object-position: 50% 12% !important; }
+      /* Same shape-matched extended photo as the phone tier — cover is safe here too. */
+      .hero-img { object-fit: cover !important; object-position: 50% 40% !important; }
       .hero-left {
         padding: 0 44px 68px !important;
         background: linear-gradient(
@@ -3554,4 +3563,86 @@
       .hero-eyebrow { color: rgba(200,169,110,0.62) !important; }
       .hero-h1a { text-shadow: 0 0 100px rgba(200,169,110,0.22) !important; }
       .hero-h1b { text-shadow: 0 0 80px rgba(200,169,110,0.28) !important; }
+    }
+
+    /* ═══════════════════════════════════════════════════════════
+       PREMIUM MICRO-INTERACTIONS — FINAL LAYER
+       (all additive; safe to remove as a block)
+    ═══════════════════════════════════════════════════════════ */
+
+    /* ── Gold reading-progress line across the very top ── */
+    #scroll-progress {
+      position: fixed;
+      top: 0; left: 0;
+      height: 2px;
+      width: 0%;
+      background: linear-gradient(to right, var(--c-bronze), var(--c-gold), var(--c-pgold));
+      z-index: 1002;
+      pointer-events: none;
+    }
+
+    /* ── Keyboard skip link — hidden until focused ── */
+    .skip-link {
+      position: fixed;
+      top: -64px; left: 16px;
+      z-index: 10000;
+      background: var(--c-night);
+      color: var(--c-pgold);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 400;
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      padding: 12px 22px;
+      text-decoration: none;
+      border: 1px solid rgba(200,169,110,0.5);
+      transition: top 0.25s ease;
+    }
+    .skip-link:focus { top: 12px; }
+
+    /* ── Hero photo: slow cinematic settle after fade-in ── */
+    @media (prefers-reduced-motion: no-preference) {
+      @keyframes heroSettle {
+        from { transform: scale(1.06); }
+        to   { transform: scale(1); }
+      }
+      .hero-img.img-ready { animation: heroSettle 6.5s var(--ease-out) both; }
+    }
+
+    /* ── Product filter: soft fade when switching category ── */
+    @keyframes filterFade {
+      from { opacity: 0; transform: translateY(10px); }
+      to   { opacity: 1; transform: none; }
+    }
+    .prod-grid.filter-fade { animation: filterFade 0.45s var(--ease-out); }
+
+    /* ── Tactile press feedback on every CTA ── */
+    .btn-ol:active, .btn-solid:active, .prod-btn:active, .sale-btn:active,
+    .na-hover-cta:active, .ic-ig-cta:active, .f-pill:active, #btt:active {
+      transform: scale(0.985);
+    }
+
+    /* ── Dark outline button: soft gold aura on hover ── */
+    .btn-ol.dark { transition: color 0.35s var(--ease-out), border-color 0.35s var(--ease-out), box-shadow 0.4s ease; }
+    .btn-ol.dark:hover { box-shadow: 0 10px 36px rgba(200,169,110,0.20); }
+
+    /* ── Back-to-top: gentle lift ── */
+    #btt { transition: opacity 0.3s, background 0.3s, transform 0.3s var(--ease-out); }
+    #btt:hover { transform: translateY(-2px); }
+
+    /* ── Firefox/macOS font smoothing to match WebKit ── */
+    body { -moz-osx-font-smoothing: grayscale; }
+
+    /* ── Perf: pause infinite animations while their section is off-screen ── */
+    .anim-off .ha-orbit1, .anim-off .ha-orbit2,
+    .anim-off .ha-ring-svg, .anim-off .hero-glow,
+    .anim-off .ha-sweep::after,
+    .anim-off .ic-art-ring, .anim-off .ic-art-ring2,
+    .anim-off.marquee-wrap .marquee-track {
+      animation-play-state: paused;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      #scroll-progress { display: none; }
+      .prod-grid.filter-fade { animation: none; }
     }
