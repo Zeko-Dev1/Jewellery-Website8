@@ -19,7 +19,6 @@
   /* ─── LANGUAGE SWITCHER (SQ → EN → MK cycle) ─── */
   const html     = document.documentElement;
   const langBtn  = document.getElementById('langBtn');
-  const langBtnM = document.getElementById('langBtnMob');
   const LANGS    = ['sq', 'en', 'mk'];
   /* Text lives in <span data-sq>/<span data-en>/<span data-mk> triplets,
      shown/hidden by CSS via html[data-lang]. Strings that live in
@@ -41,8 +40,7 @@
     html.setAttribute('lang', lang);
     /* the pill shows the NEXT language in the cycle */
     const label = LANGS[(LANGS.indexOf(lang) + 1) % LANGS.length].toUpperCase();
-    if (langBtn)  langBtn.textContent  = label;
-    if (langBtnM) langBtnM.textContent = label;
+    if (langBtn) langBtn.textContent = label;
     document.title = TITLES[lang];
     Object.keys(ARIA).forEach(function (sel) {
       const el = document.querySelector(sel);
@@ -56,11 +54,9 @@
     }
     try { localStorage.setItem('bf_lang', lang); } catch (err) { /* private mode */ }
   }
-  [langBtn, langBtnM].filter(Boolean).forEach(btn => {
-    btn.addEventListener('click', () => {
-      const cur = html.getAttribute('data-lang') || 'sq';
-      setLang(LANGS[(LANGS.indexOf(cur) + 1) % LANGS.length]);
-    });
+  if (langBtn) langBtn.addEventListener('click', () => {
+    const cur = html.getAttribute('data-lang') || 'sq';
+    setLang(LANGS[(LANGS.indexOf(cur) + 1) % LANGS.length]);
   });
   /* Remember the visitor's language across visits */
   try {

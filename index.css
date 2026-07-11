@@ -54,6 +54,13 @@
     /* Brand-gold text selection */
     ::selection { background: var(--c-gold); color: var(--c-night); }
 
+    /* Keyboard focus — thin gold ring, matches the brand line work
+       (the custom cursor hides the pointer, so this must stay visible) */
+    a:focus-visible, button:focus-visible, [role="button"]:focus-visible {
+      outline: 1px solid var(--c-gold);
+      outline-offset: 3px;
+    }
+
     /* Slim brand scrollbar — html + body so the document scrollbar is styled
        regardless of which element WebKit treats as the scroller */
     html { scrollbar-width: thin; scrollbar-color: rgba(122,138,110,0.55) var(--c-linen); }
@@ -456,12 +463,30 @@
       font-family: 'DM Sans', sans-serif;
       font-weight: 300;
       font-size: 14px;
-      color: rgba(237,219,168,0.66);
+      color: rgba(237,219,168,0.74);
       line-height: 1.95;
-      max-width: 400px;
+      max-width: 420px;
       margin-top: 24px;
     }
     .hero-cta { margin-top: 44px; display: flex; align-items: center; gap: 32px; flex-wrap: wrap; }
+    /* Primary hero CTA — stronger presence than the base outline button:
+       faint gold fill, brighter border, soft depth, and a nudging arrow. */
+    .hero-cta .btn-ol.dark {
+      background: rgba(200,169,110,0.09);
+      border-color: rgba(200,169,110,0.85);
+      padding: 17px 50px;
+      letter-spacing: 0.22em;
+      box-shadow: 0 14px 38px rgba(0,0,0,0.35);
+      transition: color 0.35s var(--ease-out), border-color 0.35s var(--ease-out), box-shadow 0.4s ease;
+    }
+    .hero-cta .btn-ol.dark:hover { box-shadow: 0 18px 46px rgba(200,169,110,0.16); }
+    .hero-cta .btn-ol::after {
+      content: '→';
+      display: inline-block;
+      margin-left: 12px;
+      transition: transform 0.35s var(--ease-out);
+    }
+    .hero-cta .btn-ol:hover::after { transform: translateX(5px); }
     /* Quiet secondary CTA beside the main button */
     .hero-link2 {
       font-family: 'DM Sans', sans-serif;
@@ -469,10 +494,10 @@
       font-size: 10px;
       letter-spacing: 0.22em;
       text-transform: uppercase;
-      color: rgba(237,219,168,0.5);
+      color: rgba(237,219,168,0.62);
       text-decoration: none;
-      border-bottom: 1px solid rgba(200,169,110,0.25);
-      padding-bottom: 3px;
+      border-bottom: 1px solid rgba(200,169,110,0.32);
+      padding-bottom: 4px;
       transition: color 0.3s, border-color 0.3s;
     }
     .hero-link2:hover { color: var(--c-pgold); border-color: var(--c-gold); }
@@ -790,7 +815,12 @@
       padding: 0 18px;
       opacity: 0.85;
     }
-    @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-33.333%); } }
+    /* translate3d keeps the band on the GPU compositor; the exact -100%/3
+       loop distance (content = 3 identical groups) restarts seamlessly. */
+    @keyframes marquee {
+      0%   { transform: translate3d(0, 0, 0); }
+      100% { transform: translate3d(calc(-100% / 3), 0, 0); }
+    }
 
     /* ─────────────────────────────────────────────────────
        STATS
@@ -970,7 +1000,7 @@
     .prod-card {
       background: var(--c-linen);
       overflow: hidden;
-      transition: opacity 0.3s ease, transform 0.3s ease;
+      /* transition lives in the HOVER DEPTH block further down */
       position: relative;
     }
     .prod-card.hide { pointer-events: none; }
@@ -1039,24 +1069,11 @@
     .sale-price-row,
     .sale-pct,
     .prod-badge.badge-sale { display: none !important; }
-    /* Visual boxes stay transparent — the blurred photo copy
-       (.prod-photo-bg) is the only backdrop, never a solid color. */
-    .prod-visual.bg-a, .na-visual.bg-a, .sale-visual.bg-a,
-    .prod-visual.bg-b, .na-visual.bg-b, .sale-visual.bg-b,
-    .prod-visual.bg-c, .na-visual.bg-c, .sale-visual.bg-c,
-    .prod-visual.bg-d, .na-visual.bg-d, .sale-visual.bg-d { background: transparent; }
-    /* Jewelry illustration placeholder */
-    .prod-art {
-      position: absolute;
-      inset: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 1;
-    }
+    /* Visual boxes stay transparent (browser default) — the blurred photo
+       copy (.prod-photo-bg) is the only backdrop, never a solid color.
+       (The old bg-a…bg-d placeholder colors and the .prod-art SVG
+       placeholder layer were removed — every card has a real photo.) */
     @media (hover: hover) {
-      .prod-art { transition: transform 0.7s var(--ease-out); }
-      .prod-card:hover .prod-art { transform: scale(1.04); }
       .prod-card:hover .prod-photo { transform: scale(1.05); }
     }
     /* Hover overlay */
@@ -1703,6 +1720,90 @@
     .f-legal a:hover { color: var(--c-mid); }
 
     /* ─────────────────────────────────────────────────────
+       VISIT US — boutique location + framed map
+    ───────────────────────────────────────────────────── */
+    #visit {
+      background: var(--c-linen);
+      padding: 112px 0 120px;
+    }
+    .visit-grid {
+      display: grid;
+      grid-template-columns: 5fr 7fr;
+      gap: 64px;
+      margin-top: 56px;
+      align-items: stretch;
+    }
+    .visit-info {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .vi-block + .vi-block {
+      margin-top: 28px;
+      padding-top: 28px;
+      border-top: 1px solid rgba(200,169,110,0.22);
+    }
+    .vi-label {
+      display: block;
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      font-size: 9px;
+      letter-spacing: 0.30em;
+      text-transform: uppercase;
+      color: var(--c-bronze);
+      margin-bottom: 12px;
+    }
+    .vi-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 400;
+      font-size: 22px;
+      line-height: 1.55;
+      color: var(--c-night);
+      margin: 0;
+    }
+    .vi-note {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      font-size: 13px;
+      line-height: 1.85;
+      color: rgba(38,56,41,0.72);
+      margin: 0;
+      max-width: 360px;
+    }
+    .visit-btn { margin-top: 36px; align-self: flex-start; }
+    /* Map in a thin gold gallery frame; muted to match the palette,
+       full colour on hover */
+    .visit-map {
+      position: relative;
+      min-height: 380px;
+      border: 1px solid rgba(200,169,110,0.4);
+      padding: 10px;
+      background: var(--c-pale);
+      box-shadow: 0 30px 70px rgba(13,24,16,0.10);
+    }
+    /* The live map is shown untinted — Google requires its logo and
+       attribution to stay unmodified. */
+    .visit-map iframe {
+      position: absolute;
+      inset: 10px;
+      width: calc(100% - 20px);
+      height: calc(100% - 20px);
+      border: 0;
+      display: block;
+    }
+    @media (max-width: 991px) {
+      .visit-grid { grid-template-columns: 1fr; gap: 44px; margin-top: 44px; }
+      .visit-map { min-height: 320px; }
+      #visit { padding: 88px 0; }
+    }
+    @media (max-width: 575px) {
+      .vi-text { font-size: 19px; }
+      .visit-map { min-height: 280px; padding: 8px; }
+      .visit-map iframe { inset: 8px; width: calc(100% - 16px); height: calc(100% - 16px); }
+      .visit-btn { align-self: stretch; text-align: center; }
+    }
+
+    /* ─────────────────────────────────────────────────────
        BACK TO TOP
     ───────────────────────────────────────────────────── */
     #btt {
@@ -1878,8 +1979,6 @@
     ───────────────────────────────────────────────────── */
     /* Badge must sit above hover overlay */
     .prod-badge { z-index: 5; }
-    /* SVG art must not capture mouse events */
-    .prod-art { pointer-events: none; }
     /* Hide connecting line when steps collapse to single col */
     @media (max-width: 991px) { .steps::before { display: none; } }
     /* Hidden filter cards: collapse fully so grid has no gaps */
@@ -2175,12 +2274,9 @@
       position: relative;
       overflow: hidden;
     }
-    /* Photo sits above the placeholder line-art, same as product cards */
     .sale-visual img.prod-photo { z-index: 2; }
-    .sale-visual .prod-art { position: relative; z-index: 1; }
     @media (hover: hover) {
-      .sale-visual .prod-art { transition: transform 0.7s var(--ease-out); }
-      .sale-card:hover .prod-art { transform: scale(1.04); }
+      .sale-card:hover .prod-photo { transform: scale(1.04); }
     }
     .sale-pct {
       position: absolute;
@@ -2465,12 +2561,8 @@
       position: relative;
       overflow: hidden;
     }
-    .na-visual .prod-art {
-      pointer-events: none;
-    }
     @media (hover: hover) {
-      .na-visual .prod-art { transition: transform 0.8s var(--ease-out); }
-      .na-card:hover .prod-art { transform: scale(1.06); }
+      .na-card:hover .prod-photo { transform: scale(1.05); }
     }
     .na-new-pill {
       position: absolute;
@@ -2531,6 +2623,13 @@
     @media (hover: none) {
       .na-hover-cta { position: static; transform: none; }
     }
+    /* On large desktops the arrivals track bleeds slightly past the
+       container — noticeably bigger cards, editorial full-bleed feel,
+       while section headings stay aligned with the rest of the site.
+       (min-width guard: 1280px container + 2×44px bleed + margins) */
+    @media (min-width: 1400px) {
+      .na-track { margin-left: -44px; margin-right: -44px; }
+    }
     @media (max-width: 991px) {
       .na-track {
         grid-template-columns: repeat(2, 1fr);
@@ -2560,6 +2659,11 @@
         scroll-snap-align: start;
         scroll-snap-stop: always;
       }
+      /* The last card can never align its START edge (the track runs out
+         of scroll room 18vw early), so mandatory snapping used to yank it
+         back — the "pop" at the end of the slider. End-alignment gives it
+         a reachable snap point flush with the right edge. */
+      .na-card:last-child { scroll-snap-align: end; }
     }
 
     /* ─────────────────────────────────────────────────────
@@ -3474,18 +3578,18 @@
       .hero-h1a {
         display: block !important;
         font-family: 'Cormorant Garamond', serif !important;
-        font-size: 21px !important; font-style: italic !important;
-        font-weight: 400 !important; line-height: 1.32 !important;
+        font-size: clamp(21px, 6.4vw, 25px) !important; font-style: italic !important;
+        font-weight: 400 !important; line-height: 1.38 !important;
         letter-spacing: 0.01em !important; text-align: center !important;
-        color: rgba(237,219,168,0.92) !important;
+        color: rgba(237,219,168,0.94) !important;
       }
       .hero-h1b {
         display: block !important;
         font-family: 'Cormorant Garamond', serif !important;
-        font-size: 18px !important; font-style: italic !important;
-        font-weight: 400 !important; line-height: 1.32 !important;
+        font-size: clamp(17px, 5.2vw, 20px) !important; font-style: italic !important;
+        font-weight: 400 !important; line-height: 1.38 !important;
         letter-spacing: 0.01em !important; text-align: center !important;
-        color: rgba(237,219,168,0.65) !important;
+        color: rgba(237,219,168,0.68) !important;
       }
 
       .hero-sub { display: none !important; }
@@ -3495,11 +3599,15 @@
         justify-content: center !important;
         width: 100% !important;
       }
+      /* Comfortable thumb target (~48px tall) with a faint gold fill so the
+         primary action reads clearly against the photo */
       .hero-cta .btn-ol {
-        padding: 14px 46px !important; min-width: 0 !important;
-        font-size: 9px !important; letter-spacing: 0.30em !important;
-        border-color: rgba(200,169,110,0.40) !important;
-        color: rgba(237,219,168,0.86) !important;
+        padding: 17px 48px !important; min-width: 0 !important;
+        min-height: 48px !important;
+        font-size: 10px !important; letter-spacing: 0.28em !important;
+        background: rgba(200,169,110,0.10) !important;
+        border-color: rgba(200,169,110,0.55) !important;
+        color: rgba(237,219,168,0.95) !important;
       }
       .hero-shipping-note { display: none !important; }
       .hero-link2 { display: none !important; }
