@@ -279,6 +279,51 @@
     window.addEventListener('scroll', onScroll, { passive: true });
   })();
 
+  /* ─── HERO MOUSE PARALLAX (desktop only) ─────── */
+  /* Atmosphere layers drift a few px toward/away from the cursor with a
+     slow lerp — the photo itself stays still, which reads calmer. Layers
+     with their own CSS transform/animation are either driven via CSS
+     custom properties (.hero-wm) or left alone (.hero-glow, animated). */
+  (function () {
+    if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const hero = document.getElementById('hero');
+    if (!hero) return;
+    const wm = document.querySelector('.hero-wm');
+    const layers = [
+      { el: document.querySelector('.hero-sparkles'), f: 10 },
+      { el: document.querySelector('.hero-frame'),    f: 5 },
+      { el: document.querySelector('.ha-sweep'),      f: 4 }
+    ].filter(function (l) { return l.el; });
+    let tx = 0, ty = 0, cx = 0, cy = 0, raf = null;
+    function tick() {
+      cx += (tx - cx) * 0.055;
+      cy += (ty - cy) * 0.055;
+      layers.forEach(function (l) {
+        l.el.style.transform = 'translate3d(' + (cx * l.f).toFixed(2) + 'px,' + (cy * l.f).toFixed(2) + 'px,0)';
+      });
+      if (wm) {
+        wm.style.setProperty('--pwx', (cx * -14).toFixed(2) + 'px');
+        wm.style.setProperty('--pwy', (cy * -14).toFixed(2) + 'px');
+      }
+      if (Math.abs(tx - cx) > 0.002 || Math.abs(ty - cy) > 0.002) {
+        raf = requestAnimationFrame(tick);
+      } else {
+        raf = null;
+      }
+    }
+    hero.addEventListener('mousemove', function (e) {
+      const r = hero.getBoundingClientRect();
+      tx = (e.clientX - r.left) / r.width - 0.5;
+      ty = (e.clientY - r.top) / r.height - 0.5;
+      if (!raf) raf = requestAnimationFrame(tick);
+    }, { passive: true });
+    hero.addEventListener('mouseleave', function () {
+      tx = 0; ty = 0;
+      if (!raf) raf = requestAnimationFrame(tick);
+    });
+  })();
+
   /* ─── CUSTOM CURSOR ──────────────────────────── */
   (function () {
     if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;

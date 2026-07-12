@@ -731,14 +731,16 @@
       filter: blur(36px);
       z-index: 3;
       pointer-events: none;
-      animation: goldGlow 5s ease-in-out infinite;
+      /* slow breath — luxury moves slowly */
+      animation: goldGlow 9s ease-in-out infinite;
     }
     @keyframes goldGlow {
       0%, 100% { opacity: 0.7;  transform: translate(-50%, -50%) scale(1);    }
       50%       { opacity: 1;   transform: translate(-50%, -50%) scale(1.08); }
     }
 
-    /* Slow light sweep across crown */
+    /* Light sweep across the crown — one graceful pass, then a long rest.
+       Transform-only (GPU); left stays fixed so nothing repaints. */
     .ha-sweep {
       position: absolute;
       inset: 0;
@@ -750,6 +752,7 @@
       content: '';
       position: absolute;
       top: -20%;
+      left: -30%;
       width: 22%;
       height: 140%;
       background: linear-gradient(
@@ -760,14 +763,46 @@
         rgba(200,169,110,0.04) 65%,
         transparent 100%
       );
-      transform: skewX(-18deg);
-      animation: lightSweep 7s ease-in-out infinite;
+      transform: translate3d(0,0,0) skewX(-18deg);
+      animation: lightSweep 12s ease-in-out infinite;
     }
     @keyframes lightSweep {
-      0%        { left: -30%; opacity: 0; }
-      4%        { opacity: 1; }
-      65%       { left: 120%; opacity: 1; }
-      68%, 100% { left: 120%; opacity: 0; }
+      0%, 58%   { transform: translate3d(0,0,0) skewX(-18deg); opacity: 0; }
+      61%       { opacity: 1; }
+      78%       { transform: translate3d(700%,0,0) skewX(-18deg); opacity: 1; }
+      80%, 100% { transform: translate3d(700%,0,0) skewX(-18deg); opacity: 0; }
+    }
+
+    /* Crystal glints — tiny 4-point stars that catch the light every few
+       seconds, each on its own long cycle so the moments feel random */
+    .hero-sparkles {
+      position: absolute;
+      inset: 0;
+      z-index: 4;
+      pointer-events: none;
+    }
+    .hs {
+      position: absolute;
+      width: 12px;
+      height: 12px;
+      opacity: 0;
+      background:
+        radial-gradient(circle, rgba(255,252,240,0.95) 0%, rgba(255,248,230,0.25) 20%, transparent 34%),
+        linear-gradient(to right,  transparent 45%, rgba(255,252,240,0.9) 50%, transparent 55%),
+        linear-gradient(to bottom, transparent 45%, rgba(255,252,240,0.9) 50%, transparent 55%);
+      filter: drop-shadow(0 0 6px rgba(255,248,230,0.55));
+      animation: sparkleTwinkle 9s ease-in-out infinite;
+    }
+    .hs-1 { top: 38%; left: 46%; animation-delay: 1.6s; }
+    .hs-2 { top: 51%; left: 63%; width: 9px;  height: 9px;  animation-delay: 4.4s; animation-duration: 11s; }
+    .hs-3 { top: 59%; left: 37%; width: 8px;  height: 8px;  animation-delay: 7.2s; animation-duration: 13s; }
+    .hs-4 { top: 31%; left: 56%; width: 10px; height: 10px; animation-delay: 9.5s; animation-duration: 15s; }
+    @keyframes sparkleTwinkle {
+      0%, 100% { opacity: 0; transform: scale(0.3) rotate(0deg); }
+      2%       { opacity: 0.9; transform: scale(1) rotate(20deg); }
+      4.5%     { opacity: 0; transform: scale(0.4) rotate(38deg); }
+      /* rest, invisible, for the remainder of the cycle */
+      5%       { opacity: 0; transform: scale(0.3) rotate(0deg); }
     }
 
     /* Scroll indicator */
@@ -1086,17 +1121,10 @@
       transition: opacity 0.4s;
       z-index: 3;
     }
-    .prod-overlay {
-      position: absolute;
-      inset: 0;
-      display: flex;
-      align-items: flex-end;
-      justify-content: center;
-      padding-bottom: 28px;
-      z-index: 4;
-      opacity: 0;
-      transition: opacity 0.4s;
-    }
+    /* Hover overlay text retired — it duplicated the "Porosit në Instagram"
+       button right below every card. The hover now speaks through the photo
+       zoom, gold glow, and name lift instead. */
+    .prod-overlay { display: none; }
     .prod-overlay span {
       font-family: 'DM Sans', sans-serif;
       font-weight: 400;
@@ -1990,12 +2018,19 @@
     .prod-card {
       transition: opacity 0.3s ease, transform 0.35s var(--ease-out), box-shadow 0.35s ease;
     }
+    /* Product name lifts a touch as the card rises */
+    .prod-name { transition: transform 0.45s var(--ease-out); }
     @media (hover: hover) {
       .prod-card:hover {
         transform: translateY(-4px);
-        box-shadow: 0 24px 48px rgba(0,0,0,0.22);
+        /* soft golden halo instead of a plain dark shadow */
+        box-shadow:
+          0 24px 48px rgba(0,0,0,0.16),
+          0 0 0 1px rgba(200,169,110,0.30),
+          0 10px 44px rgba(200,169,110,0.13);
         z-index: 2;
       }
+      .prod-card:hover .prod-name { transform: translateY(-3px); }
     }
 
     /* ─────────────────────────────────────────────────────
@@ -2160,12 +2195,13 @@
       /* Country list clips mid-word below ~640px — drop it, keep the message */
       .ann-locs { display: none; }
     }
+    /* The full country list ("… · Maqedonia e Veriut") must never clip —
+       tighten size/tracking as the bar narrows instead of hiding words */
     @media (max-width: 520px) {
-      .ann-text { font-size: 9px; letter-spacing: 0.08em; }
+      .ann-text { font-size: 8.5px; letter-spacing: 0.06em; }
     }
     @media (max-width: 430px) {
-      .ann-locs { display: none; }
-      .ann-text { font-size: 9px; letter-spacing: 0.14em; }
+      .ann-text { font-size: 8px; letter-spacing: 0.03em; }
     }
 
     /* ─────────────────────────────────────────────────────
@@ -2902,7 +2938,9 @@
       line-height: 1;
       top: 50%;
       left: 50%;
-      transform: translate(-50%, -50%);
+      /* --pwx/--pwy are set by the mouse-parallax script; they compose with
+         the centering translate instead of overwriting it */
+      transform: translate(calc(-50% + var(--pwx, 0px)), calc(-50% + var(--pwy, 0px)));
       z-index: 0;
     }
 
@@ -2969,6 +3007,8 @@
       .ha-ring-svg  { animation: none !important; transform: none !important; }
       .ha-sweep::after { animation: none !important; }
       .hero-glow    { animation: none !important; opacity: 0.65 !important; }
+      .hs           { animation: none !important; opacity: 0 !important; }
+      .hero-img.img-ready { animation: none !important; }
       .btn-ol::before { transition: none; }
     }
 
@@ -3708,13 +3748,23 @@
     }
     .skip-link:focus { top: 12px; }
 
-    /* ── Hero photo: slow cinematic settle after fade-in ── */
+    /* ── Hero photo: slow cinematic settle after fade-in, then a barely
+          perceptible float. The float starts exactly when the settle ends
+          and keeps a 1.2% overscale so cover-fit edges never peek. ── */
     @media (prefers-reduced-motion: no-preference) {
       @keyframes heroSettle {
         from { transform: scale(1.06); }
         to   { transform: scale(1); }
       }
-      .hero-img.img-ready { animation: heroSettle 6.5s var(--ease-out) both; }
+      @keyframes heroFloat {
+        0%, 100% { transform: translateY(0) scale(1); }
+        50%      { transform: translateY(-6px) scale(1.012); }
+      }
+      .hero-img.img-ready {
+        animation:
+          heroSettle 6.5s var(--ease-out) both,
+          heroFloat 14s ease-in-out 6.5s infinite;
+      }
     }
 
     /* ── Product filter: soft fade when switching category ── */
@@ -3745,6 +3795,7 @@
     .anim-off .ha-orbit1, .anim-off .ha-orbit2,
     .anim-off .ha-ring-svg, .anim-off .hero-glow,
     .anim-off .ha-sweep::after,
+    .anim-off .hs, .anim-off .hero-img,
     .anim-off .ic-art-ring, .anim-off .ic-art-ring2,
     .anim-off.marquee-wrap .marquee-track {
       animation-play-state: paused;
