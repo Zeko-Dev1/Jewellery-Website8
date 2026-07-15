@@ -1998,7 +1998,6 @@
     /* On touch devices, strip ALL card transitions so nothing moves when finger scrolls */
     @media (hover: none) {
       .prod-card { transition: none !important; }
-      .prod-art  { transition: none !important; }
     }
 
 
