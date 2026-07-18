@@ -25,9 +25,9 @@
      attributes (title, aria-labels) can't use spans, so they're swapped
      here — keep these maps in sync if those attributes change. */
   const TITLES = {
-    sq: 'Bizhuteria Fantazia — Bizhuteri Fine Shqiptare',
-    en: 'Bizhuteria Fantazia — Fine Albanian Jewellery',
-    mk: 'Bizhuteria Fantazia — Фин албански накит'
+    sq: 'Bizhuteria Fantazia — Bizhuteri Tradicionale Shqiptare',
+    en: 'Bizhuteria Fantazia — Traditional Albanian Jewellery',
+    mk: 'Bizhuteria Fantazia — Традиционален албански накит'
   };
   const ARIA = {
     '#ann-close': { sq: 'Mbyll njoftimin', en: 'Close announcement', mk: 'Затвори го известувањето' },
@@ -340,7 +340,7 @@
       ring.classList.remove('cursor-visible');
     });
     var interactEls = document.querySelectorAll(
-      'a, button, .prod-card, .na-card, .sale-card, .f-pill, .ig-cell, .c-card'
+      'a, button, .prod-card, .na-card, .sale-card, .f-pill, .ig-cell'
     );
     interactEls.forEach(function (el) {
       el.addEventListener('mouseenter', function () { ring.classList.add('cursor-hover'); });
@@ -365,7 +365,7 @@
      while their section is scrolled out of view */
   (function () {
     if (!('IntersectionObserver' in window)) return;
-    var zones = document.querySelectorAll('#hero, .marquee-wrap, #inner-circle');
+    var zones = document.querySelectorAll('#hero, .marquee-wrap');
     if (!zones.length) return;
     var obs = new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {

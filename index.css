@@ -441,21 +441,24 @@
       font-family: 'Cormorant Garamond', serif;
       font-weight: 300;
       font-style: italic;
-      font-size: clamp(72px, 9vw, 118px);
+      font-size: clamp(56px, 6.5vw, 92px);
       color: var(--c-pgold);
-      line-height: 0.85;
+      line-height: 0.95;
       display: block;
       letter-spacing: 0.02em;
       text-shadow: 0 0 80px rgba(200,169,110,0.12);
     }
+    /* Second line carries a longer sentence — smaller scale so it
+       reads as a subtitle and never overflows the left column */
     .hero-h1b {
       font-family: 'Cormorant Garamond', serif;
       font-weight: 500;
       font-style: italic;
-      font-size: clamp(72px, 9vw, 118px);
+      font-size: clamp(28px, 3.2vw, 46px);
       color: var(--c-gold);
-      line-height: 1.0;
+      line-height: 1.15;
       display: block;
+      margin-top: 8px;
       letter-spacing: 0.02em;
       text-shadow: 0 0 60px rgba(200,169,110,0.18);
     }
@@ -502,25 +505,28 @@
     }
     .hero-link2:hover { color: var(--c-pgold); border-color: var(--c-gold); }
 
-    /* Shipping note beneath CTA */
+    /* Shipping note beneath CTA — the Instagram+delivery line is long,
+       so it may wrap to two lines; keep the dot aligned to the first. */
     .hero-shipping-note {
       margin-top: 22px;
       display: flex;
-      align-items: center;
+      align-items: flex-start;
       gap: 10px;
+      max-width: 460px;
       font-family: 'DM Sans', sans-serif;
       font-weight: 300;
       font-size: 9px;
       letter-spacing: 0.24em;
       text-transform: uppercase;
-      color: rgba(255,248,230,0.28);
-      line-height: 1;
+      color: rgba(255,248,230,0.32);
+      line-height: 1.9;
     }
     .hero-shipping-note .hsn-dot {
       width: 3px; height: 3px;
       border-radius: 50%;
       background: rgba(200,169,110,0.32);
       flex-shrink: 0;
+      margin-top: 7px;
     }
 
     /* Hero staggered entrance */
@@ -572,10 +578,8 @@
       z-index: 3;
       pointer-events: none;
     }
-    /* All inner decorations stripped; left corners hidden — clipped by diagonal */
+    /* Inner decorations stripped; left corners hidden — clipped by diagonal */
     .hf-inner, .hf-mid, .hf-mt, .hf-mb,
-    .hf-brand, .hf-brand-rule, .hf-vtxt,
-    .hf-badge, .hf-bline, .hf-lbl,
     .hf-tl, .hf-bl { display: none; }
 
     /* ── Premium L-bracket corners ── */
@@ -1199,157 +1203,6 @@
     .prod-btn:hover { background: var(--c-sage); color: var(--c-pgold); border-color: var(--c-sage); }
 
     /* ─────────────────────────────────────────────────────
-       QUOTE
-    ───────────────────────────────────────────────────── */
-    #quote {
-      background: var(--c-night);
-      min-height: 56vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 80px 56px;
-      position: relative;
-      overflow: hidden;
-    }
-    #quote::before {
-      content: '"';
-      position: absolute;
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 400px;
-      color: rgba(200,169,110,0.04);
-      top: -60px; left: -20px;
-      line-height: 1;
-      pointer-events: none;
-      font-style: italic;
-    }
-    .quote-wrap {
-      text-align: center;
-      max-width: 680px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      position: relative;
-      z-index: 1;
-    }
-    .q-text {
-      font-family: 'Cormorant Garamond', serif;
-      font-weight: 300;
-      font-style: italic;
-      font-size: clamp(28px, 4vw, 48px);
-      color: var(--c-pgold);
-      line-height: 1.45;
-      margin: 36px 0 28px;
-      letter-spacing: 0.01em;
-    }
-    .q-attr {
-      font-family: 'DM Sans', sans-serif;
-      font-weight: 200;
-      font-size: 10px;
-      letter-spacing: 0.3em;
-      text-transform: uppercase;
-      color: rgba(122,158,126,0.55);
-      margin-bottom: 28px;
-    }
-
-    /* ─────────────────────────────────────────────────────
-       HERITAGE
-    ───────────────────────────────────────────────────── */
-    #heritage {
-      background: var(--c-night);
-      padding: 112px 0;
-      position: relative;
-      overflow: hidden;
-    }
-    #heritage::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(ellipse at 70% 50%, rgba(61,92,66,0.15), transparent 70%);
-      pointer-events: none;
-    }
-    .heritage-inner {
-      max-width: 1280px;
-      margin: 0 auto;
-      padding: 0 56px;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 96px;
-      align-items: center;
-      position: relative;
-      z-index: 1;
-    }
-    .heritage-left .hl-label {
-      font-family: 'DM Sans', sans-serif;
-      font-weight: 300;
-      font-size: 10px;
-      letter-spacing: 0.26em;
-      text-transform: uppercase;
-      color: var(--c-mid);
-      display: block;
-      margin-bottom: 20px;
-    }
-    .hl-h {
-      font-family: 'Cormorant Garamond', serif;
-      font-weight: 400;
-      font-style: italic;
-      font-size: clamp(36px, 4vw, 56px);
-      color: var(--c-pgold);
-      line-height: 1.1;
-      margin-bottom: 8px;
-    }
-    .hl-sub {
-      font-family: 'DM Sans', sans-serif;
-      font-weight: 300;
-      font-size: 12px;
-      letter-spacing: 0.1em;
-      color: var(--c-mid);
-      margin-bottom: 32px;
-      display: block;
-    }
-    .hl-body {
-      font-family: 'DM Sans', sans-serif;
-      font-weight: 300;
-      font-size: 14px;
-      color: rgba(181,201,183,0.75);
-      line-height: 2;
-      margin-bottom: 16px;
-    }
-    /* Heritage visual: 3 decorative cards */
-    .heritage-right {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      grid-template-rows: 1fr 1fr;
-      gap: 3px;
-      aspect-ratio: 1 / 1.05;
-    }
-    .her-card {
-      background: var(--c-sage);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-      position: relative;
-    }
-    .her-card:first-child { grid-row: span 2; background: rgba(61,92,66,0.6); }
-    .her-card:nth-child(2) { background: rgba(140,109,63,0.3); }
-    .her-card:nth-child(3) { background: rgba(61,92,66,0.4); }
-    .her-card img {
-      position: absolute;
-      inset: 0;
-      width: 100%; height: 100%;
-      object-fit: cover;
-      display: block;
-      opacity: 0.55;
-    }
-    .her-card-placeholder {
-      position: absolute;
-      inset: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    /* ─────────────────────────────────────────────────────
        HOW TO ORDER
     ───────────────────────────────────────────────────── */
     #order { background: var(--c-sage); }
@@ -1429,67 +1282,6 @@
       line-height: 2;
     }
     .order-cta { text-align: center; margin-top: 64px; }
-
-    /* ─────────────────────────────────────────────────────
-       SHIPPING
-    ───────────────────────────────────────────────────── */
-    #shipping { background: var(--c-night); }
-    .ship-h {
-      font-family: 'Cormorant Garamond', serif;
-      font-weight: 400;
-      font-size: clamp(36px, 4.5vw, 56px);
-      color: var(--c-pgold);
-      margin-bottom: 12px;
-    }
-    .ship-sub {
-      font-family: 'DM Sans', sans-serif;
-      font-weight: 300;
-      font-size: 14px;
-      color: rgba(181,201,183,0.65);
-      margin-bottom: 56px;
-      max-width: 480px;
-    }
-    .country-grid { display: grid; grid-template-columns: repeat(3,1fr); }
-    .c-card {
-      background: rgba(31,58,38,0.45);
-      padding: 64px 48px;
-      text-align: center;
-      border-right: 1px solid rgba(200,169,110,0.12);
-      transition: background 0.35s;
-      position: relative;
-      overflow: hidden;
-    }
-    .c-card::after {
-      content: '';
-      position: absolute;
-      bottom: 0; left: 0; right: 0;
-      height: 2px;
-      background: var(--c-gold);
-      transform: scaleX(0);
-      transition: transform 0.4s var(--ease-out);
-    }
-    .c-card:last-child { border-right: none; }
-    .c-card:hover { background: rgba(31,58,38,0.75); }
-    .c-card:hover::after { transform: scaleX(1); }
-    .c-flag { font-size: 44px; line-height: 1; display: block; }
-    .c-name {
-      font-family: 'Cormorant Garamond', serif;
-      font-weight: 400;
-      font-style: italic;
-      font-size: 32px;
-      color: var(--c-pgold);
-      margin-top: 20px;
-      display: block;
-    }
-    .c-detail {
-      font-family: 'DM Sans', sans-serif;
-      font-weight: 300;
-      font-size: 11px;
-      letter-spacing: 0.1em;
-      color: rgba(181,201,183,0.6);
-      margin-top: 12px;
-      display: block;
-    }
 
     /* ─────────────────────────────────────────────────────
        STORY
@@ -1819,6 +1611,17 @@
       border: 0;
       display: block;
     }
+    /* One-line note under the framed map */
+    .visit-map-note {
+      position: absolute;
+      top: 100%; left: 0;
+      margin: 10px 0 0;
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      font-size: 11px;
+      letter-spacing: 0.05em;
+      color: rgba(44,62,47,0.55);
+    }
     @media (max-width: 991px) {
       .visit-grid { grid-template-columns: 1fr; gap: 44px; margin-top: 44px; }
       .visit-map { min-height: 320px; }
@@ -1870,8 +1673,8 @@
       #nav { height: 64px; }
       .nav-inner { padding: 0 24px; }
       .lang-btn { font-size: 9px; padding: 4px 10px; }
-      .nav-socials { display: flex; gap: 10px; }
-      .nav-social-link svg { width: 16px; height: 16px; }
+      .nav-socials { display: flex; gap: 11px; }
+      .nav-social-link svg { width: 18px; height: 18px; }
 
       /* Hero — 4/5 box: crown image fills it, text overlaid at bottom */
       #hero { height: auto; min-height: 0; flex-direction: column; padding-top: 0; }
@@ -1913,7 +1716,8 @@
       }
       .hero-left::before, .hero-left::after { display: none; }
       .hero-shipping-note { display: none; }
-      .hero-h1a, .hero-h1b { font-size: clamp(36px, 9vw, 58px); }
+      .hero-h1a { font-size: clamp(34px, 8vw, 52px); }
+      .hero-h1b { font-size: clamp(20px, 4.6vw, 30px); }
       .hero-sub { font-size: 13px; margin-top: 14px; max-width: 100%; }
       .hero-cta { margin-top: 28px; }
       .hero-rule { margin: 16px 0; }
@@ -1947,22 +1751,9 @@
       /* Featured card spans the full row for hierarchy */
       .prod-card--featured { grid-column: 1 / -1; }
 
-      /* Quote */
-      #quote { padding: 64px 24px; }
-      #quote::before { font-size: 200px; }
-
-      /* Heritage */
-      .heritage-inner { grid-template-columns: 1fr; gap: 48px; }
-      .heritage-right { max-width: 400px; }
-
       /* Order */
       .steps { grid-template-columns: 1fr; gap: 40px; }
       .order-h { font-size: 38px; }
-
-      /* Shipping */
-      .country-grid { grid-template-columns: 1fr; }
-      .c-card { border-right: none; border-bottom: 1px solid rgba(181,201,183,0.3); }
-      .c-card:last-child { border-bottom: none; }
 
       /* Story */
       .story-split { grid-template-columns: 1fr; }
@@ -2062,21 +1853,18 @@
     ───────────────────────────────────────────────────── */
     #stats           { border-top: 1px solid rgba(200,169,110,0.14); }
     #flash-sale      { border-top: 1px solid rgba(200,169,110,0.10); }
-    #quote           { border-top: 1px solid rgba(200,169,110,0.10); }
     #order           { border-top: 1px solid rgba(200,169,110,0.18); }
-    #shipping        { border-top: 1px solid rgba(200,169,110,0.14); }
     #instagram       { border-top: 1px solid rgba(200,169,110,0.10); }
-    #inner-circle    { border-top: 1px solid rgba(200,169,110,0.14); }
 
     /* ─────────────────────────────────────────────────────
        TYPOGRAPHY SCALE — unified clamp() rhythm (Part 4.5)
     ───────────────────────────────────────────────────── */
     /* Primary section headings */
-    .sec-h, .sale-h, .order-h, .ic-h {
+    .sec-h, .sale-h, .order-h {
       font-size: clamp(38px, 5vw, 64px);
     }
     /* Secondary / content headings */
-    .ship-h, .ig-h, .hl-h, .story-h {
+    .ig-h, .story-h {
       font-size: clamp(34px, 4.5vw, 54px);
     }
     /* Editorial panel heading */
@@ -2093,7 +1881,7 @@
     ───────────────────────────────────────────────────── */
     @media (hover: hover) and (pointer: fine) {
       body, a, button, [href], [role="button"],
-      .prod-card, .f-pill, .ig-cell, .c-card,
+      .prod-card, .f-pill, .ig-cell,
       .btn-ol, .btn-solid, .lang-btn, .hamburger { cursor: none; }
       #cursor-ring {
         position: fixed;
@@ -2172,7 +1960,9 @@
       color: var(--c-gold);
       letter-spacing: 0.12em;
     }
-    .ann-sep { margin: 0 16px; opacity: 0.3; }
+    /* Mobile gets the short delivery-only line instead of the full
+       Instagram+delivery message (which clips on narrow screens) */
+    .ann-mobile { display: none; }
     #ann-close {
       position: absolute;
       right: 24px;
@@ -2189,10 +1979,9 @@
     body.bar-gone { --bar-h: 0px; }
     @media (max-width: 767px) {
       #announce-bar { padding: 0 44px; }
-      .ann-sep { margin: 0 8px; }
       .ann-text { font-size: 9.5px; letter-spacing: 0.12em; white-space: nowrap; overflow: hidden; }
-      /* Country list clips mid-word below ~640px — drop it, keep the message */
-      .ann-locs { display: none; }
+      .ann-full { display: none; }
+      .ann-mobile { display: block; }
     }
     /* The full country list ("… · Maqedonia e Veriut") must never clip —
        tighten size/tracking as the bar narrows instead of hiding words */
@@ -2409,167 +2198,6 @@
     }
 
     /* ─────────────────────────────────────────────────────
-       INNER CIRCLE (newsletter / exclusive access)
-    ───────────────────────────────────────────────────── */
-    #inner-circle {
-      background: var(--c-sage);
-      padding: 112px 0;
-      position: relative;
-      overflow: hidden;
-    }
-    #inner-circle::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(ellipse at 30% 50%, rgba(200,169,110,0.08), transparent 65%);
-      pointer-events: none;
-    }
-    .ic-wm {
-      position: absolute;
-      font-family: 'Cormorant Garamond', serif;
-      font-weight: 900;
-      font-style: italic;
-      font-size: clamp(120px, 16vw, 220px);
-      color: rgba(28,43,30,0.2);
-      top: 50%; right: -2%;
-      transform: translateY(-50%);
-      letter-spacing: -0.03em;
-      pointer-events: none;
-      user-select: none;
-      line-height: 1;
-    }
-    .ic-inner {
-      max-width: 1280px;
-      margin: 0 auto;
-      padding: 0 56px;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 96px;
-      align-items: center;
-      position: relative;
-      z-index: 1;
-    }
-    .ic-label {
-      font-family: 'DM Sans', sans-serif;
-      font-weight: 300;
-      font-size: 10px;
-      letter-spacing: 0.26em;
-      text-transform: uppercase;
-      color: rgba(181,201,183,0.6);
-      display: block;
-      margin-bottom: 18px;
-    }
-    .ic-h {
-      font-family: 'Cormorant Garamond', serif;
-      font-weight: 400;
-      font-style: italic;
-      font-size: clamp(40px, 5vw, 64px);
-      color: var(--c-pgold);
-      line-height: 1.05;
-      margin-bottom: 24px;
-    }
-    .ic-p {
-      font-family: 'DM Sans', sans-serif;
-      font-weight: 300;
-      font-size: 14px;
-      color: rgba(181,201,183,0.8);
-      line-height: 2;
-      max-width: 420px;
-    }
-    .ic-perks {
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-      margin-top: 36px;
-    }
-    .ic-perk {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-    }
-    .ic-perk-dot {
-      width: 5px; height: 5px;
-      background: var(--c-gold);
-      transform: rotate(45deg);
-      flex-shrink: 0;
-    }
-    .ic-perk-text {
-      font-family: 'DM Sans', sans-serif;
-      font-weight: 300;
-      font-size: 13px;
-      color: rgba(181,201,183,0.75);
-      letter-spacing: 0.03em;
-    }
-    /* Right side */
-    .ic-right {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 32px;
-    }
-    .ic-art-wrap {
-      width: 200px;
-      height: 200px;
-      position: relative;
-    }
-    .ic-art-ring {
-      position: absolute;
-      inset: 0;
-      border-radius: 50%;
-      border: 1px solid rgba(200,169,110,0.18);
-      animation: orbitSpin 60s linear infinite;
-    }
-    .ic-art-ring::before {
-      content: '';
-      position: absolute;
-      top: -3px; left: 50%;
-      transform: translateX(-50%);
-      width: 5px; height: 5px;
-      background: var(--c-gold);
-      border-radius: 50%;
-      box-shadow: 0 0 8px rgba(200,169,110,0.5);
-    }
-    .ic-art-ring2 {
-      position: absolute;
-      inset: 20%;
-      border-radius: 50%;
-      border: 1px solid rgba(200,169,110,0.08);
-      animation: orbitSpinRev 80s linear infinite;
-    }
-    .ic-ig-cta {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      background: rgba(28,43,30,0.5);
-      border: 1px solid rgba(200,169,110,0.22);
-      padding: 18px 36px;
-      text-decoration: none;
-      transition: background 0.35s, border-color 0.35s;
-    }
-    .ic-ig-cta:hover { background: rgba(28,43,30,0.85); border-color: rgba(200,169,110,0.5); }
-    .ic-ig-cta svg { width: 20px; height: 20px; fill: none; stroke: var(--c-gold); }
-    .ic-ig-cta span {
-      font-family: 'DM Sans', sans-serif;
-      font-weight: 400;
-      font-size: 10px;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: var(--c-pgold);
-    }
-    .ic-note {
-      font-family: 'DM Sans', sans-serif;
-      font-weight: 200;
-      font-size: 11px;
-      letter-spacing: 0.06em;
-      color: rgba(181,201,183,0.45);
-      text-align: center;
-    }
-    @media (max-width: 991px) {
-      .ic-inner { grid-template-columns: 1fr; gap: 56px; }
-      .ic-right { align-items: flex-start; }
-    }
-
-    /* ─────────────────────────────────────────────────────
        NEW ARRIVALS
     ───────────────────────────────────────────────────── */
     #new-arrivals {
@@ -2652,7 +2280,8 @@
       transform: translateY(100%);
       transition: transform 0.4s var(--ease-out);
     }
-    .na-card:hover .na-hover-cta { transform: translateY(0); }
+    .na-card:hover .na-hover-cta,
+    .na-card:focus-within .na-hover-cta { transform: translateY(0); }
     /* Touch devices have no hover — show the order CTA as a static bar
        below the card body so it never covers the product name */
     @media (hover: none) {
@@ -2754,17 +2383,6 @@
       flex-direction: column;
       align-items: center;
     }
-    .pl-name-small {
-      font-family: 'DM Sans', sans-serif;
-      font-weight: 200;
-      font-size: 9px;
-      letter-spacing: 0.42em;
-      text-transform: uppercase;
-      color: rgba(122,158,126,0.6);
-      margin-bottom: 10px;
-      opacity: 0;
-      animation: plFadeUp 0.6s ease 0.1s forwards;
-    }
     .pl-logo {
       font-family: 'Cormorant Garamond', serif;
       font-weight: 300;
@@ -2783,15 +2401,56 @@
       margin: 22px 0 18px;
       animation: plLineGrow 0.9s cubic-bezier(0.4,0,0.2,1) 0.6s forwards;
     }
-    .pl-sub {
+    /* Rotating tagline — five short messages, one per second, looping.
+       A single shared keyframe + staggered per-child delays (the standard
+       CSS round-robin trick) keeps this pure-CSS, no JS timer needed.
+       Absolute-positioned children never affect the container's layout,
+       so .pl-diamond below always sits the same distance away regardless
+       of which message is showing. */
+    .pl-rotator {
+      position: relative;
+      height: 13px;
+      /* All children are position:absolute, so this box has no natural
+         width of its own — without stretching it to match its flex
+         siblings (the FANTAZIA wordmark), it collapses to 0 width and
+         text-align:center on the messages inside becomes meaningless
+         (they render left-anchored instead of centered). */
+      align-self: stretch;
+    }
+    .pl-msg {
+      position: absolute;
+      inset: 0;
+      text-align: center;
       font-family: 'DM Sans', sans-serif;
       font-weight: 200;
       font-size: 9px;
       letter-spacing: 0.34em;
       text-transform: uppercase;
-      color: rgba(122,158,126,0.45);
+      color: rgba(122,158,126,0.5);
+      white-space: nowrap;
       opacity: 0;
-      animation: plFadeUp 0.6s ease 1.0s forwards;
+      animation: plMsgCycle 5s ease-in-out infinite;
+    }
+    .pl-msg:nth-child(1) { animation-delay: 1.0s; }
+    .pl-msg:nth-child(2) { animation-delay: 2.0s; }
+    .pl-msg:nth-child(3) { animation-delay: 3.0s; }
+    .pl-msg:nth-child(4) { animation-delay: 4.0s; }
+    .pl-msg:nth-child(5) { animation-delay: 5.0s; }
+    @keyframes plMsgCycle {
+      0%        { opacity: 0; transform: translateY(3px); }
+      2%        { opacity: 1; transform: translateY(0); }
+      18%       { opacity: 1; transform: translateY(0); }
+      20%, 100% { opacity: 0; transform: translateY(-3px); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .pl-msg { animation: none !important; opacity: 0 !important; }
+      .pl-msg:first-child { opacity: 1 !important; }
+    }
+    /* The longest rotating message ("Bizhuteri Tradicionale Shqiptare" /
+       "Traditional Albanian Jewellery") clips past the viewport edge on
+       the smallest phones at the base 9px/0.34em tracking — tighten it. */
+    @media (max-width: 480px) {
+      .pl-msg { font-size: 7.5px; letter-spacing: 0.10em; }
     }
     .pl-diamond {
       width: 7px; height: 7px;
@@ -2960,14 +2619,6 @@
       margin-bottom: 10px;
     }
 
-    /* Announce bar diamond separator refinement */
-    .ann-sep {
-      font-size: 7px;
-      vertical-align: middle;
-      position: relative;
-      top: -0.5px;
-    }
-
     /* ─────────────────────────────────────────────────────
        COOKIE BANNER — mobile fix
     ───────────────────────────────────────────────────── */
@@ -2988,7 +2639,6 @@
        LEGACY BROWSER FALLBACKS (no aspect-ratio: iOS ≤14 etc.)
     ───────────────────────────────────────────────────── */
     @supports not (aspect-ratio: 1 / 1) {
-      .heritage-right { height: 520px; }
       .ig-cell { height: 240px; }
       .hero-art { height: 440px; }
     }
@@ -3038,20 +2688,6 @@
       color: var(--c-muted);
     }
 
-    /* ── Quote: full-screen commanding presence ── */
-    #quote { min-height: 72vh; padding: 140px 56px; }
-    .q-text {
-      font-size: clamp(40px, 5.8vw, 82px);
-      line-height: 1.32;
-      letter-spacing: 0.005em;
-      margin: 40px 0 32px;
-    }
-    .quote-wrap { max-width: 920px; }
-    .q-attr { letter-spacing: 0.34em; }
-    @media (max-width: 991px) {
-      #quote { min-height: auto; padding: 88px 28px; }
-      .q-text { font-size: clamp(30px, 7vw, 54px); }
-    }
 
     /* ── Countdown: hidden (countdown timers are un-luxury) ── */
     #cdWrap { display: none !important; }
@@ -3059,12 +2695,12 @@
 
     /* ── Section label luxury tracking ── */
     .sec-label, .sec-label-light, .order-label, .story-label,
-    .ig-label, .heritage-left .hl-label, .ic-label { letter-spacing: 0.36em; }
+    .ig-label { letter-spacing: 0.36em; }
 
 
     /* ── Body copy: luxury leading throughout ── */
-    .hero-sub, .ed-body, .hl-body, .step-t,
-    .story-p, .ic-p, .ship-sub { line-height: 2.2; }
+    .hero-sub, .ed-body, .step-t,
+    .story-p { line-height: 2.2; }
 
     /* ── Editorial watermark: more dramatic ── */
     .ed-wm { font-size: 210px; }
@@ -3072,15 +2708,11 @@
     /* ── Section breathing room ── */
     .section-pad  { padding: 160px 0; }
     #flash-sale   { padding: 140px 0; }
-    #heritage     { padding: 148px 0; }
-    #inner-circle { padding: 144px 0; }
     #new-arrivals { padding: 140px 0; }
     .footer-top   { padding-top: 72px; }
     @media (max-width: 991px) {
       .section-pad  { padding: 100px 0; }
       #flash-sale   { padding: 88px 0; }
-      #heritage     { padding: 88px 0; }
-      #inner-circle { padding: 88px 0; }
       #new-arrivals { padding: 88px 0; }
     }
 
@@ -3088,10 +2720,6 @@
     .step-n { font-size: 30px; }
     .step-h { font-size: clamp(22px, 2.5vw, 30px); }
     .step-n-circle { width: 62px; height: 62px; }
-
-    /* ── Heritage heading: more air ── */
-    .hl-h { margin-bottom: 12px; }
-    .hl-sub { letter-spacing: 0.12em; }
 
     /* ── New Arrivals card name size ── */
     .na-name { font-size: 22px; }
@@ -3119,12 +2747,10 @@
     .ed-col { padding: 96px 80px; }
     @media (max-width: 991px) { .ed-col { padding: 64px 40px; } }
 
-    /* ── Shipping & Story sections: more breathing room ── */
-    #shipping { padding: 140px 0; }
+    /* ── Story section: more breathing room ── */
     #story    { padding: 0; }
     .story-right { padding: 108px 96px; }
     @media (max-width: 991px) {
-      #shipping { padding: 88px 0; }
       .story-right { padding: 64px 36px; }
     }
 
@@ -3150,15 +2776,11 @@
     /* ── Floating Instagram CTA: more presence ── */
     #ig-float { border-radius: 0; }
 
-    /* ── Heritage: more visual weight on the mosaic ── */
-    .heritage-right { aspect-ratio: 1 / 1.1; }
-    .her-card:first-child { background: rgba(31,45,32,0.75) !important; }
-
     /* ── Order steps: more presence ── */
     #order .gold-rule { margin: 28px 0 0; }
 
     /* ── Section headings: slightly wider tracking ── */
-    .sec-h, .sale-h, .order-h, .ig-h, .ship-h, .hl-h, .story-h, .ic-h {
+    .sec-h, .sale-h, .order-h, .ig-h, .story-h {
       letter-spacing: 0.005em;
     }
 
@@ -3212,23 +2834,6 @@
       .editorial-split::before { display: none; }
     }
 
-    /* ── Heritage: richer gradient card backgrounds ── */
-    .her-card:first-child {
-      background: linear-gradient(158deg, #152417 0%, #233626 100%) !important;
-    }
-    .her-card:nth-child(2) {
-      background: linear-gradient(148deg, #4C3018 0%, #6B4726 100%) !important;
-    }
-    .her-card:nth-child(3) {
-      background: linear-gradient(148deg, #162519 0%, #243626 100%) !important;
-    }
-
-    /* ── Heritage SVG illustrations: slightly larger ── */
-    .her-card-placeholder svg {
-      transform: scale(1.14);
-      transform-origin: center center;
-    }
-
     /* ── Footer: brand name watermark ── */
     #footer { position: relative; overflow: hidden; }
     .footer-top    { position: relative; z-index: 1; }
@@ -3249,14 +2854,6 @@
       line-height: 1;
       z-index: 0;
       white-space: nowrap;
-    }
-
-    /* ── Quote: stronger atmospheric backdrop quotation mark ── */
-    #quote::before {
-      font-size: 520px;
-      color: rgba(200,169,110,0.052);
-      top: -90px;
-      left: -50px;
     }
 
     /* ── Marquee: soft edge-fade for premium feel ── */
@@ -3309,12 +2906,6 @@
     /* ── Story blockquote: more commanding weight ── */
     .story-bq { margin: 40px 0; padding-left: 28px; }
     .story-bq p { font-size: 22px; line-height: 1.6; }
-
-    /* ── Shipping cards: more breathing room on desktop ── */
-    @media (min-width: 992px) {
-      .c-card { padding: 80px 56px; }
-      .c-flag { font-size: 50px; }
-    }
 
     /* ── Section seam accents: thin gold top borders ── */
     #stats      { border-top: 1px solid rgba(200,169,110,0.13); border-bottom: 1px solid rgba(200,169,110,0.13); }
@@ -3419,40 +3010,12 @@
       .sale-name { font-size: 20px; }
     }
 
-    /* ── Mobile: heritage section tighten ── */
-    @media (max-width: 575px) {
-      #heritage  { padding: 72px 0; }
-      .hl-h      { font-size: clamp(28px, 9vw, 42px); }
-      .hl-body   { font-size: 13px; }
-    }
-
-    /* ── Mobile: quote section ── */
-    @media (max-width: 575px) {
-      #quote { padding: 72px 24px; }
-      #quote::before { font-size: 160px; top: -20px; left: -10px; }
-      .q-text { font-size: clamp(26px, 8vw, 40px); }
-    }
-
-    /* ── Mobile: inner circle ── */
-    @media (max-width: 575px) {
-      #inner-circle { padding: 72px 0; }
-      .ic-h { font-size: clamp(28px, 9vw, 42px); }
-      .ic-art-wrap { width: 180px; height: 180px; }
-    }
-
     /* ── Mobile: story section ── */
     @media (max-width: 575px) {
       .story-left { min-height: 240px; }
       .story-right { padding: 44px 24px; }
       .story-h { font-size: clamp(26px, 8vw, 38px); }
       .story-bq p { font-size: 18px; }
-    }
-
-    /* ── Mobile: shipping section ── */
-    @media (max-width: 575px) {
-      #shipping { padding: 72px 0; }
-      .c-card { padding: 44px 32px; }
-      .c-flag { font-size: 40px; }
     }
 
     /* ── Mobile: instagram section ── */
@@ -3688,7 +3251,8 @@
       }
       .hero-left::before { display: none !important; }
       .hero-frame { display: none !important; }
-      .hero-h1a, .hero-h1b { font-size: clamp(50px, 9vw, 78px) !important; }
+      .hero-h1a { font-size: clamp(42px, 7vw, 62px) !important; }
+      .hero-h1b { font-size: clamp(24px, 4vw, 36px) !important; }
       .hero-eyebrow {
         color: rgba(200,169,110,0.76) !important;
         letter-spacing: 0.30em !important;
@@ -3775,7 +3339,7 @@
 
     /* ── Tactile press feedback on every CTA ── */
     .btn-ol:active, .btn-solid:active, .prod-btn:active, .sale-btn:active,
-    .na-hover-cta:active, .ic-ig-cta:active, .f-pill:active, #btt:active {
+    .na-hover-cta:active, .f-pill:active, #btt:active {
       transform: scale(0.985);
     }
 
@@ -3795,7 +3359,6 @@
     .anim-off .ha-ring-svg, .anim-off .hero-glow,
     .anim-off .ha-sweep::after,
     .anim-off .hs, .anim-off .hero-img,
-    .anim-off .ic-art-ring, .anim-off .ic-art-ring2,
     .anim-off.marquee-wrap .marquee-track {
       animation-play-state: paused;
     }

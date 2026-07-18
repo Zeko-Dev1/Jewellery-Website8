@@ -3,23 +3,23 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Bizhuteria Fantazia — Bizhuteri Fine Shqiptare</title>
+  <title>Bizhuteria Fantazia — Bizhuteri Tradicionale Shqiptare</title>
   <meta name="google" content="notranslate">
-  <meta name="description" content="Bizhuteria Fantazia — bizhuteri fine e punuar me dorë, e frymëzuar nga tradita shqiptare. Dërgojmë në Shqipëri, Kosovë dhe Maqedoninë e Veriut.">
+  <meta name="description" content="Bizhuteria Fantazia — bizhuteri tradicionale shqiptare për nuse dhe raste të veçanta. Dërgojmë në Shqipëri, Kosovë dhe Maqedoninë e Veriut.">
   <!-- Open Graph -->
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Bizhuteria Fantazia">
   <meta property="og:locale" content="sq_AL">
-  <meta property="og:title" content="Bizhuteria Fantazia — Bizhuteri Fine Shqiptare">
-  <meta property="og:description" content="Bizhuteri fine e punuar me dorë, e frymëzuar nga tradita shqiptare. Porosit nëpërmjet Instagram.">
+  <meta property="og:title" content="Bizhuteria Fantazia — Bizhuteri Tradicionale Shqiptare">
+  <meta property="og:description" content="Bizhuteri tradicionale shqiptare për nuse dhe raste të veçanta. Porosit nëpërmjet Instagram.">
   <meta property="og:url" content="https://bizhuteriafantazia.mk/">
   <meta property="og:image" content="https://bizhuteriafantazia.mk/images/section/og-image.jpg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
-  <meta property="og:image:alt" content="Kurorë e punuar me dorë — Bizhuteria Fantazia">
+  <meta property="og:image:alt" content="Kurorë nusërie me kristale — Bizhuteria Fantazia">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Bizhuteria Fantazia — Bizhuteri Fine Shqiptare">
-  <meta name="twitter:description" content="Bizhuteri fine e punuar me dorë. Dërgim në Shqipëri, Kosovë dhe Maqedoninë e Veriut.">
+  <meta name="twitter:title" content="Bizhuteria Fantazia — Bizhuteri Tradicionale Shqiptare">
+  <meta name="twitter:description" content="Bizhuteri tradicionale shqiptare për nuse dhe raste të veçanta. Dërgim në Shqipëri, Kosovë dhe Maqedoninë e Veriut.">
   <meta name="twitter:image" content="https://bizhuteriafantazia.mk/images/section/og-image.jpg">
   <meta name="theme-color" content="#0D1810">
   <link rel="icon" type="image/png" sizes="96x96" href="images/icons/favicon-96.png">
@@ -44,7 +44,7 @@
     "name": "Bizhuteria Fantazia",
     "alternateName": "Euro Fantazia",
     "foundingDate": "2010",
-    "description": "Bizhuteri fine e punuar me dorë, e frymëzuar nga tradita shqiptare. Që nga viti 2010, me dy dyqane në Tetovë. Fine handcrafted jewellery inspired by Albanian tradition — two boutiques in Tetovo since 2010.",
+    "description": "Bizhuteri tradicionale shqiptare për nuse dhe raste të veçanta. Dy dyqane në Tetovë që nga viti 2010. Traditional Albanian jewellery for brides and special occasions — two boutiques in Tetovo since 2010.",
     "url": "https://bizhuteriafantazia.mk/",
     "logo": "https://bizhuteriafantazia.mk/images/icons/logo-240.png",
     "image": "https://bizhuteriafantazia.mk/images/section/og-image.jpg",
@@ -60,7 +60,7 @@
     "openingHoursSpecification": {
       "@type": "OpeningHoursSpecification",
       "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
-      "opens": "08:00",
+      "opens": "09:00",
       "closes": "19:00"
     },
     "sameAs": [
@@ -103,17 +103,32 @@
   <div class="pl-ring"></div>
   <div class="pl-ring2"></div>
   <div class="pl-inner">
-    <span class="pl-name-small">Bizhuteria</span>
-    <span class="pl-logo">Fantazia</span>
+    <span class="pl-logo">FANTAZIA</span>
     <div class="pl-line"></div>
-    <span class="pl-sub">Fine Jewellery · Est. 2010</span>
+    <!-- Rotating tagline — cycles once per second, looping. Each message
+         carries its own sq/en/mk spans so the active language (set before
+         this markup even paints) shows correctly from the very first frame. -->
+    <div class="pl-rotator">
+      <span class="pl-msg"><span data-sq>Bizhuteri Tradicionale Shqiptare</span><span data-en>Traditional Albanian Jewellery</span><span data-mk>Традиционален албански накит</span></span>
+      <span class="pl-msg"><span data-sq>Për Nuse dhe Raste të Veçanta</span><span data-en>For Brides &amp; Special Occasions</span><span data-mk>За невести и посебни пригоди</span></span>
+      <span class="pl-msg"><span data-sq>Kurora · Gjerdanë · Komplete</span><span data-en>Crowns · Necklaces · Sets</span><span data-mk>Круни · Ѓердани · Комплети</span></span>
+      <span class="pl-msg"><span data-sq>Porosit në Instagram</span><span data-en>Order via Instagram</span><span data-mk>Нарачај преку Инстаграм</span></span>
+      <span class="pl-msg"><span data-sq>Mirë se vini në Fantazia</span><span data-en>Welcome to Fantazia</span><span data-mk>Добредојдовте во Fantazia</span></span>
+    </div>
     <div class="pl-diamond"></div>
   </div>
 </div>
 
 <div id="announce-bar">
-  <p class="ann-text">
-    <span data-sq>Dërgim në Shqipëri · Kosovë · Maqedonia e Veriut</span>
+  <!-- Full message on tablet/desktop; a short delivery-only line replaces
+       it on phones (below 767px) where the long version would clip. -->
+  <p class="ann-text ann-full">
+    <span data-sq>Porosit në Instagram • Dërgesa të Shpejta në Shqipëri, Kosovë dhe Maqedoninë e Veriut</span>
+    <span data-en>Order via Instagram • Fast Delivery to Albania, Kosovo, and North Macedonia</span>
+    <span data-mk>Нарачај преку Инстаграм • Брза достава во Албанија, Косово и Северна Македонија</span>
+  </p>
+  <p class="ann-text ann-mobile">
+    <span data-sq>Dërgim në Shqipëri · Kosovë · Maqedoninë e Veriut</span>
     <span data-en>Delivery to Albania · Kosovo · North Macedonia</span>
     <span data-mk>Достава во Албанија · Косово · Северна Македонија</span>
   </p>
@@ -135,10 +150,10 @@
     </a>
 
     <ul class="nav-links">
-      <li><a href="#collection" data-section="collection"><span data-sq>Koleksioni</span><span data-en>Collections</span><span data-mk>Колекција</span></a></li>
-      <li><a href="#order" data-section="order"><span data-sq>Porosit</span><span data-en>Order</span><span data-mk>Нарачај</span></a></li>
-      <li><a href="#story" data-section="story"><span data-sq>Historia</span><span data-en>Story</span><span data-mk>Приказна</span></a></li>
-      <li><a href="#footer" data-section="footer"><span data-sq>Kontakt</span><span data-en>Contact</span><span data-mk>Контакт</span></a></li>
+      <li><a href="#collection" data-section="collection"><span data-sq>Koleksioni</span><span data-en>Collection</span><span data-mk>Колекција</span></a></li>
+      <li><a href="#order" data-section="order"><span data-sq>Porosia</span><span data-en>Order</span><span data-mk>Нарачка</span></a></li>
+      <li><a href="#story" data-section="story"><span data-sq>Rreth Nesh</span><span data-en>About</span><span data-mk>За Нас</span></a></li>
+      <li><a href="#footer" data-section="footer"><span data-sq>Kontakti</span><span data-en>Contact</span><span data-mk>Контакт</span></a></li>
     </ul>
 
     <div class="nav-right">
@@ -162,10 +177,10 @@
 <div class="mob-overlay" id="mob">
   <button class="mob-close" id="mobClose">Close ✕</button>
   <nav class="mob-nav">
-    <a href="#collection" class="mob-lnk"><span data-sq>Koleksioni</span><span data-en>Collections</span><span data-mk>Колекција</span></a>
-    <a href="#order"      class="mob-lnk"><span data-sq>Porosit</span><span data-en>Order</span><span data-mk>Нарачај</span></a>
-    <a href="#story"      class="mob-lnk"><span data-sq>Historia</span><span data-en>Story</span><span data-mk>Приказна</span></a>
-    <a href="#footer"     class="mob-lnk"><span data-sq>Kontakt</span><span data-en>Contact</span><span data-mk>Контакт</span></a>
+    <a href="#collection" class="mob-lnk"><span data-sq>Koleksioni</span><span data-en>Collection</span><span data-mk>Колекција</span></a>
+    <a href="#order"      class="mob-lnk"><span data-sq>Porosia</span><span data-en>Order</span><span data-mk>Нарачка</span></a>
+    <a href="#story"      class="mob-lnk"><span data-sq>Rreth Nesh</span><span data-en>About</span><span data-mk>За Нас</span></a>
+    <a href="#footer"     class="mob-lnk"><span data-sq>Kontakti</span><span data-en>Contact</span><span data-mk>Контакт</span></a>
   </nav>
 </div>
 
@@ -180,30 +195,30 @@
         <span class="hbn-1">BIZHUTERIA</span>
         <span class="hbn-2">FANTAZIA</span>
       </div>
-      <p class="hero-eyebrow"><span data-sq>Bizhuteri Fine · Punuar me Dorë · Që nga 2010</span><span data-en>Fine Jewellery · Handcrafted · Since 2010</span><span data-mk>Фин накит · Рачна изработка · Од 2010</span></p>
+      <p class="hero-eyebrow"><span data-sq>Bizhuteri Tradicionale Shqiptare · Tetovë</span><span data-en>Traditional Albanian Jewellery · Tetovo</span><span data-mk>Традиционален албански накит · Тетово</span></p>
       <span class="hero-rule"></span>
       <h1 style="margin:0;padding:0;font-weight:inherit;font-size:inherit;line-height:inherit;">
-        <span class="hero-h1a"><span data-sq>Afër zemrës</span><span data-en>Worn close</span><span data-mk>Блиску до срцето</span></span>
-        <span class="hero-h1b"><span data-sq>mbajtura gjithmonë.</span><span data-en>to the heart.</span><span data-mk>носено засекогаш.</span></span>
+        <span class="hero-h1a"><span data-sq>Afër zemrës.</span><span data-en>Close to the heart.</span><span data-mk>Блиску до срцето.</span></span>
+        <span class="hero-h1b"><span data-sq>Për t'u mbajtur gjithmonë.</span><span data-en>To be worn forever.</span><span data-mk>За да се носи засекогаш.</span></span>
       </h1>
       <p class="hero-sub">
-        <span data-sq>Çdo copë është një ceremoni e heshtur. Krijuar me durim dhe dërguar me kujdes në Shqipëri, Kosovë dhe Maqedoninë e Veriut.</span>
-        <span data-en>Each piece is a quiet ceremony. Created with patience and delivered with care across Albania, Kosovo, and North Macedonia.</span>
-        <span data-mk>Секое парче е тивка церемонија. Создадено со трпение и испорачано со грижа во Албанија, Косово и Северна Македонија.</span>
+        <span data-sq>Ne besojmë se zgjedhja nuk duhet të jetë e vështirë. Prandaj koleksioni ynë është ndërtuar me modele të ndryshme, që secila nuse të gjejë atë që e bën të ndihet vetvetja.</span>
+        <span data-en>We believe choosing shouldn't be hard. That's why our collection is built with many different designs — so every bride finds the one that feels like her.</span>
+        <span data-mk>Веруваме дека изборот не треба да биде тежок. Затоа нашата колекција е составена од различни модели — за секоја невеста да го најде она во кое се чувствува своја.</span>
       </p>
       <div class="hero-cta">
         <a href="#collection" class="btn-ol dark">
-          <span data-sq>Zbulo Koleksionin</span><span data-en>Explore the Collection</span><span data-mk>Откриј ја колекцијата</span>
+          <span data-sq>Zbulo Koleksionin</span><span data-en>Explore Collection</span><span data-mk>Истражи ја колекцијата</span>
         </a>
         <a href="#order" class="hero-link2">
-          <span data-sq>Si funksionon →</span><span data-en>How it works →</span><span data-mk>Како функционира →</span>
+          <span data-sq>Si të Porosisni →</span><span data-en>How to Order →</span><span data-mk>Како да нарачате →</span>
         </a>
       </div>
       <div class="hero-shipping-note">
         <span class="hsn-dot" aria-hidden="true"></span>
-        <span data-sq>Dërgim i shpejtë · Shqipëri · Kosovë · Maqedonia e Veriut</span>
-        <span data-en>Fast delivery · Albania · Kosovo · North Macedonia</span>
-        <span data-mk>Брза достава · Албанија · Косово · Северна Македонија</span>
+        <span data-sq>Porosit lehtësisht në Instagram · Paguani vetëm në dorëzim</span>
+        <span data-en>Order easily on Instagram · You pay only on delivery</span>
+        <span data-mk>Нарачајте лесно преку Instagram · Плаќате само при достава</span>
       </div>
     </div>
 
@@ -220,7 +235,7 @@
              not shape, and a high-density phone could still load the desktop crop. -->
         <source media="(max-width: 991px)" srcset="images/section/hero-mobile.webp">
         <img src="images/section/hero.webp"
-             alt="Kurorë bizhuterie e punuar me dorë — Bizhuteria Fantazia"
+             alt="Kurorë nusërie me kristale — Bizhuteria Fantazia"
              class="hero-img" loading="eager" fetchpriority="high" decoding="async"
              width="1600" height="1513">
       </picture>
@@ -325,15 +340,6 @@
         <span class="hf-c hf-tr"></span>
         <span class="hf-c hf-bl"></span>
         <span class="hf-c hf-br"></span>
-        <!-- text on top -->
-        <p class="hf-brand">Bizhuteria Fantazia</p>
-        <span class="hf-brand-rule"></span>
-        <span class="hf-vtxt">Koleksioni · 2024</span>
-        <div class="hf-badge">
-          <span class="hf-bline"></span>
-          <p class="hf-lbl">Est. 2024 · Balkans</p>
-          <span class="hf-bline"></span>
-        </div>
       </div>
     </div>
 
@@ -348,15 +354,15 @@
 ══════════════════════════════════════════ -->
 <div class="marquee-wrap" aria-hidden="true">
   <div class="marquee-track">
-    <span data-sq>Shqipëri · Kosovë · Maqedonia e Veriut · Punuar me Dorë · Porosit në Instagram · Bizhuteri e Kufizuar · Dërgim i Shpejtë ·</span>
-    <span data-en>Albania · Kosovo · North Macedonia · Handcrafted · Order via Instagram · Limited Jewellery · Fast Delivery ·</span>
-    <span data-mk>Албанија · Косово · Северна Македонија · Рачна изработка · Нарачај преку Инстаграм · Лимитиран накит · Брза достава ·</span>
-    <span data-sq>Shqipëri · Kosovë · Maqedonia e Veriut · Punuar me Dorë · Porosit në Instagram · Bizhuteri e Kufizuar · Dërgim i Shpejtë ·</span>
-    <span data-en>Albania · Kosovo · North Macedonia · Handcrafted · Order via Instagram · Limited Jewellery · Fast Delivery ·</span>
-    <span data-mk>Албанија · Косово · Северна Македонија · Рачна изработка · Нарачај преку Инстаграм · Лимитиран накит · Брза достава ·</span>
-    <span data-sq>Shqipëri · Kosovë · Maqedonia e Veriut · Punuar me Dorë · Porosit në Instagram · Bizhuteri e Kufizuar · Dërgim i Shpejtë ·</span>
-    <span data-en>Albania · Kosovo · North Macedonia · Handcrafted · Order via Instagram · Limited Jewellery · Fast Delivery ·</span>
-    <span data-mk>Албанија · Косово · Северна Македонија · Рачна изработка · Нарачај преку Инстаграм · Лимитиран накит · Брза достава ·</span>
+    <span data-sq>Kurora Nusërie · Gjerdanë · Komplete · Kollanë · Lira · Vathë · Unaza ·</span>
+    <span data-en>Bridal Crowns · Necklaces · Sets · Belts · Coin Necklaces · Earrings · Rings ·</span>
+    <span data-mk>Невестински круни · Ѓердани · Комплети · Колани · Лири · Обетки · Прстени ·</span>
+    <span data-sq>Kurora Nusërie · Gjerdanë · Komplete · Kollanë · Lira · Vathë · Unaza ·</span>
+    <span data-en>Bridal Crowns · Necklaces · Sets · Belts · Coin Necklaces · Earrings · Rings ·</span>
+    <span data-mk>Невестински круни · Ѓердани · Комплети · Колани · Лири · Обетки · Прстени ·</span>
+    <span data-sq>Kurora Nusërie · Gjerdanë · Komplete · Kollanë · Lira · Vathë · Unaza ·</span>
+    <span data-en>Bridal Crowns · Necklaces · Sets · Belts · Coin Necklaces · Earrings · Rings ·</span>
+    <span data-mk>Невестински круни · Ѓердани · Комплети · Колани · Лири · Обетки · Прстени ·</span>
   </div>
 </div>
 
@@ -366,96 +372,96 @@
 <section id="stats">
   <div class="stats-grid">
     <div class="stat-item reveal">
-      <span class="stat-num">55</span>
-      <span class="stat-lbl"><span data-sq>Krijime Unike</span><span data-en>Unique Pieces</span><span data-mk>Уникатни креации</span></span>
+      <span class="stat-num">2010</span>
+      <span class="stat-lbl"><span data-sq>Që nga</span><span data-en>Since</span><span data-mk>Од</span></span>
+    </div>
+    <div class="stat-item reveal">
+      <span class="stat-num">2</span>
+      <span class="stat-lbl"><span data-sq>Dyqane në Tetovë</span><span data-en>Boutiques in Tetovo</span><span data-mk>Продавници во Тетово</span></span>
     </div>
     <div class="stat-item reveal">
       <span class="stat-num">3</span>
-      <span class="stat-lbl"><span data-sq>Shtete</span><span data-en>Countries</span><span data-mk>Држави</span></span>
+      <span class="stat-lbl"><span data-sq>Shtete me Dërgesa</span><span data-en>Countries Served</span><span data-mk>Држави со достава</span></span>
     </div>
     <div class="stat-item reveal">
-      <span class="stat-num">100%</span>
-      <span class="stat-lbl"><span data-sq>Me Dorë</span><span data-en>Handmade</span><span data-mk>Рачна изработка</span></span>
-    </div>
-    <div class="stat-item reveal">
-      <span class="stat-num">∞</span>
-      <span class="stat-lbl"><span data-sq>Me Dashuri</span><span data-en>With Love</span><span data-mk>Со љубов</span></span>
+      <span class="stat-num">24/7</span>
+      <span class="stat-lbl"><span data-sq>Porosi në Instagram</span><span data-en>Instagram Orders</span><span data-mk>Нарачки на Инстаграм</span></span>
     </div>
   </div>
 </section>
 
 <!-- ══════════════════════════════════════════
-     NEW ARRIVALS
+     NEW ARRIVALS 
 ══════════════════════════════════════════ -->
 <section id="new-arrivals">
   <div class="lux-container">
-    <span class="sec-label reveal"><span data-sq>Sapo Arritën</span><span data-en>Just Arrived</span><span data-mk>Штотуку пристигнати</span></span>
-    <h2 class="sec-h reveal"><span data-sq>Krijimet e Reja.</span><span data-en>New Pieces.</span><span data-mk>Нови креации.</span></h2>
+    <span class="sec-label reveal"><span data-sq>Të Përzgjedhurat</span><span data-en>Featured</span><span data-mk>Избрани</span></span>
+    <h2 class="sec-h reveal"><span data-sq>Modelet Më të Preferuara.</span><span data-en>Our Most Loved Designs.</span><span data-mk>Најсаканите модели.</span></h2>
     <p class="sec-sub reveal">
-      <span data-sq>Krijimet më të fundit — seleksionuar me kujdes dhe gati për t'u zbuluar.</span>
-      <span data-en>Our latest additions — carefully curated and ready to discover.</span>
-      <span data-mk>Најновите креации — грижливо одбрани и подготвени да ги откриете.</span>
+      <span data-sq>Nga kurorat dhe gjerdanët, deri te kompletet tradicionale — zgjedhje për stile dhe raste të ndryshme.</span>
+      <span data-en>From crowns and necklaces to traditional sets — choices for different styles and occasions.</span>
+      <span data-mk>Од круни и ѓердани до традиционални комплети — избор за различни стилови и пригоди.</span>
     </p>
     <span class="gold-rule" style="margin:28px 0 0"></span>
 
     <div class="na-track">
-      <!-- NA 1: Kurorë Teuta -->
+      <!-- NA 1: Kurora Mbretërore -->
       <div class="na-card reveal">
-        <div class="na-new-pill"><span data-sq>Shumë i Shitur</span><span data-en>Best Seller</span><span data-mk>Најпродавано</span></div>
+        <div class="na-new-pill"><span data-sq>Kurorë</span><span data-en>Crown</span><span data-mk>Круна</span></div>
         <div class="na-visual bg-b">
           <img src="images/product-webp/Kuror%20Shum%20Shitur-1600.webp" alt="" class="prod-photo-bg" aria-hidden="true" loading="lazy" decoding="async">
-          <img src="images/product-webp/Kuror%20Shum%20Shitur-1600.webp" alt="Kurorë Teuta" class="prod-photo" loading="lazy" decoding="async">
+          <img src="images/product-webp/Kuror%20Shum%20Shitur-1600.webp" alt="Kurora Mbretërore" class="prod-photo" loading="lazy" decoding="async">
         </div>
         <div class="na-body">
-          <span class="na-name">Kurorë Teuta</span>
+          <span class="na-name">Kurora Mbretërore</span>
         </div>
         <a href="https://instagram.com/bizhuteriafantazia" target="_blank" rel="noopener noreferrer" class="na-hover-cta">
-          <span data-sq>Porosit në Instagram</span><span data-en>Order on Instagram</span><span data-mk>Нарачај преку Инстаграм</span>
+          <span data-sq>Porositni përmes Instagramit</span><span data-en>Order via Instagram</span><span data-mk>Нарачајте преку Инстаграм</span>
         </a>
       </div>
 
-      <!-- NA 2: Orë Fantazia -->
+      <!-- NA 2: Ora Prestige -->
       <div class="na-card reveal">
-        <div class="na-new-pill"><span data-sq>Shumë i Shitur</span><span data-en>Best Seller</span><span data-mk>Најпродавано</span></div>
+        <div class="na-new-pill"><span data-sq>Orë</span><span data-en>Watch</span><span data-mk>Часовник</span></div>
         <div class="na-visual bg-d">
           <img src="images/product-webp/Or%20Shum%20Shitur-1600.webp" alt="" class="prod-photo-bg" aria-hidden="true" loading="lazy" decoding="async">
-          <img src="images/product-webp/Or%20Shum%20Shitur-1600.webp" alt="Orë Fantazia" class="prod-photo" loading="lazy" decoding="async">
+          <img src="images/product-webp/Or%20Shum%20Shitur-1600.webp" alt="Ora Prestige" class="prod-photo" loading="lazy" decoding="async">
         </div>
         <div class="na-body">
-          <span class="na-name">Orë Fantazia</span>
+          <span class="na-name">Ora Prestige</span>
         </div>
         <a href="https://instagram.com/bizhuteriafantazia" target="_blank" rel="noopener noreferrer" class="na-hover-cta">
-          <span data-sq>Porosit në Instagram</span><span data-en>Order on Instagram</span><span data-mk>Нарачај преку Инстаграм</span>
+          <span data-sq>Porositni përmes Instagramit</span><span data-en>Order via Instagram</span><span data-mk>Нарачајте преку Инстаграм</span>
         </a>
       </div>
 
-      <!-- NA 3: Kollan Fantazia -->
+      <!-- NA 3: Kollan Fazan -->
       <div class="na-card reveal">
-        <div class="na-new-pill"><span data-sq>Shumë i Shitur</span><span data-en>Best Seller</span><span data-mk>Најпродавано</span></div>
+        <div class="na-new-pill"><span data-sq>Kollan</span><span data-en>Belt</span><span data-mk>Колан</span></div>
         <div class="na-visual bg-b">
           <img src="images/product-webp/Kollan%20Shum%20Shitur-1600.webp" alt="" class="prod-photo-bg" aria-hidden="true" loading="lazy" decoding="async">
-          <img src="images/product-webp/Kollan%20Shum%20Shitur-1600.webp" alt="Kollan Fantazia" class="prod-photo" loading="lazy" decoding="async">
+          <img src="images/product-webp/Kollan%20Shum%20Shitur-1600.webp" alt="Kollan Fazan" class="prod-photo" loading="lazy" decoding="async">
         </div>
         <div class="na-body">
-          <span class="na-name">Kollan Fantazia</span>
+          <span class="na-name">Kollan Fazan</span>
         </div>
         <a href="https://instagram.com/bizhuteriafantazia" target="_blank" rel="noopener noreferrer" class="na-hover-cta">
-          <span data-sq>Porosit në Instagram</span><span data-en>Order on Instagram</span><span data-mk>Нарачај преку Инстаграм</span>
+          <span data-sq>Porositni përmes Instagramit</span><span data-en>Order via Instagram</span><span data-mk>Нарачајте преку Инстаграм</span>
         </a>
       </div>
 
-      <!-- NA 4: Gjerdan Yllka -->
+      <!-- NA 4: Gjerdani Kristal -->
       <div class="na-card reveal">
-        <div class="na-new-pill"><span data-sq>Shumë i Shitur</span><span data-en>Best Seller</span><span data-mk>Најпродавано</span></div>
+        <div class="na-new-pill"><span data-sq>Gjerdan</span><span data-en>Necklace</span><span data-mk>Ѓердан</span></div>
         <div class="na-visual bg-d">
           <img src="images/product-webp/Gjerdan%20Shum%20Shitur%201-1600.webp" alt="" class="prod-photo-bg" aria-hidden="true" loading="lazy" decoding="async">
-          <img src="images/product-webp/Gjerdan%20Shum%20Shitur%201-1600.webp" alt="Gjerdan Yllka" class="prod-photo" loading="lazy" decoding="async">
+          <img src="images/product-webp/Gjerdan%20Shum%20Shitur%201-1600.webp" alt="Gjerdani Kristal" class="prod-photo" loading="lazy" decoding="async">
         </div>
         <div class="na-body">
-          <span class="na-name">Gjerdan Yllka</span>
+          <span class="na-name">Gjerdani Kristal</span>
         </div>
         <a href="https://instagram.com/bizhuteriafantazia" target="_blank" rel="noopener noreferrer" class="na-hover-cta">
-          <span data-sq>Porosit në Instagram</span><span data-en>Order on Instagram</span><span data-mk>Нарачај преку Инстаграм</span>
+          <span data-sq>Porositni përmes Instagramit</span><span data-en>Order via Instagram</span><span data-mk>Нарачајте преку Инстаграм</span>
         </a>
       </div>
 
@@ -471,54 +477,54 @@
 
     <div class="sale-top-row reveal">
       <div>
-        <span class="sec-label-light"><span data-sq>Koleksion i Limituar</span><span data-en>Limited Selection</span><span data-mk>Лимитирана колекција</span></span>
-        <h2 class="sale-h"><span data-sq>Edicion i Posaçëm.</span><span data-en>Special Edition.</span><span data-mk>Специјално издание.</span></h2>
+        <span class="sec-label-light"><span data-sq>Koleksione Nusërie</span><span data-en>Bridal Collections</span><span data-mk>Колекции за невести</span></span>
+        <h2 class="sale-h"><span data-sq>Koleksioni i Nuses.</span><span data-en>The Bridal Collection.</span><span data-mk>Колекција за невестата.</span></h2>
       </div>
-      <p class="sale-sub"><span data-sq>Tre pamje të plota nusërie — në ari, në të zezë dhe në alltan. Çdo detaj i zgjedhur që të flasë së bashku.</span><span data-en>Three complete bridal looks — in gold, in black, and in antique gold. Every detail chosen to speak as one.</span><span data-mk>Три комплетни невестински изгледи — во злато, во црно и во алтан. Секој детаљ одбран да зборува како едно.</span></p>
+      <p class="sale-sub"><span data-sq>Tre komplete nusërie për ditën më të veçantë — me elegancë, shkëlqim dhe detaje që plotësojnë njëra-tjetrën.</span><span data-en>Three bridal sets for the most special day — with elegance, shine, and details that complete each other.</span><span data-mk>Три невестински комплети за најпосебниот ден — со елеганција, сјај и детали кои се надополнуваат.</span></p>
     </div>
 
     <div class="sale-grid">
-      <!-- Kompleti 1: Nusja në Ari -->
+      <!-- Kompleti 1: Shkëlqimi i Artë -->
       <div class="sale-card reveal">
         <div class="sale-visual bg-d">
           <img src="images/product-webp/Komplet%203-900.webp" alt="" class="prod-photo-bg" aria-hidden="true" loading="lazy" decoding="async">
-          <img src="images/product-webp/Komplet%203-900.webp" alt="Nusja në Ari — kompleti i plotë" class="prod-photo" loading="lazy" decoding="async">
+          <img src="images/product-webp/Komplet%203-900.webp" alt="Shkëlqimi i Artë — kompleti i plotë" class="prod-photo" loading="lazy" decoding="async">
         </div>
         <div class="sale-body">
-          <span class="sale-name"><span data-sq>Nusja në Ari</span><span data-en>The Bride in Gold</span><span data-mk>Невеста во злато</span></span>
-          <span class="set-items"><span data-sq>Kurorë · Gjerdan · Vathë · Unazë · Kollan</span><span data-en>Crown · Necklace · Earrings · Ring · Belt</span><span data-mk>Круна · Ѓердан · Обетки · Прстен · Колан</span></span>
+          <span class="sale-name"><span data-sq>Shkëlqimi i Artë</span><span data-en>Golden Radiance</span><span data-mk>Златен сјај</span></span>
+          <span class="set-items"><span data-sq>Kurorë · Gjerdan · Vathë · Unazë · Byzylyk · Kollan Nusërie</span><span data-en>Crown · Necklace · Earrings · Ring · Bracelet · Bridal Belt</span><span data-mk>Круна · Ѓердан · Обетки · Прстен · Белегзија · Невестински колан</span></span>
           <a href="https://instagram.com/bizhuteriafantazia" target="_blank" rel="noopener noreferrer" class="sale-btn">
-            <span data-sq>Porosit në Instagram →</span><span data-en>Order on Instagram →</span><span data-mk>Нарачај преку Инстаграм →</span>
+            <span data-sq>Shiko Detajet →</span><span data-en>View Details →</span><span data-mk>Погледнете детали →</span>
           </a>
         </div>
       </div>
 
-      <!-- Kompleti 2: Nusja në të Zezë -->
+      <!-- Kompleti 2: Bukuri në Kontrast -->
       <div class="sale-card reveal">
         <div class="sale-visual bg-a">
           <img src="images/product-webp/Komplet%202-900.webp" alt="" class="prod-photo-bg" aria-hidden="true" loading="lazy" decoding="async">
-          <img src="images/product-webp/Komplet%202-900.webp" alt="Nusja në të Zezë — kompleti i plotë" class="prod-photo" loading="lazy" decoding="async">
+          <img src="images/product-webp/Komplet%202-900.webp" alt="Bukuri në Kontrast — kompleti i plotë" class="prod-photo" loading="lazy" decoding="async">
         </div>
         <div class="sale-body">
-          <span class="sale-name"><span data-sq>Nusja në të Zezë</span><span data-en>The Bride in Black</span><span data-mk>Невеста во црно</span></span>
-          <span class="set-items"><span data-sq>Kurorë · Gjerdan · Vathë · Unazë · Kollan</span><span data-en>Crown · Necklace · Earrings · Ring · Belt</span><span data-mk>Круна · Ѓердан · Обетки · Прстен · Колан</span></span>
+          <span class="sale-name"><span data-sq>Bukuri në Kontrast</span><span data-en>Beauty in Contrast</span><span data-mk>Убавина во контраст</span></span>
+          <span class="set-items"><span data-sq>Kurorë · Gjerdan · Vathë · Unazë · Byzylyk · Kollan Nusërie</span><span data-en>Crown · Necklace · Earrings · Ring · Bracelet · Bridal Belt</span><span data-mk>Круна · Ѓердан · Обетки · Прстен · Белегзија · Невестински колан</span></span>
           <a href="https://instagram.com/bizhuteriafantazia" target="_blank" rel="noopener noreferrer" class="sale-btn">
-            <span data-sq>Porosit në Instagram →</span><span data-en>Order on Instagram →</span><span data-mk>Нарачај преку Инстаграм →</span>
+            <span data-sq>Shiko Detajet →</span><span data-en>View Details →</span><span data-mk>Погледнете детали →</span>
           </a>
         </div>
       </div>
 
-      <!-- Kompleti 3: Nusja në Gurë -->
+      <!-- Kompleti 3: Ari Elegant -->
       <div class="sale-card reveal">
         <div class="sale-visual bg-b">
           <img src="images/product-webp/Komplet%201-900.webp" alt="" class="prod-photo-bg" aria-hidden="true" loading="lazy" decoding="async">
-          <img src="images/product-webp/Komplet%201-900.webp" alt="Nusja në Gurë — kompleti i plotë" class="prod-photo" loading="lazy" decoding="async">
+          <img src="images/product-webp/Komplet%201-900.webp" alt="Ari Elegant — kompleti i plotë" class="prod-photo" loading="lazy" decoding="async">
         </div>
         <div class="sale-body">
-          <span class="sale-name"><span data-sq>Nusja në Gurë</span><span data-en>The Bride in Stone</span><span data-mk>Невеста во камења</span></span>
-          <span class="set-items"><span data-sq>Kurorë · Gjerdan · Vathë · Unazë · Kollan</span><span data-en>Crown · Necklace · Earrings · Ring · Belt</span><span data-mk>Круна · Ѓердан · Обетки · Прстен · Колан</span></span>
+          <span class="sale-name"><span data-sq>Ari Elegant</span><span data-en>Elegant Gold</span><span data-mk>Елегантно злато</span></span>
+          <span class="set-items"><span data-sq>Kurorë · Gjerdan · Vathë · Unazë · Byzylyk · Kollan Nusërie</span><span data-en>Crown · Necklace · Earrings · Ring · Bracelet · Bridal Belt</span><span data-mk>Круна · Ѓердан · Обетки · Прстен · Белегзија · Невестински колан</span></span>
           <a href="https://instagram.com/bizhuteriafantazia" target="_blank" rel="noopener noreferrer" class="sale-btn">
-            <span data-sq>Porosit në Instagram →</span><span data-en>Order on Instagram →</span><span data-mk>Нарачај преку Инстаграм →</span>
+            <span data-sq>Shiko Detajet →</span><span data-en>View Details →</span><span data-mk>Погледнете детали →</span>
           </a>
         </div>
       </div>
@@ -534,27 +540,27 @@
   <div class="editorial-split">
     <div class="ed-col sage reveal-left">
       <span class="ed-wm"><span data-sq>Kurora</span><span data-en>Crowns</span><span data-mk>Круни</span></span>
-      <span class="ed-eyebrow" style="color:var(--c-mid)"><span data-sq>Koleksioni 01</span><span data-en>Collection 01</span><span data-mk>Колекција 01</span></span>
-      <h2 class="ed-h" style="color:var(--c-pgold)"><span data-sq>Kurorat Tona</span><span data-en>The Crown Edit</span><span data-mk>Нашите круни</span></h2>
+      <span class="ed-eyebrow" style="color:var(--c-mid)"><span data-sq>Koleksioni i Kurorave</span><span data-en>The Crown Collection</span><span data-mk>Колекција на круни</span></span>
+      <h2 class="ed-h" style="color:var(--c-pgold)"><span data-sq>Kurora Nusërie</span><span data-en>Bridal Crowns</span><span data-mk>Невестински круни</span></h2>
       <p class="ed-body" style="color:rgba(181,201,183,0.8)">
-        <span data-sq>Njëzet kurora nusërie — të bardha, të verdha, ari, të kuqe dhe të zeza. Kurora për çdo nuse.</span>
-        <span data-en>Twenty bridal crowns — white, yellow, gold, red, and black. A crown for every bride.</span>
-        <span data-mk>Дваесет невестински круни — бели, жолти, златни, црвени и црни. Круна за секоја невеста.</span>
+        <span data-sq>Kurora nusërie — modele klasike dhe moderne për çdo stil.</span>
+        <span data-en>Bridal crowns — classic and modern designs for every style.</span>
+        <span data-mk>Невестински круни — класични и модерни модели за секој стил.</span>
       </p>
       <a href="#collection" class="ed-link" style="color:var(--c-gold)">
         <span data-sq>Zbulo Kurorat →</span><span data-en>Explore Crowns →</span><span data-mk>Откриј ги круните →</span>
       </a>
     </div>
     <div class="ed-col pale reveal">
-      <span class="ed-eyebrow" style="color:var(--c-gold)"><span data-sq>Koleksioni 02</span><span data-en>Collection 02</span><span data-mk>Колекција 02</span></span>
-      <h2 class="ed-h" style="color:var(--c-pgold)"><span data-sq>Gjerdan &amp; Kompleta</span><span data-en>Necklaces &amp; Sets</span><span data-mk>Ѓердани и комплети</span></h2>
+      <span class="ed-eyebrow" style="color:var(--c-gold)"><span data-sq>Koleksioni i Gjerdanëve</span><span data-en>The Necklace Collection</span><span data-mk>Колекција на ѓердани</span></span>
+      <h2 class="ed-h" style="color:var(--c-pgold)"><span data-sq>Gjerdanë &amp; Komplete</span><span data-en>Necklaces &amp; Sets</span><span data-mk>Ѓердани и комплети</span></h2>
       <p class="ed-body" style="color:rgba(212,200,168,0.75)">
-        <span data-sq>Gjerdanë me kristale dhe kompleta të plota — gjerdan, byzylyk dhe vathë që flasin së bashku.</span>
-        <span data-en>Crystal necklaces and complete sets — necklace, bracelet, and earrings that speak as one.</span>
-        <span data-mk>Ѓердани со кристали и комплетни сетови — ѓердан, белегзија и обетки што зборуваат како едно.</span>
+        <span data-sq>Gjerdanë elegantë dhe komplete me detaje që përshtaten mes tyre.</span>
+        <span data-en>Elegant necklaces and complete sets with matching details.</span>
+        <span data-mk>Елегантни ѓердани и комплети со детали што се совпаѓаат.</span>
       </p>
       <a href="#collection" class="ed-link" style="color:var(--c-gold)">
-        <span data-sq>Zbulo →</span><span data-en>Explore →</span><span data-mk>Откриј →</span>
+        <span data-sq>Zbulo Koleksionin →</span><span data-en>Explore Collection →</span><span data-mk>Истражи ја колекцијата →</span>
       </a>
     </div>
   </div>
@@ -566,11 +572,11 @@
 <section id="collection" class="section-pad">
   <div class="lux-container">
     <span class="sec-label reveal"><span data-sq>Koleksioni</span><span data-en>The Collection</span><span data-mk>Колекција</span></span>
-    <h2 class="sec-h reveal"><span data-sq>Të Gjitha Krijimet</span><span data-en>All Pieces</span><span data-mk>Сите креации</span></h2>
+    <h2 class="sec-h reveal"><span data-sq>Koleksioni i Plotë.</span><span data-en>The Full Collection.</span><span data-mk>Целосната колекција.</span></h2>
     <p class="sec-sub reveal">
-      <span data-sq>55 krijime — nga kurorat e nusërisë te unazat. Porosit çdo copë nëpërmjet Instagram.</span>
-      <span data-en>55 pieces — from bridal crowns to rings. Order any piece through Instagram.</span>
-      <span data-mk>55 креации — од невестински круни до прстени. Нарачај секое парче преку Инстаграм.</span>
+      <span data-sq>Nga kurorat e nusërisë te unazat — porositni çdo model nëpërmjet Instagram.</span>
+      <span data-en>From bridal crowns to rings — order any design through Instagram.</span>
+      <span data-mk>Од невестински круни до прстени — нарачајте секој модел преку Инстаграм.</span>
     </p>
     <span class="gold-rule" style="margin:28px 0 0"></span>
 
@@ -595,16 +601,16 @@
         <span class="prod-badge badge-best"><span data-sq>Shumë i Shitur</span><span data-en>Best Seller</span><span data-mk>Најпродавано</span></span>
         <div class="prod-visual bg-a">
           <img src="images/product-webp/Kuror%20Shum%20Shitur-1600.webp" alt="" class="prod-photo-bg" aria-hidden="true" loading="lazy" decoding="async">
-          <img src="images/product-webp/Kuror%20Shum%20Shitur-1600.webp" alt="Kurorë Teuta — Kurorë E Bardhë" class="prod-photo" loading="lazy" decoding="async">
-          <div class="prod-overlay"><span><span data-sq>Porosit në Instagram</span><span data-en>Order via Instagram</span><span data-mk>Нарачај преку Инстаграм</span></span></div>
+          <img src="images/product-webp/Kuror%20Shum%20Shitur-1600.webp" alt="Kurora Mbretërore — Kurorë E Bardhë" class="prod-photo" loading="lazy" decoding="async">
+          <div class="prod-overlay"><span><span data-sq>Porositni përmes Instagramit</span><span data-en>Order via Instagram</span><span data-mk>Нарачајте преку Инстаграм</span></span></div>
         </div>
         <div class="prod-body">
           <div class="prod-row1">
-            <span class="prod-name">Kurorë Teuta</span>
+            <span class="prod-name">Kurora Mbretërore</span>
           </div>
           <span class="prod-cat"><span data-sq>Kurorë · E Bardhë</span><span data-en>Crown · White</span><span data-mk>Круна · Бела</span></span>
           <a href="https://instagram.com/bizhuteriafantazia" target="_blank" rel="noopener noreferrer" class="prod-btn">
-            <span data-sq>Porosit në Instagram</span><span data-en>Order on Instagram</span><span data-mk>Нарачај преку Инстаграм</span>
+            <span data-sq>Porositni përmes Instagramit</span><span data-en>Order via Instagram</span><span data-mk>Нарачајте преку Инстаграм</span>
           </a>
         </div>
       </div>
@@ -614,7 +620,7 @@
         <div class="prod-visual bg-b">
           <img src="images/product-webp/Kuror%20e%20Bardh%201-900.webp" alt="" class="prod-photo-bg" aria-hidden="true" loading="lazy" decoding="async">
           <img src="images/product-webp/Kuror%20e%20Bardh%201-900.webp" alt="Kurorë Perla — Kurorë E Bardhë" class="prod-photo" loading="lazy" decoding="async">
-          <div class="prod-overlay"><span><span data-sq>Porosit në Instagram</span><span data-en>Order via Instagram</span><span data-mk>Нарачај преку Инстаграм</span></span></div>
+          <div class="prod-overlay"><span><span data-sq>Porositni përmes Instagramit</span><span data-en>Order via Instagram</span><span data-mk>Нарачајте преку Инстаграм</span></span></div>
         </div>
         <div class="prod-body">
           <div class="prod-row1">
@@ -622,7 +628,7 @@
           </div>
           <span class="prod-cat"><span data-sq>Kurorë · E Bardhë</span><span data-en>Crown · White</span><span data-mk>Круна · Бела</span></span>
           <a href="https://instagram.com/bizhuteriafantazia" target="_blank" rel="noopener noreferrer" class="prod-btn">
-            <span data-sq>Porosit në Instagram</span><span data-en>Order on Instagram</span><span data-mk>Нарачај преку Инстаграм</span>
+            <span data-sq>Porositni përmes Instagramit</span><span data-en>Order via Instagram</span><span data-mk>Нарачајте преку Инстаграм</span>
           </a>
         </div>
       </div>
@@ -632,16 +638,16 @@
         <span class="prod-badge badge-new"><span data-sq>E Re</span><span data-en>New</span><span data-mk>Ново</span></span>
         <div class="prod-visual bg-c">
           <img src="images/product-webp/Gjerdan%20i%20Bardh%201-900.webp" alt="" class="prod-photo-bg" aria-hidden="true" loading="lazy" decoding="async">
-          <img src="images/product-webp/Gjerdan%20i%20Bardh%201-900.webp" alt="Gjerdan Jona — Gjerdan I Bardhë" class="prod-photo" loading="lazy" decoding="async">
-          <div class="prod-overlay"><span><span data-sq>Porosit në Instagram</span><span data-en>Order via Instagram</span><span data-mk>Нарачај преку Инстаграм</span></span></div>
+          <img src="images/product-webp/Gjerdan%20i%20Bardh%201-900.webp" alt="Gjerdan Perla — Gjerdan I Bardhë" class="prod-photo" loading="lazy" decoding="async">
+          <div class="prod-overlay"><span><span data-sq>Porositni përmes Instagramit</span><span data-en>Order via Instagram</span><span data-mk>Нарачајте преку Инстаграм</span></span></div>
         </div>
         <div class="prod-body">
           <div class="prod-row1">
-            <span class="prod-name">Gjerdan Jona</span>
+            <span class="prod-name">Gjerdan Perla</span>
           </div>
           <span class="prod-cat"><span data-sq>Gjerdan · I Bardhë</span><span data-en>Necklace · White</span><span data-mk>Ѓердан · Бел</span></span>
           <a href="https://instagram.com/bizhuteriafantazia" target="_blank" rel="noopener noreferrer" class="prod-btn">
-            <span data-sq>Porosit në Instagram</span><span data-en>Order on Instagram</span><span data-mk>Нарачај преку Инстаграм</span>
+            <span data-sq>Porositni përmes Instagramit</span><span data-en>Order via Instagram</span><span data-mk>Нарачајте преку Инстаграм</span>
           </a>
         </div>
       </div>
@@ -650,16 +656,16 @@
       <div class="prod-card reveal" data-cat="necklaces">
         <div class="prod-visual bg-d">
           <img src="images/product-webp/Gjerdan%20i%20Bardh%202-900.webp" alt="" class="prod-photo-bg" aria-hidden="true" loading="lazy" decoding="async">
-          <img src="images/product-webp/Gjerdan%20i%20Bardh%202-900.webp" alt="Gjerdan Klea — Gjerdan I Bardhë" class="prod-photo" loading="lazy" decoding="async">
-          <div class="prod-overlay"><span><span data-sq>Porosit në Instagram</span><span data-en>Order via Instagram</span><span data-mk>Нарачај преку Инстаграм</span></span></div>
+          <img src="images/product-webp/Gjerdan%20i%20Bardh%202-900.webp" alt="Gjerdan Sedef — Gjerdan I Bardhë" class="prod-photo" loading="lazy" decoding="async">
+          <div class="prod-overlay"><span><span data-sq>Porositni përmes Instagramit</span><span data-en>Order via Instagram</span><span data-mk>Нарачајте преку Инстаграм</span></span></div>
         </div>
         <div class="prod-body">
           <div class="prod-row1">
-            <span class="prod-name">Gjerdan Klea</span>
+            <span class="prod-name">Gjerdan Sedef</span>
           </div>
           <span class="prod-cat"><span data-sq>Gjerdan · I Bardhë</span><span data-en>Necklace · White</span><span data-mk>Ѓердан · Бел</span></span>
           <a href="https://instagram.com/bizhuteriafantazia" target="_blank" rel="noopener noreferrer" class="prod-btn">
-            <span data-sq>Porosit në Instagram</span><span data-en>Order on Instagram</span><span data-mk>Нарачај преку Инстаграм</span>
+            <span data-sq>Porositni përmes Instagramit</span><span data-en>Order via Instagram</span><span data-mk>Нарачајте преку Инстаграм</span>
           </a>
         </div>
       </div>
@@ -669,7 +675,7 @@
         <div class="prod-visual bg-a">
           <img src="images/product-webp/Lule%20Verdh%201-900.webp" alt="" class="prod-photo-bg" aria-hidden="true" loading="lazy" decoding="async">
           <img src="images/product-webp/Lule%20Verdh%201-900.webp" alt="Lule Dielli — Lule E Verdhë" class="prod-photo" loading="lazy" decoding="async">
-          <div class="prod-overlay"><span><span data-sq>Porosit në Instagram</span><span data-en>Order via Instagram</span><span data-mk>Нарачај преку Инстаграм</span></span></div>
+          <div class="prod-overlay"><span><span data-sq>Porositni përmes Instagramit</span><span data-en>Order via Instagram</span><span data-mk>Нарачајте преку Инстаграм</span></span></div>
         </div>
         <div class="prod-body">
           <div class="prod-row1">
@@ -677,7 +683,7 @@
           </div>
           <span class="prod-cat"><span data-sq>Lule · E Verdhë</span><span data-en>Hair Flower · Yellow Gold</span><span data-mk>Цвет · Жолт</span></span>
           <a href="https://instagram.com/bizhuteriafantazia" target="_blank" rel="noopener noreferrer" class="prod-btn">
-            <span data-sq>Porosit në Instagram</span><span data-en>Order on Instagram</span><span data-mk>Нарачај преку Инстаграм</span>
+            <span data-sq>Porositni përmes Instagramit</span><span data-en>Order via Instagram</span><span data-mk>Нарачајте преку Инстаграм</span>
           </a>
         </div>
       </div>
@@ -686,16 +692,16 @@
       <div class="prod-card reveal" data-cat="lule" data-preview="1">
         <div class="prod-visual bg-b">
           <img src="images/product-webp/Lule%20Verdh%202-900.webp" alt="" class="prod-photo-bg" aria-hidden="true" loading="lazy" decoding="async">
-          <img src="images/product-webp/Lule%20Verdh%202-900.webp" alt="Lule Mimoza — Lule E Verdhë" class="prod-photo" loading="lazy" decoding="async">
-          <div class="prod-overlay"><span><span data-sq>Porosit në Instagram</span><span data-en>Order via Instagram</span><span data-mk>Нарачај преку Инстаграм</span></span></div>
+          <img src="images/product-webp/Lule%20Verdh%202-900.webp" alt="Lule Mimozë — Lule E Verdhë" class="prod-photo" loading="lazy" decoding="async">
+          <div class="prod-overlay"><span><span data-sq>Porositni përmes Instagramit</span><span data-en>Order via Instagram</span><span data-mk>Нарачајте преку Инстаграм</span></span></div>
         </div>
         <div class="prod-body">
           <div class="prod-row1">
-            <span class="prod-name">Lule Mimoza</span>
+            <span class="prod-name">Lule Mimozë</span>
           </div>
           <span class="prod-cat"><span data-sq>Lule · E Verdhë</span><span data-en>Hair Flower · Yellow Gold</span><span data-mk>Цвет · Жолт</span></span>
           <a href="https://instagram.com/bizhuteriafantazia" target="_blank" rel="noopener noreferrer" class="prod-btn">
-            <span data-sq>Porosit në Instagram</span><span data-en>Order on Instagram</span><span data-mk>Нарачај преку Инстаграм</span>
+            <span data-sq>Porositni përmes Instagramit</span><span data-en>Order via Instagram</span><span data-mk>Нарачајте преку Инстаграм</span>
           </a>
         </div>
       </div>
@@ -705,7 +711,7 @@
         <div class="prod-visual bg-c">
           <img src="images/product-webp/Kollan%20Bardh%201-900.webp" alt="" class="prod-photo-bg" aria-hidden="true" loading="lazy" decoding="async">
           <img src="images/product-webp/Kollan%20Bardh%201-900.webp" alt="Kollan Perla — Kollan I Bardhë" class="prod-photo" loading="lazy" decoding="async">
-          <div class="prod-overlay"><span><span data-sq>Porosit në Instagram</span><span data-en>Order via Instagram</span><span data-mk>Нарачај преку Инстаграм</span></span></div>
+          <div class="prod-overlay"><span><span data-sq>Porositni përmes Instagramit</span><span data-en>Order via Instagram</span><span data-mk>Нарачајте преку Инстаграм</span></span></div>
         </div>
         <div class="prod-body">
           <div class="prod-row1">
@@ -713,7 +719,7 @@
           </div>
           <span class="prod-cat"><span data-sq>Kollan · I Bardhë</span><span data-en>Belt · White</span><span data-mk>Колан · Бел</span></span>
           <a href="https://instagram.com/bizhuteriafantazia" target="_blank" rel="noopener noreferrer" class="prod-btn">
-            <span data-sq>Porosit në Instagram</span><span data-en>Order on Instagram</span><span data-mk>Нарачај преку Инстаграм</span>
+            <span data-sq>Porositni përmes Instagramit</span><span data-en>Order via Instagram</span><span data-mk>Нарачајте преку Инстаграм</span>
           </a>
         </div>
       </div>
@@ -722,16 +728,16 @@
       <div class="prod-card reveal" data-cat="kollan">
         <div class="prod-visual bg-d">
           <img src="images/product-webp/Kollan%20Elmaz%201-900.webp" alt="" class="prod-photo-bg" aria-hidden="true" loading="lazy" decoding="async">
-          <img src="images/product-webp/Kollan%20Elmaz%201-900.webp" alt="Kollan Nata — Kollan I Zi" class="prod-photo" loading="lazy" decoding="async">
-          <div class="prod-overlay"><span><span data-sq>Porosit në Instagram</span><span data-en>Order via Instagram</span><span data-mk>Нарачај преку Инстаграм</span></span></div>
+          <img src="images/product-webp/Kollan%20Elmaz%201-900.webp" alt="Kollan Oniks — Kollan I Zi" class="prod-photo" loading="lazy" decoding="async">
+          <div class="prod-overlay"><span><span data-sq>Porositni përmes Instagramit</span><span data-en>Order via Instagram</span><span data-mk>Нарачајте преку Инстаграм</span></span></div>
         </div>
         <div class="prod-body">
           <div class="prod-row1">
-            <span class="prod-name">Kollan Nata</span>
+            <span class="prod-name">Kollan Oniks</span>
           </div>
           <span class="prod-cat"><span data-sq>Kollan · I Zi</span><span data-en>Belt · Black</span><span data-mk>Колан · Црн</span></span>
           <a href="https://instagram.com/bizhuteriafantazia" target="_blank" rel="noopener noreferrer" class="prod-btn">
-            <span data-sq>Porosit në Instagram</span><span data-en>Order on Instagram</span><span data-mk>Нарачај преку Инстаграм</span>
+            <span data-sq>Porositni përmes Instagramit</span><span data-en>Order via Instagram</span><span data-mk>Нарачајте преку Инстаграм</span>
           </a>
         </div>
       </div>
@@ -740,16 +746,16 @@
       <div class="prod-card reveal" data-cat="hallka" data-preview="1">
         <div class="prod-visual bg-a">
           <img src="images/product-webp/Hallka%201-900.webp" alt="" class="prod-photo-bg" aria-hidden="true" loading="lazy" decoding="async">
-          <img src="images/product-webp/Hallka%201-900.webp" alt="Hallka Luna — Hallka Klasike" class="prod-photo" loading="lazy" decoding="async">
-          <div class="prod-overlay"><span><span data-sq>Porosit në Instagram</span><span data-en>Order via Instagram</span><span data-mk>Нарачај преку Инстаграм</span></span></div>
+          <img src="images/product-webp/Hallka%201-900.webp" alt="Hallka Elegante — Hallka Klasike" class="prod-photo" loading="lazy" decoding="async">
+          <div class="prod-overlay"><span><span data-sq>Porositni përmes Instagramit</span><span data-en>Order via Instagram</span><span data-mk>Нарачајте преку Инстаграм</span></span></div>
         </div>
         <div class="prod-body">
           <div class="prod-row1">
-            <span class="prod-name">Hallka Luna</span>
+            <span class="prod-name">Hallka Elegante</span>
           </div>
           <span class="prod-cat"><span data-sq>Hallka · Klasike</span><span data-en>Hoops · Classic</span><span data-mk>Алки · Класични</span></span>
           <a href="https://instagram.com/bizhuteriafantazia" target="_blank" rel="noopener noreferrer" class="prod-btn">
-            <span data-sq>Porosit në Instagram</span><span data-en>Order on Instagram</span><span data-mk>Нарачај преку Инстаграм</span>
+            <span data-sq>Porositni përmes Instagramit</span><span data-en>Order via Instagram</span><span data-mk>Нарачајте преку Инстаграм</span>
           </a>
         </div>
       </div>
@@ -758,16 +764,16 @@
       <div class="prod-card reveal" data-cat="hallka" data-preview="1">
         <div class="prod-visual bg-b">
           <img src="images/product-webp/Hallka%202-900.webp" alt="" class="prod-photo-bg" aria-hidden="true" loading="lazy" decoding="async">
-          <img src="images/product-webp/Hallka%202-900.webp" alt="Hallka Era — Hallka Klasike" class="prod-photo" loading="lazy" decoding="async">
-          <div class="prod-overlay"><span><span data-sq>Porosit në Instagram</span><span data-en>Order via Instagram</span><span data-mk>Нарачај преку Инстаграм</span></span></div>
+          <img src="images/product-webp/Hallka%202-900.webp" alt="Hallka Moderne — Hallka Klasike" class="prod-photo" loading="lazy" decoding="async">
+          <div class="prod-overlay"><span><span data-sq>Porositni përmes Instagramit</span><span data-en>Order via Instagram</span><span data-mk>Нарачајте преку Инстаграм</span></span></div>
         </div>
         <div class="prod-body">
           <div class="prod-row1">
-            <span class="prod-name">Hallka Era</span>
+            <span class="prod-name">Hallka Moderne</span>
           </div>
           <span class="prod-cat"><span data-sq>Hallka · Klasike</span><span data-en>Hoops · Classic</span><span data-mk>Алки · Класични</span></span>
           <a href="https://instagram.com/bizhuteriafantazia" target="_blank" rel="noopener noreferrer" class="prod-btn">
-            <span data-sq>Porosit në Instagram</span><span data-en>Order on Instagram</span><span data-mk>Нарачај преку Инстаграм</span>
+            <span data-sq>Porositni përmes Instagramit</span><span data-en>Order via Instagram</span><span data-mk>Нарачајте преку Инстаграм</span>
           </a>
         </div>
       </div>
@@ -776,16 +782,16 @@
       <div class="prod-card reveal" data-cat="bracelets" data-preview="1">
         <div class="prod-visual bg-c">
           <img src="images/product-webp/Bilizik%20Bardh%201-900.webp" alt="" class="prod-photo-bg" aria-hidden="true" loading="lazy" decoding="async">
-          <img src="images/product-webp/Bilizik%20Bardh%201-900.webp" alt="Byzylyk Bora — Byzylyk I Bardhë" class="prod-photo" loading="lazy" decoding="async">
-          <div class="prod-overlay"><span><span data-sq>Porosit në Instagram</span><span data-en>Order via Instagram</span><span data-mk>Нарачај преку Инстаграм</span></span></div>
+          <img src="images/product-webp/Bilizik%20Bardh%201-900.webp" alt="Byzylyk Perla — Byzylyk I Bardhë" class="prod-photo" loading="lazy" decoding="async">
+          <div class="prod-overlay"><span><span data-sq>Porositni përmes Instagramit</span><span data-en>Order via Instagram</span><span data-mk>Нарачајте преку Инстаграм</span></span></div>
         </div>
         <div class="prod-body">
           <div class="prod-row1">
-            <span class="prod-name">Byzylyk Bora</span>
+            <span class="prod-name">Byzylyk Perla</span>
           </div>
           <span class="prod-cat"><span data-sq>Byzylyk · I Bardhë</span><span data-en>Bracelet · White</span><span data-mk>Белегзија · Бела</span></span>
           <a href="https://instagram.com/bizhuteriafantazia" target="_blank" rel="noopener noreferrer" class="prod-btn">
-            <span data-sq>Porosit në Instagram</span><span data-en>Order on Instagram</span><span data-mk>Нарачај преку Инстаграм</span>
+            <span data-sq>Porositni përmes Instagramit</span><span data-en>Order via Instagram</span><span data-mk>Нарачајте преку Инстаграм</span>
           </a>
         </div>
       </div>
@@ -795,7 +801,7 @@
         <div class="prod-visual bg-d">
           <img src="images/product-webp/Bilizik%20Verdh%201-900.webp" alt="" class="prod-photo-bg" aria-hidden="true" loading="lazy" decoding="async">
           <img src="images/product-webp/Bilizik%20Verdh%201-900.webp" alt="Byzylyk Dielli — Byzylyk I Verdhë" class="prod-photo" loading="lazy" decoding="async">
-          <div class="prod-overlay"><span><span data-sq>Porosit në Instagram</span><span data-en>Order via Instagram</span><span data-mk>Нарачај преку Инстаграм</span></span></div>
+          <div class="prod-overlay"><span><span data-sq>Porositni përmes Instagramit</span><span data-en>Order via Instagram</span><span data-mk>Нарачајте преку Инстаграм</span></span></div>
         </div>
         <div class="prod-body">
           <div class="prod-row1">
@@ -803,7 +809,7 @@
           </div>
           <span class="prod-cat"><span data-sq>Byzylyk · I Verdhë</span><span data-en>Bracelet · Yellow Gold</span><span data-mk>Белегзија · Жолта</span></span>
           <a href="https://instagram.com/bizhuteriafantazia" target="_blank" rel="noopener noreferrer" class="prod-btn">
-            <span data-sq>Porosit në Instagram</span><span data-en>Order on Instagram</span><span data-mk>Нарачај преку Инстаграм</span>
+            <span data-sq>Porositni përmes Instagramit</span><span data-en>Order via Instagram</span><span data-mk>Нарачајте преку Инстаграм</span>
           </a>
         </div>
       </div>
@@ -813,7 +819,7 @@
         <div class="prod-visual bg-a">
           <img src="images/product-webp/Ore%20Bardh%201-900.webp" alt="" class="prod-photo-bg" aria-hidden="true" loading="lazy" decoding="async">
           <img src="images/product-webp/Ore%20Bardh%201-900.webp" alt="Orë Perla — Orë E Bardhë" class="prod-photo" loading="lazy" decoding="async">
-          <div class="prod-overlay"><span><span data-sq>Porosit në Instagram</span><span data-en>Order via Instagram</span><span data-mk>Нарачај преку Инстаграм</span></span></div>
+          <div class="prod-overlay"><span><span data-sq>Porositni përmes Instagramit</span><span data-en>Order via Instagram</span><span data-mk>Нарачајте преку Инстаграм</span></span></div>
         </div>
         <div class="prod-body">
           <div class="prod-row1">
@@ -821,7 +827,7 @@
           </div>
           <span class="prod-cat"><span data-sq>Orë · E Bardhë</span><span data-en>Watch · White</span><span data-mk>Часовник · Бел</span></span>
           <a href="https://instagram.com/bizhuteriafantazia" target="_blank" rel="noopener noreferrer" class="prod-btn">
-            <span data-sq>Porosit në Instagram</span><span data-en>Order on Instagram</span><span data-mk>Нарачај преку Инстаграм</span>
+            <span data-sq>Porositni përmes Instagramit</span><span data-en>Order via Instagram</span><span data-mk>Нарачајте преку Инстаграм</span>
           </a>
         </div>
       </div>
@@ -831,7 +837,7 @@
         <div class="prod-visual bg-b">
           <img src="images/product-webp/Ore%20Verdh%201-900.webp" alt="" class="prod-photo-bg" aria-hidden="true" loading="lazy" decoding="async">
           <img src="images/product-webp/Ore%20Verdh%201-900.webp" alt="Orë Dielli — Orë E Verdhë" class="prod-photo" loading="lazy" decoding="async">
-          <div class="prod-overlay"><span><span data-sq>Porosit në Instagram</span><span data-en>Order via Instagram</span><span data-mk>Нарачај преку Инстаграм</span></span></div>
+          <div class="prod-overlay"><span><span data-sq>Porositni përmes Instagramit</span><span data-en>Order via Instagram</span><span data-mk>Нарачајте преку Инстаграм</span></span></div>
         </div>
         <div class="prod-body">
           <div class="prod-row1">
@@ -839,7 +845,7 @@
           </div>
           <span class="prod-cat"><span data-sq>Orë · E Verdhë</span><span data-en>Watch · Yellow Gold</span><span data-mk>Часовник · Жолт</span></span>
           <a href="https://instagram.com/bizhuteriafantazia" target="_blank" rel="noopener noreferrer" class="prod-btn">
-            <span data-sq>Porosit në Instagram</span><span data-en>Order on Instagram</span><span data-mk>Нарачај преку Инстаграм</span>
+            <span data-sq>Porositni përmes Instagramit</span><span data-en>Order via Instagram</span><span data-mk>Нарачајте преку Инстаграм</span>
           </a>
         </div>
       </div>
@@ -848,16 +854,16 @@
       <div class="prod-card reveal" data-cat="earrings" data-preview="1">
         <div class="prod-visual bg-c">
           <img src="images/product-webp/Vanth%20Bardh%201-900.webp" alt="" class="prod-photo-bg" aria-hidden="true" loading="lazy" decoding="async">
-          <img src="images/product-webp/Vanth%20Bardh%201-900.webp" alt="Vathë Bora — Vathë Të Bardhë" class="prod-photo" loading="lazy" decoding="async">
-          <div class="prod-overlay"><span><span data-sq>Porosit në Instagram</span><span data-en>Order via Instagram</span><span data-mk>Нарачај преку Инстаграм</span></span></div>
+          <img src="images/product-webp/Vanth%20Bardh%201-900.webp" alt="Vathë Kristal — Vathë Të Bardhë" class="prod-photo" loading="lazy" decoding="async">
+          <div class="prod-overlay"><span><span data-sq>Porositni përmes Instagramit</span><span data-en>Order via Instagram</span><span data-mk>Нарачајте преку Инстаграм</span></span></div>
         </div>
         <div class="prod-body">
           <div class="prod-row1">
-            <span class="prod-name">Vathë Bora</span>
+            <span class="prod-name">Vathë Kristal</span>
           </div>
           <span class="prod-cat"><span data-sq>Vathë · Të Bardhë</span><span data-en>Earrings · White</span><span data-mk>Обетки · Бели</span></span>
           <a href="https://instagram.com/bizhuteriafantazia" target="_blank" rel="noopener noreferrer" class="prod-btn">
-            <span data-sq>Porosit në Instagram</span><span data-en>Order on Instagram</span><span data-mk>Нарачај преку Инстаграм</span>
+            <span data-sq>Porositni përmes Instagramit</span><span data-en>Order via Instagram</span><span data-mk>Нарачајте преку Инстаграм</span>
           </a>
         </div>
       </div>
@@ -867,7 +873,7 @@
         <div class="prod-visual bg-d">
           <img src="images/product-webp/Vanth%20Verdh%201-900.webp" alt="" class="prod-photo-bg" aria-hidden="true" loading="lazy" decoding="async">
           <img src="images/product-webp/Vanth%20Verdh%201-900.webp" alt="Vathë Dielli — Vathë Të Verdhë" class="prod-photo" loading="lazy" decoding="async">
-          <div class="prod-overlay"><span><span data-sq>Porosit në Instagram</span><span data-en>Order via Instagram</span><span data-mk>Нарачај преку Инстаграм</span></span></div>
+          <div class="prod-overlay"><span><span data-sq>Porositni përmes Instagramit</span><span data-en>Order via Instagram</span><span data-mk>Нарачајте преку Инстаграм</span></span></div>
         </div>
         <div class="prod-body">
           <div class="prod-row1">
@@ -875,7 +881,7 @@
           </div>
           <span class="prod-cat"><span data-sq>Vathë · Të Verdhë</span><span data-en>Earrings · Yellow Gold</span><span data-mk>Обетки · Жолти</span></span>
           <a href="https://instagram.com/bizhuteriafantazia" target="_blank" rel="noopener noreferrer" class="prod-btn">
-            <span data-sq>Porosit në Instagram</span><span data-en>Order on Instagram</span><span data-mk>Нарачај преку Инстаграм</span>
+            <span data-sq>Porositni përmes Instagramit</span><span data-en>Order via Instagram</span><span data-mk>Нарачајте преку Инстаграм</span>
           </a>
         </div>
       </div>
@@ -884,16 +890,16 @@
       <div class="prod-card reveal" data-cat="rings" data-preview="1">
         <div class="prod-visual bg-a">
           <img src="images/product-webp/Unaz%20Bardh%201-900.webp" alt="" class="prod-photo-bg" aria-hidden="true" loading="lazy" decoding="async">
-          <img src="images/product-webp/Unaz%20Bardh%201-900.webp" alt="Unazë Bora — Unazë E Bardhë" class="prod-photo" loading="lazy" decoding="async">
-          <div class="prod-overlay"><span><span data-sq>Porosit në Instagram</span><span data-en>Order via Instagram</span><span data-mk>Нарачај преку Инстаграм</span></span></div>
+          <img src="images/product-webp/Unaz%20Bardh%201-900.webp" alt="Unazë Perla — Unazë E Bardhë" class="prod-photo" loading="lazy" decoding="async">
+          <div class="prod-overlay"><span><span data-sq>Porositni përmes Instagramit</span><span data-en>Order via Instagram</span><span data-mk>Нарачајте преку Инстаграм</span></span></div>
         </div>
         <div class="prod-body">
           <div class="prod-row1">
-            <span class="prod-name">Unazë Bora</span>
+            <span class="prod-name">Unazë Perla</span>
           </div>
           <span class="prod-cat"><span data-sq>Unazë · E Bardhë</span><span data-en>Ring · White</span><span data-mk>Прстен · Бел</span></span>
           <a href="https://instagram.com/bizhuteriafantazia" target="_blank" rel="noopener noreferrer" class="prod-btn">
-            <span data-sq>Porosit në Instagram</span><span data-en>Order on Instagram</span><span data-mk>Нарачај преку Инстаграм</span>
+            <span data-sq>Porositni përmes Instagramit</span><span data-en>Order via Instagram</span><span data-mk>Нарачајте преку Инстаграм</span>
           </a>
         </div>
       </div>
@@ -903,7 +909,7 @@
         <div class="prod-visual bg-b">
           <img src="images/product-webp/Unaz%20Verdh%201-900.webp" alt="" class="prod-photo-bg" aria-hidden="true" loading="lazy" decoding="async">
           <img src="images/product-webp/Unaz%20Verdh%201-900.webp" alt="Unazë Dielli — Unazë E Verdhë" class="prod-photo" loading="lazy" decoding="async">
-          <div class="prod-overlay"><span><span data-sq>Porosit në Instagram</span><span data-en>Order via Instagram</span><span data-mk>Нарачај преку Инстаграм</span></span></div>
+          <div class="prod-overlay"><span><span data-sq>Porositni përmes Instagramit</span><span data-en>Order via Instagram</span><span data-mk>Нарачајте преку Инстаграм</span></span></div>
         </div>
         <div class="prod-body">
           <div class="prod-row1">
@@ -911,7 +917,7 @@
           </div>
           <span class="prod-cat"><span data-sq>Unazë · E Verdhë</span><span data-en>Ring · Yellow Gold</span><span data-mk>Прстен · Жолт</span></span>
           <a href="https://instagram.com/bizhuteriafantazia" target="_blank" rel="noopener noreferrer" class="prod-btn">
-            <span data-sq>Porosit në Instagram</span><span data-en>Order on Instagram</span><span data-mk>Нарачај преку Инстаграм</span>
+            <span data-sq>Porositni përmes Instagramit</span><span data-en>Order via Instagram</span><span data-mk>Нарачајте преку Инстаграм</span>
           </a>
         </div>
       </div>
@@ -920,16 +926,16 @@
       <div class="prod-card reveal" data-cat="crowns">
         <div class="prod-visual bg-c">
           <img src="images/product-webp/Kuror%20e%20Bardh%202-900.webp" alt="" class="prod-photo-bg" aria-hidden="true" loading="lazy" decoding="async">
-          <img src="images/product-webp/Kuror%20e%20Bardh%202-900.webp" alt="Kurorë Bora — Kurorë E Bardhë" class="prod-photo" loading="lazy" decoding="async">
-          <div class="prod-overlay"><span><span data-sq>Porosit në Instagram</span><span data-en>Order via Instagram</span><span data-mk>Нарачај преку Инстаграм</span></span></div>
+          <img src="images/product-webp/Kuror%20e%20Bardh%202-900.webp" alt="Kurorë Kristal — Kurorë E Bardhë" class="prod-photo" loading="lazy" decoding="async">
+          <div class="prod-overlay"><span><span data-sq>Porositni përmes Instagramit</span><span data-en>Order via Instagram</span><span data-mk>Нарачајте преку Инстаграм</span></span></div>
         </div>
         <div class="prod-body">
           <div class="prod-row1">
-            <span class="prod-name">Kurorë Bora</span>
+            <span class="prod-name">Kurorë Kristal</span>
           </div>
           <span class="prod-cat"><span data-sq>Kurorë · E Bardhë</span><span data-en>Crown · White</span><span data-mk>Круна · Бела</span></span>
           <a href="https://instagram.com/bizhuteriafantazia" target="_blank" rel="noopener noreferrer" class="prod-btn">
-            <span data-sq>Porosit në Instagram</span><span data-en>Order on Instagram</span><span data-mk>Нарачај преку Инстаграм</span>
+            <span data-sq>Porositni përmes Instagramit</span><span data-en>Order via Instagram</span><span data-mk>Нарачајте преку Инстаграм</span>
           </a>
         </div>
       </div>
@@ -938,16 +944,16 @@
       <div class="prod-card reveal" data-cat="crowns">
         <div class="prod-visual bg-d">
           <img src="images/product-webp/Kuror%20e%20Bardh%203-900.webp" alt="" class="prod-photo-bg" aria-hidden="true" loading="lazy" decoding="async">
-          <img src="images/product-webp/Kuror%20e%20Bardh%203-900.webp" alt="Kurorë Vesa — Kurorë E Bardhë" class="prod-photo" loading="lazy" decoding="async">
-          <div class="prod-overlay"><span><span data-sq>Porosit në Instagram</span><span data-en>Order via Instagram</span><span data-mk>Нарачај преку Инстаграм</span></span></div>
+          <img src="images/product-webp/Kuror%20e%20Bardh%203-900.webp" alt="Kurorë Klasike — Kurorë E Bardhë" class="prod-photo" loading="lazy" decoding="async">
+          <div class="prod-overlay"><span><span data-sq>Porositni përmes Instagramit</span><span data-en>Order via Instagram</span><span data-mk>Нарачајте преку Инстаграм</span></span></div>
         </div>
         <div class="prod-body">
           <div class="prod-row1">
-            <span class="prod-name">Kurorë Vesa</span>
+            <span class="prod-name">Kurorë Klasike</span>
           </div>
           <span class="prod-cat"><span data-sq>Kurorë · E Bardhë</span><span data-en>Crown · White</span><span data-mk>Круна · Бела</span></span>
           <a href="https://instagram.com/bizhuteriafantazia" target="_blank" rel="noopener noreferrer" class="prod-btn">
-            <span data-sq>Porosit në Instagram</span><span data-en>Order on Instagram</span><span data-mk>Нарачај преку Инстаграм</span>
+            <span data-sq>Porositni përmes Instagramit</span><span data-en>Order via Instagram</span><span data-mk>Нарачајте преку Инстаграм</span>
           </a>
         </div>
       </div>
@@ -956,16 +962,16 @@
       <div class="prod-card reveal" data-cat="necklaces">
         <div class="prod-visual bg-a">
           <img src="images/product-webp/Gjerdan%20i%20Verdh%201-900.webp" alt="" class="prod-photo-bg" aria-hidden="true" loading="lazy" decoding="async">
-          <img src="images/product-webp/Gjerdan%20i%20Verdh%201-900.webp" alt="Gjerdan Mira — Gjerdan I Verdhë" class="prod-photo" loading="lazy" decoding="async">
-          <div class="prod-overlay"><span><span data-sq>Porosit në Instagram</span><span data-en>Order via Instagram</span><span data-mk>Нарачај преку Инстаграм</span></span></div>
+          <img src="images/product-webp/Gjerdan%20i%20Verdh%201-900.webp" alt="Gjerdan Dielli — Gjerdan I Verdhë" class="prod-photo" loading="lazy" decoding="async">
+          <div class="prod-overlay"><span><span data-sq>Porositni përmes Instagramit</span><span data-en>Order via Instagram</span><span data-mk>Нарачајте преку Инстаграм</span></span></div>
         </div>
         <div class="prod-body">
           <div class="prod-row1">
-            <span class="prod-name">Gjerdan Mira</span>
+            <span class="prod-name">Gjerdan Dielli</span>
           </div>
           <span class="prod-cat"><span data-sq>Gjerdan · I Verdhë</span><span data-en>Necklace · Yellow Gold</span><span data-mk>Ѓердан · Жолт</span></span>
           <a href="https://instagram.com/bizhuteriafantazia" target="_blank" rel="noopener noreferrer" class="prod-btn">
-            <span data-sq>Porosit në Instagram</span><span data-en>Order on Instagram</span><span data-mk>Нарачај преку Инстаграм</span>
+            <span data-sq>Porositni përmes Instagramit</span><span data-en>Order via Instagram</span><span data-mk>Нарачајте преку Инстаграм</span>
           </a>
         </div>
       </div>
@@ -974,16 +980,16 @@
       <div class="prod-card reveal" data-cat="necklaces">
         <div class="prod-visual bg-b">
           <img src="images/product-webp/Gjerdan%20i%20Verdh%202-900.webp" alt="" class="prod-photo-bg" aria-hidden="true" loading="lazy" decoding="async">
-          <img src="images/product-webp/Gjerdan%20i%20Verdh%202-900.webp" alt="Gjerdan Diva — Gjerdan I Verdhë" class="prod-photo" loading="lazy" decoding="async">
-          <div class="prod-overlay"><span><span data-sq>Porosit në Instagram</span><span data-en>Order via Instagram</span><span data-mk>Нарачај преку Инстаграм</span></span></div>
+          <img src="images/product-webp/Gjerdan%20i%20Verdh%202-900.webp" alt="Gjerdan Tradicional — Gjerdan I Verdhë" class="prod-photo" loading="lazy" decoding="async">
+          <div class="prod-overlay"><span><span data-sq>Porositni përmes Instagramit</span><span data-en>Order via Instagram</span><span data-mk>Нарачајте преку Инстаграм</span></span></div>
         </div>
         <div class="prod-body">
           <div class="prod-row1">
-            <span class="prod-name">Gjerdan Diva</span>
+            <span class="prod-name">Gjerdan Tradicional</span>
           </div>
           <span class="prod-cat"><span data-sq>Gjerdan · I Verdhë</span><span data-en>Necklace · Yellow Gold</span><span data-mk>Ѓердан · Жолт</span></span>
           <a href="https://instagram.com/bizhuteriafantazia" target="_blank" rel="noopener noreferrer" class="prod-btn">
-            <span data-sq>Porosit në Instagram</span><span data-en>Order on Instagram</span><span data-mk>Нарачај преку Инстаграм</span>
+            <span data-sq>Porositni përmes Instagramit</span><span data-en>Order via Instagram</span><span data-mk>Нарачајте преку Инстаграм</span>
           </a>
         </div>
       </div>
@@ -992,16 +998,16 @@
       <div class="prod-card reveal" data-cat="lule" data-preview="1">
         <div class="prod-visual bg-c">
           <img src="images/product-webp/Lule%20Bardh%201-900.webp" alt="" class="prod-photo-bg" aria-hidden="true" loading="lazy" decoding="async">
-          <img src="images/product-webp/Lule%20Bardh%201-900.webp" alt="Lule Bora — Lule E Bardhë" class="prod-photo" loading="lazy" decoding="async">
-          <div class="prod-overlay"><span><span data-sq>Porosit në Instagram</span><span data-en>Order via Instagram</span><span data-mk>Нарачај преку Инстаграм</span></span></div>
+          <img src="images/product-webp/Lule%20Bardh%201-900.webp" alt="Lule Kristal — Lule E Bardhë" class="prod-photo" loading="lazy" decoding="async">
+          <div class="prod-overlay"><span><span data-sq>Porositni përmes Instagramit</span><span data-en>Order via Instagram</span><span data-mk>Нарачајте преку Инстаграм</span></span></div>
         </div>
         <div class="prod-body">
           <div class="prod-row1">
-            <span class="prod-name">Lule Bora</span>
+            <span class="prod-name">Lule Kristal</span>
           </div>
           <span class="prod-cat"><span data-sq>Lule · E Bardhë</span><span data-en>Hair Flower · White</span><span data-mk>Цвет · Бел</span></span>
           <a href="https://instagram.com/bizhuteriafantazia" target="_blank" rel="noopener noreferrer" class="prod-btn">
-            <span data-sq>Porosit në Instagram</span><span data-en>Order on Instagram</span><span data-mk>Нарачај преку Инстаграм</span>
+            <span data-sq>Porositni përmes Instagramit</span><span data-en>Order via Instagram</span><span data-mk>Нарачајте преку Инстаграм</span>
           </a>
         </div>
       </div>
@@ -1011,7 +1017,7 @@
         <div class="prod-visual bg-d">
           <img src="images/product-webp/Lule%20Bardh%202-900.webp" alt="" class="prod-photo-bg" aria-hidden="true" loading="lazy" decoding="async">
           <img src="images/product-webp/Lule%20Bardh%202-900.webp" alt="Lule Zambaku — Lule E Bardhë" class="prod-photo" loading="lazy" decoding="async">
-          <div class="prod-overlay"><span><span data-sq>Porosit në Instagram</span><span data-en>Order via Instagram</span><span data-mk>Нарачај преку Инстаграм</span></span></div>
+          <div class="prod-overlay"><span><span data-sq>Porositni përmes Instagramit</span><span data-en>Order via Instagram</span><span data-mk>Нарачајте преку Инстаграм</span></span></div>
         </div>
         <div class="prod-body">
           <div class="prod-row1">
@@ -1019,7 +1025,7 @@
           </div>
           <span class="prod-cat"><span data-sq>Lule · E Bardhë</span><span data-en>Hair Flower · White</span><span data-mk>Цвет · Бел</span></span>
           <a href="https://instagram.com/bizhuteriafantazia" target="_blank" rel="noopener noreferrer" class="prod-btn">
-            <span data-sq>Porosit në Instagram</span><span data-en>Order on Instagram</span><span data-mk>Нарачај преку Инстаграм</span>
+            <span data-sq>Porositni përmes Instagramit</span><span data-en>Order via Instagram</span><span data-mk>Нарачајте преку Инстаграм</span>
           </a>
         </div>
       </div>
@@ -1029,7 +1035,7 @@
         <div class="prod-visual bg-a">
           <img src="images/product-webp/Kollan%20Ari%201-900.webp" alt="" class="prod-photo-bg" aria-hidden="true" loading="lazy" decoding="async">
           <img src="images/product-webp/Kollan%20Ari%201-900.webp" alt="Kollan Ari — Kollan Ari" class="prod-photo" loading="lazy" decoding="async">
-          <div class="prod-overlay"><span><span data-sq>Porosit në Instagram</span><span data-en>Order via Instagram</span><span data-mk>Нарачај преку Инстаграм</span></span></div>
+          <div class="prod-overlay"><span><span data-sq>Porositni përmes Instagramit</span><span data-en>Order via Instagram</span><span data-mk>Нарачајте преку Инстаграм</span></span></div>
         </div>
         <div class="prod-body">
           <div class="prod-row1">
@@ -1037,7 +1043,7 @@
           </div>
           <span class="prod-cat"><span data-sq>Kollan · Ari</span><span data-en>Belt · Gold</span><span data-mk>Колан · Златен</span></span>
           <a href="https://instagram.com/bizhuteriafantazia" target="_blank" rel="noopener noreferrer" class="prod-btn">
-            <span data-sq>Porosit në Instagram</span><span data-en>Order on Instagram</span><span data-mk>Нарачај преку Инстаграм</span>
+            <span data-sq>Porositni përmes Instagramit</span><span data-en>Order via Instagram</span><span data-mk>Нарачајте преку Инстаграм</span>
           </a>
         </div>
       </div>
@@ -1047,7 +1053,7 @@
         <div class="prod-visual bg-b">
           <img src="images/product-webp/Kollan%20Verdh%201-900.webp" alt="" class="prod-photo-bg" aria-hidden="true" loading="lazy" decoding="async">
           <img src="images/product-webp/Kollan%20Verdh%201-900.webp" alt="Kollan Dielli — Kollan I Verdhë" class="prod-photo" loading="lazy" decoding="async">
-          <div class="prod-overlay"><span><span data-sq>Porosit në Instagram</span><span data-en>Order via Instagram</span><span data-mk>Нарачај преку Инстаграм</span></span></div>
+          <div class="prod-overlay"><span><span data-sq>Porositni përmes Instagramit</span><span data-en>Order via Instagram</span><span data-mk>Нарачајте преку Инстаграм</span></span></div>
         </div>
         <div class="prod-body">
           <div class="prod-row1">
@@ -1055,7 +1061,7 @@
           </div>
           <span class="prod-cat"><span data-sq>Kollan · I Verdhë</span><span data-en>Belt · Yellow Gold</span><span data-mk>Колан · Жолт</span></span>
           <a href="https://instagram.com/bizhuteriafantazia" target="_blank" rel="noopener noreferrer" class="prod-btn">
-            <span data-sq>Porosit në Instagram</span><span data-en>Order on Instagram</span><span data-mk>Нарачај преку Инстаграм</span>
+            <span data-sq>Porositni përmes Instagramit</span><span data-en>Order via Instagram</span><span data-mk>Нарачајте преку Инстаграм</span>
           </a>
         </div>
       </div>
@@ -1065,16 +1071,16 @@
         <span class="prod-badge badge-best"><span data-sq>Shumë i Shitur</span><span data-en>Best Seller</span><span data-mk>Најпродавано</span></span>
         <div class="prod-visual bg-c">
           <img src="images/product-webp/Or%20Shum%20Shitur-900.webp" alt="" class="prod-photo-bg" aria-hidden="true" loading="lazy" decoding="async">
-          <img src="images/product-webp/Or%20Shum%20Shitur-900.webp" alt="Orë Fantazia — Orë E Bardhë" class="prod-photo" loading="lazy" decoding="async">
-          <div class="prod-overlay"><span><span data-sq>Porosit në Instagram</span><span data-en>Order via Instagram</span><span data-mk>Нарачај преку Инстаграм</span></span></div>
+          <img src="images/product-webp/Or%20Shum%20Shitur-900.webp" alt="Ora Prestige — Orë E Bardhë" class="prod-photo" loading="lazy" decoding="async">
+          <div class="prod-overlay"><span><span data-sq>Porositni përmes Instagramit</span><span data-en>Order via Instagram</span><span data-mk>Нарачајте преку Инстаграм</span></span></div>
         </div>
         <div class="prod-body">
           <div class="prod-row1">
-            <span class="prod-name">Orë Fantazia</span>
+            <span class="prod-name">Ora Prestige</span>
           </div>
           <span class="prod-cat"><span data-sq>Orë · E Bardhë</span><span data-en>Watch · White</span><span data-mk>Часовник · Бел</span></span>
           <a href="https://instagram.com/bizhuteriafantazia" target="_blank" rel="noopener noreferrer" class="prod-btn">
-            <span data-sq>Porosit në Instagram</span><span data-en>Order on Instagram</span><span data-mk>Нарачај преку Инстаграм</span>
+            <span data-sq>Porositni përmes Instagramit</span><span data-en>Order via Instagram</span><span data-mk>Нарачајте преку Инстаграм</span>
           </a>
         </div>
       </div>
@@ -1083,16 +1089,16 @@
       <div class="prod-card reveal" data-cat="earrings" data-preview="1">
         <div class="prod-visual bg-d">
           <img src="images/product-webp/Vanth%20Ngjyra%201-900.webp" alt="" class="prod-photo-bg" aria-hidden="true" loading="lazy" decoding="async">
-          <img src="images/product-webp/Vanth%20Ngjyra%201-900.webp" alt="Vathë Rubina — Vathë Të Kuq" class="prod-photo" loading="lazy" decoding="async">
-          <div class="prod-overlay"><span><span data-sq>Porosit në Instagram</span><span data-en>Order via Instagram</span><span data-mk>Нарачај преку Инстаграм</span></span></div>
+          <img src="images/product-webp/Vanth%20Ngjyra%201-900.webp" alt="Vathë Rubin — Vathë Të Kuq" class="prod-photo" loading="lazy" decoding="async">
+          <div class="prod-overlay"><span><span data-sq>Porositni përmes Instagramit</span><span data-en>Order via Instagram</span><span data-mk>Нарачајте преку Инстаграм</span></span></div>
         </div>
         <div class="prod-body">
           <div class="prod-row1">
-            <span class="prod-name">Vathë Rubina</span>
+            <span class="prod-name">Vathë Rubin</span>
           </div>
           <span class="prod-cat"><span data-sq>Vathë · Të Kuq</span><span data-en>Earrings · Red</span><span data-mk>Обетки · Црвени</span></span>
           <a href="https://instagram.com/bizhuteriafantazia" target="_blank" rel="noopener noreferrer" class="prod-btn">
-            <span data-sq>Porosit në Instagram</span><span data-en>Order on Instagram</span><span data-mk>Нарачај преку Инстаграм</span>
+            <span data-sq>Porositni përmes Instagramit</span><span data-en>Order via Instagram</span><span data-mk>Нарачајте преку Инстаграм</span>
           </a>
         </div>
       </div>
@@ -1102,7 +1108,7 @@
         <div class="prod-visual bg-a">
           <img src="images/product-webp/Unaz%20Ari%201-900.webp" alt="" class="prod-photo-bg" aria-hidden="true" loading="lazy" decoding="async">
           <img src="images/product-webp/Unaz%20Ari%201-900.webp" alt="Unazë Ari — Unazë Ari" class="prod-photo" loading="lazy" decoding="async">
-          <div class="prod-overlay"><span><span data-sq>Porosit në Instagram</span><span data-en>Order via Instagram</span><span data-mk>Нарачај преку Инстаграм</span></span></div>
+          <div class="prod-overlay"><span><span data-sq>Porositni përmes Instagramit</span><span data-en>Order via Instagram</span><span data-mk>Нарачајте преку Инстаграм</span></span></div>
         </div>
         <div class="prod-body">
           <div class="prod-row1">
@@ -1110,7 +1116,7 @@
           </div>
           <span class="prod-cat"><span data-sq>Unazë · Ari</span><span data-en>Ring · Gold</span><span data-mk>Прстен · Златен</span></span>
           <a href="https://instagram.com/bizhuteriafantazia" target="_blank" rel="noopener noreferrer" class="prod-btn">
-            <span data-sq>Porosit në Instagram</span><span data-en>Order on Instagram</span><span data-mk>Нарачај преку Инстаграм</span>
+            <span data-sq>Porositni përmes Instagramit</span><span data-en>Order via Instagram</span><span data-mk>Нарачајте преку Инстаграм</span>
           </a>
         </div>
       </div>
@@ -1120,7 +1126,7 @@
         <div class="prod-visual bg-b">
           <img src="images/product-webp/Unaz%20Ngjyra%201-900.webp" alt="" class="prod-photo-bg" aria-hidden="true" loading="lazy" decoding="async">
           <img src="images/product-webp/Unaz%20Ngjyra%201-900.webp" alt="Unaza Ylberi — Unazë Ngjyra të Ndryshme" class="prod-photo" loading="lazy" decoding="async">
-          <div class="prod-overlay"><span><span data-sq>Porosit në Instagram</span><span data-en>Order via Instagram</span><span data-mk>Нарачај преку Инстаграм</span></span></div>
+          <div class="prod-overlay"><span><span data-sq>Porositni përmes Instagramit</span><span data-en>Order via Instagram</span><span data-mk>Нарачајте преку Инстаграм</span></span></div>
         </div>
         <div class="prod-body">
           <div class="prod-row1">
@@ -1128,7 +1134,7 @@
           </div>
           <span class="prod-cat"><span data-sq>Unazë · Ngjyra të Ndryshme</span><span data-en>Ring · Assorted Colours</span><span data-mk>Прстен · Разни бои</span></span>
           <a href="https://instagram.com/bizhuteriafantazia" target="_blank" rel="noopener noreferrer" class="prod-btn">
-            <span data-sq>Porosit në Instagram</span><span data-en>Order on Instagram</span><span data-mk>Нарачај преку Инстаграм</span>
+            <span data-sq>Porositni përmes Instagramit</span><span data-en>Order via Instagram</span><span data-mk>Нарачајте преку Инстаграм</span>
           </a>
         </div>
       </div>
@@ -1137,16 +1143,16 @@
       <div class="prod-card reveal" data-cat="crowns">
         <div class="prod-visual bg-c">
           <img src="images/product-webp/Kuror%20e%20Bardh%204-900.webp" alt="" class="prod-photo-bg" aria-hidden="true" loading="lazy" decoding="async">
-          <img src="images/product-webp/Kuror%20e%20Bardh%204-900.webp" alt="Kurorë Drita — Kurorë E Bardhë" class="prod-photo" loading="lazy" decoding="async">
-          <div class="prod-overlay"><span><span data-sq>Porosit në Instagram</span><span data-en>Order via Instagram</span><span data-mk>Нарачај преку Инстаграм</span></span></div>
+          <img src="images/product-webp/Kuror%20e%20Bardh%204-900.webp" alt="Kurorë Elegante — Kurorë E Bardhë" class="prod-photo" loading="lazy" decoding="async">
+          <div class="prod-overlay"><span><span data-sq>Porositni përmes Instagramit</span><span data-en>Order via Instagram</span><span data-mk>Нарачајте преку Инстаграм</span></span></div>
         </div>
         <div class="prod-body">
           <div class="prod-row1">
-            <span class="prod-name">Kurorë Drita</span>
+            <span class="prod-name">Kurorë Elegante</span>
           </div>
           <span class="prod-cat"><span data-sq>Kurorë · E Bardhë</span><span data-en>Crown · White</span><span data-mk>Круна · Бела</span></span>
           <a href="https://instagram.com/bizhuteriafantazia" target="_blank" rel="noopener noreferrer" class="prod-btn">
-            <span data-sq>Porosit në Instagram</span><span data-en>Order on Instagram</span><span data-mk>Нарачај преку Инстаграм</span>
+            <span data-sq>Porositni përmes Instagramit</span><span data-en>Order via Instagram</span><span data-mk>Нарачајте преку Инстаграм</span>
           </a>
         </div>
       </div>
@@ -1155,16 +1161,16 @@
       <div class="prod-card reveal" data-cat="crowns">
         <div class="prod-visual bg-d">
           <img src="images/product-webp/Kuror%20e%20Bardh%205-900.webp" alt="" class="prod-photo-bg" aria-hidden="true" loading="lazy" decoding="async">
-          <img src="images/product-webp/Kuror%20e%20Bardh%205-900.webp" alt="Kurorë Luna — Kurorë E Bardhë" class="prod-photo" loading="lazy" decoding="async">
-          <div class="prod-overlay"><span><span data-sq>Porosit në Instagram</span><span data-en>Order via Instagram</span><span data-mk>Нарачај преку Инстаграм</span></span></div>
+          <img src="images/product-webp/Kuror%20e%20Bardh%205-900.webp" alt="Kurorë Nusërie — Kurorë E Bardhë" class="prod-photo" loading="lazy" decoding="async">
+          <div class="prod-overlay"><span><span data-sq>Porositni përmes Instagramit</span><span data-en>Order via Instagram</span><span data-mk>Нарачајте преку Инстаграм</span></span></div>
         </div>
         <div class="prod-body">
           <div class="prod-row1">
-            <span class="prod-name">Kurorë Luna</span>
+            <span class="prod-name">Kurorë Nusërie</span>
           </div>
           <span class="prod-cat"><span data-sq>Kurorë · E Bardhë</span><span data-en>Crown · White</span><span data-mk>Круна · Бела</span></span>
           <a href="https://instagram.com/bizhuteriafantazia" target="_blank" rel="noopener noreferrer" class="prod-btn">
-            <span data-sq>Porosit në Instagram</span><span data-en>Order on Instagram</span><span data-mk>Нарачај преку Инстаграм</span>
+            <span data-sq>Porositni përmes Instagramit</span><span data-en>Order via Instagram</span><span data-mk>Нарачајте преку Инстаграм</span>
           </a>
         </div>
       </div>
@@ -1173,16 +1179,16 @@
       <div class="prod-card reveal" data-cat="necklaces">
         <div class="prod-visual bg-a">
           <img src="images/product-webp/Gjerdan%20Ari%201-900.webp" alt="" class="prod-photo-bg" aria-hidden="true" loading="lazy" decoding="async">
-          <img src="images/product-webp/Gjerdan%20Ari%201-900.webp" alt="Gjerdan Arta — Gjerdan Ari" class="prod-photo" loading="lazy" decoding="async">
-          <div class="prod-overlay"><span><span data-sq>Porosit në Instagram</span><span data-en>Order via Instagram</span><span data-mk>Нарачај преку Инстаграм</span></span></div>
+          <img src="images/product-webp/Gjerdan%20Ari%201-900.webp" alt="Gjerdan Alltan — Gjerdan Ari" class="prod-photo" loading="lazy" decoding="async">
+          <div class="prod-overlay"><span><span data-sq>Porositni përmes Instagramit</span><span data-en>Order via Instagram</span><span data-mk>Нарачајте преку Инстаграм</span></span></div>
         </div>
         <div class="prod-body">
           <div class="prod-row1">
-            <span class="prod-name">Gjerdan Arta</span>
+            <span class="prod-name">Gjerdan Alltan</span>
           </div>
           <span class="prod-cat"><span data-sq>Gjerdan · Ari</span><span data-en>Necklace · Gold</span><span data-mk>Ѓердан · Златен</span></span>
           <a href="https://instagram.com/bizhuteriafantazia" target="_blank" rel="noopener noreferrer" class="prod-btn">
-            <span data-sq>Porosit në Instagram</span><span data-en>Order on Instagram</span><span data-mk>Нарачај преку Инстаграм</span>
+            <span data-sq>Porositni përmes Instagramit</span><span data-en>Order via Instagram</span><span data-mk>Нарачајте преку Инстаграм</span>
           </a>
         </div>
       </div>
@@ -1191,16 +1197,16 @@
       <div class="prod-card reveal" data-cat="necklaces">
         <div class="prod-visual bg-b">
           <img src="images/product-webp/Gjerdan%20Ari%202-900.webp" alt="" class="prod-photo-bg" aria-hidden="true" loading="lazy" decoding="async">
-          <img src="images/product-webp/Gjerdan%20Ari%202-900.webp" alt="Gjerdan Florina — Gjerdan Ari" class="prod-photo" loading="lazy" decoding="async">
-          <div class="prod-overlay"><span><span data-sq>Porosit në Instagram</span><span data-en>Order via Instagram</span><span data-mk>Нарачај преку Инстаграм</span></span></div>
+          <img src="images/product-webp/Gjerdan%20Ari%202-900.webp" alt="Gjerdan Flori — Gjerdan Ari" class="prod-photo" loading="lazy" decoding="async">
+          <div class="prod-overlay"><span><span data-sq>Porositni përmes Instagramit</span><span data-en>Order via Instagram</span><span data-mk>Нарачајте преку Инстаграм</span></span></div>
         </div>
         <div class="prod-body">
           <div class="prod-row1">
-            <span class="prod-name">Gjerdan Florina</span>
+            <span class="prod-name">Gjerdan Flori</span>
           </div>
           <span class="prod-cat"><span data-sq>Gjerdan · Ari</span><span data-en>Necklace · Gold</span><span data-mk>Ѓердан · Златен</span></span>
           <a href="https://instagram.com/bizhuteriafantazia" target="_blank" rel="noopener noreferrer" class="prod-btn">
-            <span data-sq>Porosit në Instagram</span><span data-en>Order on Instagram</span><span data-mk>Нарачај преку Инстаграм</span>
+            <span data-sq>Porositni përmes Instagramit</span><span data-en>Order via Instagram</span><span data-mk>Нарачајте преку Инстаграм</span>
           </a>
         </div>
       </div>
@@ -1210,16 +1216,16 @@
         <span class="prod-badge badge-best"><span data-sq>Shumë i Shitur</span><span data-en>Best Seller</span><span data-mk>Најпродавано</span></span>
         <div class="prod-visual bg-c">
           <img src="images/product-webp/Kollan%20Shum%20Shitur-900.webp" alt="" class="prod-photo-bg" aria-hidden="true" loading="lazy" decoding="async">
-          <img src="images/product-webp/Kollan%20Shum%20Shitur-900.webp" alt="Kollan Fantazia — Kollan Ari" class="prod-photo" loading="lazy" decoding="async">
-          <div class="prod-overlay"><span><span data-sq>Porosit në Instagram</span><span data-en>Order via Instagram</span><span data-mk>Нарачај преку Инстаграм</span></span></div>
+          <img src="images/product-webp/Kollan%20Shum%20Shitur-900.webp" alt="Kollan Fazan — Kollan Ari" class="prod-photo" loading="lazy" decoding="async">
+          <div class="prod-overlay"><span><span data-sq>Porositni përmes Instagramit</span><span data-en>Order via Instagram</span><span data-mk>Нарачајте преку Инстаграм</span></span></div>
         </div>
         <div class="prod-body">
           <div class="prod-row1">
-            <span class="prod-name">Kollan Fantazia</span>
+            <span class="prod-name">Kollan Fazan</span>
           </div>
           <span class="prod-cat"><span data-sq>Kollan · Ari</span><span data-en>Belt · Gold</span><span data-mk>Колан · Златен</span></span>
           <a href="https://instagram.com/bizhuteriafantazia" target="_blank" rel="noopener noreferrer" class="prod-btn">
-            <span data-sq>Porosit në Instagram</span><span data-en>Order on Instagram</span><span data-mk>Нарачај преку Инстаграм</span>
+            <span data-sq>Porositni përmes Instagramit</span><span data-en>Order via Instagram</span><span data-mk>Нарачајте преку Инстаграм</span>
           </a>
         </div>
       </div>
@@ -1228,16 +1234,16 @@
       <div class="prod-card reveal" data-cat="crowns">
         <div class="prod-visual bg-d">
           <img src="images/product-webp/Kuror%20e%20Bardh%206-900.webp" alt="" class="prod-photo-bg" aria-hidden="true" loading="lazy" decoding="async">
-          <img src="images/product-webp/Kuror%20e%20Bardh%206-900.webp" alt="Kurorë Hëna — Kurorë E Bardhë" class="prod-photo" loading="lazy" decoding="async">
-          <div class="prod-overlay"><span><span data-sq>Porosit në Instagram</span><span data-en>Order via Instagram</span><span data-mk>Нарачај преку Инстаграм</span></span></div>
+          <img src="images/product-webp/Kuror%20e%20Bardh%206-900.webp" alt="Kurorë Sedef — Kurorë E Bardhë" class="prod-photo" loading="lazy" decoding="async">
+          <div class="prod-overlay"><span><span data-sq>Porositni përmes Instagramit</span><span data-en>Order via Instagram</span><span data-mk>Нарачајте преку Инстаграм</span></span></div>
         </div>
         <div class="prod-body">
           <div class="prod-row1">
-            <span class="prod-name">Kurorë Hëna</span>
+            <span class="prod-name">Kurorë Sedef</span>
           </div>
           <span class="prod-cat"><span data-sq>Kurorë · E Bardhë</span><span data-en>Crown · White</span><span data-mk>Круна · Бела</span></span>
           <a href="https://instagram.com/bizhuteriafantazia" target="_blank" rel="noopener noreferrer" class="prod-btn">
-            <span data-sq>Porosit në Instagram</span><span data-en>Order on Instagram</span><span data-mk>Нарачај преку Инстаграм</span>
+            <span data-sq>Porositni përmes Instagramit</span><span data-en>Order via Instagram</span><span data-mk>Нарачајте преку Инстаграм</span>
           </a>
         </div>
       </div>
@@ -1246,16 +1252,16 @@
       <div class="prod-card reveal" data-cat="crowns">
         <div class="prod-visual bg-a">
           <img src="images/product-webp/Kuror%20e%20Bardh%207-900.webp" alt="" class="prod-photo-bg" aria-hidden="true" loading="lazy" decoding="async">
-          <img src="images/product-webp/Kuror%20e%20Bardh%207-900.webp" alt="Kurorë Nora — Kurorë E Bardhë" class="prod-photo" loading="lazy" decoding="async">
-          <div class="prod-overlay"><span><span data-sq>Porosit në Instagram</span><span data-en>Order via Instagram</span><span data-mk>Нарачај преку Инстаграм</span></span></div>
+          <img src="images/product-webp/Kuror%20e%20Bardh%207-900.webp" alt="Kurorë Princeshë — Kurorë E Bardhë" class="prod-photo" loading="lazy" decoding="async">
+          <div class="prod-overlay"><span><span data-sq>Porositni përmes Instagramit</span><span data-en>Order via Instagram</span><span data-mk>Нарачајте преку Инстаграм</span></span></div>
         </div>
         <div class="prod-body">
           <div class="prod-row1">
-            <span class="prod-name">Kurorë Nora</span>
+            <span class="prod-name">Kurorë Princeshë</span>
           </div>
           <span class="prod-cat"><span data-sq>Kurorë · E Bardhë</span><span data-en>Crown · White</span><span data-mk>Круна · Бела</span></span>
           <a href="https://instagram.com/bizhuteriafantazia" target="_blank" rel="noopener noreferrer" class="prod-btn">
-            <span data-sq>Porosit në Instagram</span><span data-en>Order on Instagram</span><span data-mk>Нарачај преку Инстаграм</span>
+            <span data-sq>Porositni përmes Instagramit</span><span data-en>Order via Instagram</span><span data-mk>Нарачајте преку Инстаграм</span>
           </a>
         </div>
       </div>
@@ -1264,16 +1270,16 @@
       <div class="prod-card reveal" data-cat="necklaces">
         <div class="prod-visual bg-b">
           <img src="images/product-webp/Gjerdan%20Elmaz%201-900.webp" alt="" class="prod-photo-bg" aria-hidden="true" loading="lazy" decoding="async">
-          <img src="images/product-webp/Gjerdan%20Elmaz%201-900.webp" alt="Gjerdan Hija — Gjerdan E Zezë" class="prod-photo" loading="lazy" decoding="async">
-          <div class="prod-overlay"><span><span data-sq>Porosit në Instagram</span><span data-en>Order via Instagram</span><span data-mk>Нарачај преку Инстаграм</span></span></div>
+          <img src="images/product-webp/Gjerdan%20Elmaz%201-900.webp" alt="Gjerdan Mesnatë — Gjerdan E Zezë" class="prod-photo" loading="lazy" decoding="async">
+          <div class="prod-overlay"><span><span data-sq>Porositni përmes Instagramit</span><span data-en>Order via Instagram</span><span data-mk>Нарачајте преку Инстаграм</span></span></div>
         </div>
         <div class="prod-body">
           <div class="prod-row1">
-            <span class="prod-name">Gjerdan Hija</span>
+            <span class="prod-name">Gjerdan Mesnatë</span>
           </div>
           <span class="prod-cat"><span data-sq>Gjerdan · E Zezë</span><span data-en>Necklace · Black</span><span data-mk>Ѓердан · Црн</span></span>
           <a href="https://instagram.com/bizhuteriafantazia" target="_blank" rel="noopener noreferrer" class="prod-btn">
-            <span data-sq>Porosit në Instagram</span><span data-en>Order on Instagram</span><span data-mk>Нарачај преку Инстаграм</span>
+            <span data-sq>Porositni përmes Instagramit</span><span data-en>Order via Instagram</span><span data-mk>Нарачајте преку Инстаграм</span>
           </a>
         </div>
       </div>
@@ -1283,7 +1289,7 @@
         <div class="prod-visual bg-c">
           <img src="images/product-webp/Gjerdan%20Elmaz%202-900.webp" alt="" class="prod-photo-bg" aria-hidden="true" loading="lazy" decoding="async">
           <img src="images/product-webp/Gjerdan%20Elmaz%202-900.webp" alt="Gjerdan Oniks — Gjerdan E Zezë" class="prod-photo" loading="lazy" decoding="async">
-          <div class="prod-overlay"><span><span data-sq>Porosit në Instagram</span><span data-en>Order via Instagram</span><span data-mk>Нарачај преку Инстаграм</span></span></div>
+          <div class="prod-overlay"><span><span data-sq>Porositni përmes Instagramit</span><span data-en>Order via Instagram</span><span data-mk>Нарачајте преку Инстаграм</span></span></div>
         </div>
         <div class="prod-body">
           <div class="prod-row1">
@@ -1291,7 +1297,7 @@
           </div>
           <span class="prod-cat"><span data-sq>Gjerdan · E Zezë</span><span data-en>Necklace · Black</span><span data-mk>Ѓердан · Црн</span></span>
           <a href="https://instagram.com/bizhuteriafantazia" target="_blank" rel="noopener noreferrer" class="prod-btn">
-            <span data-sq>Porosit në Instagram</span><span data-en>Order on Instagram</span><span data-mk>Нарачај преку Инстаграм</span>
+            <span data-sq>Porositni përmes Instagramit</span><span data-en>Order via Instagram</span><span data-mk>Нарачајте преку Инстаграм</span>
           </a>
         </div>
       </div>
@@ -1300,16 +1306,16 @@
       <div class="prod-card reveal" data-cat="crowns">
         <div class="prod-visual bg-d">
           <img src="images/product-webp/Kuror%20e%20Bardh%208-900.webp" alt="" class="prod-photo-bg" aria-hidden="true" loading="lazy" decoding="async">
-          <img src="images/product-webp/Kuror%20e%20Bardh%208-900.webp" alt="Kurorë Era — Kurorë E Bardhë" class="prod-photo" loading="lazy" decoding="async">
-          <div class="prod-overlay"><span><span data-sq>Porosit në Instagram</span><span data-en>Order via Instagram</span><span data-mk>Нарачај преку Инстаграм</span></span></div>
+          <img src="images/product-webp/Kuror%20e%20Bardh%208-900.webp" alt="Kurorë Romantike — Kurorë E Bardhë" class="prod-photo" loading="lazy" decoding="async">
+          <div class="prod-overlay"><span><span data-sq>Porositni përmes Instagramit</span><span data-en>Order via Instagram</span><span data-mk>Нарачајте преку Инстаграм</span></span></div>
         </div>
         <div class="prod-body">
           <div class="prod-row1">
-            <span class="prod-name">Kurorë Era</span>
+            <span class="prod-name">Kurorë Romantike</span>
           </div>
           <span class="prod-cat"><span data-sq>Kurorë · E Bardhë</span><span data-en>Crown · White</span><span data-mk>Круна · Бела</span></span>
           <a href="https://instagram.com/bizhuteriafantazia" target="_blank" rel="noopener noreferrer" class="prod-btn">
-            <span data-sq>Porosit në Instagram</span><span data-en>Order on Instagram</span><span data-mk>Нарачај преку Инстаграм</span>
+            <span data-sq>Porositni përmes Instagramit</span><span data-en>Order via Instagram</span><span data-mk>Нарачајте преку Инстаграм</span>
           </a>
         </div>
       </div>
@@ -1318,16 +1324,16 @@
       <div class="prod-card reveal" data-cat="crowns">
         <div class="prod-visual bg-a">
           <img src="images/product-webp/Kuror%20e%20Bardh%209-900.webp" alt="" class="prod-photo-bg" aria-hidden="true" loading="lazy" decoding="async">
-          <img src="images/product-webp/Kuror%20e%20Bardh%209-900.webp" alt="Kurorë Dea — Kurorë E Bardhë" class="prod-photo" loading="lazy" decoding="async">
-          <div class="prod-overlay"><span><span data-sq>Porosit në Instagram</span><span data-en>Order via Instagram</span><span data-mk>Нарачај преку Инстаграм</span></span></div>
+          <img src="images/product-webp/Kuror%20e%20Bardh%209-900.webp" alt="Kurorë Moderne — Kurorë E Bardhë" class="prod-photo" loading="lazy" decoding="async">
+          <div class="prod-overlay"><span><span data-sq>Porositni përmes Instagramit</span><span data-en>Order via Instagram</span><span data-mk>Нарачајте преку Инстаграм</span></span></div>
         </div>
         <div class="prod-body">
           <div class="prod-row1">
-            <span class="prod-name">Kurorë Dea</span>
+            <span class="prod-name">Kurorë Moderne</span>
           </div>
           <span class="prod-cat"><span data-sq>Kurorë · E Bardhë</span><span data-en>Crown · White</span><span data-mk>Круна · Бела</span></span>
           <a href="https://instagram.com/bizhuteriafantazia" target="_blank" rel="noopener noreferrer" class="prod-btn">
-            <span data-sq>Porosit në Instagram</span><span data-en>Order on Instagram</span><span data-mk>Нарачај преку Инстаграм</span>
+            <span data-sq>Porositni përmes Instagramit</span><span data-en>Order via Instagram</span><span data-mk>Нарачајте преку Инстаграм</span>
           </a>
         </div>
       </div>
@@ -1337,16 +1343,16 @@
         <span class="prod-badge badge-best"><span data-sq>Shumë i Shitur</span><span data-en>Best Seller</span><span data-mk>Најпродавано</span></span>
         <div class="prod-visual bg-b">
           <img src="images/product-webp/Gjerdan%20Shum%20Shitur%201-900.webp" alt="" class="prod-photo-bg" aria-hidden="true" loading="lazy" decoding="async">
-          <img src="images/product-webp/Gjerdan%20Shum%20Shitur%201-900.webp" alt="Gjerdan Yllka — Gjerdan E Bardhë" class="prod-photo" loading="lazy" decoding="async">
-          <div class="prod-overlay"><span><span data-sq>Porosit në Instagram</span><span data-en>Order via Instagram</span><span data-mk>Нарачај преку Инстаграм</span></span></div>
+          <img src="images/product-webp/Gjerdan%20Shum%20Shitur%201-900.webp" alt="Gjerdani Kristal — Gjerdan E Bardhë" class="prod-photo" loading="lazy" decoding="async">
+          <div class="prod-overlay"><span><span data-sq>Porositni përmes Instagramit</span><span data-en>Order via Instagram</span><span data-mk>Нарачајте преку Инстаграм</span></span></div>
         </div>
         <div class="prod-body">
           <div class="prod-row1">
-            <span class="prod-name">Gjerdan Yllka</span>
+            <span class="prod-name">Gjerdani Kristal</span>
           </div>
           <span class="prod-cat"><span data-sq>Gjerdan · E Bardhë</span><span data-en>Necklace · White</span><span data-mk>Ѓердан · Бел</span></span>
           <a href="https://instagram.com/bizhuteriafantazia" target="_blank" rel="noopener noreferrer" class="prod-btn">
-            <span data-sq>Porosit në Instagram</span><span data-en>Order on Instagram</span><span data-mk>Нарачај преку Инстаграм</span>
+            <span data-sq>Porositni përmes Instagramit</span><span data-en>Order via Instagram</span><span data-mk>Нарачајте преку Инстаграм</span>
           </a>
         </div>
       </div>
@@ -1356,7 +1362,7 @@
         <div class="prod-visual bg-c">
           <img src="images/product-webp/Lira%201-900.webp" alt="" class="prod-photo-bg" aria-hidden="true" loading="lazy" decoding="async">
           <img src="images/product-webp/Lira%201-900.webp" alt="Lira Mbretëreshë — Lira Ari" class="prod-photo" loading="lazy" decoding="async">
-          <div class="prod-overlay"><span><span data-sq>Porosit në Instagram</span><span data-en>Order via Instagram</span><span data-mk>Нарачај преку Инстаграм</span></span></div>
+          <div class="prod-overlay"><span><span data-sq>Porositni përmes Instagramit</span><span data-en>Order via Instagram</span><span data-mk>Нарачајте преку Инстаграм</span></span></div>
         </div>
         <div class="prod-body">
           <div class="prod-row1">
@@ -1364,7 +1370,7 @@
           </div>
           <span class="prod-cat"><span data-sq>Lira · Ari</span><span data-en>Coin Necklace · Gold</span><span data-mk>Лира · Златна</span></span>
           <a href="https://instagram.com/bizhuteriafantazia" target="_blank" rel="noopener noreferrer" class="prod-btn">
-            <span data-sq>Porosit në Instagram</span><span data-en>Order on Instagram</span><span data-mk>Нарачај преку Инстаграм</span>
+            <span data-sq>Porositni përmes Instagramit</span><span data-en>Order via Instagram</span><span data-mk>Нарачајте преку Инстаграм</span>
           </a>
         </div>
       </div>
@@ -1375,7 +1381,7 @@
         <div class="prod-visual bg-d">
           <img src="images/product-webp/Kuror%20e%20Verdh%201-900.webp" alt="" class="prod-photo-bg" aria-hidden="true" loading="lazy" decoding="async">
           <img src="images/product-webp/Kuror%20e%20Verdh%201-900.webp" alt="Kurorë Dielli — Kurorë E Verdhë" class="prod-photo" loading="lazy" decoding="async">
-          <div class="prod-overlay"><span><span data-sq>Porosit në Instagram</span><span data-en>Order via Instagram</span><span data-mk>Нарачај преку Инстаграм</span></span></div>
+          <div class="prod-overlay"><span><span data-sq>Porositni përmes Instagramit</span><span data-en>Order via Instagram</span><span data-mk>Нарачајте преку Инстаграм</span></span></div>
         </div>
         <div class="prod-body">
           <div class="prod-row1">
@@ -1383,7 +1389,7 @@
           </div>
           <span class="prod-cat"><span data-sq>Kurorë · E Verdhë</span><span data-en>Crown · Yellow Gold</span><span data-mk>Круна · Жолта</span></span>
           <a href="https://instagram.com/bizhuteriafantazia" target="_blank" rel="noopener noreferrer" class="prod-btn">
-            <span data-sq>Porosit në Instagram</span><span data-en>Order on Instagram</span><span data-mk>Нарачај преку Инстаграм</span>
+            <span data-sq>Porositni përmes Instagramit</span><span data-en>Order via Instagram</span><span data-mk>Нарачајте преку Инстаграм</span>
           </a>
         </div>
       </div>
@@ -1392,16 +1398,16 @@
       <div class="prod-card reveal" data-cat="crowns">
         <div class="prod-visual bg-a">
           <img src="images/product-webp/Kuror%20e%20Verdh%202-900.webp" alt="" class="prod-photo-bg" aria-hidden="true" loading="lazy" decoding="async">
-          <img src="images/product-webp/Kuror%20e%20Verdh%202-900.webp" alt="Kurorë Agimi — Kurorë E Verdhë" class="prod-photo" loading="lazy" decoding="async">
-          <div class="prod-overlay"><span><span data-sq>Porosit në Instagram</span><span data-en>Order via Instagram</span><span data-mk>Нарачај преку Инстаграм</span></span></div>
+          <img src="images/product-webp/Kuror%20e%20Verdh%202-900.webp" alt="Kurorë Alltan — Kurorë E Verdhë" class="prod-photo" loading="lazy" decoding="async">
+          <div class="prod-overlay"><span><span data-sq>Porositni përmes Instagramit</span><span data-en>Order via Instagram</span><span data-mk>Нарачајте преку Инстаграм</span></span></div>
         </div>
         <div class="prod-body">
           <div class="prod-row1">
-            <span class="prod-name">Kurorë Agimi</span>
+            <span class="prod-name">Kurorë Alltan</span>
           </div>
           <span class="prod-cat"><span data-sq>Kurorë · E Verdhë</span><span data-en>Crown · Yellow Gold</span><span data-mk>Круна · Жолта</span></span>
           <a href="https://instagram.com/bizhuteriafantazia" target="_blank" rel="noopener noreferrer" class="prod-btn">
-            <span data-sq>Porosit në Instagram</span><span data-en>Order on Instagram</span><span data-mk>Нарачај преку Инстаграм</span>
+            <span data-sq>Porositni përmes Instagramit</span><span data-en>Order via Instagram</span><span data-mk>Нарачајте преку Инстаграм</span>
           </a>
         </div>
       </div>
@@ -1410,16 +1416,16 @@
       <div class="prod-card reveal" data-cat="lira" data-preview="1">
         <div class="prod-visual bg-b">
           <img src="images/product-webp/Lira%202-900.webp" alt="" class="prod-photo-bg" aria-hidden="true" loading="lazy" decoding="async">
-          <img src="images/product-webp/Lira%202-900.webp" alt="Lira Artemisa — Lira Ari" class="prod-photo" loading="lazy" decoding="async">
-          <div class="prod-overlay"><span><span data-sq>Porosit në Instagram</span><span data-en>Order via Instagram</span><span data-mk>Нарачај преку Инстаграм</span></span></div>
+          <img src="images/product-webp/Lira%202-900.webp" alt="Lira Klasike — Lira Ari" class="prod-photo" loading="lazy" decoding="async">
+          <div class="prod-overlay"><span><span data-sq>Porositni përmes Instagramit</span><span data-en>Order via Instagram</span><span data-mk>Нарачајте преку Инстаграм</span></span></div>
         </div>
         <div class="prod-body">
           <div class="prod-row1">
-            <span class="prod-name">Lira Artemisa</span>
+            <span class="prod-name">Lira Klasike</span>
           </div>
           <span class="prod-cat"><span data-sq>Lira · Ari</span><span data-en>Coin Necklace · Gold</span><span data-mk>Лира · Златна</span></span>
           <a href="https://instagram.com/bizhuteriafantazia" target="_blank" rel="noopener noreferrer" class="prod-btn">
-            <span data-sq>Porosit në Instagram</span><span data-en>Order on Instagram</span><span data-mk>Нарачај преку Инстаграм</span>
+            <span data-sq>Porositni përmes Instagramit</span><span data-en>Order via Instagram</span><span data-mk>Нарачајте преку Инстаграм</span>
           </a>
         </div>
       </div>
@@ -1428,16 +1434,16 @@
       <div class="prod-card reveal" data-cat="qistek" data-preview="1">
         <div class="prod-visual bg-c">
           <img src="images/product-webp/Qistek%201-900.webp" alt="" class="prod-photo-bg" aria-hidden="true" loading="lazy" decoding="async">
-          <img src="images/product-webp/Qistek%201-900.webp" alt="Zinxhir Dafina — Qistek Ari" class="prod-photo" loading="lazy" decoding="async">
-          <div class="prod-overlay"><span><span data-sq>Porosit në Instagram</span><span data-en>Order via Instagram</span><span data-mk>Нарачај преку Инстаграм</span></span></div>
+          <img src="images/product-webp/Qistek%201-900.webp" alt="Zinxhir Klasik — Qistek Ari" class="prod-photo" loading="lazy" decoding="async">
+          <div class="prod-overlay"><span><span data-sq>Porositni përmes Instagramit</span><span data-en>Order via Instagram</span><span data-mk>Нарачајте преку Инстаграм</span></span></div>
         </div>
         <div class="prod-body">
           <div class="prod-row1">
-            <span class="prod-name">Zinxhir Dafina</span>
+            <span class="prod-name">Zinxhir Klasik</span>
           </div>
           <span class="prod-cat"><span data-sq>Qistek · Ari</span><span data-en>Chain · Gold</span><span data-mk>Синџир · Златен</span></span>
           <a href="https://instagram.com/bizhuteriafantazia" target="_blank" rel="noopener noreferrer" class="prod-btn">
-            <span data-sq>Porosit në Instagram</span><span data-en>Order on Instagram</span><span data-mk>Нарачај преку Инстаграм</span>
+            <span data-sq>Porositni përmes Instagramit</span><span data-en>Order via Instagram</span><span data-mk>Нарачајте преку Инстаграм</span>
           </a>
         </div>
       </div>
@@ -1446,16 +1452,16 @@
       <div class="prod-card reveal" data-cat="crowns">
         <div class="prod-visual bg-d">
           <img src="images/product-webp/Kuror%20e%20Verdh%203-900.webp" alt="" class="prod-photo-bg" aria-hidden="true" loading="lazy" decoding="async">
-          <img src="images/product-webp/Kuror%20e%20Verdh%203-900.webp" alt="Kurorë Flaka — Kurorë E Verdhë" class="prod-photo" loading="lazy" decoding="async">
-          <div class="prod-overlay"><span><span data-sq>Porosit në Instagram</span><span data-en>Order via Instagram</span><span data-mk>Нарачај преку Инстаграм</span></span></div>
+          <img src="images/product-webp/Kuror%20e%20Verdh%203-900.webp" alt="Kurorë Festive — Kurorë E Verdhë" class="prod-photo" loading="lazy" decoding="async">
+          <div class="prod-overlay"><span><span data-sq>Porositni përmes Instagramit</span><span data-en>Order via Instagram</span><span data-mk>Нарачајте преку Инстаграм</span></span></div>
         </div>
         <div class="prod-body">
           <div class="prod-row1">
-            <span class="prod-name">Kurorë Flaka</span>
+            <span class="prod-name">Kurorë Festive</span>
           </div>
           <span class="prod-cat"><span data-sq>Kurorë · E Verdhë</span><span data-en>Crown · Yellow Gold</span><span data-mk>Круна · Жолта</span></span>
           <a href="https://instagram.com/bizhuteriafantazia" target="_blank" rel="noopener noreferrer" class="prod-btn">
-            <span data-sq>Porosit në Instagram</span><span data-en>Order on Instagram</span><span data-mk>Нарачај преку Инстаграм</span>
+            <span data-sq>Porositni përmes Instagramit</span><span data-en>Order via Instagram</span><span data-mk>Нарачајте преку Инстаграм</span>
           </a>
         </div>
       </div>
@@ -1464,16 +1470,16 @@
       <div class="prod-card reveal" data-cat="crowns">
         <div class="prod-visual bg-a">
           <img src="images/product-webp/Kuror%20e%20Verdh%204-900.webp" alt="" class="prod-photo-bg" aria-hidden="true" loading="lazy" decoding="async">
-          <img src="images/product-webp/Kuror%20e%20Verdh%204-900.webp" alt="Kurorë Vera — Kurorë E Verdhë" class="prod-photo" loading="lazy" decoding="async">
-          <div class="prod-overlay"><span><span data-sq>Porosit në Instagram</span><span data-en>Order via Instagram</span><span data-mk>Нарачај преку Инстаграм</span></span></div>
+          <img src="images/product-webp/Kuror%20e%20Verdh%204-900.webp" alt="Kurorë Verore — Kurorë E Verdhë" class="prod-photo" loading="lazy" decoding="async">
+          <div class="prod-overlay"><span><span data-sq>Porositni përmes Instagramit</span><span data-en>Order via Instagram</span><span data-mk>Нарачајте преку Инстаграм</span></span></div>
         </div>
         <div class="prod-body">
           <div class="prod-row1">
-            <span class="prod-name">Kurorë Vera</span>
+            <span class="prod-name">Kurorë Verore</span>
           </div>
           <span class="prod-cat"><span data-sq>Kurorë · E Verdhë</span><span data-en>Crown · Yellow Gold</span><span data-mk>Круна · Жолта</span></span>
           <a href="https://instagram.com/bizhuteriafantazia" target="_blank" rel="noopener noreferrer" class="prod-btn">
-            <span data-sq>Porosit në Instagram</span><span data-en>Order on Instagram</span><span data-mk>Нарачај преку Инстаграм</span>
+            <span data-sq>Porositni përmes Instagramit</span><span data-en>Order via Instagram</span><span data-mk>Нарачајте преку Инстаграм</span>
           </a>
         </div>
       </div>
@@ -1482,16 +1488,16 @@
       <div class="prod-card reveal" data-cat="qistek" data-preview="1">
         <div class="prod-visual bg-b">
           <img src="images/product-webp/Qistek%202-900.webp" alt="" class="prod-photo-bg" aria-hidden="true" loading="lazy" decoding="async">
-          <img src="images/product-webp/Qistek%202-900.webp" alt="Zinxhir Miranda — Qistek Ari" class="prod-photo" loading="lazy" decoding="async">
-          <div class="prod-overlay"><span><span data-sq>Porosit në Instagram</span><span data-en>Order via Instagram</span><span data-mk>Нарачај преку Инстаграм</span></span></div>
+          <img src="images/product-webp/Qistek%202-900.webp" alt="Zinxhir Elegant — Qistek Ari" class="prod-photo" loading="lazy" decoding="async">
+          <div class="prod-overlay"><span><span data-sq>Porositni përmes Instagramit</span><span data-en>Order via Instagram</span><span data-mk>Нарачајте преку Инстаграм</span></span></div>
         </div>
         <div class="prod-body">
           <div class="prod-row1">
-            <span class="prod-name">Zinxhir Miranda</span>
+            <span class="prod-name">Zinxhir Elegant</span>
           </div>
           <span class="prod-cat"><span data-sq>Qistek · Ari</span><span data-en>Chain · Gold</span><span data-mk>Синџир · Златен</span></span>
           <a href="https://instagram.com/bizhuteriafantazia" target="_blank" rel="noopener noreferrer" class="prod-btn">
-            <span data-sq>Porosit në Instagram</span><span data-en>Order on Instagram</span><span data-mk>Нарачај преку Инстаграм</span>
+            <span data-sq>Porositni përmes Instagramit</span><span data-en>Order via Instagram</span><span data-mk>Нарачајте преку Инстаграм</span>
           </a>
         </div>
       </div>
@@ -1500,16 +1506,16 @@
       <div class="prod-card reveal" data-cat="crowns">
         <div class="prod-visual bg-c">
           <img src="images/product-webp/Kuror%20e%20Verdh%205-900.webp" alt="" class="prod-photo-bg" aria-hidden="true" loading="lazy" decoding="async">
-          <img src="images/product-webp/Kuror%20e%20Verdh%205-900.webp" alt="Kurorë Ylli — Kurorë E Verdhë" class="prod-photo" loading="lazy" decoding="async">
-          <div class="prod-overlay"><span><span data-sq>Porosit në Instagram</span><span data-en>Order via Instagram</span><span data-mk>Нарачај преку Инстаграм</span></span></div>
+          <img src="images/product-webp/Kuror%20e%20Verdh%205-900.webp" alt="Kurorë Yjore — Kurorë E Verdhë" class="prod-photo" loading="lazy" decoding="async">
+          <div class="prod-overlay"><span><span data-sq>Porositni përmes Instagramit</span><span data-en>Order via Instagram</span><span data-mk>Нарачајте преку Инстаграм</span></span></div>
         </div>
         <div class="prod-body">
           <div class="prod-row1">
-            <span class="prod-name">Kurorë Ylli</span>
+            <span class="prod-name">Kurorë Yjore</span>
           </div>
           <span class="prod-cat"><span data-sq>Kurorë · E Verdhë</span><span data-en>Crown · Yellow Gold</span><span data-mk>Круна · Жолта</span></span>
           <a href="https://instagram.com/bizhuteriafantazia" target="_blank" rel="noopener noreferrer" class="prod-btn">
-            <span data-sq>Porosit në Instagram</span><span data-en>Order on Instagram</span><span data-mk>Нарачај преку Инстаграм</span>
+            <span data-sq>Porositni përmes Instagramit</span><span data-en>Order via Instagram</span><span data-mk>Нарачајте преку Инстаграм</span>
           </a>
         </div>
       </div>
@@ -1518,16 +1524,16 @@
       <div class="prod-card reveal" data-cat="crowns">
         <div class="prod-visual bg-d">
           <img src="images/product-webp/Kuror%20e%20Verdh%206-900.webp" alt="" class="prod-photo-bg" aria-hidden="true" loading="lazy" decoding="async">
-          <img src="images/product-webp/Kuror%20e%20Verdh%206-900.webp" alt="Kurorë Mjalta — Kurorë E Verdhë" class="prod-photo" loading="lazy" decoding="async">
-          <div class="prod-overlay"><span><span data-sq>Porosit në Instagram</span><span data-en>Order via Instagram</span><span data-mk>Нарачај преку Инстаграм</span></span></div>
+          <img src="images/product-webp/Kuror%20e%20Verdh%206-900.webp" alt="Kurorë Tradicionale — Kurorë E Verdhë" class="prod-photo" loading="lazy" decoding="async">
+          <div class="prod-overlay"><span><span data-sq>Porositni përmes Instagramit</span><span data-en>Order via Instagram</span><span data-mk>Нарачајте преку Инстаграм</span></span></div>
         </div>
         <div class="prod-body">
           <div class="prod-row1">
-            <span class="prod-name">Kurorë Mjalta</span>
+            <span class="prod-name">Kurorë Tradicionale</span>
           </div>
           <span class="prod-cat"><span data-sq>Kurorë · E Verdhë</span><span data-en>Crown · Yellow Gold</span><span data-mk>Круна · Жолта</span></span>
           <a href="https://instagram.com/bizhuteriafantazia" target="_blank" rel="noopener noreferrer" class="prod-btn">
-            <span data-sq>Porosit në Instagram</span><span data-en>Order on Instagram</span><span data-mk>Нарачај преку Инстаграм</span>
+            <span data-sq>Porositni përmes Instagramit</span><span data-en>Order via Instagram</span><span data-mk>Нарачајте преку Инстаграм</span>
           </a>
         </div>
       </div>
@@ -1537,7 +1543,7 @@
         <div class="prod-visual bg-a">
           <img src="images/product-webp/Kuror%20Ari-900.webp" alt="" class="prod-photo-bg" aria-hidden="true" loading="lazy" decoding="async">
           <img src="images/product-webp/Kuror%20Ari-900.webp" alt="Kurorë Ari — Kurorë Ari" class="prod-photo" loading="lazy" decoding="async">
-          <div class="prod-overlay"><span><span data-sq>Porosit në Instagram</span><span data-en>Order via Instagram</span><span data-mk>Нарачај преку Инстаграм</span></span></div>
+          <div class="prod-overlay"><span><span data-sq>Porositni përmes Instagramit</span><span data-en>Order via Instagram</span><span data-mk>Нарачајте преку Инстаграм</span></span></div>
         </div>
         <div class="prod-body">
           <div class="prod-row1">
@@ -1545,7 +1551,7 @@
           </div>
           <span class="prod-cat"><span data-sq>Kurorë · Ari</span><span data-en>Crown · Gold</span><span data-mk>Круна · Златна</span></span>
           <a href="https://instagram.com/bizhuteriafantazia" target="_blank" rel="noopener noreferrer" class="prod-btn">
-            <span data-sq>Porosit në Instagram</span><span data-en>Order on Instagram</span><span data-mk>Нарачај преку Инстаграм</span>
+            <span data-sq>Porositni përmes Instagramit</span><span data-en>Order via Instagram</span><span data-mk>Нарачајте преку Инстаграм</span>
           </a>
         </div>
       </div>
@@ -1554,16 +1560,16 @@
       <div class="prod-card reveal" data-cat="crowns">
         <div class="prod-visual bg-b">
           <img src="images/product-webp/Kuror%20e%20Kuqe-900.webp" alt="" class="prod-photo-bg" aria-hidden="true" loading="lazy" decoding="async">
-          <img src="images/product-webp/Kuror%20e%20Kuqe-900.webp" alt="Kurorë Rubina — Kurorë E Kuqe" class="prod-photo" loading="lazy" decoding="async">
-          <div class="prod-overlay"><span><span data-sq>Porosit në Instagram</span><span data-en>Order via Instagram</span><span data-mk>Нарачај преку Инстаграм</span></span></div>
+          <img src="images/product-webp/Kuror%20e%20Kuqe-900.webp" alt="Kurorë Rubin — Kurorë E Kuqe" class="prod-photo" loading="lazy" decoding="async">
+          <div class="prod-overlay"><span><span data-sq>Porositni përmes Instagramit</span><span data-en>Order via Instagram</span><span data-mk>Нарачајте преку Инстаграм</span></span></div>
         </div>
         <div class="prod-body">
           <div class="prod-row1">
-            <span class="prod-name">Kurorë Rubina</span>
+            <span class="prod-name">Kurorë Rubin</span>
           </div>
           <span class="prod-cat"><span data-sq>Kurorë · E Kuqe</span><span data-en>Crown · Red</span><span data-mk>Круна · Црвена</span></span>
           <a href="https://instagram.com/bizhuteriafantazia" target="_blank" rel="noopener noreferrer" class="prod-btn">
-            <span data-sq>Porosit në Instagram</span><span data-en>Order on Instagram</span><span data-mk>Нарачај преку Инстаграм</span>
+            <span data-sq>Porositni përmes Instagramit</span><span data-en>Order via Instagram</span><span data-mk>Нарачајте преку Инстаграм</span>
           </a>
         </div>
       </div>
@@ -1572,16 +1578,16 @@
       <div class="prod-card reveal" data-cat="crowns">
         <div class="prod-visual bg-c">
           <img src="images/product-webp/Kuror%20Elmaz-900.webp" alt="" class="prod-photo-bg" aria-hidden="true" loading="lazy" decoding="async">
-          <img src="images/product-webp/Kuror%20Elmaz-900.webp" alt="Kurorë Nata — Kurorë E Zezë" class="prod-photo" loading="lazy" decoding="async">
-          <div class="prod-overlay"><span><span data-sq>Porosit në Instagram</span><span data-en>Order via Instagram</span><span data-mk>Нарачај преку Инстаграм</span></span></div>
+          <img src="images/product-webp/Kuror%20Elmaz-900.webp" alt="Kurorë Elmaz — Kurorë E Zezë" class="prod-photo" loading="lazy" decoding="async">
+          <div class="prod-overlay"><span><span data-sq>Porositni përmes Instagramit</span><span data-en>Order via Instagram</span><span data-mk>Нарачајте преку Инстаграм</span></span></div>
         </div>
         <div class="prod-body">
           <div class="prod-row1">
-            <span class="prod-name">Kurorë Nata</span>
+            <span class="prod-name">Kurorë Elmaz</span>
           </div>
           <span class="prod-cat"><span data-sq>Kurorë · E Zezë</span><span data-en>Crown · Black</span><span data-mk>Круна · Црна</span></span>
           <a href="https://instagram.com/bizhuteriafantazia" target="_blank" rel="noopener noreferrer" class="prod-btn">
-            <span data-sq>Porosit në Instagram</span><span data-en>Order on Instagram</span><span data-mk>Нарачај преку Инстаграм</span>
+            <span data-sq>Porositni përmes Instagramit</span><span data-en>Order via Instagram</span><span data-mk>Нарачајте преку Инстаграм</span>
           </a>
         </div>
       </div>
@@ -1591,187 +1597,52 @@
 </section>
 
 <!-- ══════════════════════════════════════════
-     QUOTE
-══════════════════════════════════════════ -->
-<section id="quote">
-  <div class="quote-wrap reveal">
-    <!-- Ornamental divider top -->
-    <div style="display:flex;align-items:center;justify-content:center;gap:14px;margin-bottom:8px;">
-      <div style="width:56px;height:1px;background:linear-gradient(to right,transparent,rgba(200,169,110,0.5));"></div>
-      <div style="width:7px;height:7px;border:1px solid rgba(200,169,110,0.6);transform:rotate(45deg);"></div>
-      <div style="width:56px;height:1px;background:linear-gradient(to left,transparent,rgba(200,169,110,0.5));"></div>
-    </div>
-    <blockquote class="q-text">
-      <span data-sq>"Ari i nuses nuk trashëgohet vetëm — ai bëhet histori."</span>
-      <span data-en>"A bride's gold is not simply inherited — it becomes history."</span>
-      <span data-mk>„Златото на невестата не само што се наследува — тоа станува историја.“</span>
-    </blockquote>
-    <p class="q-attr">— Bizhuteria Fantazia</p>
-    <!-- Ornamental divider bottom -->
-    <div style="display:flex;align-items:center;justify-content:center;gap:14px;margin-top:8px;">
-      <div style="width:56px;height:1px;background:linear-gradient(to right,transparent,rgba(200,169,110,0.5));"></div>
-      <div style="width:7px;height:7px;border:1px solid rgba(200,169,110,0.6);transform:rotate(45deg);"></div>
-      <div style="width:56px;height:1px;background:linear-gradient(to left,transparent,rgba(200,169,110,0.5));"></div>
-    </div>
-  </div>
-</section>
-
-<!-- ══════════════════════════════════════════
-     HERITAGE
-══════════════════════════════════════════ -->
-<section id="heritage">
-  <div class="heritage-inner">
-    <div class="heritage-left reveal-left">
-      <span class="hl-label"><span data-sq>Trashëgimia</span><span data-en>Heritage</span><span data-mk>Наследство</span></span>
-      <h2 class="hl-h"><span data-sq>Ari i nuses shqiptare</span><span data-en>The Albanian bride's gold</span><span data-mk>Златото на албанската невеста</span></h2>
-      <span class="hl-sub">
-        <span data-sq>Tradita e vjetër e dasmës shqiptare dhe bizhuterisë</span>
-        <span data-en>The ancient Albanian wedding tradition and its jewellery</span>
-        <span data-mk>Старата традиција на албанската свадба и нејзиниот накит</span>
-      </span>
-      <span class="gold-rule" style="margin-bottom:28px"></span>
-      <p class="hl-body">
-        <span data-sq>Në mëngjesin e dasmës, nëna hap kutinë. Brenda — ari. Gjerdan, byzylyk, unazë. Shpesh të njëjtat që i janë dhënë edhe asaj, dikur. Ky moment nuk ka muzikë. Ka vetëm duar që dridhen pak dhe sy plot ujë. Asnjë fjalë. Sepse ari i mirë flet vetë — nga nëna te vajza, nga brez në brez, pa fund.</span>
-        <span data-en>On the morning of the wedding, the mother opens a box. Inside — gold. A necklace, a bracelet, a ring. Often the same pieces once given to her. This moment has no music. Only hands that tremble slightly and eyes full of tears. No words. Because good gold speaks for itself — from mother to daughter, generation to generation, without end.</span>
-        <span data-mk>Утрото на свадбата, мајката ја отвора кутијата. Внатре — злато. Ѓердан, белегзија, прстен. Често истите парчиња што некогаш ѝ биле подарени и нејзе. Овој момент нема музика. Има само раце што малку треперат и очи полни солзи. Ниту еден збор. Зашто доброто злато зборува само за себе — од мајка на ќерка, од генерација на генерација, без крај.</span>
-      </p>
-      <p class="hl-body">
-        <span data-sq>Bizhuteria Fantazia lindi nga respekti i thellë ndaj kësaj gjuhe heshtjeje. Çdo model është zgjedhur me kujdes, me mendjen te ato gra — nuse apo nëna, e re apo e moshuar — që e dinë vlerën e asaj që mbajnë. Qëllimi ynë: që atë ditë kur hapet kutia, të jetë diçka prej nesh brenda.</span>
-        <span data-en>Bizhuteria Fantazia was born from a deep respect for that language of silence. Every design is chosen with care, with those women in mind — bride or mother, young or old — who understand the value of what they wear. Our goal: that one day when the box is opened, there is something of ours inside.</span>
-        <span data-mk>Bizhuteria Fantazia се роди од длабока почит кон тој јазик на тишината. Секој модел е одбран со грижа, мислејќи на тие жени — невести или мајки, млади или постари — што ја знаат вредноста на она што го носат. Нашата цел: тој ден кога ќе се отвори кутијата, внатре да има нешто и од нас.</span>
-      </p>
-    </div>
-    <div class="heritage-right reveal">
-      <!-- Tall left: ring illustration -->
-      <div class="her-card" style="background:rgba(45,68,48,0.6);">
-        <img src="images/section/heritage-1.webp" alt="Kurorë nusërie e bardhë me kristale — detaj" loading="lazy">
-        <div class="her-card-placeholder">
-          <svg width="120" height="160" viewBox="0 0 180 240" fill="none">
-            <ellipse cx="90" cy="188" rx="72" ry="18" stroke="rgba(200,169,110,0.45)" stroke-width="1"/>
-            <line x1="18" y1="188" x2="18" y2="142" stroke="rgba(200,169,110,0.45)" stroke-width="1"/>
-            <line x1="162" y1="188" x2="162" y2="142" stroke="rgba(200,169,110,0.45)" stroke-width="1"/>
-            <path d="M18 142 Q90 116 162 142" stroke="rgba(200,169,110,0.45)" stroke-width="1" fill="none"/>
-            <ellipse cx="90" cy="128" rx="36" ry="10" stroke="rgba(200,169,110,0.3)" stroke-width="0.8" fill="rgba(200,169,110,0.03)"/>
-            <path d="M64 124 L58 82" stroke="rgba(200,169,110,0.38)" stroke-width="0.8" stroke-linecap="round"/>
-            <path d="M116 124 L122 82" stroke="rgba(200,169,110,0.38)" stroke-width="0.8" stroke-linecap="round"/>
-            <circle cx="90" cy="54" r="30" stroke="rgba(200,169,110,0.5)" stroke-width="1" fill="rgba(200,169,110,0.04)"/>
-            <circle cx="90" cy="54" r="18" stroke="rgba(200,169,110,0.22)" stroke-width="0.7" fill="rgba(200,169,110,0.03)"/>
-            <circle cx="80" cy="44" r="2" fill="rgba(232,213,163,0.65)"/>
-          </svg>
-        </div>
-      </div>
-      <!-- Top right: necklace -->
-      <div class="her-card" style="background:rgba(110,83,48,0.22);">
-        <img src="images/section/heritage-2.webp" alt="Set gjerdani me kristale të bardha" loading="lazy">
-        <div class="her-card-placeholder">
-          <svg width="100" height="90" viewBox="0 0 160 130" fill="none">
-            <path d="M16 38 C46 22 78 16 80 15 C82 16 114 22 144 38" stroke="rgba(200,169,110,0.42)" stroke-width="1" fill="none"/>
-            <path d="M16 38 C46 22 78 16 80 15" stroke="rgba(200,169,110,0.2)" stroke-width="2" fill="none" stroke-dasharray="2 3"/>
-            <path d="M80 15 C82 16 114 22 144 38" stroke="rgba(200,169,110,0.2)" stroke-width="2" fill="none" stroke-dasharray="2 3"/>
-            <line x1="80" y1="15" x2="80" y2="60" stroke="rgba(200,169,110,0.38)" stroke-width="0.8"/>
-            <path d="M80 60 L96 84 L80 110 L64 84 Z" stroke="rgba(200,169,110,0.55)" stroke-width="1" fill="rgba(200,169,110,0.05)"/>
-            <circle cx="74" cy="68" r="1.5" fill="rgba(232,213,163,0.6)"/>
-          </svg>
-        </div>
-      </div>
-      <!-- Bottom right: earrings -->
-      <div class="her-card" style="background:rgba(45,68,48,0.35);">
-        <img src="images/section/heritage-3.webp" alt="Kurorë me kristale — Bizhuteria Fantazia" loading="lazy">
-        <div class="her-card-placeholder">
-          <svg width="100" height="90" viewBox="0 0 160 130" fill="none">
-            <path d="M46 14 Q46 6 54 6 Q62 6 62 14 L62 26" stroke="rgba(200,169,110,0.55)" stroke-width="1.1" fill="none" stroke-linecap="round"/>
-            <line x1="62" y1="26" x2="62" y2="56" stroke="rgba(200,169,110,0.42)" stroke-width="0.8"/>
-            <path d="M62 56 Q50 76 62 100 Q74 76 62 56" stroke="rgba(200,169,110,0.6)" stroke-width="1" fill="rgba(200,169,110,0.06)"/>
-            <path d="M114 14 Q114 6 106 6 Q98 6 98 14 L98 26" stroke="rgba(200,169,110,0.55)" stroke-width="1.1" fill="none" stroke-linecap="round"/>
-            <line x1="98" y1="26" x2="98" y2="56" stroke="rgba(200,169,110,0.42)" stroke-width="0.8"/>
-            <path d="M98 56 Q86 76 98 100 Q110 76 98 56" stroke="rgba(200,169,110,0.6)" stroke-width="1" fill="rgba(200,169,110,0.06)"/>
-            <circle cx="57" cy="64" r="1.2" fill="rgba(232,213,163,0.6)"/>
-            <circle cx="93" cy="64" r="1.2" fill="rgba(232,213,163,0.6)"/>
-          </svg>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ══════════════════════════════════════════
      HOW TO ORDER
 ══════════════════════════════════════════ -->
 <section id="order" class="section-pad">
   <div class="lux-container">
     <span class="order-label"><span data-sq>Procesi</span><span data-en>Process</span><span data-mk>Процес</span></span>
-    <h2 class="order-h reveal"><span data-sq>Si funksionon.</span><span data-en>How it works.</span><span data-mk>Како функционира.</span></h2>
+    <h2 class="order-h reveal"><span data-sq>Si të Porosisni.</span><span data-en>How to Order.</span><span data-mk>Како да нарачате.</span></h2>
     <span class="gold-rule"></span>
     <div class="steps">
       <div class="step reveal">
         <div class="step-n-wrap">
           <div class="step-n-circle"><span class="step-n">01</span></div>
         </div>
-        <h3 class="step-h"><span data-sq>Gjej copën tënde</span><span data-en>Find your piece</span><span data-mk>Најди го своето парче</span></h3>
+        <h3 class="step-h"><span data-sq>Zgjidh Modelin</span><span data-en>Choose Your Favourite</span><span data-mk>Избери го моделот</span></h3>
         <p class="step-t">
-          <span data-sq>Shfleto krijimet tona dhe mbaj mend emrin e asaj copë që të bën të ndihesh vetja.</span>
-          <span data-en>Browse our pieces and note the name of the one that feels like you.</span>
-          <span data-mk>Разгледај ги нашите креации и запомни го името на парчето во кое се препознаваш.</span>
+          <span data-sq>Shfleto koleksionin dhe zgjidh modelin që të pëlqen më shumë.</span>
+          <span data-en>Browse the collection and choose the design you like most.</span>
+          <span data-mk>Разгледај ја колекцијата и избери го моделот што најмногу ти се допаѓа.</span>
         </p>
       </div>
       <div class="step reveal">
         <div class="step-n-wrap">
           <div class="step-n-circle"><span class="step-n">02</span></div>
         </div>
-        <h3 class="step-h"><span data-sq>Na shkruaj</span><span data-en>Write to us</span><span data-mk>Пиши ни</span></h3>
+        <h3 class="step-h"><span data-sq>Na shkruaj</span><span data-en>Send Us a Message</span><span data-mk>Пиши ни</span></h3>
         <p class="step-t">
-          <span data-sq>Dërgo DM në Instagram me emrin e copës dhe adresën tënde të dërgimit.</span>
-          <span data-en>Send us a DM on Instagram with the piece name and your delivery address.</span>
-          <span data-mk>Испрати ни DM на Инстаграм со името на парчето и твојата адреса за достава.</span>
+          <span data-sq>Na dërgo një mesazh në Instagram me emrin e modelit dhe adresën për dërgesë.</span>
+          <span data-en>Send us a message on Instagram with the design name and your delivery address.</span>
+          <span data-mk>Испрати ни порака на Инстаграм со името на моделот и адресата за достава.</span>
         </p>
       </div>
       <div class="step reveal">
         <div class="step-n-wrap">
           <div class="step-n-circle"><span class="step-n">03</span></div>
         </div>
-        <h3 class="step-h"><span data-sq>Merre</span><span data-en>Receive it</span><span data-mk>Прими го</span></h3>
+        <h3 class="step-h"><span data-sq>Merr Porosinë</span><span data-en>Receive Your Order</span><span data-mk>Прими ја нарачката</span></h3>
         <p class="step-t">
-          <span data-sq>Ne konfirmojmë porosinë dhe dërgojmë brenda 2–4 ditëve pune.</span>
-          <span data-en>We confirm your order and ship within 2–4 working days.</span>
-          <span data-mk>Ја потврдуваме нарачката и испраќаме во рок од 2–4 работни дена.</span>
+          <span data-sq>Pasi konfirmojmë porosinë, ajo dërgohet brenda 2–4 ditëve pune.</span>
+          <span data-en>Once we confirm your order, it ships within 2–4 working days.</span>
+          <span data-mk>Откако ќе ја потврдиме нарачката, се испраќа во рок од 2–4 работни дена.</span>
         </p>
       </div>
     </div>
     <div class="order-cta">
       <a href="https://instagram.com/bizhuteriafantazia" target="_blank" rel="noopener noreferrer" class="btn-ol dark">
-        <span data-sq>Na dërgo mesazh →</span><span data-en>Message us on Instagram →</span><span data-mk>Прати ни порака →</span>
+        <span data-sq>Porosit në Instagram →</span><span data-en>Order via Instagram →</span><span data-mk>Нарачај преку Инстаграм →</span>
       </a>
-    </div>
-  </div>
-</section>
-
-<!-- ══════════════════════════════════════════
-     SHIPPING
-══════════════════════════════════════════ -->
-<section id="shipping" class="section-pad">
-  <div class="lux-container">
-    <h2 class="ship-h reveal"><span data-sq>Ku dërgojmë.</span><span data-en>Where we ship.</span><span data-mk>Каде испорачуваме.</span></h2>
-    <p class="ship-sub reveal">
-      <span data-sq>Krijuar në Ballkan. Dërguar në tre shtete.</span>
-      <span data-en>Created in the Balkans. Delivered across three countries.</span>
-      <span data-mk>Создадено на Балканот. Испорачано во три држави.</span>
-    </p>
-    <div class="country-grid">
-      <div class="c-card reveal">
-        <span class="c-flag">🇦🇱</span>
-        <span class="c-name"><span data-sq>Shqipëri</span><span data-en>Albania</span><span data-mk>Албанија</span></span>
-        <span class="c-detail"><span data-sq>Dorëzim 2–4 ditë pune</span><span data-en>Delivery in 2–4 working days</span><span data-mk>Достава за 2–4 работни дена</span></span>
-      </div>
-      <div class="c-card reveal">
-        <span class="c-flag">🇽🇰</span>
-        <span class="c-name"><span data-sq>Kosovë</span><span data-en>Kosovo</span><span data-mk>Косово</span></span>
-        <span class="c-detail"><span data-sq>Dorëzim 3–6 ditë pune</span><span data-en>Delivery in 3–6 working days</span><span data-mk>Достава за 3–6 работни дена</span></span>
-      </div>
-      <div class="c-card reveal">
-        <span class="c-flag">🇲🇰</span>
-        <span class="c-name"><span data-sq>Maqedonia e Veriut</span><span data-en>North Macedonia</span><span data-mk>Северна Македонија</span></span>
-        <span class="c-detail"><span data-sq>Dorëzim 4–7 ditë pune</span><span data-en>Delivery in 4–7 working days</span><span data-mk>Достава за 4–7 работни дена</span></span>
-      </div>
     </div>
   </div>
 </section>
@@ -1814,22 +1685,23 @@
       </div>
     </div>
     <div class="story-right reveal">
-      <span class="story-label"><span data-sq>Historia Jonë</span><span data-en>Our Story</span><span data-mk>Нашата приказна</span></span>
+      <span class="story-label"><span data-sq>Rreth Nesh</span><span data-en>About Us</span><span data-mk>За Нас</span></span>
       <h2 class="story-h">
-        <span data-sq>Krijuar për momentet<br>më të çmuara të jetës.</span>
-        <span data-en>Crafted to celebrate<br>life's most precious moments.</span>
-        <span data-mk>Создадено за најскапоцените<br>моменти во животот.</span>
+        <span data-sq>Për momentet<br>më të veçanta.</span>
+        <span data-en>For life's most<br>special moments.</span>
+        <span data-mk>За најпосебните<br>моменти.</span>
       </h2>
       <span class="gold-rule" style="margin-bottom:26px"></span>
       <p class="story-p">
-        <span data-sq>Bizhuteria Fantazia nisi nga një gjë shumë e thjeshtë: dëshira që secila grua shqiptare të gjejë bizhuterinë e saj. Jo atë çfarë mbajnë të gjitha — atë që e ndien kur e provon për herë të parë dhe nuk do ta heqësh.</span>
-        <span data-en>Bizhuteria Fantazia started from something very simple: the wish that every Albanian woman finds her own jewellery. Not what everyone else wears — what she feels when she tries it on for the first time and doesn't want to take off.</span>
-        <span data-mk>Bizhuteria Fantazia започна од нешто многу едноставно: желбата секоја албанска жена да го најде својот накит. Не она што го носат сите — туку она што го чувствуваш кога ќе го пробаш првпат и не сакаш да го симнеш.</span>
+        <span data-sq>Te Bizhuteria Fantazia do të gjeni një përzgjedhje të bizhuterive tradicionale shqiptare për nuse dhe raste të veçanta. Me stile, ngjyra dhe kombinime të ndryshme, synojmë që secila të gjejë atë që i përshtatet më së miri.</span>
+        <span data-en>At Bizhuteria Fantazia you will find a selection of traditional Albanian jewellery for brides and special occasions. With different styles, colours, and combinations, our aim is for every woman to find what suits her best.</span>
+        <span data-mk>Во Bizhuteria Fantazia ќе најдете избор на традиционален албански накит за невести и посебни пригоди. Со различни стилови, бои и комбинации, целта ни е секоја да го најде она што најмногу ѝ одговара.</span>
       </p>
       <p class="story-p">
-        <span data-sq>Nuk kemi qindra produkte. Kemi 55, dhe secili ka arsyen e vet. Çdo model zgjidhet me kujdes — me mendjen te ato gra që e dinë çfarë duan, por nuk e gjejnë lehtë. Ne punojmë për to.</span>
-        <span data-en>We don't have hundreds of products. We have 55, and each one has its reason. Every design is chosen with care — with those women in mind who know what they want, but don't find it easily. We work for them.</span>
-        <span data-mk>Немаме стотици производи. Имаме 55, и секој има своја причина. Секој модел се избира со грижа — мислејќи на тие жени што знаат што сакаат, но не го наоѓаат лесно. Ние работиме за нив.</span>      </p>
+        <span data-sq>Koleksioni përfshin kurora, gjerdanë, komplete, vathë dhe aksesorë për stile dhe preferenca të ndryshme. Qëllimi ynë është ta bëjmë më të lehtë zgjedhjen e bizhuterisë së duhur për ditën tuaj të veçantë.</span>
+        <span data-en>The collection includes crowns, necklaces, sets, earrings, and accessories for different styles and preferences. Our goal is to make it easier to choose the right jewellery for your special day.</span>
+        <span data-mk>Колекцијата вклучува круни, ѓердани, комплети, обетки и додатоци за различни стилови и преференции. Нашата цел е да го олесниме изборот на вистинскиот накит за вашиот посебен ден.</span>
+      </p>
       <div class="story-bq">
         <p>
           <span data-sq>"Bizhuteri e mirë nuk kërkon vëmendje. E merr vetë."</span>
@@ -1846,7 +1718,7 @@
 ══════════════════════════════════════════ -->
 <section id="instagram" class="section-pad">
   <div class="lux-container">
-    <span class="ig-label reveal"><span data-sq>Na Ndiq</span><span data-en>Follow Along</span><span data-mk>Следи нè</span></span>
+    <span class="ig-label reveal"><span data-sq>Na Ndiq</span><span data-en>Follow Us</span><span data-mk>Следи нè</span></span>
     <h2 class="ig-h reveal">
       <span data-sq>Bota jonë<br>në Instagram.</span>
       <span data-en>Our world<br>on Instagram.</span>
@@ -1857,107 +1729,34 @@
     <div class="ig-grid">
       <a href="https://instagram.com/bizhuteriafantazia" target="_blank" rel="noopener noreferrer" class="ig-cell ig-c1">
         <div class="ig-inner"><img src="images/instagram/instagram-1.webp" alt="Instagram post" loading="lazy"></div>
-        <div class="ig-overlay"><span><span data-sq>Shiko</span><span data-en>View</span><span data-mk>Види</span></span></div>
+        <div class="ig-overlay"><span><span data-sq>Hape</span><span data-en>Open</span><span data-mk>Отвори</span></span></div>
       </a>
       <a href="https://instagram.com/bizhuteriafantazia" target="_blank" rel="noopener noreferrer" class="ig-cell ig-c2">
         <div class="ig-inner"><img src="images/instagram/instagram-2.webp" alt="Instagram post" loading="lazy"></div>
-        <div class="ig-overlay"><span><span data-sq>Shiko</span><span data-en>View</span><span data-mk>Види</span></span></div>
+        <div class="ig-overlay"><span><span data-sq>Hape</span><span data-en>Open</span><span data-mk>Отвори</span></span></div>
       </a>
       <a href="https://instagram.com/bizhuteriafantazia" target="_blank" rel="noopener noreferrer" class="ig-cell ig-c3">
         <div class="ig-inner"><img src="images/instagram/instagram-3.webp" alt="Instagram post" loading="lazy"></div>
-        <div class="ig-overlay"><span><span data-sq>Shiko</span><span data-en>View</span><span data-mk>Види</span></span></div>
+        <div class="ig-overlay"><span><span data-sq>Hape</span><span data-en>Open</span><span data-mk>Отвори</span></span></div>
       </a>
       <a href="https://instagram.com/bizhuteriafantazia" target="_blank" rel="noopener noreferrer" class="ig-cell ig-c4">
         <div class="ig-inner"><img src="images/instagram/instagram-4.webp" alt="Instagram post" loading="lazy"></div>
-        <div class="ig-overlay"><span><span data-sq>Shiko</span><span data-en>View</span><span data-mk>Види</span></span></div>
+        <div class="ig-overlay"><span><span data-sq>Hape</span><span data-en>Open</span><span data-mk>Отвори</span></span></div>
       </a>
       <a href="https://instagram.com/bizhuteriafantazia" target="_blank" rel="noopener noreferrer" class="ig-cell ig-c5">
         <div class="ig-inner"><img src="images/instagram/instagram-5.webp" alt="Instagram post" loading="lazy"></div>
-        <div class="ig-overlay"><span><span data-sq>Shiko</span><span data-en>View</span><span data-mk>Види</span></span></div>
+        <div class="ig-overlay"><span><span data-sq>Hape</span><span data-en>Open</span><span data-mk>Отвори</span></span></div>
       </a>
       <a href="https://instagram.com/bizhuteriafantazia" target="_blank" rel="noopener noreferrer" class="ig-cell ig-c6">
         <div class="ig-inner"><img src="images/instagram/instagram-6.webp" alt="Instagram post" loading="lazy"></div>
-        <div class="ig-overlay"><span><span data-sq>Shiko</span><span data-en>View</span><span data-mk>Види</span></span></div>
+        <div class="ig-overlay"><span><span data-sq>Hape</span><span data-en>Open</span><span data-mk>Отвори</span></span></div>
       </a>
     </div>
     <div class="ig-cta">
       <a href="https://instagram.com/bizhuteriafantazia" target="_blank" rel="noopener noreferrer" class="btn-solid">
-        <span data-sq>Na Ndiq @bizhuteriafantazia</span><span data-en>Follow @bizhuteriafantazia</span><span data-mk>Следи нè @bizhuteriafantazia</span>
+        <span data-sq>Shiko më shumë në Instagram</span><span data-en>See More on Instagram</span><span data-mk>Види повеќе на Инстаграм</span>
       </a>
     </div>
-  </div>
-</section>
-
-<!-- ══════════════════════════════════════════
-     INNER CIRCLE
-══════════════════════════════════════════ -->
-<section id="inner-circle">
-  <div class="ic-wm" aria-hidden="true">FANTAZIA</div>
-  <div class="ic-inner">
-
-    <div class="reveal-left">
-      <span class="ic-label"><span data-sq>Ekskluziv</span><span data-en>Exclusive Access</span><span data-mk>Ексклузивно</span></span>
-      <h2 class="ic-h">
-        <span data-sq>Bashkohuni me<br>Rrethin Tonë.</span>
-        <span data-en>Join Our<br>Inner Circle.</span>
-        <span data-mk>Приклучи се на<br>нашиот круг.</span>
-      </h2>
-      <p class="ic-p">
-        <span data-sq>Jini të parët që mësoni për krijimet e reja, çmimet ekskluzive dhe ofertat sezonale. Vetëm nëpërmjet Instagram DM.</span>
-        <span data-en>Be the first to discover new pieces, exclusive pricing, and seasonal drops. Available only through Instagram DM.</span>
-        <span data-mk>Бидете први што ќе дознаете за новите креации, ексклузивните цени и сезонските понуди. Само преку Инстаграм DM.</span>
-      </p>
-      <div class="ic-perks">
-        <div class="ic-perk">
-          <div class="ic-perk-dot"></div>
-          <span class="ic-perk-text"><span data-sq>Krijimet e reja para të gjithëve</span><span data-en>New pieces before anyone else</span><span data-mk>Новите креации пред сите</span></span>
-        </div>
-        <div class="ic-perk">
-          <div class="ic-perk-dot"></div>
-          <span class="ic-perk-text"><span data-sq>Zbritje ekskluzive 10–20%</span><span data-en>Exclusive 10–20% member discounts</span><span data-mk>Ексклузивни попусти 10–20%</span></span>
-        </div>
-        <div class="ic-perk">
-          <div class="ic-perk-dot"></div>
-          <span class="ic-perk-text"><span data-sq>Akses privat në koleksione të kufizuara</span><span data-en>Private access to limited collections</span><span data-mk>Приватен пристап до лимитирани колекции</span></span>
-        </div>
-      </div>
-    </div>
-
-    <div class="ic-right reveal">
-      <div class="ic-art-wrap">
-        <div class="ic-art-ring"></div>
-        <div class="ic-art-ring2"></div>
-        <svg width="100%" height="100%" viewBox="0 0 200 200" fill="none" style="position:absolute;inset:0;">
-          <circle cx="100" cy="100" r="60" stroke="rgba(200,169,110,0.12)" stroke-width="0.8"/>
-          <ellipse cx="100" cy="128" rx="36" ry="9" stroke="rgba(200,169,110,0.45)" stroke-width="1"/>
-          <line x1="64" y1="128" x2="64" y2="108" stroke="rgba(200,169,110,0.45)" stroke-width="1"/>
-          <line x1="136" y1="128" x2="136" y2="108" stroke="rgba(200,169,110,0.45)" stroke-width="1"/>
-          <path d="M64 108 Q100 92 136 108" stroke="rgba(200,169,110,0.45)" stroke-width="1" fill="none"/>
-          <ellipse cx="100" cy="100" rx="22" ry="6" stroke="rgba(200,169,110,0.28)" stroke-width="0.8" fill="rgba(200,169,110,0.03)"/>
-          <path d="M80 98 L76 70" stroke="rgba(200,169,110,0.35)" stroke-width="0.8" stroke-linecap="round"/>
-          <path d="M120 98 L124 70" stroke="rgba(200,169,110,0.35)" stroke-width="0.8" stroke-linecap="round"/>
-          <circle cx="100" cy="54" r="18" stroke="rgba(200,169,110,0.52)" stroke-width="1" fill="rgba(200,169,110,0.04)"/>
-          <circle cx="100" cy="54" r="10" stroke="rgba(200,169,110,0.22)" stroke-width="0.6" fill="rgba(200,169,110,0.03)"/>
-          <circle cx="92" cy="46" r="1.5" fill="rgba(232,213,163,0.6)"/>
-          <line x1="100" y1="12" x2="100" y2="22" stroke="rgba(200,169,110,0.2)" stroke-width="0.7"/>
-          <line x1="100" y1="178" x2="100" y2="188" stroke="rgba(200,169,110,0.2)" stroke-width="0.7"/>
-          <line x1="12" y1="100" x2="22" y2="100" stroke="rgba(200,169,110,0.2)" stroke-width="0.7"/>
-          <line x1="178" y1="100" x2="188" y2="100" stroke="rgba(200,169,110,0.2)" stroke-width="0.7"/>
-        </svg>
-      </div>
-
-      <a href="https://instagram.com/bizhuteriafantazia" target="_blank" rel="noopener noreferrer" class="ic-ig-cta">
-        <svg viewBox="0 0 24 24" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="#C8A96E" stroke="none"/></svg>
-        <span><span data-sq>DM na në Instagram</span><span data-en>DM us on Instagram</span><span data-mk>Прати ни DM на Инстаграм</span></span>
-      </a>
-
-      <p class="ic-note">
-        <span data-sq>Nuk dërgojmë spam. Vetëm bizhuteri e vërtetë.</span>
-        <span data-en>No spam. Just real jewellery.</span>
-        <span data-mk>Не праќаме спам. Само вистински накит.</span>
-      </p>
-    </div>
-
   </div>
 </section>
 
@@ -1966,12 +1765,12 @@
 ══════════════════════════════════════════ -->
 <section id="visit">
   <div class="lux-container">
-    <span class="sec-label reveal"><span data-sq>Vizitoni Butikun</span><span data-en>Visit the Boutique</span><span data-mk>Посетете го бутикот</span></span>
-    <h2 class="sec-h reveal"><span data-sq>Na gjeni në Tetovë.</span><span data-en>Find us in Tetovo.</span><span data-mk>Најдете нè во Тетово.</span></h2>
+    <span class="sec-label reveal"><span data-sq>Na Vizitoni</span><span data-en>Visit Us</span><span data-mk>Посетете нè</span></span>
+    <h2 class="sec-h reveal"><span data-sq>Ju presim në Tetovë.</span><span data-en>Visit us in Tetovo.</span><span data-mk>Ве очекуваме во Тетово.</span></h2>
     <p class="sec-sub reveal">
-      <span data-sq>Ejani të provoni krijimet tona nga afër — ju presim me kënaqësi në dy dyqanet tona në qendër të qytetit.</span>
-      <span data-en>Come try our pieces in person — we look forward to welcoming you at our two boutiques in the heart of the city.</span>
-      <span data-mk>Дојдете и пробајте ги нашите креации одблиску — ве очекуваме со задоволство во нашите две продавници во центарот на градот.</span>
+      <span data-sq>Na vizitoni në njërin prej dy dyqaneve tona në Tetovë. Shihni koleksionin nga afër, provoni modelet që ju pëlqejnë dhe zgjidhni atë që ju përshtatet.</span>
+      <span data-en>Visit us at one of our two boutiques in Tetovo. See the collection up close, try on the designs you like, and choose the one that suits you.</span>
+      <span data-mk>Посетете нè во една од нашите две продавници во Тетово. Погледнете ја колекцијата одблиску, пробајте ги моделите што ви се допаѓаат и изберете го оној што ви одговара.</span>
     </p>
     <span class="gold-rule" style="margin:28px 0 0"></span>
 
@@ -1980,9 +1779,9 @@
         <div class="vi-block">
           <span class="vi-label"><span data-sq>Dyqanet Tona</span><span data-en>Our Boutiques</span><span data-mk>Нашите продавници</span></span>
           <p class="vi-text">
-            <span data-sq>Bizhuteria Fantazia · Euro Fantazia<br>Dy dyqane, e njëjta rrugë — që nga viti 2010</span>
-            <span data-en>Bizhuteria Fantazia · Euro Fantazia<br>Two boutiques, one street — since 2010</span>
-            <span data-mk>Bizhuteria Fantazia · Euro Fantazia<br>Две продавници, иста улица — од 2010 година</span>
+            <span data-sq>Bizhuteria Fantazia · Euro Fantazia<br>Dy dyqane në Tetovë</span>
+            <span data-en>Bizhuteria Fantazia · Euro Fantazia<br>Two boutiques in Tetovo</span>
+            <span data-mk>Bizhuteria Fantazia · Euro Fantazia<br>Две продавници во Тетово</span>
           </p>
         </div>
         <div class="vi-block">
@@ -1996,9 +1795,9 @@
         <div class="vi-block">
           <span class="vi-label"><span data-sq>Orari</span><span data-en>Opening Hours</span><span data-mk>Работно време</span></span>
           <p class="vi-text">
-            <span data-sq>E Hënë – E Shtunë: 08:00 – 19:00<br>E Diel: Mbyllur</span>
-            <span data-en>Monday – Saturday: 08:00 – 19:00<br>Sunday: Closed</span>
-            <span data-mk>Понеделник – Сабота: 08:00 – 19:00<br>Недела: Затворено</span>
+            <span data-sq>E Hënë – E Shtunë: 09:00 – 19:00<br>E Diel: Mbyllur</span>
+            <span data-en>Monday – Saturday: 09:00 – 19:00<br>Sunday: Closed</span>
+            <span data-mk>Понеделник – Сабота: 09:00 – 19:00<br>Недела: Затворено</span>
           </p>
         </div>
         <div class="vi-block">
@@ -2020,6 +1819,11 @@
         <iframe src="https://www.google.com/maps?q=Bizhuteria+Fantazia,+Tetovo&amp;output=embed"
                 title="Bizhuteria Fantazia — Tetovo"
                 loading="lazy" allowfullscreen referrerpolicy="no-referrer-when-downgrade"></iframe>
+        <p class="visit-map-note">
+          <span data-sq>* Harta tregon lokacionin e Bizhuteria Fantazia.</span>
+          <span data-en>* The map shows the location of Bizhuteria Fantazia.</span>
+          <span data-mk>* Мапата ја покажува локацијата на Bizhuteria Fantazia.</span>
+        </p>
       </div>
     </div>
   </div>
@@ -2052,9 +1856,9 @@
           </div>
         </div>
         <p class="f-brand-desc">
-          <span data-sq>Bizhuteri fine e punuar me dorë, e frymëzuar nga tradita shqiptare. Që nga viti 2010 — Bizhuteria Fantazia &amp; Euro Fantazia, Tetovë.</span>
-          <span data-en>Fine jewellery handcrafted with Albanian soul. Since 2010 — Bizhuteria Fantazia &amp; Euro Fantazia, Tetovo.</span>
-          <span data-mk>Фин накит, рачно изработен, инспириран од албанската традиција. Од 2010 — Bizhuteria Fantazia &amp; Euro Fantazia, Тетово.</span>
+          <span data-sq>Bizhuteri tradicionale shqiptare për nuse dhe raste të veçanta. Bizhuteria Fantazia &amp; Euro Fantazia, Tetovë.</span>
+          <span data-en>Traditional Albanian jewellery for brides and special occasions. Bizhuteria Fantazia &amp; Euro Fantazia, Tetovo.</span>
+          <span data-mk>Традиционален албански накит за невести и посебни пригоди. Bizhuteria Fantazia &amp; Euro Fantazia, Тетово.</span>
         </p>
         <div class="f-socials">
           <a href="https://instagram.com/bizhuteriafantazia" target="_blank" rel="noopener noreferrer" class="f-social-link" aria-label="Instagram">
@@ -2067,17 +1871,17 @@
       </div>
 
       <div>
-        <span class="f-col-head"><span data-sq>Navigoni</span><span data-en>Navigate</span><span data-mk>Навигација</span></span>
+        <span class="f-col-head"><span data-sq>Navigim</span><span data-en>Explore</span><span data-mk>Навигација</span></span>
         <ul class="f-links">
-          <li><a href="#collection"><span data-sq>Koleksioni</span><span data-en>Collections</span><span data-mk>Колекција</span></a></li>
-          <li><a href="#heritage"><span data-sq>Trashëgimia</span><span data-en>Heritage</span><span data-mk>Наследство</span></a></li>
-          <li><a href="#story"><span data-sq>Historia</span><span data-en>Our Story</span><span data-mk>Приказна</span></a></li>
-          <li><a href="#order"><span data-sq>Si të Porosisësh</span><span data-en>How to Order</span><span data-mk>Како да нарачаш</span></a></li>
+          <li><a href="#collection"><span data-sq>Koleksioni</span><span data-en>Collection</span><span data-mk>Колекција</span></a></li>
+          <li><a href="#order"><span data-sq>Si të Porosisni</span><span data-en>How to Order</span><span data-mk>Како да нарачате</span></a></li>
+          <li><a href="#story"><span data-sq>Rreth Nesh</span><span data-en>About</span><span data-mk>За Нас</span></a></li>
+          <li><a href="#visit"><span data-sq>Na Vizitoni</span><span data-en>Visit Us</span><span data-mk>Посетете нè</span></a></li>
         </ul>
       </div>
 
       <div>
-        <span class="f-col-head"><span data-sq>Na Gjeni</span><span data-en>Find Us</span><span data-mk>Најди нè</span></span>
+        <span class="f-col-head"><span data-sq>Kontakti</span><span data-en>Contact</span><span data-mk>Контакт</span></span>
         <ul class="f-links">
           <li><a href="https://instagram.com/bizhuteriafantazia" target="_blank" rel="noopener noreferrer">Instagram @bizhuteriafantazia</a></li>
           <li><a href="https://tiktok.com/@bizhuteriafantazia" target="_blank" rel="noopener noreferrer">TikTok @bizhuteriafantazia</a></li>
@@ -2086,13 +1890,10 @@
       </div>
 
       <div>
-        <span class="f-col-head"><span data-sq>Dërgimi</span><span data-en>Shipping</span><span data-mk>Достава</span></span>
+        <span class="f-col-head"><span data-sq>Dërgesa</span><span data-en>Shipping</span><span data-mk>Достава</span></span>
         <ul class="f-links">
-          <li><span class="highlight">🇦🇱 <span data-sq>Shqipëri</span><span data-en>Albania</span><span data-mk>Албанија</span></span></li>
-          <li><span class="highlight">🇽🇰 <span data-sq>Kosovë</span><span data-en>Kosovo</span><span data-mk>Косово</span></span></li>
-          <li><span class="highlight">🇲🇰 <span data-sq>Maqedonia e Veriut</span><span data-en>North Macedonia</span><span data-mk>Северна Македонија</span></span></li>
-          <li><a href="terms.html#dergimi"><span data-sq>Kushtet e Dërgimit</span><span data-en>Shipping Details</span><span data-mk>Услови за достава</span></a></li>
-          <li><a href="terms.html#kthimet"><span data-sq>Kthimet — 14 Ditë</span><span data-en>Returns — 14 Days</span><span data-mk>Враќање — 14 дена</span></a></li>
+          <li><a href="terms.html#dergimi"><span data-sq>Kushtet e Dërgesës</span><span data-en>Shipping Details</span><span data-mk>Услови за достава</span></a></li>
+          <li><a href="terms.html#kthimet"><span data-sq>Politika e Kthimit</span><span data-en>Returns Policy</span><span data-mk>Политика за враќање</span></a></li>
         </ul>
       </div>
 
@@ -2101,7 +1902,7 @@
   <div style="height:1px;background:rgba(181,201,183,0.08)"></div>
   <div class="lux-container">
     <div class="footer-bottom">
-      <span class="f-copy">© 2026 Bizhuteria Fantazia</span>
+      <span class="f-copy">© 2026 Bizhuteria Fantazia. <span data-sq>Të gjitha të drejtat e rezervuara.</span><span data-en>All rights reserved.</span><span data-mk>Сите права се задржани.</span></span>
       <div class="f-legal">
         <a href="privacy.html"><span data-sq>Privatësia</span><span data-en>Privacy</span><span data-mk>Приватност</span></a>
         <a href="terms.html"><span data-sq>Kushtet</span><span data-en>Terms</span><span data-mk>Услови</span></a>
@@ -2124,7 +1925,7 @@
     <circle cx="17.5" cy="6.5" r="1" fill="#C8A96E" stroke="none"/>
   </svg>
   <div class="ig-float-text">
-    <span class="ig-float-top"><span data-sq>Porosit tani</span><span data-en>Order now</span><span data-mk>Нарачај сега</span></span>
+    <span class="ig-float-top"><span data-sq>Na shkruaj</span><span data-en>Message Us</span><span data-mk>Пиши ни</span></span>
     <span class="ig-float-main">Instagram DM</span>
   </div>
 </a>
@@ -2132,13 +1933,13 @@
 <!-- Cookie Consent Banner -->
 <div id="cookie-bar" style="position:fixed;bottom:0;left:0;right:0;z-index:9999;background:rgba(13,24,16,0.97);border-top:1px solid rgba(201,169,97,0.18);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);padding:16px 40px;display:none;align-items:center;justify-content:space-between;gap:24px;font-family:'DM Sans',sans-serif;font-weight:300;transform:translateY(0);transition:transform 0.4s ease;">
   <p style="font-size:12px;color:rgba(181,201,183,0.65);line-height:1.7;margin:0;max-width:680px;">
-    <span data-sq>Kjo faqe përdor vetëm cookies thelbësore për funksionimin e duhur. Nuk përdorim cookies gjurmimi.</span>
-    <span data-en>This site uses only essential cookies for proper functioning. No tracking cookies.</span>
-    <span data-mk>Оваа страница користи само неопходни колачиња за правилно функционирање. Не користиме колачиња за следење.</span>
+    <span data-sq>Kjo faqe përdor vetëm cookies të nevojshme për funksionimin e saj. Nuk përdorim cookies për gjurmim apo reklama.</span>
+    <span data-en>This website uses only essential cookies to function properly. We don't use tracking or advertising cookies.</span>
+    <span data-mk>Оваа веб-страница користи само неопходни колачиња за правилно функционирање. Не користиме колачиња за следење или рекламирање.</span>
     <a href="privacy.html" style="color:rgba(201,169,97,0.7);margin-left:8px;text-decoration:none;border-bottom:1px solid rgba(201,169,97,0.25);"><span data-sq>Privatësia</span><span data-en>Privacy</span><span data-mk>Приватност</span></a>
   </p>
   <button onclick="document.getElementById('cookie-bar').style.transform='translateY(110%)';localStorage.setItem('bf_cookie_ok','1');" style="flex-shrink:0;font-family:'DM Sans',sans-serif;font-weight:300;font-size:10px;letter-spacing:0.22em;text-transform:uppercase;background:none;border:1px solid rgba(201,169,97,0.4);color:rgba(201,169,97,0.85);padding:10px 22px;cursor:pointer;transition:border-color 0.3s,color 0.3s;white-space:nowrap;" onmouseover="this.style.borderColor='#C9A961';this.style.color='#EDDBA8';" onmouseout="this.style.borderColor='rgba(201,169,97,0.4)';this.style.color='rgba(201,169,97,0.85)';">
-    <span data-sq>Kuptoj</span><span data-en>OK</span><span data-mk>Разбирам</span>
+    <span data-sq>Kuptoj</span><span data-en>Got it</span><span data-mk>Разбирам</span>
   </button>
 </div>
 
