@@ -854,17 +854,19 @@
       padding: 0 18px;
       opacity: 0.85;
     }
-    /* translate3d keeps the band on the GPU compositor; the exact -100%/3
-       loop distance (content = 3 identical groups) restarts seamlessly. */
+    /* translate3d keeps the band on the GPU compositor; the exact -100%/6
+       loop distance (content = 6 identical groups) restarts seamlessly.
+       6 groups (not 3): the track must stay wider than viewport + one
+       group at all times, or an empty gap sweeps across on desktop. */
     @keyframes marquee {
       0%   { transform: translate3d(0, 0, 0); }
-      100% { transform: translate3d(calc(-100% / 3), 0, 0); }
+      100% { transform: translate3d(calc(-100% / 6), 0, 0); }
     }
 
     /* ─────────────────────────────────────────────────────
        STATS
     ───────────────────────────────────────────────────── */
-    #stats { background: var(--c-linen); padding: 72px 0; }
+    #stats { background: var(--c-linen); padding: 72px 0 48px; }
     .stats-grid {
       max-width: 1280px;
       margin: 0 auto;
@@ -2227,19 +2229,6 @@
     @media (hover: hover) {
       .na-card:hover .prod-photo { transform: scale(1.05); }
     }
-    .na-new-pill {
-      position: absolute;
-      top: 16px; left: 16px;
-      z-index: 5;
-      font-family: 'DM Sans', sans-serif;
-      font-weight: 300;
-      font-size: 8px;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: var(--c-night);
-      background: var(--c-gold);
-      padding: 5px 12px;
-    }
     .na-body {
       padding: 20px 20px 24px;
       background: var(--c-linen);
@@ -2641,6 +2630,10 @@
     @supports not (aspect-ratio: 1 / 1) {
       .ig-cell { height: 240px; }
       .hero-art { height: 440px; }
+      /* Product/NA/sale boxes hold absolute-positioned photos — without
+         aspect-ratio support they'd collapse to zero height */
+      .prod-visual, .na-visual { height: 320px; }
+      .sale-visual { height: 480px; }
     }
 
     /* ─────────────────────────────────────────────────────
@@ -2665,8 +2658,8 @@
        PREMIUM UPGRADE — VISUAL ELEVATION
     ═══════════════════════════════════════════════════════════ */
 
-    /* ── Stats: restored to original ── */
-    #stats { padding: 72px 0; }
+    /* ── Stats: restored to original (bottom tightened per user ask) ── */
+    #stats { padding: 72px 0 48px; }
     .stat-item {
       padding: 40px 24px;
       border-right: 1px solid rgba(181,201,183,0.5);
@@ -3366,4 +3359,6 @@
     @media (prefers-reduced-motion: reduce) {
       #scroll-progress { display: none; }
       .prod-grid.filter-fade { animation: none; }
+      /* Marquee stands still for motion-sensitive visitors (text stays visible) */
+      .marquee-track { animation: none; }
     }
