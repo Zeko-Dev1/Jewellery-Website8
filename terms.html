@@ -184,7 +184,8 @@
     }
     .pg-footer-links a:hover { color: var(--c-mid); }
     @media (max-width: 767px) {
-      .pg-header { padding: 24px; }
+      /* Stack brand + back-link — side by side they collide on phones */
+      .pg-header { padding: 24px; flex-direction: column; align-items: flex-start; gap: 16px; }
       .pg-hero { padding: 48px 24px 40px; }
       .pg-content { padding: 48px 24px 64px; }
       .pg-footer { padding: 24px; flex-direction: column; align-items: flex-start; }
@@ -195,7 +196,7 @@
 
   <header class="pg-header">
     <a href="index.html" class="pg-brand">
-      <img src="images/icons/logo-240.png" alt="Bizhuteria Fantazia" onerror="this.style.display='none'">
+      <img src="images/icons/logo-240.webp" alt="Bizhuteria Fantazia" onerror="this.style.display='none'">
       <div class="pg-brand-text">
         <span class="pg-brand-top">Bizhuteria</span>
         <span class="pg-brand-main">Fantazia</span>

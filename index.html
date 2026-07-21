@@ -3,6 +3,20 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    /* Apply the saved language BEFORE first paint — without this, a
+       returning EN/MK visitor sees the page flash in Albanian on every
+       refresh until script.js (end of body) catches up. */
+    (function () {
+      try {
+        var l = localStorage.getItem('bf_lang');
+        if (l === 'en' || l === 'mk') {
+          document.documentElement.setAttribute('data-lang', l);
+          document.documentElement.setAttribute('lang', l);
+        }
+      } catch (e) { /* private mode */ }
+    })();
+  </script>
   <title>Bizhuteria Fantazia — Bizhuteri Tradicionale Shqiptare</title>
   <meta name="google" content="notranslate">
   <meta name="description" content="Bizhuteria Fantazia — bizhuteri tradicionale shqiptare për nuse dhe raste të veçanta. Dërgojmë në Shqipëri, Kosovë dhe Maqedoninë e Veriut.">
@@ -45,7 +59,7 @@
     "foundingDate": "2010",
     "description": "Bizhuteri tradicionale shqiptare për nuse dhe raste të veçanta. Dy dyqane në Tetovë që nga viti 2010. Traditional Albanian jewellery for brides and special occasions — two boutiques in Tetovo since 2010.",
     "url": "https://bizhuteriafantazia.mk/",
-    "logo": "https://bizhuteriafantazia.mk/images/icons/logo-240.png",
+    "logo": "https://bizhuteriafantazia.mk/images/icons/logo-240.webp",
     "image": "https://bizhuteriafantazia.mk/images/section/og-image.jpg",
     "email": "bizhuteriafantazia@gmail.com",
     "address": {
@@ -140,7 +154,7 @@
 <nav id="nav">
   <div class="nav-inner">
     <a href="#" class="nav-logo">
-      <img src="images/icons/logo-240.png" alt="Bizhuteria Fantazia" class="nav-logo-img" width="66" height="44" onerror="this.style.display='none'">
+      <img src="images/icons/logo-240.webp" alt="Bizhuteria Fantazia" class="nav-logo-img" width="66" height="44" onerror="this.style.display='none'">
       <span class="nav-logo-text">
         <span class="nav-logo-top">Bizhuteria</span>
         <span class="nav-logo-main">Fantazia</span>
@@ -155,7 +169,7 @@
     </ul>
 
     <div class="nav-right">
-      <button class="lang-btn" id="langBtn">EN</button>
+      <button class="lang-btn" id="langBtn" type="button" aria-label="Zgjidh gjuhën">EN</button>
       <div class="nav-socials">
         <a href="https://instagram.com/bizhuteriafantazia" target="_blank" rel="noopener noreferrer" class="nav-social-link" aria-label="Instagram">
           <svg viewBox="0 0 24 24" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="#C8A96E" stroke="none"/></svg>
@@ -173,7 +187,6 @@
 
 <!-- Mobile overlay -->
 <div class="mob-overlay" id="mob">
-  <button class="mob-close" id="mobClose">Close ✕</button>
   <nav class="mob-nav">
     <a href="#collection" class="mob-lnk"><span data-sq>Koleksioni</span><span data-en>Collection</span><span data-mk>Колекција</span></a>
     <a href="#order"      class="mob-lnk"><span data-sq>Porosia</span><span data-en>Order</span><span data-mk>Нарачка</span></a>
@@ -1776,7 +1789,7 @@
 
       <div class="f-brand-col">
         <div class="f-brand-row">
-          <img src="images/icons/logo-240.png" alt="Bizhuteria Fantazia" style="height:50px;width:auto;object-fit:contain;flex-shrink:0;margin-right:-8px;" onerror="this.style.display='none'">
+          <img src="images/icons/logo-240.webp" alt="Bizhuteria Fantazia" style="height:50px;width:auto;object-fit:contain;flex-shrink:0;margin-right:-8px;" onerror="this.style.display='none'">
           <div>
             <span style="font-family:'DM Sans',sans-serif;font-weight:300;font-size:9px;letter-spacing:0.28em;text-transform:uppercase;color:rgba(181,201,183,0.5);display:block;margin-bottom:2px;">Bizhuteria</span>
             <span style="font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:400;font-size:28px;color:var(--c-pgold);letter-spacing:0.08em;display:block;line-height:1;">Fantazia</span>
@@ -1867,6 +1880,37 @@
   <button onclick="document.getElementById('cookie-bar').style.transform='translateY(110%)';localStorage.setItem('bf_cookie_ok','1');" style="flex-shrink:0;font-family:'DM Sans',sans-serif;font-weight:300;font-size:10px;letter-spacing:0.22em;text-transform:uppercase;background:none;border:1px solid rgba(201,169,97,0.4);color:rgba(201,169,97,0.85);padding:10px 22px;cursor:pointer;transition:border-color 0.3s,color 0.3s;white-space:nowrap;" onmouseover="this.style.borderColor='#C9A961';this.style.color='#EDDBA8';" onmouseout="this.style.borderColor='rgba(201,169,97,0.4)';this.style.color='rgba(201,169,97,0.85)';">
     <span data-sq>Kuptoj</span><span data-en>Got it</span><span data-mk>Разбирам</span>
   </button>
+</div>
+
+<!-- ══════════════════════════════════════════
+     PRODUCT LIGHTBOX — click any product photo to view it large.
+     One dialog reused for every card; name/category are copied from the
+     clicked card as innerHTML, so the data-sq/en/mk spans keep working.
+══════════════════════════════════════════ -->
+<div id="lightbox" role="dialog" aria-modal="true" aria-hidden="true" aria-label="Pamje e zmadhuar e produktit">
+  <div class="lb-backdrop" id="lbBackdrop"></div>
+  <button class="lb-close" id="lbClose" type="button" aria-label="Mbyll">
+    <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 3l14 14M17 3L3 17"/></svg>
+  </button>
+  <button class="lb-arrow lb-prev" id="lbPrev" type="button" aria-label="Fotoja e mëparshme">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 4l-8 8 8 8"/></svg>
+  </button>
+  <button class="lb-arrow lb-next" id="lbNext" type="button" aria-label="Fotoja tjetër">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 4l8 8-8 8"/></svg>
+  </button>
+  <figure class="lb-stage" id="lbStage">
+    <div class="lb-frame">
+      <img class="lb-img" id="lbImg" src="" alt="" decoding="async">
+    </div>
+    <figcaption class="lb-caption">
+      <span class="lb-count" id="lbCount"></span>
+      <span class="lb-name" id="lbName"></span>
+      <span class="lb-cat" id="lbCat"></span>
+      <a href="https://instagram.com/bizhuteriafantazia" target="_blank" rel="noopener noreferrer" class="lb-cta">
+        <span data-sq>Porositni përmes Instagramit</span><span data-en>Order via Instagram</span><span data-mk>Нарачајте преку Инстаграм</span>
+      </a>
+    </figcaption>
+  </figure>
 </div>
 
 <script src="script.js"></script>

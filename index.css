@@ -345,20 +345,9 @@
       line-height: 1;
     }
     .mob-nav a:hover { color: var(--c-gold); }
-    .mob-close {
-      position: absolute;
-      top: 28px; right: 36px;
-      background: none;
-      border: none;
-      font-family: 'DM Sans', sans-serif;
-      font-size: 11px;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: rgba(181,201,183,0.5);
-      cursor: pointer;
-      transition: color 0.3s;
-    }
-    .mob-close:hover { color: var(--c-pale); }
+    /* (The old .mob-close "Close ✕" button was removed 2026-07-22 — it sat
+       underneath the fixed nav/announce bar and could never be tapped; the
+       hamburger morphs into the ✕ and is the real close control.) */
 
     /* ─────────────────────────────────────────────────────
        HERO
@@ -2271,11 +2260,9 @@
     }
     .na-card:hover .na-hover-cta,
     .na-card:focus-within .na-hover-cta { transform: translateY(0); }
-    /* Touch devices have no hover — show the order CTA as a static bar
-       below the card body so it never covers the product name */
-    @media (hover: none) {
-      .na-hover-cta { position: static; transform: none; }
-    }
+    /* Touch devices: the CTA bar stays tucked away exactly like desktop
+       at rest (user request — same as the desktop hover). Tapping the
+       photo opens the lightbox, which carries the same order button. */
     /* On large desktops the arrivals track bleeds slightly past the
        container — noticeably bigger cards, editorial full-bleed feel,
        while section headings stay aligned with the rest of the site.
@@ -3361,4 +3348,232 @@
       .prod-grid.filter-fade { animation: none; }
       /* Marquee stands still for motion-sensitive visitors (text stays visible) */
       .marquee-track { animation: none; }
+    }
+    /* ─────────────────────────────────────────────────────
+       PRODUCT LIGHTBOX — click a product photo to view large
+       Deep-forest backdrop, gallery-mat gold frame, caption
+       with the product name + order CTA. One dialog reused
+       for grid, featured and bridal-set photos.
+    ───────────────────────────────────────────────────── */
+    #lightbox {
+      position: fixed;
+      inset: 0;
+      z-index: 99990; /* above grain (9999) & cookie bar; below #cursor-ring (99998) */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 56px 110px;
+      visibility: hidden;
+      opacity: 0;
+      /* no pointer-events while closed/fading — otherwise the invisible
+         overlay swallows the first click after closing */
+      pointer-events: none;
+      transition: opacity 0.45s ease, visibility 0s linear 0.45s;
+    }
+    #lightbox.open {
+      visibility: visible;
+      opacity: 1;
+      pointer-events: auto;
+      transition: opacity 0.45s ease;
+    }
+    .lb-backdrop {
+      position: absolute;
+      inset: 0;
+      background: rgba(10,18,12,0.93);
+      backdrop-filter: blur(16px) saturate(0.85);
+      -webkit-backdrop-filter: blur(16px) saturate(0.85);
+    }
+    .lb-stage {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      max-width: min(1080px, 100%);
+      max-height: 100%;
+      transform: scale(0.965) translateY(10px);
+      transition: transform 0.55s var(--ease-out);
+    }
+    #lightbox.open .lb-stage { transform: none; }
+    /* Gallery mat — thin gold frame with an inner hairline, like the map frame */
+    .lb-frame {
+      position: relative;
+      border: 1px solid rgba(201,169,97,0.3);
+      background: rgba(16,28,18,0.55);
+      padding: 10px;
+    }
+    .lb-frame::after {
+      content: '';
+      position: absolute;
+      inset: 5px;
+      border: 1px solid rgba(201,169,97,0.12);
+      pointer-events: none;
+    }
+    .lb-img {
+      display: block;
+      max-width: 100%;
+      max-height: calc(100vh - 320px);
+      min-height: 180px;
+      object-fit: contain;
+      opacity: 1;
+      transition: opacity 0.26s ease;
+    }
+    .lb-img.lb-swapping { opacity: 0; }
+    .lb-caption {
+      text-align: center;
+      margin-top: 22px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 7px;
+    }
+    .lb-count {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 400;
+      font-size: 9px;
+      letter-spacing: 0.32em;
+      color: rgba(201,169,97,0.55);
+    }
+    .lb-count:empty { display: none; }
+    .lb-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-weight: 500;
+      font-size: 27px;
+      letter-spacing: 0.02em;
+      color: var(--c-linen);
+      line-height: 1.25;
+    }
+    .lb-cat {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      font-size: 10px;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: rgba(181,201,183,0.62);
+    }
+    .lb-cat:empty { display: none; }
+    .lb-cta {
+      margin-top: 13px;
+      display: inline-block;
+      padding: 13px 28px;
+      border: 1px solid rgba(201,169,97,0.45);
+      background: rgba(201,169,97,0.06);
+      color: var(--c-pgold);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 400;
+      font-size: 10px;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: border-color 0.3s ease, background 0.3s ease;
+    }
+    .lb-cta:hover { border-color: var(--c-gold); background: rgba(201,169,97,0.14); }
+    .lb-close {
+      position: absolute;
+      top: 26px;
+      right: 30px;
+      z-index: 2;
+      width: 46px;
+      height: 46px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: none;
+      border: 1px solid rgba(201,169,97,0.28);
+      border-radius: 50%;
+      cursor: pointer;
+      transition: border-color 0.3s ease, transform 0.45s var(--ease-out);
+    }
+    .lb-close svg {
+      width: 15px;
+      height: 15px;
+      stroke: var(--c-pgold);
+      stroke-width: 1.3;
+      stroke-linecap: round;
+      fill: none;
+    }
+    .lb-close:hover { border-color: var(--c-gold); transform: rotate(90deg); }
+    .lb-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 2;
+      width: 56px;
+      height: 56px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: none;
+      border: none;
+      cursor: pointer;
+      opacity: 0.5;
+      transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+    .lb-prev { left: 24px; }
+    .lb-next { right: 24px; }
+    .lb-arrow svg {
+      width: 30px;
+      height: 30px;
+      stroke: var(--c-pgold);
+      stroke-width: 1.2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      fill: none;
+    }
+    .lb-arrow:hover { opacity: 1; }
+    .lb-prev:hover { transform: translateY(-50%) translateX(-3px); }
+    .lb-next:hover { transform: translateY(-50%) translateX(3px); }
+
+    /* Corner "view larger" chip — injected by script.js into every product
+       visual; fades in on card hover as the click affordance */
+    .lb-hint {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      z-index: 4; /* above the .prod-visual::after hover wash (z 3) */
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid rgba(201,169,97,0.5);
+      background: rgba(13,24,16,0.4);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      opacity: 0;
+      transform: translateY(4px);
+      transition: opacity 0.35s ease, transform 0.35s var(--ease-out);
+      pointer-events: none;
+    }
+    .lb-hint svg {
+      width: 13px;
+      height: 13px;
+      stroke: var(--c-pgold);
+      stroke-width: 1.4;
+      stroke-linecap: round;
+      fill: none;
+    }
+    @media (hover: hover) {
+      .prod-card:hover .lb-hint,
+      .na-card:hover .lb-hint,
+      .sale-card:hover .lb-hint { opacity: 1; transform: none; }
+    }
+
+    @media (max-width: 767px) {
+      #lightbox { padding: 18px 16px; }
+      .lb-close { top: 12px; right: 12px; width: 42px; height: 42px; }
+      .lb-arrow { width: 44px; height: 44px; opacity: 0.75; }
+      .lb-prev { left: 2px; }
+      .lb-next { right: 2px; }
+      .lb-arrow svg { width: 24px; height: 24px; }
+      .lb-frame { padding: 7px; }
+      .lb-frame::after { inset: 3px; }
+      .lb-img { max-height: calc(100vh - 290px); }
+      .lb-caption { margin-top: 16px; gap: 6px; }
+      .lb-name { font-size: 21px; }
+      .lb-cta { padding: 12px 22px; font-size: 9px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      #lightbox, .lb-stage, .lb-img, .lb-hint { transition: none; }
     }

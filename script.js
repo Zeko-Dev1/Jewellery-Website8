@@ -16,10 +16,14 @@
     }
   })();
 
-  /* ─── LANGUAGE SWITCHER (SQ → EN → MK cycle) ─── */
-  const html     = document.documentElement;
-  const langBtn  = document.getElementById('langBtn');
-  const LANGS    = ['sq', 'en', 'mk'];
+  /* ─── LANGUAGE SWITCHER (SQ → EN → MK cycle) ───
+     One pill, one click = next language; the label shows the NEXT
+     language in the cycle (the one you'll get). The inline <head>
+     script applies the saved language before first paint, so a refresh
+     never flashes Albanian and the pill label can never desync. */
+  const html    = document.documentElement;
+  const langBtn = document.getElementById('langBtn');
+  const LANGS   = ['sq', 'en', 'mk'];
   /* Text lives in <span data-sq>/<span data-en>/<span data-mk> triplets,
      shown/hidden by CSS via html[data-lang]. Strings that live in
      attributes (title, aria-labels) can't use spans, so they're swapped
@@ -32,15 +36,19 @@
   const ARIA = {
     '#ann-close': { sq: 'Mbyll njoftimin', en: 'Close announcement', mk: 'Затвори го известувањето' },
     '#ham':       { sq: 'Menyja',          en: 'Menu',               mk: 'Мени' },
-    '#btt':       { sq: 'Kthehu lart',     en: 'Back to top',        mk: 'Врати се горе' }
+    '#btt':       { sq: 'Kthehu lart',     en: 'Back to top',        mk: 'Врати се горе' },
+    '#langBtn':   { sq: 'Zgjidh gjuhën',   en: 'Choose language',    mk: 'Избери јазик' },
+    '#lbClose':   { sq: 'Mbyll',           en: 'Close',              mk: 'Затвори' },
+    '#lbPrev':    { sq: 'Fotoja e mëparshme', en: 'Previous photo',  mk: 'Претходна фотографија' },
+    '#lbNext':    { sq: 'Fotoja tjetër',   en: 'Next photo',         mk: 'Следна фотографија' },
+    '#lightbox':  { sq: 'Pamje e zmadhuar e produktit', en: 'Enlarged product view', mk: 'Зголемен приказ на производот' }
   };
   function setLang(lang) {
     if (LANGS.indexOf(lang) === -1) lang = 'sq';
     html.setAttribute('data-lang', lang);
     html.setAttribute('lang', lang);
     /* the pill shows the NEXT language in the cycle */
-    const label = LANGS[(LANGS.indexOf(lang) + 1) % LANGS.length].toUpperCase();
-    if (langBtn) langBtn.textContent = label;
+    if (langBtn) langBtn.textContent = LANGS[(LANGS.indexOf(lang) + 1) % LANGS.length].toUpperCase();
     document.title = TITLES[lang];
     Object.keys(ARIA).forEach(function (sel) {
       const el = document.querySelector(sel);
@@ -54,15 +62,19 @@
     }
     try { localStorage.setItem('bf_lang', lang); } catch (err) { /* private mode */ }
   }
-  if (langBtn) langBtn.addEventListener('click', () => {
+  if (langBtn) langBtn.addEventListener('click', function () {
     const cur = html.getAttribute('data-lang') || 'sq';
     setLang(LANGS[(LANGS.indexOf(cur) + 1) % LANGS.length]);
   });
-  /* Remember the visitor's language across visits */
+  /* Sync the UI with the saved language. The inline <head> script already
+     set data-lang before paint; this aligns the pill label, title and
+     aria-labels with it. */
+  var savedLang = 'sq';
   try {
-    var savedLang = localStorage.getItem('bf_lang');
-    if (savedLang && savedLang !== 'sq' && LANGS.indexOf(savedLang) !== -1) setLang(savedLang);
+    var storedLang = localStorage.getItem('bf_lang');
+    if (LANGS.indexOf(storedLang) !== -1) savedLang = storedLang;
   } catch (err) { /* private mode */ }
+  setLang(savedLang);
 
   /* ─── NAV SCROLL ────────────────────────── */
   const nav = document.getElementById('nav');
@@ -101,15 +113,13 @@
   updateActiveLink();
 
   /* ─── MOBILE MENU ───────────────────────── */
-  const ham      = document.getElementById('ham');
-  const mob      = document.getElementById('mob');
-  const mobClose = document.getElementById('mobClose');
+  const ham = document.getElementById('ham');
+  const mob = document.getElementById('mob');
 
   function openMob()  { mob.classList.add('open'); ham.classList.add('open'); ham.setAttribute('aria-expanded', 'true');  document.body.style.overflow = 'hidden'; }
   function closeMob() { mob.classList.remove('open'); ham.classList.remove('open'); ham.setAttribute('aria-expanded', 'false'); document.body.style.overflow = ''; }
 
   ham.addEventListener('click', () => mob.classList.contains('open') ? closeMob() : openMob());
-  mobClose.addEventListener('click', closeMob);
   document.querySelectorAll('.mob-lnk').forEach(l => l.addEventListener('click', closeMob));
   document.addEventListener('keydown', e => { if (e.key === 'Escape' && mob.classList.contains('open')) closeMob(); });
 
@@ -389,6 +399,146 @@
       if (!ticking) { requestAnimationFrame(update); ticking = true; }
     }, { passive: true });
     update();
+  })();
+
+  /* ─── PRODUCT LIGHTBOX ──────────────────────
+     Click any product photo (grid, featured, bridal sets) to view it
+     large. Arrows/swipe move within the clicked card's own section; for
+     the grid only the currently visible (filtered) cards are included.
+     Name/category are copied as innerHTML so the data-sq/en/mk spans
+     keep responding to the language toggle while the dialog is open. */
+  (function () {
+    var lb = document.getElementById('lightbox');
+    if (!lb) return;
+    var lbImg    = document.getElementById('lbImg');
+    var lbName   = document.getElementById('lbName');
+    var lbCat    = document.getElementById('lbCat');
+    var lbCount  = document.getElementById('lbCount');
+    var btnClose = document.getElementById('lbClose');
+    var btnPrev  = document.getElementById('lbPrev');
+    var btnNext  = document.getElementById('lbNext');
+    var backdrop = document.getElementById('lbBackdrop');
+    var items = [], idx = 0, lastFocus = null, swapTimer = null;
+
+    var HINT_SVG = '<svg viewBox="0 0 14 14" aria-hidden="true"><path d="M8.5 1.5h4v4M13 1L8 6M5.5 12.5h-4v-4M1 13l5-5"/></svg>';
+
+    function visuals(sel) { return Array.prototype.slice.call(document.querySelectorAll(sel)); }
+
+    function contextFor(v) {
+      if (v.classList.contains('na-visual'))   return visuals('.na-track .na-visual');
+      if (v.classList.contains('sale-visual')) return visuals('.sale-grid .sale-visual');
+      return visuals('#pgrid .prod-card:not(.hide) .prod-visual');
+    }
+    function infoFor(v) {
+      var card  = v.closest('.prod-card, .na-card, .sale-card');
+      var photo = v.querySelector('.prod-photo');
+      var name  = card ? card.querySelector('.prod-name, .na-name, .sale-name') : null;
+      var cat   = card ? card.querySelector('.prod-cat, .set-items') : null;
+      return {
+        src:  photo ? (photo.currentSrc || photo.src) : '',
+        alt:  photo ? photo.alt : '',
+        name: name ? name.innerHTML : '',
+        cat:  cat ? cat.innerHTML : ''
+      };
+    }
+    function render() {
+      var info = infoFor(items[idx]);
+      lbName.innerHTML = info.name;
+      lbCat.innerHTML  = info.cat;
+      lbCount.textContent = items.length > 1 ? (idx + 1) + ' / ' + items.length : '';
+      /* brief fade so photo swaps read as intentional, not as a glitch */
+      lbImg.classList.add('lb-swapping');
+      if (swapTimer) clearTimeout(swapTimer);
+      swapTimer = setTimeout(function () {
+        lbImg.alt = info.alt;
+        lbImg.src = info.src;
+        if (lbImg.complete && lbImg.naturalWidth > 0) {
+          lbImg.classList.remove('lb-swapping');
+        } else {
+          lbImg.addEventListener('load', function onLoad() {
+            lbImg.removeEventListener('load', onLoad);
+            lbImg.classList.remove('lb-swapping');
+          });
+        }
+      }, 130);
+      /* warm the neighbours so arrow taps feel instant */
+      if (items.length > 1) {
+        [1, items.length - 1].forEach(function (d) {
+          var pre = new Image();
+          pre.src = infoFor(items[(idx + d) % items.length]).src;
+        });
+      }
+    }
+    function openLb(v) {
+      items = contextFor(v);
+      idx = Math.max(0, items.indexOf(v));
+      lastFocus = document.activeElement;
+      var multi = items.length > 1;
+      btnPrev.style.display = multi ? '' : 'none';
+      btnNext.style.display = multi ? '' : 'none';
+      lb.classList.add('open');
+      lb.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+      render();
+      try { btnClose.focus({ preventScroll: true }); } catch (err) { btnClose.focus(); }
+    }
+    function closeLb() {
+      lb.classList.remove('open');
+      lb.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+      if (lastFocus && document.contains(lastFocus) && lastFocus.focus) {
+        try { lastFocus.focus({ preventScroll: true }); } catch (err) { /* ignore */ }
+      }
+    }
+    function navLb(dir) {
+      if (items.length < 2) return;
+      idx = (idx + dir + items.length) % items.length;
+      render();
+    }
+
+    visuals('.prod-visual, .na-visual, .sale-visual').forEach(function (v) {
+      /* corner "view larger" chip — shown on card hover (CSS) */
+      var hint = document.createElement('span');
+      hint.className = 'lb-hint';
+      hint.setAttribute('aria-hidden', 'true');
+      hint.innerHTML = HINT_SVG;
+      v.appendChild(hint);
+      v.addEventListener('click', function () { openLb(v); });
+    });
+
+    btnClose.addEventListener('click', closeLb);
+    backdrop.addEventListener('click', closeLb);
+    btnPrev.addEventListener('click', function () { navLb(-1); });
+    btnNext.addEventListener('click', function () { navLb(1); });
+
+    document.addEventListener('keydown', function (e) {
+      if (!lb.classList.contains('open')) return;
+      if (e.key === 'Escape') { closeLb(); return; }
+      if (e.key === 'ArrowLeft')  { navLb(-1); return; }
+      if (e.key === 'ArrowRight') { navLb(1);  return; }
+      if (e.key === 'Tab') {
+        /* keep focus inside the dialog while it's open */
+        var focusables = [btnClose, btnPrev, btnNext, lb.querySelector('.lb-cta')]
+          .filter(function (el) { return el && el.style.display !== 'none'; });
+        var first = focusables[0], last = focusables[focusables.length - 1];
+        if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+        else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+        else if (!lb.contains(document.activeElement)) { e.preventDefault(); first.focus(); }
+      }
+    });
+
+    /* swipe left/right on touch */
+    var touchX = null, touchY = null;
+    lb.addEventListener('touchstart', function (e) {
+      if (e.touches.length === 1) { touchX = e.touches[0].clientX; touchY = e.touches[0].clientY; }
+    }, { passive: true });
+    lb.addEventListener('touchend', function (e) {
+      if (touchX === null) return;
+      var dx = e.changedTouches[0].clientX - touchX;
+      var dy = e.changedTouches[0].clientY - touchY;
+      touchX = touchY = null;
+      if (Math.abs(dx) > 48 && Math.abs(dx) > Math.abs(dy) * 1.5) navLb(dx < 0 ? 1 : -1);
+    }, { passive: true });
   })();
 
   /* ─── STATS COUNT-UP ──────────────────────── */
