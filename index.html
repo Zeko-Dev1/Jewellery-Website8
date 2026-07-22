@@ -1877,7 +1877,7 @@
     <span data-mk>Оваа веб-страница користи само неопходни колачиња за правилно функционирање. Не користиме колачиња за следење или рекламирање.</span>
     <a href="privacy.html" style="color:rgba(201,169,97,0.7);margin-left:8px;text-decoration:none;border-bottom:1px solid rgba(201,169,97,0.25);"><span data-sq>Privatësia</span><span data-en>Privacy</span><span data-mk>Приватност</span></a>
   </p>
-  <button onclick="document.getElementById('cookie-bar').style.transform='translateY(110%)';localStorage.setItem('bf_cookie_ok','1');" style="flex-shrink:0;font-family:'DM Sans',sans-serif;font-weight:300;font-size:10px;letter-spacing:0.22em;text-transform:uppercase;background:none;border:1px solid rgba(201,169,97,0.4);color:rgba(201,169,97,0.85);padding:10px 22px;cursor:pointer;transition:border-color 0.3s,color 0.3s;white-space:nowrap;" onmouseover="this.style.borderColor='#C9A961';this.style.color='#EDDBA8';" onmouseout="this.style.borderColor='rgba(201,169,97,0.4)';this.style.color='rgba(201,169,97,0.85)';">
+  <button onclick="document.getElementById('cookie-bar').style.transform='translateY(110%)';try{localStorage.setItem('bf_cookie_ok','1');}catch(e){}" style="flex-shrink:0;font-family:'DM Sans',sans-serif;font-weight:300;font-size:10px;letter-spacing:0.22em;text-transform:uppercase;background:none;border:1px solid rgba(201,169,97,0.4);color:rgba(201,169,97,0.85);padding:10px 22px;cursor:pointer;transition:border-color 0.3s,color 0.3s;white-space:nowrap;" onmouseover="this.style.borderColor='#C9A961';this.style.color='#EDDBA8';" onmouseout="this.style.borderColor='rgba(201,169,97,0.4)';this.style.color='rgba(201,169,97,0.85)';">
     <span data-sq>Kuptoj</span><span data-en>Got it</span><span data-mk>Разбирам</span>
   </button>
 </div>
@@ -1915,7 +1915,11 @@
 
 <script src="script.js"></script>
 <script>
-  if (!localStorage.getItem('bf_cookie_ok')) {
+  /* try/catch: in hard private mode localStorage access itself can throw —
+     the banner then shows every visit, which is the safe default */
+  var bfCookieOk = false;
+  try { bfCookieOk = localStorage.getItem('bf_cookie_ok') === '1'; } catch (e) {}
+  if (!bfCookieOk) {
     var cb = document.getElementById('cookie-bar');
     if (cb) { cb.style.display = 'flex'; }
   }

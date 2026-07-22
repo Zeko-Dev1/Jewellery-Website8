@@ -3348,6 +3348,12 @@
       .prod-grid.filter-fade { animation: none; }
       /* Marquee stands still for motion-sensitive visitors (text stays visible) */
       .marquee-track { animation: none; }
+      /* Scroll-reveals appear instantly — no slide, no fade */
+      .reveal, .reveal-left {
+        transition: none;
+        transform: none;
+        opacity: 1;
+      }
     }
     /* ─────────────────────────────────────────────────────
        PRODUCT LIGHTBOX — click a product photo to view large
