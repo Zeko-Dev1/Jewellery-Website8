@@ -20,11 +20,17 @@
        RESET & BASE
     ───────────────────────────────────────────────────── */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; font-size: 16px; overflow-x: hidden; }
+    /* overflow-x: clip (with hidden as fallback) — `hidden` on html/body
+       makes some mobile WebViews (Chrome iOS, Snapchat/Instagram in-app)
+       treat the body as its own scroll container, which breaks smooth
+       address-bar collapsing and makes finger-scrolling feel jumpy.
+       `clip` forbids horizontal overflow WITHOUT creating a scroller. */
+    html { scroll-behavior: smooth; font-size: 16px; overflow-x: hidden; overflow-x: clip; }
     body {
       background: var(--c-linen);
       color: var(--c-text);
       overflow-x: hidden;
+      overflow-x: clip;
       font-family: 'DM Sans', sans-serif;
       font-weight: 300;
       line-height: 1.6;
@@ -36,11 +42,21 @@
       scroll-margin-top: calc(var(--bar-h) + 80px + 12px);
     }
 
-    /* Grain texture overlay */
+    /* Grain texture overlay.
+       Top-anchored with a STABLE height (lvh) on purpose: with `inset: 0`
+       this fixed layer resized on every frame of the mobile URL-bar
+       collapse (Chrome / in-app browsers like Snapchat), forcing a
+       full-screen repaint of the turbulence texture while scrolling —
+       felt like the page "jumping". Safari hides this cost, Chrome
+       doesn't. lvh = largest viewport, so the layer never resizes. */
     body::after {
       content: '';
       position: fixed;
-      inset: 0;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100vh;  /* fallback for pre-lvh browsers */
+      height: 100lvh;
       background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23g)' opacity='0.035'/%3E%3C/svg%3E");
       pointer-events: none;
       z-index: 9999;
@@ -169,6 +185,10 @@
       transition: background 0.5s, border-color 0.5s, box-shadow 0.5s, top 0.4s;
       display: flex;
       align-items: center;
+      /* Pre-promote the nav to its own compositor layer — otherwise the
+         layer is created the instant .scrolled adds backdrop-filter at
+         60px of scroll, a one-frame hitch right as scrolling starts */
+      will-change: backdrop-filter;
     }
     #nav.scrolled {
       background: rgba(240,235,224,0.96);
@@ -3419,6 +3439,7 @@
       display: block;
       max-width: 100%;
       max-height: calc(100vh - 320px);
+      max-height: calc(100dvh - 320px); /* tracks the real visible height in mobile in-app browsers */
       min-height: 180px;
       object-fit: contain;
       opacity: 1;
@@ -3575,7 +3596,7 @@
       .lb-arrow svg { width: 24px; height: 24px; }
       .lb-frame { padding: 7px; }
       .lb-frame::after { inset: 3px; }
-      .lb-img { max-height: calc(100vh - 290px); }
+      .lb-img { max-height: calc(100vh - 290px); max-height: calc(100dvh - 290px); }
       .lb-caption { margin-top: 16px; gap: 6px; }
       .lb-name { font-size: 21px; }
       .lb-cta { padding: 12px 22px; font-size: 9px; }

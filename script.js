@@ -277,7 +277,9 @@
     const mq = window.matchMedia('(max-width: 991px)');
     var ticking = false;
     function onScroll() {
-      if (mq.matches) { heroArt.style.transform = ''; return; }
+      /* On phones: bail WITHOUT touching style — writing style.transform
+         on every scroll event invalidates style mid-scroll (jank) */
+      if (mq.matches) { if (heroArt.style.transform) heroArt.style.transform = ''; return; }
       if (!ticking) {
         requestAnimationFrame(function () {
           heroArt.style.transform = 'translateY(' + (window.scrollY * 0.3) + 'px)';
